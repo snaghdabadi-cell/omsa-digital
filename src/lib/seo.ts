@@ -1,7 +1,7 @@
 // Centralized SEO helpers and structured-data factories.
 // Keeps canonical/og:url consistent across every route.
 
-export const SITE_URL = "https://premium-uae-growth.lovable.app";
+export const SITE_URL = "https://omsadigital.com";
 export const SITE_NAME = "OMSA Digital & AI Studio";
 export const SITE_LEGAL_NAME = "OMSA Digital & AI Studio";
 export const SITE_LOCALE = "en_GB";
