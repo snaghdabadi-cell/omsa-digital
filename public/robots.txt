@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Block crawl of system endpoints if any
+Disallow: /api/
+
+Sitemap: https://omsadigital.com/sitemap.xml
