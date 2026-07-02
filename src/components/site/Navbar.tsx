@@ -11,10 +11,14 @@ declare global {
 }
 
 const trackStrategyCallClick = () => {
+  console.log("CTA clicked");
+
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({
     event: "contact_page_view",
   });
+
+  console.log(window.dataLayer);
 };
 
 const links = [
