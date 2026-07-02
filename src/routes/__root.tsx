@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -19,7 +20,11 @@ import { MobileStickyCta } from "../components/site/MobileStickyCta";
 import { PageTransition } from "../components/site/PageTransition";
 import { SITE_URL, organizationJsonLd, websiteJsonLd } from "../lib/seo";
 import { LocaleProvider } from "../lib/i18n/LocaleProvider";
-
+declare global {
+  interface Window {
+    dataLayer: any[];
+  }
+}
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -146,6 +151,24 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+
+  useEffect(() => {
+    window.dataLayer = window.dataLayer || [];
+
+    window.dataLayer.push({
+      event: "page_view",
+      page_path: pathname,
+    });
+
+    if (pathname === "/contact") {
+      window.dataLayer.push({
+        event: "contact_page_view",
+        page_path: pathname,
+      });
+    }
+  }, [pathname]);
+
   return (
     <QueryClientProvider client={queryClient}>
       <LocaleProvider>
