@@ -4,6 +4,19 @@ import { motion, AnimatePresence } from "motion/react";
 import { Menu, X, Sparkles, Search } from "lucide-react";
 import { LocaleSwitcher } from "./LocaleSwitcher";
 
+declare global {
+  interface Window {
+    dataLayer: any[];
+  }
+}
+
+const trackStrategyCallClick = () => {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: "contact_page_view",
+  });
+};
+
 const links = [
   { to: "/", label: "Home" },
   { to: "/services", label: "Services" },
@@ -79,7 +92,7 @@ export function Navbar() {
               <Search className="h-4 w-4" />
             </Link>
             <LocaleSwitcher />
-            <Link to="/contact" className="btn-gold !py-2.5 !px-5 text-sm">
+            <Link to="/contact" className="btn-gold !py-2.5 !px-5 text-sm" onClick={trackStrategyCallClick}>
               Book a Strategy Call
             </Link>
           </div>
@@ -132,7 +145,7 @@ export function Navbar() {
                     </Link>
                   </motion.div>
                 ))}
-                <Link to="/contact" className="btn-gold mt-2">
+                <Link to="/contact" className="btn-gold mt-2" onClick={trackStrategyCallClick}>
                   Book a Strategy Call
                 </Link>
               </nav>
