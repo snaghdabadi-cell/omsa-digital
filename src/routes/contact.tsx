@@ -1,9 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Calendar, CheckCircle2, Clock, Mail, MapPin, MessageCircle, Phone, Send, ShieldCheck } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { z } from "zod";
 import { Reveal } from "@/components/site/Reveal";
-
+declare global {
+  interface Window {
+    dataLayer: any[];
+  }
+}
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
@@ -29,7 +33,12 @@ const schema = z.object({
 function ContactPage() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [sent, setSent] = useState(false);
-
+  useEffect(() => {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: "contact_page_view",
+  });
+}, []);
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
