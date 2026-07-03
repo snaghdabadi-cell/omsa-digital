@@ -153,22 +153,27 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
-useEffect(() => {
-  const currentPath = window.location.pathname;
+  useEffect(() => {
+    console.log("pathname =", pathname);
 
-  window.dataLayer = window.dataLayer || [];
+    const currentPath = window.location.pathname;
 
-  window.dataLayer.push({
-    event: "page_view",
-    page_path: currentPath,
-  });
+    window.dataLayer = window.dataLayer || [];
 
-  if (currentPath.includes("/contact")) {
     window.dataLayer.push({
-      event: "contact_page_view",
-      page_path: currentPath,
+        event: "page_view",
+        page_path: currentPath,
     });
-  }
+
+    if (currentPath.includes("/contact")) {
+
+      console.log("CONTACT EVENT FIRED");
+      
+        window.dataLayer.push({
+            event: "contact_page_view",
+            page_path: currentPath,
+        });
+    }
 }, [pathname]);
 
   return (
