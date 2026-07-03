@@ -166,14 +166,15 @@ function RootComponent() {
     });
 
     if (currentPath.includes("/contact")) {
+  console.log("CONTACT EVENT FIRED");
 
-      console.log("CONTACT EVENT FIRED");
-      
-        window.dataLayer.push({
-            event: "contact_page_view",
-            page_path: currentPath,
-        });
-    }
+  setTimeout(() => {
+    window.dataLayer.push({
+      event: "contact_page_view",
+      page_path: currentPath,
+    });
+  }, 0);
+}
 }, [pathname]);
 
   return (
