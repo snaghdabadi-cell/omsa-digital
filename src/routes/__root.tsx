@@ -153,21 +153,23 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
-  useEffect(() => {
-    window.dataLayer = window.dataLayer || [];
+useEffect(() => {
+  const currentPath = window.location.pathname;
 
+  window.dataLayer = window.dataLayer || [];
+
+  window.dataLayer.push({
+    event: "page_view",
+    page_path: currentPath,
+  });
+
+  if (currentPath.includes("/contact")) {
     window.dataLayer.push({
-      event: "page_view",
-      page_path: pathname,
+      event: "contact_page_view",
+      page_path: currentPath,
     });
-
-    if (pathname === "/contact") {
-      window.dataLayer.push({
-        event: "contact_page_view",
-        page_path: pathname,
-      });
-    }
-  }, [pathname]);
+  }
+}, [pathname]);
 
   return (
     <QueryClientProvider client={queryClient}>
