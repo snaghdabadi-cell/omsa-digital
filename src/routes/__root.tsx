@@ -154,27 +154,23 @@ function RootComponent() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   useEffect(() => {
-    console.log("pathname =", pathname);
+  console.log("pathname =", pathname);
 
-    const currentPath = window.location.pathname;
+  window.dataLayer = window.dataLayer || [];
 
-    window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: "page_view",
+    page_path: pathname,
+  });
 
-    window.dataLayer.push({
-        event: "page_view",
-        page_path: currentPath,
-    });
+  if (pathname === "/contact") {
+    console.log("CONTACT EVENT FIRED");
 
-    if (currentPath.includes("/contact")) {
-  console.log("CONTACT EVENT FIRED");
-
-  setTimeout(() => {
     window.dataLayer.push({
       event: "contact_page_view",
-      page_path: currentPath,
+      page_path: pathname,
     });
-  }, 0);
-}
+  }
 }, [pathname]);
 
   return (
