@@ -39,7 +39,7 @@ function ContactPage() {
     event: "contact_page_view",
   });
 }, []);
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
     const result = schema.safeParse(Object.fromEntries(fd));
@@ -50,7 +50,31 @@ function ContactPage() {
       return;
     }
     setErrors({});
-    setSent(true);
+
+try {
+  const response = await fetch("/api/contact", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(result.data),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to send");
+  }
+
+  window.dataLayer?.push({
+    event: "contact_form_submit",
+  });
+
+  setSent(true);
+  e.currentTarget.reset();
+} catch (err) {
+  console.error(err);
+
+  alert("Something went wrong. Please try again.");
+}
   };
 
   return (

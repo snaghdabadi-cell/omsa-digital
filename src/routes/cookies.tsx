@@ -36,7 +36,7 @@ function CookiesPage() {
           <section>
             <h2 className="font-display text-xl font-semibold tracking-tight text-foreground">Contact</h2>
             <p className="mt-3">
-              For questions about cookies or analytics, write to <a className="text-[color:var(--gold-deep)] underline-offset-4 hover:underline" href="mailto:hello@aurum.ai">hello@aurum.ai</a>.
+              For questions about cookies or analytics, write to <a className="text-[color:var(--gold-deep)] underline-offset-4 hover:underline" href="mailto:omsadigitalstudio@gmail.com">omsadigitalstudio@gmail.com</a>.
             </p>
           </section>
         </div>

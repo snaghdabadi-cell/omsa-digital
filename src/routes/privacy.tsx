@@ -45,7 +45,7 @@ function PrivacyPage() {
             <h2 className="font-display text-xl font-semibold tracking-tight text-foreground">Your rights</h2>
             <p className="mt-3">
               You can request access, correction or deletion of your personal data at any time by emailing
-              {" "}<a className="text-[color:var(--gold-deep)] underline-offset-4 hover:underline" href="mailto:hello@aurum.ai">hello@aurum.ai</a>.
+              {" "}<a className="text-[color:var(--gold-deep)] underline-offset-4 hover:underline" href="mailto:omsadigitalstudio@gmail.com">omsadigitalstudio@gmail.com</a>.
               We respond within five working days.
             </p>
           </section>

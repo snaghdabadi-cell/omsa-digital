@@ -22,7 +22,7 @@ function TermsPage() {
           <section>
             <h2 className="font-display text-xl font-semibold tracking-tight text-foreground">Use of this website</h2>
             <p className="mt-3">
-              By using aurum.ai you accept these terms. We reserve the right to update them; the latest version will always be published on this page.
+              By using omsadigital.com you accept these terms. We reserve the right to update them; the latest version will always be published on this page.
             </p>
           </section>
 
