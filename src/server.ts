@@ -53,7 +53,7 @@ async function handleContactForm(request: Request, env: unknown): Promise<Respon
     },
     body: JSON.stringify({
       from: "OMSA Digital <contact@omsadigital.com>",
-      to: ["omsadigitalstudio@gmail.com", "snaghdabadi@gmail.com"],
+      to: ["snaghdabadi@gmail.com"],
       subject: "New contact form submission - OMSA Digital",
       html: `
         <h2>New contact form submission</h2>
