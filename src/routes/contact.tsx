@@ -162,8 +162,8 @@ try {
                 </ol>
               </div>
 
-              <ContactCard icon={Mail} label="Email" value="hello@aurum.ai" href="mailto:hello@aurum.ai" />
-              <ContactCard icon={Phone} label="Phone" value="+968 9000 0000" href="tel:+96890000000" />
+              <ContactCard icon={Mail} label="Email" value="contact@omsadigital.com" href="mailto:contact@omsadigital.com" />
+              <ContactCard icon={Phone} label="Phone" value="+968 9098 0683" href="tel:+96890980683" />
               <ContactCard
                 icon={MessageCircle}
                 label="WhatsApp"

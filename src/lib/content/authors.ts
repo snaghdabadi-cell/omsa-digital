@@ -9,7 +9,7 @@ export type Author = {
 
 export const AUTHORS: Author[] = [
   {
-    slug: "aurum-editorial",
+    slug: "omsa-editorial",
     name: "OMSA Digital & AI Studio Editorial",
     role: "Editorial team",
     bio: "Strategists, engineers and designers writing about digital growth, AI and the GCC market.",

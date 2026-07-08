@@ -20,7 +20,7 @@ export function Footer() {
                 <Sparkles className="h-4 w-4 text-[color:var(--gold)]" />
               </span>
               <span className="font-display text-xl font-bold">
-                Aurum<span className="text-gradient-gold">AI</span>
+                OMSA<span className="text-gradient-gold">Digital</span>
               </span>
             </div>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-white/60">

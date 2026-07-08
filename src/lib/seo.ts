@@ -18,9 +18,9 @@ export const CONTACT = {
 };
 
 export const SOCIAL = {
-  linkedin: "https://www.linkedin.com/company/aurumai-studio",
-  instagram: "https://www.instagram.com/aurumai.studio",
-  twitter: "https://twitter.com/aurumai_studio",
+  linkedin: "https://omsadigital.com",
+  instagram: "https://omsadigital.com",
+  twitter: "https://omsadigital.com",
 };
 
 export const abs = (path: string) =>
