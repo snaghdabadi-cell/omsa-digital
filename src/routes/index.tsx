@@ -185,7 +185,7 @@ function Hero() {
               transition={{ duration: 0.6 }}
               className="eyebrow"
             >
-              AI Digital Growth Agency · Oman · UAE · GCC
+              Trusted Digital Growth Partner for Businesses Across Oman & the GCC
             </motion.p>
 
             <motion.h1
@@ -194,8 +194,10 @@ function Hero() {
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
               className="mt-6 font-display text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.02] tracking-[-0.03em]"
             >
-              Accelerate your business with{" "}
-              <span className="text-gradient-gold">AI, SEO & Automation.</span>
+              Custom Websites, SEO &{" "}
+              <span className="text-gradient-gold">
+                  AI Solutions Built for Business Growth
+              </span>
             </motion.h1>
 
             <motion.p
@@ -204,9 +206,9 @@ function Hero() {
               transition={{ duration: 0.9, delay: 0.15 }}
               className="mt-7 max-w-xl text-lg text-muted-foreground leading-relaxed"
             >
-              We build premium websites, SEO strategies, AI solutions, and business
-              automation systems that help companies generate more leads, increase
-              revenue, and scale faster across Oman, the UAE, and the GCC.
+              We build high-performing websites, data-driven SEO strategies,
+              AI automation, and digital growth solutions that help businesses attract
+              more customers, generate qualified leads, and achieve sustainable growth across Oman, the UAE, and the GCC.
             </motion.p>
 
             <motion.div
@@ -219,12 +221,12 @@ function Hero() {
                 <Link to="/contact" className="btn-gold">
                   Book a Free Strategy Call <ArrowRight className="h-4 w-4" />
                 </Link>
-                <Link to="/case-studies" className="btn-ghost-luxe">
-                  See Client Results
+                <Link to="/services" className="btn-ghost-luxe">
+                  Explore Our Services
                 </Link>
               </div>
               <p className="text-xs text-muted-foreground">
-                30 minutes · No obligation · Tailored growth plan within 5 working days
+                Free Consultation • No Commitment • Tailored Digital Growth Strategy
               </p>
             </motion.div>
 
@@ -234,26 +236,8 @@ function Hero() {
               transition={{ duration: 1, delay: 0.6 }}
               className="mt-12 flex items-center gap-6 text-sm text-muted-foreground"
             >
-              <div className="flex -space-x-2">
-                {["#C9A227", "#1a1a1a", "#999", "#444"].map((c, i) => (
-                  <span
-                    key={i}
-                    style={{ background: c }}
-                    className="h-9 w-9 rounded-full ring-2 ring-background"
-                  />
-                ))}
-              </div>
-              <div>
-                <div className="flex items-center gap-1 text-foreground">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-[color:var(--gold)] text-[color:var(--gold)]" />
-                  ))}
-                  <span className="ml-2 font-semibold">5.0</span>
-                </div>
-                <p className="mt-0.5 text-xs">Trusted by leading brands across the GCC</p>
-              </div>
-            </motion.div>
-          </div>
+            
+          </motion.div>
 
           {/* Floating UI cards */}
           <div className="relative h-[520px] hidden md:block">
@@ -262,16 +246,16 @@ function Hero() {
               delay={0}
               icon={<BarChart3 className="h-5 w-5" />}
               label="Analytics"
-              value="+412%"
-              caption="Organic traffic · 90d"
+              value="Real-Time"
+              caption="Performance insights"
             />
             <FloatingCard
               className="right-4 top-32"
               delay={0.4}
               icon={<Search className="h-5 w-5" />}
-              label="SEO Score"
-              value="98 / 100"
-              caption="Technical audit"
+              label="Technical SEO"
+              value="SEO-Ready"
+              caption="Optimized foundations"
               accent
             />
             <FloatingCard
@@ -280,15 +264,15 @@ function Hero() {
               icon={<Bot className="h-5 w-5" />}
               label="AI Chatbot"
               value="24 / 7"
-              caption="Replies in 0.6s"
+              caption="Automated customer support"
             />
             <FloatingCard
               className="right-0 bottom-8"
               delay={1.2}
               icon={<Cpu className="h-5 w-5" />}
               label="Automation"
-              value="38 hrs / wk"
-              caption="Saved per team"
+              value="Scalable"
+              caption="Streamlined workflows"
               accent
             />
             {/* center orb */}
@@ -353,14 +337,14 @@ function FloatingCard({
 /* ─────────────────────── TRUST STRIP ─────────────────────── */
 function TrustStrip() {
   const items = [
-    "Luxury Hotels", "Real Estate", "Restaurants", "Medical Clinics",
-    "Corporate", "Law Firms", "Construction", "Retail", "Luxury Brands", "SMBs",
+    "Professional Services", "Healthcare", "Real Estate", "Hospitality",
+    "Retail", "Construction", "Manufacturing", "Education", "Startups", "SMEs",
   ];
   return (
     <section className="border-y border-border bg-muted/30">
       <div className="container-luxe py-8">
         <p className="text-center text-xs uppercase tracking-[0.22em] text-muted-foreground">
-          Partnering with operators across the GCC
+          Trusted by Growing Businesses Across Oman, UAE & the GCC
         </p>
         <div className="mt-6 overflow-hidden">
           <div className="flex gap-12 animate-marquee whitespace-nowrap font-display text-lg font-semibold text-foreground/40">
@@ -382,25 +366,25 @@ const PILLARS = [
   {
     tag: "01 — Build",
     icon: Code2,
-    title: "Build",
-    headline: "A digital foundation worthy of your brand.",
-    desc: "Your website is the first room a customer walks into. We design and engineer it as a precise commercial asset — clear, fast, and built to turn quiet visitors into real business.",
+    title: "Website Development",
+    headline: "Custom websites engineered to generate leads and build trust.",
+    desc: "We design and develop high-performance business websites optimized for user experience, search engines, conversions, and long-term business growth across Oman, the UAE, and the GCC.",
     items: [
-      "Premium website design",
-      "Conversion-focused landing pages",
-      "Corporate and brand websites",
-      "Considered UX and UI architecture",
-      "Performance and Core Web Vitals",
+      "Custom Website Design",
+      "Responsive Website Development",
+      "Corporate & Business Websites",
+      "Landing Pages & Conversion Optimization",
+      "Core Web Vitals & Technical Performance",
     ],
   },
   {
     tag: "02 — Grow",
     icon: TrendingUp,
-    title: "Grow",
-    headline: "Long-term visibility, measured in revenue.",
-    desc: "Search, content, conversion and analytics — wired together so the right audience finds you, understands you, and chooses you. Compounding visibility, not short-term tricks.",
+    title: "SEO & Digital Growth",
+    headline: "Increase visibility, traffic, and qualified leads.",
+    desc: "We combine technical SEO, local SEO, content strategy, conversion optimization, and analytics to help your business achieve sustainable organic growth across Oman, the UAE, and the GCC.",
     items: [
-      "Technical and on-page SEO",
+      "Technical & On-Page SEO",
       "Local SEO for Oman, UAE and GCC",
       "Google Analytics 4 and GTM",
       "Conversion rate optimization",
@@ -411,8 +395,8 @@ const PILLARS = [
     tag: "03 — Automate",
     icon: Workflow,
     title: "Automate",
-    headline: "Quiet AI working in the background of your business.",
-    desc: "Custom AI assistants, integrations and workflows that handle support, qualify leads, and remove the repetitive work — so your team can focus on the customers and decisions that matter.",
+    headline: "Automate repetitive work and scale your business with AI.",
+    desc: "We build AI chatbots, workflow automation, and custom AI solutions that reduce manual tasks, improve customer experience, and help your team work faster and smarter.",
     items: [
       "AI chatbots and assistants",
       "Business process automation",
@@ -429,16 +413,15 @@ function Pillars() {
       <div className="container-luxe">
         <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:items-end">
           <div>
-            <p className="eyebrow">Three pillars</p>
+            <p className="eyebrow">Our Digital Growth Framework</p>
             <h2 className="mt-6 font-display text-4xl md:text-5xl font-bold tracking-tight">
-              One studio. <span className="text-gradient-gold">Three engines</span> of growth.
+              Build. <span className="text-gradient-gold">Grow.</span> Automate.
             </h2>
           </div>
           <p className="text-muted-foreground max-w-lg">
-            We don't sell websites in isolation. Build, Grow and Automate are designed as a single
-            system — so every part of your digital presence supports the others, and growth becomes
-            a process rather than a campaign.
-          </p>
+            We combine high-performance website development, SEO, and AI automation into one connected digital growth system.
+            Every service is designed to increase visibility, generate qualified leads, improve conversions, and help your business scale faster.
+            No disconnected marketing. Just one strategy that delivers measurable business growth.
         </div>
 
         <div className="mt-16 grid gap-6 lg:grid-cols-3">
@@ -478,14 +461,14 @@ function Pillars() {
 
 /* ─────────────────────── GROWTH SYSTEM ─────────────────────── */
 const GROWTH_FLOW = [
-  { icon: Users, label: "Visitor", note: "Discovers your brand" },
-  { icon: Globe, label: "Website", note: "Earns their attention" },
-  { icon: Search, label: "SEO", note: "Brings the right traffic" },
-  { icon: BarChart3, label: "Analytics", note: "Reveals what works" },
-  { icon: Bot, label: "AI assistant", note: "Engages and answers" },
-  { icon: Workflow, label: "Automation", note: "Routes and follows up" },
-  { icon: MousePointerClick, label: "Leads", note: "Become real opportunities" },
-  { icon: Rocket, label: "Growth", note: "Compounds into revenue" },
+  { icon: Users, label: "Potential Customers", note: "Discover your business" },
+  { icon: Globe, label: "Professional Website", note: "Build trust instantly" },
+  { icon: Search, label: "SEO", note: "Increase search visibility" },
+  { icon: BarChart3, label: "Analytics", note: "Measure every interaction" },
+  { icon: Bot, label: "AI Chatbot", note: "Convert visitors into leads" },
+  { icon: Workflow, label: "Automation", note: "Eliminate repetitive work" },
+  { icon: MousePointerClick, label: "Qualified Leads", note: "Generate more opportunities" },
+  { icon: Rocket, label: "Business Growth", note: "Scale revenue continuously" },
 ];
 
 function GrowthSystem() {
@@ -494,14 +477,14 @@ function GrowthSystem() {
       <div aria-hidden className="absolute -top-40 left-1/2 -translate-x-1/2 h-[28rem] w-[28rem] rounded-full bg-[color:var(--gold)]/10 blur-3xl" />
       <div className="container-luxe relative">
         <div className="max-w-3xl">
-          <p className="eyebrow !text-white/60">The digital growth system</p>
+          <p className="eyebrow !text-white/60">Our Digital Growth System</p>
           <h2 className="mt-6 font-display text-4xl md:text-5xl font-bold tracking-tight">
-            Eight connected stages. <span className="text-gradient-gold">One business outcome.</span>
+            Connect every stage of your <span className="text-gradient-gold">digital growth journey.</span>
           </h2>
           <p className="mt-6 text-white/60 max-w-xl">
-            Design, search, analytics, AI, and automation rarely fail in isolation — they fail when
-            they're disconnected. We connect them, so attention turns into traffic, traffic turns
-            into leads, and leads turn into measurable revenue.
+            Modern business growth requires more than just a website or SEO.
+            We connect website development, search visibility, AI automation, analytics, and lead generation into one scalable growth system.
+            Every stage supports the next, helping your business attract more customers, increase conversions, and grow consistently.
           </p>
         </div>
 
@@ -536,12 +519,12 @@ function GrowthSystem() {
 
 /* ────────────────────────── SERVICES ────────────────────────── */
 export const SERVICES = [
-  { icon: Globe, title: "Premium Website Development", desc: "High-performance websites designed to convert visitors into customers while delivering exceptional speed, user experience, and SEO performance.", tag: "Build" },
-  { icon: Search, title: "SEO & Organic Growth", desc: "Technical SEO, content strategy, and local optimization that improve rankings, increase qualified traffic, and generate long-term business growth.", tag: "Visibility" },
-  { icon: Bot, title: "AI Business Solutions", desc: "Custom AI assistants and intelligent automation that improve customer experience, reduce workload, and increase operational efficiency.", tag: "AI" },
-  { icon: BarChart3, title: "Analytics & Conversion Tracking", desc: "GA4, Tag Manager, Search Console, and dashboards that show exactly where leads come from and how users convert.", tag: "Clarity" },
-  { icon: Cpu, title: "Business Automation", desc: "Smart workflows and integrations that reduce manual work, improve response time, and help your team operate more efficiently.", tag: "Efficiency" },
-  { icon: Megaphone, title: "Digital Marketing Strategy", desc: "Clear marketing strategies built around visibility, content, lead generation, and sustainable business growth.", tag: "Growth" },
+  { icon: Globe, title: "Web Design & Development", desc: "Custom, responsive, and SEO-ready websites built to strengthen your brand, improve user experience, and generate qualified leads." },
+  { icon: Search, title: "SEO & Search Visibility", desc: "Technical SEO, local SEO, and content strategies designed to improve rankings and attract customers across Oman, the UAE, and the GCC." },
+  { icon: Bot, title: "AI Solutions & Chatbots", desc: "Custom AI chatbots and intelligent solutions that improve customer support, capture leads, and create better digital experiences." },
+  { icon: BarChart3, title: "Analytics & Performance", desc: "Accurate tracking, dashboards, and actionable insights that help you understand performance and make better business decisions." },
+  { icon: Cpu, title: "AI Automation", desc: "Smart workflows and system integrations that reduce repetitive work, improve response times, and increase operational efficiency." },
+  { icon: Megaphone, title: "Digital Marketing", desc: "Google Ads, social media marketing, branding, and conversion strategies built to increase visibility, leads, and revenue." },
 ];
 
 function Services() {
@@ -550,14 +533,14 @@ function Services() {
       <div className="container-luxe">
         <div className="flex flex-col items-start gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
-            <p className="eyebrow">What we do</p>
+            <p className="eyebrow">Our Services</p>
             <Reveal as="h2" className="mt-6 font-display text-4xl md:text-5xl font-bold tracking-tight">
-              Six disciplines, <span className="text-gradient-gold">one growth system.</span>
+              Digital solutions designed to <span className="text-gradient-gold">build, grow, and automate.</span>
             </Reveal>
           </div>
           <Reveal className="max-w-md text-muted-foreground">
-            Each service solves a specific business problem. Together, they form a coherent system
-            that attracts, converts and retains the customers you actually want.
+            From website development and SEO to AI automation and digital marketing,
+            every service works together to strengthen your brand, generate leads, and support sustainable business growth.
           </Reveal>
         </div>
 
@@ -595,7 +578,7 @@ export function ServiceCard({
       <h3 className="mt-7 font-display text-2xl font-semibold tracking-tight">{title}</h3>
       <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{desc}</p>
       <div className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-foreground/70 group-hover:text-[color:var(--gold-deep)]">
-        Explore solutions <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        View Service Details <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
       </div>
     </div>
   );
@@ -604,24 +587,24 @@ export function ServiceCard({
 /* ────────────────────────── STATS ────────────────────────── */
 function Stats() {
   const stats = [
-    { value: 80, suffix: "+", label: "Businesses partnered with" },
-    { value: 412, suffix: "%", label: "Average organic traffic growth" },
-    { value: 38, suffix: "hrs", label: "Operational hours saved per week" },
-    { value: 12, suffix: "x", label: "Average return on marketing spend" },
+    { value: 13, suffix: "+", label: "Digital services" },
+    { value: 3, suffix: "", label: "Target markets" },
+    { value: 24, suffix: "/7", label: "AI chatbot availability" },
+    { value: 1, suffix: "", label: "Connected growth system" },
   ];
   return (
     <section className="section-pad bg-[color:var(--ink)] text-white">
       <div className="container-luxe">
         <div className="grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-end">
           <div>
-            <p className="eyebrow !text-white/60">Measured, not assumed</p>
+            <p className="eyebrow !text-white/60">Built for Modern Growth</p>
             <h2 className="mt-6 font-display text-4xl md:text-5xl font-bold tracking-tight">
-              We measure success the way <span className="text-gradient-gold">you measure your business.</span>
+              Digital expertise that <span className="text-gradient-gold">supports every stage of your growth.</span>
             </h2>
           </div>
           <p className="text-white/60 max-w-md">
-            Bookings, qualified leads, revenue per visitor, cost per acquisition. The metrics on
-            your board pack, not the ones that only flatter a dashboard.
+            From strategy and website development to SEO, AI automation, and analytics,
+            our connected services help businesses build stronger digital foundations and scale with confidence.
           </p>
         </div>
 
