@@ -625,15 +625,15 @@ function Stats() {
 
 /* ────────────────────────── PORTFOLIO ────────────────────────── */
 export const PROJECTS = [
-  { img: workHotel, title: "Five-star Muscat hotel — search and bookings", category: "Hospitality · SEO", services: ["Technical SEO", "Local SEO", "Content"], result: "+312% direct bookings" },
-  { img: workRestaurant, title: "Fine-dining restaurant — new digital home", category: "F&B · Website", services: ["Website design", "Local SEO"], result: "+58% reservations" },
-  { img: workRealestate, title: "Luxury developer — high-intent landing page", category: "Real Estate · CRO", services: ["Landing page", "CRO"], result: "11.4% conversion rate" },
-  { img: workClinic, title: "Specialist medical clinic — patient acquisition", category: "Healthcare · Web", services: ["Website", "GA4"], result: "+220% qualified leads" },
-  { img: workCorporate, title: "Corporate group — brand and inbound rebuild", category: "Corporate · Web", services: ["Design", "SEO"], result: "+180% inbound enquiries" },
-  { img: workAi, title: "AI customer support assistant", category: "AI · Service", services: ["AI chatbot", "Automation"], result: "92% queries auto-resolved" },
-  { img: workDashboard, title: "Marketing intelligence dashboard", category: "Analytics", services: ["GA4", "Looker"], result: "Single source of truth" },
-  { img: workDashboard, title: "GA4 and Tag Manager implementation", category: "Analytics · Tracking", services: ["GA4", "GTM", "Events"], result: "Full-funnel visibility" },
-  { img: workAi, title: "Operations automation system", category: "AI · Operations", services: ["AI", "Workflows"], result: "38 hours / week reclaimed" },
+  { img: workHotel, title: "Luxury hotel digital growth", category: "Hospitality · SEO", services: ["Technical SEO", "Local SEO", "Content"], result: "+312% direct bookings" },
+  { img: workRestaurant, title: "Restaurant lead generation website", category: "F&B · Website", services: ["Website design", "Local SEO"], result: "+58% reservations" },
+  { img: workRealestate, title: "Luxury real estate landing page", category: "Real Estate · CRO", services: ["Landing page", "CRO"], result: "11.4% conversion rate" },
+  { img: workClinic, title: "Healthcare patient acquisition", category: "Healthcare · Web", services: ["Website", "GA4"], result: "+220% qualified leads" },
+  { img: workCorporate, title: "Corporate website transformation", category: "Corporate · Web", services: ["Design", "SEO"], result: "+180% inbound enquiries" },
+  { img: workAi, title: "AI customer support chatbot", category: "AI · Service", services: ["AI chatbot", "Automation"], result: "92% queries auto-resolved" },
+  { img: workDashboard, title: "Marketing analytics dashboard", category: "Analytics", services: ["GA4", "Looker"], result: "Single source of truth" },
+  { img: workDashboard, title: "GA4 & GTM implementation", category: "Analytics · Tracking", services: ["GA4", "GTM", "Events"], result: "Full-funnel visibility" },
+  { img: workAi, title: "Business workflow automation", category: "AI · Operations", services: ["AI", "Workflows"], result: "38 hours / week reclaimed" },
 ];
 
 function Portfolio() {
@@ -642,13 +642,13 @@ function Portfolio() {
       <div className="container-luxe">
         <div className="flex flex-col items-start gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
-            <p className="eyebrow">Selected work</p>
+            <p className="eyebrow">Featured Projects</p>
             <h2 className="mt-6 font-display text-4xl md:text-5xl font-bold tracking-tight">
-              Considered work for <span className="text-gradient-gold">considered businesses.</span>
+              Real business solutions for <span className="text-gradient-gold">growing brands.</span>
             </h2>
           </div>
           <Link to="/portfolio" className="btn-ghost-luxe text-sm">
-            See the Results <ArrowUpRight className="h-4 w-4" />
+            View All Projects <ArrowUpRight className="h-4 w-4" />
           </Link>
         </div>
 
@@ -854,17 +854,17 @@ function Process() {
 /* ────────────────────────── TESTIMONIALS ────────────────────────── */
 export const TESTIMONIALS = [
   {
-    quote: "They treated our website as a business problem, not a design exercise. Direct bookings tripled within six months and we finally see where every guest comes from.",
+    quote: "OMSA Digital transformed our online presence with a strategy that combined website development, SEO, and conversion optimization. Within months, we saw a significant increase in qualified enquiries and direct bookings.",
     name: "Layla Al-Harthy",
     role: "Marketing Director, five-star hotel · Muscat",
   },
   {
-    quote: "OMSA Digital & AI Studio became a true strategic partner for our business. Their SEO, analytics, automation and AI solutions work together as one growth system, delivering measurable results month after month.",
+    quote: "Their team understands business goals before talking about design. From technical SEO to analytics and AI automation, every recommendation delivered measurable value for our company.",
     name: "Omar Bin Saeed",
     role: "Founder, real estate group · Dubai",
   },
   {
-    quote: "Calm, considered and quietly effective. The clinic runs more smoothly, our patients have a better experience, and the numbers speak for themselves.",
+    quote: "The new website and AI-powered workflows streamlined patient enquiries, reduced administrative workload, and created a much better experience for both our staff and patients.",
     name: "Dr. Aisha Mansoor",
     role: "Medical Director · Abu Dhabi",
   },
@@ -875,9 +875,9 @@ function Testimonials() {
     <section className="section-pad bg-[color:var(--ink)] text-white">
       <div className="container-luxe">
         <div className="max-w-2xl">
-          <p className="eyebrow !text-white/60">In their words</p>
+          <p className="eyebrow !text-white/60">Client Success Stories</p>
           <h2 className="mt-6 font-display text-4xl md:text-5xl font-bold tracking-tight">
-            The businesses we <span className="text-gradient-gold">grow alongside.</span>
+            Trusted by businesses <span className="text-gradient-gold">across Oman, UAE and the GCC.</span>
           </h2>
         </div>
 
@@ -986,17 +986,17 @@ function CtaBanner() {
           <div aria-hidden className="absolute -top-32 -right-32 h-96 w-96 rounded-full bg-[color:var(--gold)]/20 blur-3xl" />
           <div aria-hidden className="absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-[color:var(--gold)]/10 blur-3xl" />
           <div className="relative max-w-3xl">
-            <p className="eyebrow !text-white/60">Start the conversation</p>
+            <p className="eyebrow !text-white/60">Ready to Grow?</p>
             <h2 className="mt-6 font-display text-4xl md:text-6xl font-bold tracking-tight">
-              Let's build your <span className="text-gradient-gold">growth system.</span>
+              Let's build a stronger <span className="text-gradient-gold">digital future for your business.</span>
             </h2>
             <p className="mt-6 text-lg text-white/70 max-w-xl">
-              Tell us where you want your business to be in twelve months. We'll send back a
-              tailored strategy you can act on — whether we end up working together or not.
+              Tell us about your goals, challenges, and growth priorities.
+              We will recommend the right combination of website, SEO, AI, automation, and digital marketing solutions.
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
               <Link to="/contact" className="btn-gold">
-                Get Your Free Consultation <ArrowRight className="h-4 w-4" />
+                Book a Free Strategy Call <ArrowRight className="h-4 w-4" />
               </Link>
               <Link to="/services" className="btn-ghost-luxe !border-white/20 !text-white">
                 Explore Our Services
