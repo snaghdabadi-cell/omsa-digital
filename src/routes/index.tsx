@@ -422,7 +422,7 @@ function Pillars() {
             We combine high-performance website development, SEO, and AI automation into one connected digital growth system.
             Every service is designed to increase visibility, generate qualified leads, improve conversions, and help your business scale faster.
             No disconnected marketing. Just one strategy that delivers measurable business growth.
-        </div>
+        </p>
 
         <div className="mt-16 grid gap-6 lg:grid-cols-3">
           {PILLARS.map((p, i) => (
@@ -565,7 +565,7 @@ export function ServiceCard({
   icon: any;
   title: string;
   desc: string;
-  tag: string;
+  tag?: string;
 }) {
   return (
     <div className="group relative h-full rounded-3xl border border-border bg-card p-8 transition-all duration-500 hover:-translate-y-1 hover:border-[color:var(--gold)] hover:shadow-luxe">
