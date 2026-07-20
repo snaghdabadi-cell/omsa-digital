@@ -914,12 +914,12 @@ function Testimonials() {
 
 /* ────────────────────────── FAQ ────────────────────────── */
 export const FAQS = [
-  { q: "Where are you based and who do you work with?", a: "Our team works between Muscat and Dubai with businesses across Oman, the UAE, and the wider GCC — hospitality groups, real estate developers, clinics, professional services firms, restaurants and growing companies that take their digital presence seriously." },
-  { q: "How long does a typical website project take?", a: "A premium website project usually runs six to ten weeks from discovery to launch, depending on scope, content readiness and integrations. SEO, analytics and AI engagements are ongoing partnerships." },
-  { q: "Do you guarantee SEO rankings?", a: "No responsible partner will. We commit to a transparent, technically excellent process and to reporting against the outcomes that matter to your business — qualified traffic, leads and revenue, not vanity positions." },
-  { q: "Can you work in Arabic and English?", a: "Yes. We design, write and optimize fully bilingual experiences with native-quality copy, proper RTL support, and locale-aware SEO across both languages." },
-  { q: "What does an AI chatbot engagement look like?", a: "We start with the use cases — support, booking, lead qualification — train the assistant on your own content and brand voice, integrate it with your stack, and launch a branded experience that typically goes live in three to four weeks." },
-  { q: "How is pricing structured?", a: "Fixed-scope investments for websites and audits, and clear monthly retainers for SEO, content, ads and AI automation. Every proposal lists deliverables, KPIs and what success looks like." },
+  { q: "What digital marketing and AI services do you offer?", a: "We provide website design and development, ecommerce solutions, SEO, Local SEO, Technical SEO, AI automation, AI chatbots, AI solutions, Google Ads, social media marketing, branding, analytics, and digital growth strategy." },
+  { q: "How long does it take to design and develop a website?", a: "Most business websites are completed within four to eight weeks, depending on project complexity, content readiness, required integrations, and feedback turnaround." },
+  { q: "How long does SEO take to deliver results?", a: "SEO is a long-term growth strategy. Initial improvements may appear within three to six months, while stronger rankings, organic traffic, and qualified leads develop over time based on competition, website condition, content quality, and ongoing optimization." },
+  { q: "Can you build bilingual English and Arabic websites?", a: "Yes. We design, develop, and optimize fully bilingual English and Arabic websites with proper RTL support, localized SEO, and a seamless experience for users across Oman, the UAE, and the wider GCC." },
+  { q: "What can an AI chatbot do for my business?", a: "An AI chatbot can answer customer questions 24/7, qualify leads, book appointments, recommend services, collect enquiries, and integrate with your CRM or business systems to automate repetitive tasks while improving customer experience." },
+  { q: "How is pricing structured?", a: "Every project is quoted based on your business goals, required features, integrations, content, and growth strategy. After a free consultation, we provide a transparent proposal tailored to your needs with no hidden costs." },
   { q: "Do you handle analytics and tracking?", a: "Yes. Google Analytics 4, Tag Manager, Search Console, event tracking, server-side tagging and custom dashboards are standard parts of every engagement." },
   { q: "Can you handle paid media alongside SEO?", a: "Yes. We run integrated growth programmes — SEO for compounding long-term visibility, paid media for short-term acceleration — measured together in a single dashboard." },
   { q: "Where does AI actually create value for my business?", a: "In four places: customer-facing assistants, content and operations workflows, internal reporting, and personalization. We apply it where it earns its place." },
@@ -932,15 +932,15 @@ function Faq() {
       <div className="container-luxe">
         <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr]">
           <div>
-            <p className="eyebrow">Questions, answered</p>
+            <p className="eyebrow">Frequently Asked Questions</p>
             <h2 className="mt-6 font-display text-4xl md:text-5xl font-bold tracking-tight">
-              Practical answers, before the <span className="text-gradient-gold">first call.</span>
+              Get clear answers before <span className="text-gradient-gold">starting your project.</span>
             </h2>
             <p className="mt-6 text-muted-foreground max-w-md">
-              If your question isn't here, write to us — we respond within one working day.
+              Everything you need to know about our services, timelines, SEO, AI solutions, pricing, and working process.
             </p>
             <Link to="/contact" className="mt-8 inline-flex btn-ghost-luxe">
-              Let's Talk <MessageSquare className="h-4 w-4" />
+              Book a Free Strategy Call <MessageSquare className="h-4 w-4" />
             </Link>
           </div>
 

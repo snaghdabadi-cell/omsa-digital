@@ -20,12 +20,12 @@ export function Footer() {
                 <Sparkles className="h-4 w-4 text-[color:var(--gold)]" />
               </span>
               <span className="font-display text-xl font-bold">
-                OMSA<span className="text-gradient-gold">Digital</span>
+                OMSA<span className="text-gradient-gold"> Digital & AI Studio</span>
               </span>
             </div>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-white/60">
-              An AI digital growth platform for ambitious businesses across Oman, the UAE and the
-              wider GCC.
+              Helping businesses across Oman, the UAE and the GCC grow through web design, SEO,
+              AI automation, digital marketing, and data-driven strategy.
             </p>
             <nav aria-label="Social" className="mt-6 flex gap-2">
               {[
@@ -63,7 +63,7 @@ export function Footer() {
           <FooterCol
             title="Resources"
             items={[
-              { label: "Insights", to: "/blog" },
+              { label: "Blog", to: "/blog" },
               { label: "Case Studies", to: "/case-studies" },
               ...RESOURCE_CATEGORIES.slice(0, 4).map((c) => ({ label: c.label, to: `/resources/${c.slug}` })),
               { label: "Tools", to: "/tools" },
@@ -72,11 +72,11 @@ export function Footer() {
           <FooterCol
             title="Company"
             items={[
-              { label: "About", to: "/about" },
-              { label: "Authors", to: "/authors" },
-              { label: "Careers", to: "/careers" },
-              { label: "Press", to: "/press" },
-              { label: "Community", to: "/community" },
+              { label: "About Us", to: "/about" },
+              { label: "Our Services", to: "/services" },
+              { label: "Our Work", to: "/portfolio" },
+              { label: "Industries", to: "/industries" },
+              { label: "Locations", to: "/locations" },
               { label: "Contact", to: "/contact" },
             ]}
           />
@@ -85,10 +85,10 @@ export function Footer() {
         <div className="mt-16 grid gap-8 border-t border-white/10 pt-10 lg:grid-cols-[1.4fr_1fr]">
           <div>
             <h4 className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-white/80">
-              Newsletter
+              Stay Updated
             </h4>
             <p className="mt-4 max-w-md text-sm text-white/60">
-              One short, considered note each month on AI, SEO and digital growth. No noise.
+              Get practical insights on AI, SEO, websites, and digital growth delivered straight to your inbox.
             </p>
             <form className="mt-4 flex max-w-md gap-2" onSubmit={(e) => e.preventDefault()} aria-label="Newsletter signup">
               <label htmlFor="newsletter-email" className="sr-only">Your email address</label>
@@ -96,10 +96,10 @@ export function Footer() {
                 id="newsletter-email"
                 type="email"
                 required
-                placeholder="you@brand.com"
+                placeholder="Enter your email address"
                 className="flex-1 rounded-full bg-white/5 border border-white/10 px-4 py-3 text-sm placeholder:text-white/40 focus:outline-none focus:border-[color:var(--gold)]"
               />
-              <button className="btn-gold !py-2.5 !px-4 text-sm" type="submit">Join</button>
+              <button className="btn-gold !py-2.5 !px-4 text-sm" type="submit">Subscribe</button>
             </form>
           </div>
           <address className="not-italic space-y-3 text-sm text-white/60">
@@ -110,7 +110,7 @@ export function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-xs text-white/50">© {new Date().getFullYear()} CMSA Digital & AI Studio. All rights reserved.</p>
+          <p className="text-xs text-white/50">© {new Date().getFullYear()} OMSA Digital & AI Studio. All rights reserved.</p>
           <nav aria-label="Legal" className="flex gap-6 text-xs text-white/50">
             <Link to="/privacy" className="hover:text-white">Privacy</Link>
             <Link to="/terms" className="hover:text-white">Terms</Link>
