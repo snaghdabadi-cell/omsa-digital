@@ -18,7 +18,7 @@ export type ServiceDetail = {
   name: string;
   short: string;
   icon: LucideIcon;
-  category: "Build" | "Visibility" | "Intelligence" | "Clarity" | "Efficiency";
+  category: "Build" | "Visibility" | "Intelligence" | "Growth" | "Insights";
   metaTitle: string;
   metaDescription: string;
   problem: string;
@@ -47,8 +47,8 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
       "Higher conversion from existing traffic",
       "Faster pages and stronger Core Web Vitals",
       "Bilingual experience with native-quality copy",
-      "CMS-ready, easy for your team to maintain",
-      "A foundation SEO and AI can build on",
+      "Easy content management without developer dependency",
+      "Built for SEO, AI search, speed and long-term growth",
     ],
     process: [
       { step: "Discovery", detail: "Business goals, decision-makers, customer journey, and what success will look like in twelve months." },
@@ -67,11 +67,11 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
   },
   {
     slug: "seo",
-    name: "SEO Strategy",
+    name: "SEO Services",
     short: "Long-term visibility that consistently generates qualified traffic.",
     icon: Search,
     category: "Visibility",
-    metaTitle: "SEO Agency in Oman & UAE — Strategy, Technical & Content",
+    metaTitle: "SEO Services in Oman & UAE | OMSA Digital & AI Studio",
     metaDescription:
       "A serious SEO programme for ambitious businesses in Oman, the UAE and the GCC. Technical SEO, on-page, content, authority and local search delivered as one strategy.",
     problem:
@@ -201,7 +201,7 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     name: "Business Automation",
     short: "Quiet workflows that handle the repetitive work and free your team to focus on customers.",
     icon: Workflow,
-    category: "Efficiency",
+    category: "Growth",
     metaTitle: "Business Automation in Oman & UAE — OMSA Digital & AI Studio",
     metaDescription:
       "AI-assisted business automation for operations, sales and marketing teams in Oman and the UAE. Workflow orchestration, CRM integration and AI-powered lead handling.",
@@ -230,10 +230,10 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
   },
   {
     slug: "google-analytics",
-    name: "Google Analytics & Tracking",
+    name: "Analytics & Tracking",
     short: "Better decisions through measurable, trustworthy insights — across web, ads and customer journey.",
     icon: BarChart3,
-    category: "Clarity",
+    category: "Insights",
     metaTitle: "Google Analytics 4 (GA4) Consulting — Oman & UAE",
     metaDescription:
       "GA4, Google Tag Manager and Search Console implementation, server-side tagging, and executive dashboards for businesses in Oman and the UAE.",

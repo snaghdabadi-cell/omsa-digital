@@ -45,6 +45,13 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
     services: ["website-design", "seo", "technical-seo"],
   },
   {
+    slug: "construction",
+    name: "Construction",
+    tagline: "Digital solutions that help construction companies win more projects and build trust.",
+    description: "Professional construction websites, SEO, AI automation and lead generation systems designed for contractors, engineering firms and developers across Oman and the UAE.",
+    services: ["website-design", "seo", "technical-seo", "google-analytics"],
+  },
+  {
     slug: "education",
     name: "Education",
     tagline: "Digital learning platforms that attract students and build credibility.",
