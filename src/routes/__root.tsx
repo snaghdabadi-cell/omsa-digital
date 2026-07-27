@@ -154,7 +154,7 @@ function RootComponent() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   useEffect(() => {
-  console.log("pathname =", pathname);
+  
 
   window.dataLayer = window.dataLayer || [];
 
@@ -164,8 +164,6 @@ function RootComponent() {
   });
 
   if (pathname === "/contact") {
-    console.log("CONTACT EVENT FIRED");
-
     window.dataLayer.push({
       event: "contact_page_view",
       page_path: pathname,

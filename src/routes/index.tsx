@@ -206,7 +206,7 @@ function Hero() {
               transition={{ duration: 0.9, delay: 0.15 }}
               className="mt-7 max-w-xl text-lg text-muted-foreground leading-relaxed"
             >
-              We build high-performing websites, data-driven SEO strategies,
+              We build high-performing websites, results-driven SEO strategies,
               AI automation, and digital growth solutions that help businesses attract
               more customers, generate qualified leads, and achieve sustainable growth across Oman, the UAE, and the GCC.
             </motion.p>
@@ -367,8 +367,8 @@ const PILLARS = [
     tag: "01 — Build",
     icon: Code2,
     title: "Website Development",
-    headline: "Custom websites engineered to generate leads and build trust.",
-    desc: "We design and develop high-performance business websites optimized for user experience, search engines, conversions, and long-term business growth across Oman, the UAE, and the GCC.",
+    headline: "Custom websites designed to build trust, generate leads, and accelerate business growth.",
+    desc: "We design and develop premium business websites optimized for user experience, search visibility, performance, and conversions.",
     items: [
       "Custom Website Design",
       "Responsive Website Development",
@@ -381,8 +381,8 @@ const PILLARS = [
     tag: "02 — Grow",
     icon: TrendingUp,
     title: "SEO & Digital Growth",
-    headline: "Increase visibility, traffic, and qualified leads.",
-    desc: "We combine technical SEO, local SEO, content strategy, conversion optimization, and analytics to help your business achieve sustainable organic growth across Oman, the UAE, and the GCC.",
+    headline: "Increase visibility, attract qualified leads, and drive sustainable growth.",
+    desc: "We combine technical SEO, local SEO, content strategy, analytics, and conversion optimization to deliver long-term organic growth.",
     items: [
       "Technical & On-Page SEO",
       "Local SEO for Oman, UAE and GCC",
@@ -395,8 +395,8 @@ const PILLARS = [
     tag: "03 — Automate",
     icon: Workflow,
     title: "Automate",
-    headline: "Automate repetitive work and scale your business with AI.",
-    desc: "We build AI chatbots, workflow automation, and custom AI solutions that reduce manual tasks, improve customer experience, and help your team work faster and smarter.",
+    headline: "Automate operations, improve customer experiences, and scale your business with AI.",
+    desc: "We develop AI chatbots, workflow automation, and intelligent AI solutions that streamline operations, reduce manual work, and improve customer engagement.",
     items: [
       "AI chatbots and assistants",
       "Business process automation",
@@ -770,16 +770,16 @@ function WhyUs() {
       <div className="container-luxe">
         <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:items-end">
           <div>
-            <p className="eyebrow">Why businesses choose Apex AI Labs</p>
+            <p className="eyebrow">Why Choose OMSA Digital & AI Studio</p>
             <h2 className="mt-6 font-display text-4xl md:text-5xl font-bold tracking-tight">
-              Why ambitious businesses choose <span className="text-gradient-gold">one trusted partner.</span>
+              Why businesses across Oman, the UAE, and the GCC choose OMSA. <span className="text-gradient-gold">one trusted partner.</span>
             </h2>
           </div>
           <p className="text-muted-foreground max-w-lg">
-            Businesses across Oman and the UAE choose Apex AI Labs because
-            strategy, website development, SEO, AI automation, and analytics
-            are delivered by one expert team. This creates faster execution, stronger results, 
-            and a consistent digital growth system.
+            Businesses choose OMSA because we combine strategy, premium web design,
+            SEO, AI automation, branding, and analytics under one expert team.
+            Instead of managing multiple agencies, you gain a single digital growth 
+            partner focused on measurable business results.
           </p>
         </div>
         <div className="mt-14 grid gap-px overflow-hidden rounded-3xl bg-border sm:grid-cols-2 lg:grid-cols-4">
@@ -800,10 +800,10 @@ function WhyUs() {
 
 /* ────────────────────────── PROCESS ────────────────────────── */
 const PROCESS = [
-  { t: "Discovery", d: "Understand the business, the customer, and what success actually looks like." },
-  { t: "Research", d: "Audit competitors, search demand, behaviour, and the gaps worth pursuing." },
-  { t: "Strategy", d: "A written plan — positioning, priorities, channels, and a 12-month roadmap." },
-  { t: "Design", d: "Brand-led interfaces shaped around how your customers actually decide." },
+  { t: "Discovery", d: "Understand your business, goals, audience, competitors, and growth opportunities." },
+  { t: "Research", d: "Analyze your market, search demand, competitors, and opportunities using data-driven insights." },
+  { t: "Strategy", d: "Develop a clear digital growth roadmap covering website, SEO, AI, and marketing priorities." },
+  { t: "Design", d: "Create premium user experiences focused on trust, usability, and conversions." },
   { t: "Development", d: "Engineered for speed, accessibility, and long-term maintainability." },
   { t: "SEO", d: "Technical, on-page, content and local SEO laid in from the first sprint." },
   { t: "Analytics", d: "GA4, Tag Manager, Search Console and dashboards built around real KPIs." },
@@ -819,14 +819,14 @@ function Process() {
       <div className="container-luxe">
         <div className="flex flex-col items-start gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
-            <p className="eyebrow">How we work</p>
+            <p className="eyebrow">How We Work</p>
             <h2 className="mt-6 font-display text-4xl md:text-5xl font-bold tracking-tight">
-              A consulting framework. <span className="text-gradient-gold">Not a checklist.</span>
+              A Proven Process. <span className="text-gradient-gold">Built for Results.</span>
             </h2>
           </div>
           <p className="max-w-md text-muted-foreground">
-            Eleven defined stages from discovery to continuous improvement — so you know what's
-            happening, why it's happening, and what it's worth.
+            Every project follows a structured process designed to reduce risk,
+            improve collaboration, and deliver measurable business growth.
           </p>
         </div>
 
@@ -986,13 +986,13 @@ function CtaBanner() {
           <div aria-hidden className="absolute -top-32 -right-32 h-96 w-96 rounded-full bg-[color:var(--gold)]/20 blur-3xl" />
           <div aria-hidden className="absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-[color:var(--gold)]/10 blur-3xl" />
           <div className="relative max-w-3xl">
-            <p className="eyebrow !text-white/60">Ready to Grow?</p>
+            <p className="eyebrow !text-white/60">Ready to Accelerate Your Business?</p>
             <h2 className="mt-6 font-display text-4xl md:text-6xl font-bold tracking-tight">
-              Let's build a stronger <span className="text-gradient-gold">digital future for your business.</span>
+              Let's Build Your <span className="text-gradient-gold">Next Stage of Growth.</span>
             </h2>
             <p className="mt-6 text-lg text-white/70 max-w-xl">
-              Tell us about your goals, challenges, and growth priorities.
-              We will recommend the right combination of website, SEO, AI, automation, and digital marketing solutions.
+              Tell us about your business, goals, challenges, and growth opportunities.
+              We'll create a tailored strategy combining web design, SEO, AI, automation, and digital marketing to help you achieve measurable results.
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
               <Link to="/contact" className="btn-gold">
@@ -1003,7 +1003,7 @@ function CtaBanner() {
               </Link>
             </div>
             <p className="mt-5 text-xs text-white/50">
-              Free consultation • No obligation • Personalized growth roadmap
+              Free Strategy Session • No Commitment • Tailored Growth Roadmap
             </p>
           </div>
         </div>
