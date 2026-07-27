@@ -238,6 +238,7 @@ function Hero() {
             >
             
           </motion.div>
+          </div>
 
           {/* Floating UI cards */}
           <div className="relative h-[520px] hidden md:block">
@@ -455,6 +456,7 @@ function Pillars() {
           ))}
         </div>
       </div>
+    </div>
     </section>
   );
 }
