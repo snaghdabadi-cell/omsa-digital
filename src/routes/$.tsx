@@ -1,7 +1,10 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/$")({
-  component: NotFoundPage,
+  beforeLoad: () => {
+    throw notFound();
+  },
+  notFoundComponent: NotFoundPage,
 });
 
 function NotFoundPage() {
