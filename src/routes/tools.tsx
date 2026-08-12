@@ -2,14 +2,17 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Wrench } from "lucide-react";
 import { Container, Eyebrow, Heading, Prose, Tag } from "@/components/site/Primitives";
 import { TOOLS } from "@/lib/content/tools";
-import { pageMeta } from "@/lib/seo";
+import { pageMeta, isLeafMatch } from "@/lib/seo";
 
 export const Route = createFileRoute("/tools")({
-  head: () => pageMeta({
-    title: "Free digital tools — SEO audit, analyzer and more",
-    description: "Free, focused tools for marketers, founders and operators across the GCC. Audits, analyzers, calculators and templates.",
-    path: "/tools",
-  }),
+  head: ({ matches, match }) => {
+    const meta = pageMeta({
+      title: "Free digital tools — SEO audit, analyzer and more",
+      description: "Free, focused tools for marketers, founders and operators across the GCC. Audits, analyzers, calculators and templates.",
+      path: "/tools",
+    });
+    return isLeafMatch(matches, match) ? meta : { ...meta, links: [] };
+  },
   component: ToolsPage,
 });
 

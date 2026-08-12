@@ -2,14 +2,17 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { Container, Eyebrow, Heading, Prose } from "@/components/site/Primitives";
 import { INDUSTRY_PAGES } from "@/lib/content/industries";
-import { pageMeta } from "@/lib/seo";
+import { pageMeta, isLeafMatch } from "@/lib/seo";
 
 export const Route = createFileRoute("/industries")({
-  head: () => pageMeta({
-    title: "Industries we serve — Hospitality, Real Estate, Healthcare & more",
-    description: "Deep specialism across hospitality, real estate, healthcare, retail and professional services in Oman and the UAE.",
-    path: "/industries",
-  }),
+  head: ({ matches, match }) => {
+    const meta = pageMeta({
+      title: "Industries we serve — Hospitality, Real Estate, Healthcare & more",
+      description: "Deep specialism across hospitality, real estate, healthcare, retail and professional services in Oman and the UAE.",
+      path: "/industries",
+    });
+    return isLeafMatch(matches, match) ? meta : { ...meta, links: [] };
+  },
   component: IndustriesPage,
 });
 

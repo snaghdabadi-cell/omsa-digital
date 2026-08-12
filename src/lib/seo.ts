@@ -26,6 +26,17 @@ export const SOCIAL = {
 export const abs = (path: string) =>
   path.startsWith("http") ? path : `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
 
+/**
+ * True when this route is the deepest matched route for the current URL.
+ * Used by parent/list routes to suppress their own canonical link when a
+ * nested child route (e.g. /services/$slug) is also matched, so the page
+ * never renders two conflicting <link rel="canonical"> tags.
+ */
+export const isLeafMatch = (
+  matches: ReadonlyArray<{ routeId: string }>,
+  match: { routeId: string },
+) => matches[matches.length - 1]?.routeId === match.routeId;
+
 /** Standard per-route head meta block — call inside head(). */
 export function pageMeta(opts: {
   title: string;

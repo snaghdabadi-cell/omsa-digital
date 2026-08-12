@@ -2,14 +2,17 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, MapPin } from "lucide-react";
 import { Container, Eyebrow, Heading, Prose, Tag } from "@/components/site/Primitives";
 import { ROLES } from "@/lib/content/careers";
-import { pageMeta } from "@/lib/seo";
+import { pageMeta, isLeafMatch } from "@/lib/seo";
 
 export const Route = createFileRoute("/careers")({
-  head: () => pageMeta({
-    title: "Careers — Join OMSA Digital & AI Studio",
-    description: "We're hiring strategists, designers and engineers to build the leading AI digital growth agency in the GCC.",
-    path: "/careers",
-  }),
+  head: ({ matches, match }) => {
+    const meta = pageMeta({
+      title: "Careers — Join OMSA Digital & AI Studio",
+      description: "We're hiring strategists, designers and engineers to build the leading AI digital growth agency in the GCC.",
+      path: "/careers",
+    });
+    return isLeafMatch(matches, match) ? meta : { ...meta, links: [] };
+  },
   component: CareersPage,
 });
 

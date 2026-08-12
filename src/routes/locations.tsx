@@ -2,14 +2,17 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, MapPin } from "lucide-react";
 import { Container, Eyebrow, Heading, Prose } from "@/components/site/Primitives";
 import { LOCATIONS } from "@/lib/content/locations";
-import { pageMeta } from "@/lib/seo";
+import { pageMeta, isLeafMatch } from "@/lib/seo";
 
 export const Route = createFileRoute("/locations")({
-  head: () => pageMeta({
-    title: "Locations — OMSA Digital & AI Studio in Oman, UAE & the GCC",
-    description: "Discover OMSA Digital & AI Studio locations serving businesses across Muscat, Dubai, Abu Dhabi and the GCC with AI, SEO, web development and digital growth services.",
-    path: "/locations",
-  }),
+  head: ({ matches, match }) => {
+    const meta = pageMeta({
+      title: "Locations — OMSA Digital & AI Studio in Oman, UAE & the GCC",
+      description: "Discover OMSA Digital & AI Studio locations serving businesses across Muscat, Dubai, Abu Dhabi and the GCC with AI, SEO, web development and digital growth services.",
+      path: "/locations",
+    });
+    return isLeafMatch(matches, match) ? meta : { ...meta, links: [] };
+  },
   component: LocationsPage,
 });
 

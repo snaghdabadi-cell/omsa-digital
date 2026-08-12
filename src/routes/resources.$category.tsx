@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { Container, Eyebrow, Heading, Prose, EmptyState, Tag } from "@/components/site/Primitives";
 import { RESOURCE_CATEGORIES, getResourcesByCategory, type ResourceCategory } from "@/lib/content/resources";
-import { pageMeta } from "@/lib/seo";
+import { pageMeta, isLeafMatch } from "@/lib/seo";
 
 export const Route = createFileRoute("/resources/$category")({
   loader: ({ params }) => {
@@ -9,13 +9,14 @@ export const Route = createFileRoute("/resources/$category")({
     if (!cat) throw notFound();
     return { cat, items: getResourcesByCategory(params.category as ResourceCategory) };
   },
-  head: ({ params, loaderData }) => {
+  head: ({ params, loaderData, matches, match }) => {
     const cat = loaderData?.cat ?? RESOURCE_CATEGORIES[0];
-    return pageMeta({
+    const meta = pageMeta({
       title: `${cat.label} — AI, SEO & Digital Growth Resources | OMSA Digital & AI Studio`,
       description: cat.description,
       path: `/resources/${params.category}`,
     });
+    return isLeafMatch(matches, match) ? meta : { ...meta, links: [] };
   },
   component: ResourceCategoryPage,
 });

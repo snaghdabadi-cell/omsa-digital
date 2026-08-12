@@ -2,14 +2,17 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, BookOpen } from "lucide-react";
 import { Container, Eyebrow, Heading, Prose } from "@/components/site/Primitives";
 import { RESOURCE_CATEGORIES } from "@/lib/content/resources";
-import { pageMeta } from "@/lib/seo";
+import { pageMeta, isLeafMatch } from "@/lib/seo";
 
 export const Route = createFileRoute("/resources")({
-  head: () => pageMeta({
-    title: "Resources — Guides, templates and tools for digital growth",
-    description: "A growing library of guides, templates, whitepapers and downloads on SEO, AI and digital growth in the GCC.",
-    path: "/resources",
-  }),
+  head: ({ matches, match }) => {
+    const meta = pageMeta({
+      title: "Resources — Guides, templates and tools for digital growth",
+      description: "A growing library of guides, templates, whitepapers and downloads on SEO, AI and digital growth in the GCC.",
+      path: "/resources",
+    });
+    return isLeafMatch(matches, match) ? meta : { ...meta, links: [] };
+  },
   component: ResourcesPage,
 });
 

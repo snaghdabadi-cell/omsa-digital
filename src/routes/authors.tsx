@@ -1,14 +1,17 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Container, Eyebrow, Heading, Prose, Tag } from "@/components/site/Primitives";
 import { AUTHORS } from "@/lib/content/authors";
-import { pageMeta } from "@/lib/seo";
+import { pageMeta, isLeafMatch } from "@/lib/seo";
 
 export const Route = createFileRoute("/authors")({
-  head: () => pageMeta({
-    title: "Authors — OMSA Digital & AI Studio",
-    description: "Meet the strategists, designers and AI specialists behind OMSA Digital & AI Studio.",
-    path: "/authors",
-  }),
+  head: ({ matches, match }) => {
+    const meta = pageMeta({
+      title: "Authors — OMSA Digital & AI Studio",
+      description: "Meet the strategists, designers and AI specialists behind OMSA Digital & AI Studio.",
+      path: "/authors",
+    });
+    return isLeafMatch(matches, match) ? meta : { ...meta, links: [] };
+  },
   component: AuthorsPage,
 });
 

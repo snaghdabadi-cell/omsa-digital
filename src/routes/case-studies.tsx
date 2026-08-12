@@ -4,10 +4,10 @@ import { Reveal } from "@/components/site/Reveal";
 import workHotel from "@/assets/work-hotel.jpg";
 import workClinic from "@/assets/work-clinic.jpg";
 import workRealestate from "@/assets/work-realestate.jpg";
-import { abs } from "@/lib/seo";
+import { abs, isLeafMatch } from "@/lib/seo";
 
 export const Route = createFileRoute("/case-studies")({
-  head: () => ({
+  head: ({ matches, match }) => ({
     meta: [
       { title: "Case Studies — Real Growth for GCC Businesses" },
       { name: "description", content: "See how OMSA Digital & AI Studio helps businesses across Oman and the GCC achieve measurable growth through web design, SEO and AI automation." },
@@ -15,7 +15,7 @@ export const Route = createFileRoute("/case-studies")({
       { property: "og:description", content: "Strategy you can measure: real growth stories from GCC businesses." },
       { property: "og:url", content: abs("/case-studies") },
     ],
-    links: [{ rel: "canonical", href: abs("/case-studies") }],
+    links: isLeafMatch(matches, match) ? [{ rel: "canonical", href: abs("/case-studies") }] : [],
   }),
   component: CaseStudiesPage,
 });
