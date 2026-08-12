@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { ServiceCard, SERVICES } from "./index";
+import { abs } from "@/lib/seo";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
@@ -10,9 +11,9 @@ export const Route = createFileRoute("/services")({
       { name: "description", content: "Comprehensive AI-powered digital growth services including web development, SEO, analytics, automation, branding and performance marketing for businesses across Oman and the GCC." },
       { property: "og:title", content: "Services — OMSA Digital & AI Studio" },
       { property: "og:description", content: "AI-driven websites, SEO, analytics and automation designed to accelerate business growth across Oman and the GCC." },
-      { property: "og:url", content: "/services" },
+      { property: "og:url", content: abs("/services") },
     ],
-    links: [{ rel: "canonical", href: "/services" }],
+    links: [{ rel: "canonical", href: abs("/services") }],
   }),
   component: ServicesPage,
 });

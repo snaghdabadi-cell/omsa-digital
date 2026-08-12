@@ -4,6 +4,7 @@ import { Reveal } from "@/components/site/Reveal";
 import workHotel from "@/assets/work-hotel.jpg";
 import workClinic from "@/assets/work-clinic.jpg";
 import workRealestate from "@/assets/work-realestate.jpg";
+import { abs } from "@/lib/seo";
 
 export const Route = createFileRoute("/case-studies")({
   head: () => ({
@@ -12,9 +13,9 @@ export const Route = createFileRoute("/case-studies")({
       { name: "description", content: "See how OMSA Digital & AI Studio helps businesses across Oman and the GCC achieve measurable growth through web design, SEO and AI automation." },
       { property: "og:title", content: "Case Studies — OMSA Digital & AI Studio" },
       { property: "og:description", content: "Strategy you can measure: real growth stories from GCC businesses." },
-      { property: "og:url", content: "/case-studies" },
+      { property: "og:url", content: abs("/case-studies") },
     ],
-    links: [{ rel: "canonical", href: "/case-studies" }],
+    links: [{ rel: "canonical", href: abs("/case-studies") }],
   }),
   component: CaseStudiesPage,
 });

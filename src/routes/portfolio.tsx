@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Reveal } from "@/components/site/Reveal";
 import { PROJECTS, ProjectCard } from "./index";
+import { abs } from "@/lib/seo";
 
 export const Route = createFileRoute("/portfolio")({
   head: () => ({
@@ -9,9 +10,9 @@ export const Route = createFileRoute("/portfolio")({
       { name: "description", content: "Explore AI, SEO, analytics, automation and website projects delivered by OMSA Digital & AI Studio for businesses across Oman and the GCC." },
       { property: "og:title", content: "Portfolio — OMSA Digital & AI Studio" },
       { property: "og:description", content: "Real AI-powered digital growth projects delivering measurable business results across Oman and the GCC." },
-      { property: "og:url", content: "/portfolio" },
+      { property: "og:url", content: abs("/portfolio") },
     ],
-    links: [{ rel: "canonical", href: "/portfolio" }],
+    links: [{ rel: "canonical", href: abs("/portfolio") }],
   }),
   component: PortfolioPage,
 });

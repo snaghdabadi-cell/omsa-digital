@@ -7,6 +7,7 @@ import workDashboard from "@/assets/work-dashboard.jpg";
 import workCorporate from "@/assets/work-corporate.jpg";
 import workClinic from "@/assets/work-clinic.jpg";
 import workRealestate from "@/assets/work-realestate.jpg";
+import { abs } from "@/lib/seo";
 
 export const Route = createFileRoute("/blog")({
   head: () => ({
@@ -15,9 +16,9 @@ export const Route = createFileRoute("/blog")({
       { name: "description", content: "Expert insights on web design, SEO, AI automation, Google Analytics, and digital growth strategies for businesses in Oman and the GCC." },
       { property: "og:title", content: "Insights — OMSA Digital & AI Studio Blog" },
       { property: "og:description", content: "Practical articles, case studies, and expert guides on websites, SEO, AI automation, analytics, and digital marketing." },
-      { property: "og:url", content: "/blog" },
+      { property: "og:url", content: abs("/blog") },
     ],
-    links: [{ rel: "canonical", href: "/blog" }],
+    links: [{ rel: "canonical", href: abs("/blog") }],
   }),
   component: BlogPage,
 });
