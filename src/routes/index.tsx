@@ -424,6 +424,7 @@ function Pillars() {
             Every service is designed to increase visibility, generate qualified leads, improve conversions, and help your business scale faster.
             No disconnected marketing. Just one strategy that delivers measurable business growth.
         </p>
+        </div>
 
         <div className="mt-16 grid gap-6 lg:grid-cols-3">
           {PILLARS.map((p, i) => (
@@ -456,7 +457,6 @@ function Pillars() {
           ))}
         </div>
       </div>
-    </div>
     </section>
   );
 }
