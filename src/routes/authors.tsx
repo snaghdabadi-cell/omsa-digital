@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-router";
 import { Container, Eyebrow, Heading, Prose, Tag } from "@/components/site/Primitives";
 import { AUTHORS } from "@/lib/content/authors";
 import { pageMeta, isLeafMatch } from "@/lib/seo";
@@ -16,6 +16,9 @@ export const Route = createFileRoute("/authors")({
 });
 
 function AuthorsPage() {
+  const isLeaf = useRouterState({ select: (s) => s.matches.at(-1)?.routeId === Route.id });
+  if (!isLeaf) return <Outlet />;
+
   return (
     <section className="pt-40 pb-32">
       <Container>

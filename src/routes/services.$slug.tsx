@@ -124,6 +124,15 @@ function ServiceDetailPage() {
               How we solve it
             </h2>
             <p className="mt-5 text-muted-foreground leading-relaxed">{service.solution}</p>
+            {service.auditToolAnchor && (
+              <p className="mt-4 text-sm text-muted-foreground">
+                Want a clearer starting point?{" "}
+                <Link to="/tools/$slug" params={{ slug: "seo-audit" }} className="link-underline font-medium text-[color:var(--gold-deep)]">
+                  {service.auditToolAnchor}
+                </Link>
+                .
+              </p>
+            )}
           </article>
         </div>
       </section>

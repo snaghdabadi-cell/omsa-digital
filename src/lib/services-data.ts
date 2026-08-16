@@ -27,6 +27,7 @@ export type ServiceDetail = {
   process: { step: string; detail: string }[];
   faqs: { q: string; a: string }[];
   related: string[]; // slugs
+  auditToolAnchor?: string; // optional contextual link label to /tools/seo-audit
 };
 
 export const SERVICE_DETAILS: ServiceDetail[] = [
@@ -98,6 +99,7 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
       { q: "Do you work in Arabic?", a: "Yes. We plan and execute SEO across both languages, with native Arabic content, RTL technical setup and locale-aware structured data." },
     ],
     related: ["technical-seo", "local-seo", "google-analytics"],
+    auditToolAnchor: "SEO Audit Tool",
   },
   {
     slug: "technical-seo",
@@ -130,6 +132,7 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
       { q: "Do you support headless and modern frameworks?", a: "Yes — Next.js, TanStack Start, Astro, Shopify Hydrogen, headless WordPress and standard stacks. Technical SEO is framework-aware." },
     ],
     related: ["seo", "local-seo", "website-design"],
+    auditToolAnchor: "technical SEO audit",
   },
   {
     slug: "local-seo",
@@ -162,6 +165,7 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
       { q: "How do you handle Arabic local search?", a: "We optimize bilingual GBP listings, dual-language schema, and locale-aware landing pages so you appear for searches in both languages." },
     ],
     related: ["seo", "technical-seo", "google-analytics"],
+    auditToolAnchor: "check your SEO foundation",
   },
   {
     slug: "ai-chatbots",

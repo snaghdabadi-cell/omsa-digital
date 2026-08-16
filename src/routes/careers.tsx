@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-router";
 import { ArrowRight, MapPin } from "lucide-react";
 import { Container, Eyebrow, Heading, Prose, Tag } from "@/components/site/Primitives";
 import { ROLES } from "@/lib/content/careers";
@@ -17,6 +17,9 @@ export const Route = createFileRoute("/careers")({
 });
 
 function CareersPage() {
+  const isLeaf = useRouterState({ select: (s) => s.matches.at(-1)?.routeId === Route.id });
+  if (!isLeaf) return <Outlet />;
+
   return (
     <section className="pt-40 pb-32">
       <Container>

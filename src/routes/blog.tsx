@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Outlet, useRouterState } from "@tanstack/react-router";
 import { ArrowUpRight, Clock } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import workAi from "@/assets/work-ai.jpg";
@@ -35,6 +35,9 @@ const POSTS = [
 ];
 
 function BlogPage() {
+  const isLeaf = useRouterState({ select: (s) => s.matches.at(-1)?.routeId === Route.id });
+  if (!isLeaf) return <Outlet />;
+
   const featured = POSTS[0];
   return (
     <>

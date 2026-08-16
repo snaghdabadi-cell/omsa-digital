@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { ServiceCard, SERVICES } from "./index";
@@ -82,6 +82,9 @@ const DEEP_SERVICES = [
 ];
 
 function ServicesPage() {
+  const isLeaf = useRouterState({ select: (s) => s.matches.at(-1)?.routeId === Route.id });
+  if (!isLeaf) return <Outlet />;
+
   return (
     <>
       <section className="pt-40 pb-20">
