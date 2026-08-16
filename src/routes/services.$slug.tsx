@@ -1,8 +1,15 @@
+import type { ReactNode } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, CheckCircle2 } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { FaqItem } from "@/routes/index";
-import { SERVICE_DETAILS, getService } from "@/lib/services-data";
+import {
+  SERVICE_DETAILS,
+  getService,
+  type AnchorLink,
+  type ContentLink,
+  type EditorialSection,
+} from "@/lib/services-data";
 import {
   abs,
   breadcrumbJsonLd,
@@ -10,6 +17,130 @@ import {
   pageMeta,
   serviceJsonLd,
 } from "@/lib/seo";
+
+// Resolves a ContentLink to the actual typed route. Kept as a closed switch
+// so every destination this page can render is one of the app's real routes.
+function ContentAnchor({
+  link,
+  label,
+  className,
+}: {
+  link: ContentLink;
+  label: string;
+  className: string;
+}) {
+  switch (link.kind) {
+    case "service":
+      return (
+        <Link to="/services/$slug" params={{ slug: link.slug }} className={className}>
+          {label}
+        </Link>
+      );
+    case "tool":
+      return (
+        <Link to="/tools/$slug" params={{ slug: link.slug }} className={className}>
+          {label}
+        </Link>
+      );
+    case "location":
+      return (
+        <Link to="/locations/$city" params={{ city: link.city }} className={className}>
+          {label}
+        </Link>
+      );
+    case "contact":
+      return (
+        <Link to="/contact" className={className}>
+          {label}
+        </Link>
+      );
+    case "portfolio":
+      return (
+        <Link to="/portfolio" className={className}>
+          {label}
+        </Link>
+      );
+    case "external":
+      return (
+        <a href={link.href} target="_blank" rel="noopener noreferrer" className={className}>
+          {label}
+        </a>
+      );
+  }
+}
+
+// Renders body copy that optionally has one AnchorLink applied over an exact
+// substring. Scoped per-paragraph so overlapping anchor words never collide.
+function Linkify({ text, link }: { text: string; link?: AnchorLink }): ReactNode {
+  if (!link) return text;
+  const idx = text.indexOf(link.anchor);
+  if (idx === -1) return text;
+  const before = text.slice(0, idx);
+  const after = text.slice(idx + link.anchor.length);
+  return (
+    <>
+      {before}
+      <ContentAnchor link={link.link} label={link.anchor} className="link-underline font-medium text-[color:var(--gold-deep)]" />
+      {after}
+    </>
+  );
+}
+
+function EditorialSectionBlock({ section, muted }: { section: EditorialSection; muted?: boolean }) {
+  const cardClass = muted
+    ? "rounded-3xl border border-border bg-background p-8"
+    : "rounded-3xl border border-border bg-card p-8";
+  return (
+    <section className={`section-pad${muted ? " bg-muted/30" : ""}`}>
+      <div className="container-luxe">
+        {section.eyebrow && <p className="eyebrow">{section.eyebrow}</p>}
+        <h2 className={`font-display text-3xl md:text-4xl font-bold tracking-tight max-w-3xl${section.eyebrow ? " mt-5" : ""}`}>
+          {section.h2}
+        </h2>
+        {section.paragraphs && section.paragraphs.length > 0 && (
+          <div className="mt-6 max-w-3xl space-y-4">
+            {section.paragraphs.map((p, i) => (
+              <p key={i} className="text-muted-foreground leading-relaxed">
+                <Linkify text={p.text} link={p.link} />
+              </p>
+            ))}
+          </div>
+        )}
+        {section.bullets && section.bullets.length > 0 && (
+          <ul className="mt-8 grid gap-3 sm:grid-cols-2 max-w-3xl">
+            {section.bullets.map((b) => (
+              <li key={b} className="flex items-start gap-3 text-sm text-foreground/85 leading-relaxed">
+                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[color:var(--gold)]" />
+                {b}
+              </li>
+            ))}
+          </ul>
+        )}
+        {section.afterBullets && section.afterBullets.length > 0 && (
+          <div className="mt-6 max-w-3xl space-y-4">
+            {section.afterBullets.map((p, i) => (
+              <p key={i} className="text-muted-foreground leading-relaxed">
+                <Linkify text={p.text} link={p.link} />
+              </p>
+            ))}
+          </div>
+        )}
+        {section.subsections && section.subsections.length > 0 && (
+          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {section.subsections.map((sub) => (
+              <div key={sub.h3} className={cardClass}>
+                <h3 className="font-display text-lg font-semibold tracking-tight">{sub.h3}</h3>
+                <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
+                  <Linkify text={sub.body} link={sub.link} />
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
 
 export const Route = createFileRoute("/services/$slug")({
   loader: ({ params }) => {
@@ -100,9 +231,31 @@ function ServiceDetailPage() {
             </span>
             <div>
               <h1 className="font-display text-4xl md:text-6xl font-bold tracking-tight leading-[1.05] max-w-3xl">
-                {service.name}
+                {service.h1 ?? service.name}
               </h1>
-              <p className="mt-6 max-w-2xl text-lg text-muted-foreground">{service.short}</p>
+              {service.heroBody && service.heroBody.length > 0 ? (
+                <div className="mt-6 max-w-2xl space-y-4">
+                  {service.heroBody.map((p: string, i: number) => (
+                    <p key={i} className="text-lg text-muted-foreground leading-relaxed">{p}</p>
+                  ))}
+                </div>
+              ) : (
+                <p className="mt-6 max-w-2xl text-lg text-muted-foreground">{service.short}</p>
+              )}
+              {service.heroCta && (
+                <div className="mt-8 flex flex-wrap items-center gap-4">
+                  <Link to="/contact" className="btn-gold">
+                    {service.heroCta.primaryLabel} <ArrowRight className="h-4 w-4" />
+                  </Link>
+                  {service.heroCta.secondaryLabel && service.heroCta.secondaryLink && (
+                    <ContentAnchor
+                      link={service.heroCta.secondaryLink}
+                      label={service.heroCta.secondaryLabel}
+                      className="btn-ghost-luxe"
+                    />
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -137,12 +290,21 @@ function ServiceDetailPage() {
         </div>
       </section>
 
+      {/* Editorial sections (optional, long-form pages only) */}
+      {service.sections?.map((section: EditorialSection, i: number) => (
+        <EditorialSectionBlock key={section.id} section={section} muted={i % 2 === 0} />
+      ))}
+
       {/* Benefits */}
       <section className="section-pad">
         <div className="container-luxe">
-          <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight max-w-2xl">
-            What you can expect
+          {service.benefitsEyebrow && <p className="eyebrow">{service.benefitsEyebrow}</p>}
+          <h2 className={`font-display text-3xl md:text-4xl font-bold tracking-tight max-w-2xl${service.benefitsEyebrow ? " mt-5" : ""}`}>
+            {service.benefitsHeading ?? "What you can expect"}
           </h2>
+          {service.benefitsIntro && (
+            <p className="mt-5 max-w-2xl text-muted-foreground">{service.benefitsIntro}</p>
+          )}
           <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {service.benefits.map((b: string) => (
               <li
@@ -157,6 +319,10 @@ function ServiceDetailPage() {
         </div>
       </section>
 
+      {service.postBenefitsSection && (
+        <EditorialSectionBlock section={service.postBenefitsSection} />
+      )}
+
       {/* Process */}
       <section className="section-pad bg-muted/30">
         <div className="container-luxe">
@@ -165,20 +331,49 @@ function ServiceDetailPage() {
             A clear, predictable process
           </h2>
           <ol className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {service.process.map((p: { step: string; detail: string }, i: number) => (
+            {service.process.map((p: { step: string; detail: string; link?: AnchorLink }, i: number) => (
               <Reveal key={p.step} delay={i * 0.05}>
                 <li className="h-full rounded-3xl border border-border bg-background p-8">
                   <span className="font-display text-4xl font-bold text-gradient-gold">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <h3 className="mt-5 font-display text-lg font-semibold tracking-tight">{p.step}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{p.detail}</p>
+                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                    <Linkify text={p.detail} link={p.link} />
+                  </p>
                 </li>
               </Reveal>
             ))}
           </ol>
         </div>
       </section>
+
+      {/* Who this is for */}
+      {service.whoFor && service.whoFor.length > 0 && (
+        <section className="section-pad bg-muted/30">
+          <div className="container-luxe">
+            <p className="eyebrow">Who this is for</p>
+            <h2 className="mt-5 font-display text-3xl md:text-4xl font-bold tracking-tight max-w-2xl">
+              Who This Service Is For
+            </h2>
+            {service.whoForIntro && (
+              <p className="mt-5 max-w-md text-muted-foreground">{service.whoForIntro}</p>
+            )}
+            <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {service.whoFor.map((w: { title: string; body: string }) => (
+                <div key={w.title} className="rounded-3xl border border-border bg-background p-8">
+                  <h3 className="font-display text-lg font-semibold tracking-tight">{w.title}</h3>
+                  <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{w.body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {service.preFaqSection && (
+        <EditorialSectionBlock section={service.preFaqSection} />
+      )}
 
       {/* FAQ */}
       <section className="section-pad" id="faq">
@@ -193,8 +388,12 @@ function ServiceDetailPage() {
             </p>
           </div>
           <div className="space-y-3">
-            {service.faqs.map((f: { q: string; a: string }, i: number) => (
-              <FaqItem key={f.q} item={f} defaultOpen={i === 0} />
+            {service.faqs.map((f: { q: string; a: string; link?: AnchorLink }, i: number) => (
+              <FaqItem
+                key={f.q}
+                item={{ q: f.q, a: <Linkify text={f.a} link={f.link} /> }}
+                defaultOpen={i === 0}
+              />
             ))}
           </div>
         </div>
@@ -239,14 +438,25 @@ function ServiceDetailPage() {
         <div className="container-luxe">
           <div className="rounded-[2rem] border border-border bg-card p-10 lg:p-16 text-center">
             <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight">
-              Want to see what {service.name.toLowerCase()} could look like for your business?
+              {service.finalCta?.heading ??
+                `Want to see what ${service.name.toLowerCase()} could look like for your business?`}
             </h2>
             <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
-              Book a 30-minute strategy call. We'll review your current setup and send back a written plan within five working days.
+              {service.finalCta?.body ??
+                "Book a 30-minute strategy call. We'll review your current setup and send back a written plan within five working days."}
             </p>
-            <Link to="/contact" className="mt-8 inline-flex btn-gold">
-              Book a Free Strategy Call <ArrowRight className="h-4 w-4" />
-            </Link>
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+              <Link to="/contact" className="inline-flex btn-gold">
+                {service.finalCta?.primaryLabel ?? "Book a Free Strategy Call"} <ArrowRight className="h-4 w-4" />
+              </Link>
+              {service.finalCta && (
+                <ContentAnchor
+                  link={service.finalCta.secondaryLink}
+                  label={service.finalCta.secondaryLabel}
+                  className="btn-ghost-luxe"
+                />
+              )}
+            </div>
           </div>
         </div>
       </section>

@@ -34,7 +34,7 @@ import {
   Brain,
   Compass,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import heroImg from "@/assets/hero.jpg";
 import workHotel from "@/assets/work-hotel.jpg";
 import workRestaurant from "@/assets/work-restaurant.jpg";
@@ -957,7 +957,7 @@ function Faq() {
   );
 }
 
-export function FaqItem({ item, defaultOpen = false }: { item: { q: string; a: string }; defaultOpen?: boolean }) {
+export function FaqItem({ item, defaultOpen = false }: { item: { q: string; a: ReactNode }; defaultOpen?: boolean }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
     <div className="rounded-2xl border border-border bg-card overflow-hidden">

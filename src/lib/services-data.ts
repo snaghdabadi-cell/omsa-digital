@@ -13,6 +13,39 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
+// A single internal/external destination a piece of copy can link to.
+// Kept as a small closed union (rather than a raw href) so every link a
+// service page renders resolves through the router's typed `<Link>` and can
+// be verified against real routes instead of a hand-typed string.
+export type ContentLink =
+  | { kind: "service"; slug: string }
+  | { kind: "tool"; slug: string }
+  | { kind: "location"; city: string }
+  | { kind: "contact" }
+  | { kind: "portfolio" }
+  | { kind: "external"; href: string };
+
+// Attaches a ContentLink to one exact substring ("anchor") of a paragraph.
+// Scoped per-paragraph (not shared across a whole section) so overlapping
+// anchor words (e.g. "SEO" inside "Technical SEO") never collide.
+export type AnchorLink = { anchor: string; link: ContentLink };
+
+export type EditorialParagraph = { text: string; link?: AnchorLink };
+export type EditorialSubsection = { h3: string; body: string; link?: AnchorLink };
+
+// A long-form H2 block for service pages whose approved copy goes beyond the
+// standard problem/solution + benefits + process shape. Optional and unused
+// by default — only populated where a service genuinely needs it.
+export type EditorialSection = {
+  id: string;
+  eyebrow?: string;
+  h2: string;
+  paragraphs?: EditorialParagraph[];
+  bullets?: string[];
+  afterBullets?: EditorialParagraph[]; // closing paragraphs rendered after the bullet list
+  subsections?: EditorialSubsection[];
+};
+
 export type ServiceDetail = {
   slug: string;
   name: string;
@@ -24,10 +57,26 @@ export type ServiceDetail = {
   problem: string;
   solution: string;
   benefits: string[];
-  process: { step: string; detail: string }[];
-  faqs: { q: string; a: string }[];
+  process: { step: string; detail: string; link?: AnchorLink }[];
+  faqs: { q: string; a: string; link?: AnchorLink }[];
   related: string[]; // slugs
   auditToolAnchor?: string; // optional contextual link label to /tools/seo-audit
+
+  // Optional long-form page content — only set where a page's approved copy
+  // needs more than the standard shape above. Every field below is additive
+  // and safe to leave undefined for every other service.
+  h1?: string; // overrides `name` in the page <h1> only (name still powers breadcrumbs/cards)
+  heroBody?: string[]; // replaces the single `short` paragraph in the hero when present
+  heroCta?: { primaryLabel: string; secondaryLabel?: string; secondaryLink?: ContentLink };
+  sections?: EditorialSection[]; // rendered as a block, in order, after Problem/Solution
+  benefitsEyebrow?: string;
+  benefitsHeading?: string; // overrides "What you can expect"
+  benefitsIntro?: string;
+  postBenefitsSection?: EditorialSection; // rendered after the benefits grid
+  whoForIntro?: string;
+  whoFor?: { title: string; body: string }[];
+  preFaqSection?: EditorialSection; // rendered after "Who this is for", before FAQ
+  finalCta?: { heading: string; body: string; primaryLabel: string; secondaryLabel: string; secondaryLink: ContentLink };
 };
 
 export const SERVICE_DETAILS: ServiceDetail[] = [
@@ -37,34 +86,276 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     short: "A digital platform that attracts, educates and converts visitors into customers.",
     icon: Globe,
     category: "Build",
-    metaTitle: "Premium Website Design in Oman & UAE — OMSA Digital & AI Studio",
+    metaTitle: "Website Design Oman | Professional Web Design | OMSA",
     metaDescription:
-      "Brand-led, conversion-focused website design for hotels, real estate, clinics and corporate groups across Oman, the UAE and the GCC. Built for speed, search and revenue.",
+      "Professional website design in Oman for businesses that need a fast, responsive and search-ready digital presence. OMSA designs strategic websites for Oman, Muscat and the GCC.",
     problem:
-      "Most business websites are made to look good in a slide deck, not to do commercial work. Visitors leave, search engines ignore them, and the marketing budget runs into a brand asset that doesn't generate revenue.",
+      "A polished homepage is not the same as an effective website. Visitors arrive with questions — what you offer, whether your business is credible, whether your service is relevant to them — and if those answers are difficult to find, visual design alone will not solve the problem.",
     solution:
-      "We design websites as commercial instruments — a precise architecture, a brand-led visual system, a conversion-focused experience, and engineering that respects Core Web Vitals from day one. Bilingual English and Arabic by default.",
+      "Before deciding how a page should look, we consider what the visitor needs to understand and what the business needs the visitor to do — positioning, page hierarchy, information architecture, search visibility and conversion paths, before visual details are allowed to dominate the project.",
+    h1: "Website Design in Oman Built to Turn Attention Into Business",
+    heroBody: [
+      "Your website should do more than make your business look established. It should make your value clear, build confidence quickly and give potential customers a reason to take the next step.",
+      "OMSA Digital & AI Studio designs professional websites for businesses in Oman, Muscat and across the GCC — combining strategy, user experience, responsive design, search-friendly architecture and conversion thinking in one digital experience.",
+      "Whether you are launching a new business, replacing an outdated website or strengthening an established brand, we design around a simple question:",
+      "What does this website need to accomplish for the business?",
+    ],
+    heroCta: {
+      primaryLabel: "Start Your Website Project",
+      secondaryLabel: "Explore Our Work",
+      secondaryLink: { kind: "portfolio" },
+    },
+    sections: [
+      {
+        id: "reality",
+        eyebrow: "Where websites quietly fail",
+        h2: "A Website Can Look Good and Still Fail Your Business",
+        paragraphs: [
+          { text: "A polished homepage is not the same as an effective website." },
+          { text: "Visitors arrive with questions. They want to understand what you offer, whether your business is credible, whether your service is relevant to them and what they should do next." },
+          { text: "If those answers are difficult to find, visual design alone will not solve the problem." },
+        ],
+        bullets: [
+          "unclear positioning and messaging",
+          "confusing navigation",
+          "weak mobile experiences",
+          "slow or unnecessarily heavy pages",
+          "inconsistent visual hierarchy",
+          "important services buried inside the site",
+          "poor calls to action",
+          "pages created without search intent in mind",
+          "weak internal linking",
+          "content that explains the company but not the customer's problem",
+          "English and Arabic experiences that were not planned together",
+        ],
+      },
+      {
+        id: "philosophy",
+        eyebrow: "Our philosophy",
+        h2: "Website Design Where Strategy Comes Before Decoration",
+        paragraphs: [
+          { text: "OMSA approaches website design as a business system rather than a collection of attractive screens." },
+          { text: "Before deciding how a page should look, we consider what the visitor needs to understand and what the business needs the visitor to do." },
+          { text: "That means thinking about positioning, page hierarchy, information architecture, search visibility, user journeys and conversion paths before visual details are allowed to dominate the project." },
+          { text: "The result is a website designed around purpose." },
+          { text: "For a professional services company, that may mean turning expertise into trust." },
+          { text: "For a local business in Muscat, it may mean helping nearby customers understand the service and make contact quickly." },
+          { text: "For a growing GCC company, it may mean creating a digital foundation capable of supporting multiple services, locations, languages and future campaigns." },
+          { text: "For an established company, it may mean replacing an outdated digital presence with one that better reflects the quality of the business behind it." },
+        ],
+      },
+      {
+        id: "achieve",
+        eyebrow: "What it should do",
+        h2: "What Professional Website Design Should Achieve",
+        subsections: [
+          { h3: "Make Your Business Easy to Understand", body: "Visitors should not have to investigate your website to understand what you do. We structure pages so the core offer, audience and next step become clear quickly." },
+          { h3: "Build Trust Before the First Conversation", body: "Your website often shapes a prospect's first serious impression of your company. Consistent design, useful content, logical structure and clear positioning help reduce uncertainty before a customer contacts you." },
+          { h3: "Create Better Paths to Conversion", body: "Calls to action should appear because they make sense within the user journey — not because every section needs another button. We design paths that move visitors naturally from discovery to evaluation and action." },
+          {
+            h3: "Support Organic Search",
+            body: "Search visibility should be considered while the website is being structured, not added as an afterthought. Page hierarchy, internal links, headings, metadata and content relationships all influence how easily search engines can understand a site — the same foundation our SEO services build on once a site is live.",
+            link: { anchor: "SEO services", link: { kind: "service", slug: "seo" } },
+          },
+          {
+            h3: "Work Across Devices",
+            body: "A website has to remain clear and usable across mobile, tablet and desktop experiences. Responsive behaviour is therefore part of the design system rather than a final adjustment, in line with Google's guidance on responsive web design.",
+            link: { anchor: "responsive web design", link: { kind: "external", href: "https://developers.google.com/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing" } },
+          },
+          { h3: "Create a Foundation That Can Grow", body: "A good website should make future expansion easier. New services, locations, resources, campaigns and integrations should be able to fit into a coherent architecture instead of creating a disconnected collection of pages." },
+        ],
+      },
+      {
+        id: "our-services",
+        eyebrow: "Our website design services",
+        h2: "Our Website Design Services",
+        subsections: [
+          { h3: "Business Website Design", body: "Professional websites for companies that need a credible, structured digital presence capable of explaining services clearly and generating qualified enquiries." },
+          { h3: "Corporate Website Design", body: "Structured digital experiences for organisations with multiple services, audiences, departments or markets where clarity and information architecture matter as much as visual presentation." },
+          { h3: "Responsive Website Design", body: "Layouts and interfaces designed to adapt across screen sizes while preserving usability, hierarchy and conversion paths." },
+          { h3: "Website Redesign", body: "A strategic redesign for businesses whose existing website no longer reflects their brand, services, customer expectations or growth plans." },
+          { h3: "Landing Page Design", body: "Focused pages built around a specific campaign, service or conversion objective, with unnecessary distractions removed from the user journey." },
+          {
+            h3: "SEO-Friendly Website Architecture",
+            body: "Page structures developed with crawlability, semantic relationships, internal linking and search intent in mind — the same discipline behind our Technical SEO work.",
+            link: { anchor: "Technical SEO", link: { kind: "service", slug: "technical-seo" } },
+          },
+          { h3: "Arabic and English Website Design", body: "Bilingual website experiences planned for audiences who may interact with your business in either English or Arabic, with attention to hierarchy, usability and the different requirements of left-to-right and right-to-left interfaces." },
+        ],
+      },
+      {
+        id: "oman-gcc",
+        eyebrow: "Oman & the GCC",
+        h2: "Website Design for Oman — With the Wider GCC in Mind",
+        paragraphs: [
+          { text: "A website serving customers in Oman needs more than a generic international template with a location name added to the headline." },
+          { text: "Businesses operate within a specific commercial and cultural environment. Customer expectations, language, trust signals, service areas and search behaviour can vary by market." },
+          { text: "OMSA therefore designs with local relevance in mind while keeping the architecture strong enough to support expansion." },
+          {
+            text: "For businesses focused on Muscat, this can mean creating clear pathways between services and local intent.",
+            link: { anchor: "Muscat", link: { kind: "location", city: "muscat" } },
+          },
+          { text: "For companies operating across Oman, it can mean structuring the website so additional locations or business areas can be introduced logically." },
+          { text: "For organisations expanding into the UAE or wider GCC, it means avoiding a website architecture that has to be rebuilt every time a new market is added." },
+        ],
+      },
+      {
+        id: "bilingual",
+        eyebrow: "Bilingual by design",
+        h2: "English and Arabic Website Design Should Be Planned Together",
+        paragraphs: [
+          { text: "Adding Arabic after an English website has already been completed can create problems that go far beyond translation." },
+          { text: "Navigation changes direction. Text length changes. Layout priorities can shift. Components have to work correctly in right-to-left environments. Calls to action must remain clear. And the language itself needs to sound appropriate to the audience rather than mechanically translated." },
+          { text: "For businesses serving Oman and the GCC, bilingual capability should therefore be considered at the architecture and design stage." },
+          { text: "OMSA can plan English and Arabic experiences as parts of the same digital system so the website remains coherent across languages." },
+        ],
+      },
+      {
+        id: "seo-alignment",
+        eyebrow: "SEO alignment",
+        h2: "SEO and Website Design Should Not Be Separate Conversations",
+        paragraphs: [
+          { text: "Many SEO problems begin long before an SEO campaign starts." },
+          { text: "They begin when websites are created without a clear page hierarchy, when several services are forced onto one page, when important content is difficult to reach internally, or when design decisions make useful information inaccessible or unnecessarily difficult to discover." },
+          { text: "We consider the SEO foundation during the website design process." },
+        ],
+        bullets: [
+          "logical site architecture",
+          "meaningful page hierarchy",
+          "descriptive headings",
+          "crawlable internal navigation",
+          "contextual internal linking",
+          "appropriate metadata foundations",
+          "mobile usability",
+          "performance awareness",
+          "structured content",
+          "search-intent alignment",
+        ],
+        afterBullets: [
+          { text: "This does not mean design should be dictated by search engines." },
+          { text: "It means the website should work for people without making it unnecessarily difficult for search engines to understand." },
+          {
+            text: "Once the architecture above is in place, it becomes the foundation a dedicated SEO programme builds on.",
+            link: { anchor: "SEO", link: { kind: "service", slug: "seo" } },
+          },
+          {
+            text: "Where a site is carrying deeper technical issues, Technical SEO work can resolve them.",
+            link: { anchor: "Technical SEO", link: { kind: "service", slug: "technical-seo" } },
+          },
+          {
+            text: "If you want a quick read on where your current site stands, our SEO Audit Tool is a useful starting point.",
+            link: { anchor: "SEO Audit Tool", link: { kind: "tool", slug: "seo-audit" } },
+          },
+          {
+            text: "For deeper background on how search engines evaluate websites, see Google Search Central.",
+            link: { anchor: "Google Search Central", link: { kind: "external", href: "https://developers.google.com/search/docs/fundamentals/get-started-developers" } },
+          },
+        ],
+      },
+      {
+        id: "performance",
+        eyebrow: "Performance",
+        h2: "Performance Is Part of the Experience",
+        paragraphs: [
+          { text: "A visually ambitious website should not become frustrating to use." },
+          {
+            text: "Images, fonts, scripts, animations and third-party integrations can all affect how quickly a page becomes useful, how stable it feels while loading, and Core Web Vitals.",
+            link: { anchor: "Core Web Vitals", link: { kind: "external", href: "https://web.dev/explore/learn-core-web-vitals" } },
+          },
+          { text: "Performance therefore needs to be considered alongside design. We aim for thoughtful implementation decisions that balance visual quality with usability and technical efficiency rather than adding complexity simply because it looks impressive." },
+          {
+            text: "When performance requires deeper investigation, our Technical SEO work can identify the elements creating unnecessary friction.",
+            link: { anchor: "Technical SEO", link: { kind: "service", slug: "technical-seo" } },
+          },
+        ],
+      },
+    ],
     benefits: [
-      "Higher conversion from existing traffic",
-      "Faster pages and stronger Core Web Vitals",
-      "Bilingual experience with native-quality copy",
-      "Easy content management without developer dependency",
-      "Built for SEO, AI search, speed and long-term growth",
+      "website strategy and page planning",
+      "information architecture",
+      "responsive page design",
+      "reusable interface components",
+      "service and conversion page structures",
+      "mobile experience planning",
+      "English and Arabic design considerations where required",
+      "SEO-conscious page architecture",
+      "metadata implementation",
+      "internal linking foundations",
+      "technical and performance considerations",
+      "contact and conversion pathways",
+      "pre-launch quality checks",
     ],
+    benefitsEyebrow: "What you receive",
+    benefitsHeading: "What You Receive",
+    benefitsIntro: "The exact scope depends on the project, but a professional OMSA website engagement can include:",
     process: [
-      { step: "Discovery", detail: "Business goals, decision-makers, customer journey, and what success will look like in twelve months." },
-      { step: "Architecture", detail: "Sitemap, content model, and URL structure built around how your customers actually search." },
-      { step: "Design", detail: "A brand-led visual system applied to every key page, with motion, type and imagery considered." },
-      { step: "Build", detail: "Engineered for speed, accessibility and maintainability — SEO and analytics laid in from the first sprint." },
-      { step: "Launch & optimize", detail: "A monitored release with zero downtime, then conversion experiments informed by real data." },
+      { step: "Discovery and Business Understanding", detail: "We begin by understanding the business, services, audiences, competitors, markets and primary goals of the website. This creates the context needed for every later decision." },
+      { step: "Website Strategy and Architecture", detail: "We define the important pages, relationships between them, navigation logic and user journeys before building individual sections in isolation." },
+      { step: "Content and Page Structure", detail: "Each important page is organised around what the visitor needs to understand, the questions the page should answer and the action it should encourage." },
+      { step: "UX and Visual Design", detail: "The structure becomes an interface. Hierarchy, typography, spacing, components, imagery and interaction are used to communicate the brand while keeping the experience clear." },
+      { step: "Responsive Implementation", detail: "The experience is adapted and tested across relevant screen sizes so important content and actions remain accessible beyond desktop." },
+      { step: "SEO and Technical Foundations", detail: "Metadata, page relationships, internal links, crawlability and other relevant foundations are reviewed as part of implementation." },
+      { step: "Testing and Launch Preparation", detail: "Before launch, the website should be checked for broken paths, layout problems, content errors and other issues that could weaken the experience." },
+      {
+        step: "Improvement After Launch",
+        detail: "Launch is the beginning of real-world learning. Search data, analytics and user behaviour can reveal where the website should evolve next.",
+        link: { anchor: "analytics", link: { kind: "service", slug: "google-analytics" } },
+      },
     ],
+    postBenefitsSection: {
+      id: "vs-development",
+      eyebrow: "Design vs. development",
+      h2: "Website Design and Website Development Are Different — and Both Matter",
+      paragraphs: [
+        { text: "Website design determines how the experience should communicate, behave and guide the user." },
+        { text: "Website development turns that system into a functioning digital product." },
+        { text: "The distinction matters because a strong concept can still fail through poor implementation, while technically competent website development cannot rescue a website with unclear structure and weak communication." },
+        { text: "OMSA treats the two disciplines as connected parts of the same outcome: a website that communicates professionally and works reliably." },
+      ],
+    },
+    whoForIntro: "OMSA Website Design is suited to:",
+    whoFor: [
+      { title: "Startups", body: "Build a credible digital presence without creating a site structure that becomes restrictive as the company grows." },
+      { title: "Small and Medium-Sized Businesses", body: "Turn services, expertise and local relevance into a clearer online customer journey." },
+      { title: "Professional Service Firms", body: "Communicate expertise and trust through stronger positioning, service architecture and conversion pathways." },
+      { title: "Established Companies", body: "Modernise an outdated website and create a digital presence more aligned with the quality and direction of the organisation." },
+      { title: "Companies Expanding Across the GCC", body: "Create an architecture capable of supporting additional markets, locations, services and languages more coherently." },
+    ],
+    preFaqSection: {
+      id: "why-different",
+      eyebrow: "Why OMSA",
+      h2: "Why OMSA Approaches Website Design Differently",
+      paragraphs: [
+        { text: "We do not begin with the question: \"What style of website do you want?\"" },
+        { text: "We begin with: \"What does the business need the website to do?\"" },
+        { text: "That distinction affects everything that follows." },
+        { text: "It changes how pages are organised. It changes what information gets priority. It changes where calls to action appear. It changes how SEO fits into the architecture. And it changes how design decisions are evaluated." },
+        { text: "A website should represent the brand. But representation is only the beginning." },
+        { text: "The stronger objective is to create a digital asset that helps people discover the business, understand it, trust it and take action." },
+      ],
+    },
     faqs: [
-      { q: "How long does a website project take?", a: "A premium website typically runs six to ten weeks from discovery to launch, depending on scope, content readiness and integrations." },
-      { q: "Do you write the content?", a: "Yes. Strategy, structure and copywriting are handled in-house. We can also collaborate with your existing writers and brand team." },
-      { q: "Is the site easy to update?", a: "Yes. We build on modern CMS platforms so your team can add content, swap images and publish pages without engineering support." },
-      { q: "Will it support Arabic and English?", a: "Fully. Bilingual sites are designed with proper RTL support and locale-aware SEO from the start, not retrofitted later." },
+      { q: "How much does website design cost in Oman?", a: "Website design costs depend on the size of the site, complexity of the user experience, content requirements, functionality, languages and integrations involved. A focused business website and a large multilingual corporate website require very different scopes. OMSA defines the requirements before recommending an appropriate project scope." },
+      { q: "How long does it take to design a business website?", a: "Timelines vary according to the number of pages, content readiness, design complexity, feedback cycles and technical requirements. The project scope should be established before a reliable delivery timeline is agreed." },
+      { q: "Can OMSA design Arabic and English websites?", a: "Yes. English and Arabic experiences can be planned as part of the same website architecture when bilingual delivery is required, including consideration for right-to-left interfaces and content hierarchy." },
+      { q: "Will my website be mobile-friendly?", a: "Responsive behaviour is a core consideration in modern website design. Important content, navigation and conversion paths should remain usable across mobile, tablet and desktop screen sizes." },
+      {
+        q: "Is SEO included in website design?",
+        a: "OMSA considers important SEO foundations during website planning and implementation, including site architecture, headings, metadata, internal linking, crawlability and search intent. Broader SEO campaigns, ongoing optimisation and competitive search growth may require a dedicated SEO engagement.",
+        link: { anchor: "dedicated SEO", link: { kind: "service", slug: "seo" } },
+      },
+      { q: "Can you redesign an existing website?", a: "Yes. A redesign can address more than visual appearance. Depending on the project, it can improve positioning, information architecture, user journeys, mobile usability, content structure and the technical foundation of the existing site." },
+      { q: "Do you provide website design for businesses outside Oman?", a: "Yes. OMSA is positioned to work with businesses in Oman, the UAE and the wider GCC. The website strategy can be adapted according to the markets, audiences, languages and growth plans involved." },
+      { q: "What should I prepare before starting a website project?", a: "Useful starting information includes your services, target customers, business goals, existing brand materials, priority markets, required languages, examples of websites you find effective and any functionality or integrations you already know you need. If some of these are not yet defined, they can be clarified during discovery." },
     ],
-    related: ["seo", "google-analytics", "ai-chatbots"],
+    finalCta: {
+      heading: "Your Website Should Earn Its Place in Your Business",
+      body: "A website occupies an important position between discovery and decision. Make that position useful. If you are building a new digital presence or replacing a website that no longer represents where your business is going, OMSA can help you plan a clearer, stronger and more scalable foundation.",
+      primaryLabel: "Start Your Website Project",
+      secondaryLabel: "Explore SEO Services",
+      secondaryLink: { kind: "service", slug: "seo" },
+    },
+    related: ["seo", "technical-seo", "google-analytics"],
   },
   {
     slug: "seo",
