@@ -521,11 +521,11 @@ function GrowthSystem() {
 
 /* ────────────────────────── SERVICES ────────────────────────── */
 export const SERVICES = [
-  { icon: Globe, title: "Web Design & Development", desc: "Custom, responsive, and SEO-ready websites built to strengthen your brand, improve user experience, and generate qualified leads." },
-  { icon: Search, title: "SEO & Search Visibility", desc: "Technical SEO, local SEO, and content strategies designed to improve rankings and attract customers across Oman, the UAE, and the GCC." },
-  { icon: Bot, title: "AI Solutions & Chatbots", desc: "Custom AI chatbots and intelligent solutions that improve customer support, capture leads, and create better digital experiences." },
-  { icon: BarChart3, title: "Analytics & Performance", desc: "Accurate tracking, dashboards, and actionable insights that help you understand performance and make better business decisions." },
-  { icon: Cpu, title: "AI Automation", desc: "Smart workflows and system integrations that reduce repetitive work, improve response times, and increase operational efficiency." },
+  { icon: Globe, title: "Web Design & Development", desc: "Custom, responsive, and SEO-ready websites built to strengthen your brand, improve user experience, and generate qualified leads.", slug: "website-design" },
+  { icon: Search, title: "SEO & Search Visibility", desc: "Technical SEO, local SEO, and content strategies designed to improve rankings and attract customers across Oman, the UAE, and the GCC.", slug: "seo" },
+  { icon: Bot, title: "AI Solutions & Chatbots", desc: "Custom AI chatbots and intelligent solutions that improve customer support, capture leads, and create better digital experiences.", slug: "ai-chatbots" },
+  { icon: BarChart3, title: "Analytics & Performance", desc: "Accurate tracking, dashboards, and actionable insights that help you understand performance and make better business decisions.", slug: "google-analytics" },
+  { icon: Cpu, title: "AI Automation", desc: "Smart workflows and system integrations that reduce repetitive work, improve response times, and increase operational efficiency.", slug: "business-automation" },
   { icon: Megaphone, title: "Digital Marketing", desc: "Google Ads, social media marketing, branding, and conversion strategies built to increase visibility, leads, and revenue." },
 ];
 
@@ -563,14 +563,17 @@ export function ServiceCard({
   title,
   desc,
   tag,
+  slug,
 }: {
   icon: any;
   title: string;
   desc: string;
   tag?: string;
+  slug?: string;
 }) {
-  return (
-    <div className="group relative h-full rounded-3xl border border-border bg-card p-8 transition-all duration-500 hover:-translate-y-1 hover:border-[color:var(--gold)] hover:shadow-luxe">
+  const cardClassName = "group relative h-full rounded-3xl border border-border bg-card p-8 transition-all duration-500 hover:-translate-y-1 hover:border-[color:var(--gold)] hover:shadow-luxe";
+  const cardContent = (
+    <>
       <div className="absolute right-6 top-6 text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
         {tag}
       </div>
@@ -582,8 +585,18 @@ export function ServiceCard({
       <div className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-foreground/70 group-hover:text-[color:var(--gold-deep)]">
         View Service Details <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
       </div>
-    </div>
+    </>
   );
+
+  if (slug) {
+    return (
+      <Link to="/services/$slug" params={{ slug }} className={`block ${cardClassName}`}>
+        {cardContent}
+      </Link>
+    );
+  }
+
+  return <div className={cardClassName}>{cardContent}</div>;
 }
 
 /* ────────────────────────── STATS ────────────────────────── */
