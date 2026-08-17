@@ -341,7 +341,7 @@ function TrustStrip() {
     <section className="border-y border-border bg-muted/30">
       <div className="container-luxe py-8">
         <p className="text-center text-xs uppercase tracking-[0.22em] text-muted-foreground">
-          Trusted by Growing Businesses Across Oman, UAE & the GCC
+          Built for Growing Businesses Across Oman, UAE & the GCC
         </p>
         <div className="mt-6 overflow-hidden">
           <div className="flex gap-12 animate-marquee whitespace-nowrap font-display text-lg font-semibold text-foreground/40">

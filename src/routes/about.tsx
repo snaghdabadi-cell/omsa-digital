@@ -87,17 +87,30 @@ function AboutPage() {
 
       <section className="section-pad">
         <div className="container-luxe grid gap-12 lg:grid-cols-4">
+          {/* The first and third cards previously showed an unverifiable client
+              count ("80+ Businesses partnered with") and ROI figure ("12x
+              Average campaign return") with no supporting evidence anywhere
+              in the repository. Replaced with factual capability statements
+              rather than an invented number. */}
           {[
-            { v: 80, s: "+", l: "Businesses partnered with" },
+            { text: "Digital systems designed around business goals — not a template package." },
             { v: 9, s: "yrs", l: "Combined senior experience" },
-            { v: 12, s: "x", l: "Average campaign return" },
+            { text: "Built for growing businesses across Oman, the UAE and the GCC." },
             { v: 100, s: "%", l: "Bilingual: English and Arabic" },
-          ].map((s) => (
-            <div key={s.l}>
-              <div className="font-display text-5xl font-bold tracking-tight text-gradient-gold">
-                <Counter to={s.v} suffix={s.s} />
-              </div>
-              <p className="mt-3 text-sm text-muted-foreground">{s.l}</p>
+          ].map((s, i) => (
+            <div key={i}>
+              {"text" in s ? (
+                <div className="font-display text-xl font-semibold tracking-tight text-gradient-gold leading-snug">
+                  {s.text}
+                </div>
+              ) : (
+                <>
+                  <div className="font-display text-5xl font-bold tracking-tight text-gradient-gold">
+                    <Counter to={s.v} suffix={s.s} />
+                  </div>
+                  <p className="mt-3 text-sm text-muted-foreground">{s.l}</p>
+                </>
+              )}
             </div>
           ))}
         </div>

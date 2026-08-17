@@ -15,6 +15,11 @@ export const Route = createFileRoute("/resources/$category")({
       title: `${cat.label} — AI, SEO & Digital Growth Resources | OMSA Digital & AI Studio`,
       description: cat.description,
       path: `/resources/${params.category}`,
+      // Every resource category currently holds only "soon"-status items or
+      // no items at all — keep these out of the index until real resources
+      // are published. The /resources hub itself stays indexable (see
+      // resources.tsx) since its category descriptions are genuine content.
+      noindex: true,
     });
     return isLeafMatch(matches, match) ? meta : { ...meta, links: [] };
   },

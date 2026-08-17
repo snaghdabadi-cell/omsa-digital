@@ -379,7 +379,7 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     ],
     heroCta: {
       primaryLabel: "Start Your SEO Strategy",
-      secondaryLabel: "Run a Free SEO Audit",
+      secondaryLabel: "See the SEO Audit Framework",
       secondaryLink: { kind: "tool", slug: "seo-audit" },
     },
     sections: [
@@ -545,7 +545,7 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
       heading: "Ready to Turn Search Visibility Into Business Growth?",
       body: "Understanding where your organic search opportunities and obstacles actually lie is the first step. Let's review your current visibility and identify what should be prioritized.",
       primaryLabel: "Start Your SEO Strategy",
-      secondaryLabel: "Run a Free SEO Audit",
+      secondaryLabel: "See the SEO Audit Framework",
       secondaryLink: { kind: "tool", slug: "seo-audit" },
     },
     related: ["technical-seo", "local-seo", "google-analytics"],
@@ -572,7 +572,7 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     ],
     heroCta: {
       primaryLabel: "Request a Technical SEO Review",
-      secondaryLabel: "Run a Free SEO Audit",
+      secondaryLabel: "See the SEO Audit Framework",
       secondaryLink: { kind: "tool", slug: "seo-audit" },
     },
     sections: [
@@ -772,7 +772,7 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
       heading: "Remove the Technical Barriers Holding Your Site Back",
       body: "A strong website can still underperform in search if search engines can't properly crawl, render or index it. Let's identify what's actually limiting your visibility and what should be fixed first.",
       primaryLabel: "Request a Technical SEO Review",
-      secondaryLabel: "Run a Free SEO Audit",
+      secondaryLabel: "See the SEO Audit Framework",
       secondaryLink: { kind: "tool", slug: "seo-audit" },
     },
     related: ["seo", "local-seo", "website-design"],
@@ -799,7 +799,7 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     ],
     heroCta: {
       primaryLabel: "Improve Your Local Visibility",
-      secondaryLabel: "Run a Free SEO Audit",
+      secondaryLabel: "See the SEO Audit Framework",
       secondaryLink: { kind: "tool", slug: "seo-audit" },
     },
     sections: [
@@ -970,7 +970,7 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
       heading: "Be Findable When Local Customers Are Ready to Act",
       body: "Local search is often the moment a prospective customer decides who to contact. Let's review your current local visibility and identify what's genuinely holding it back.",
       primaryLabel: "Improve Your Local Visibility",
-      secondaryLabel: "Run a Free SEO Audit",
+      secondaryLabel: "See the SEO Audit Framework",
       secondaryLink: { kind: "tool", slug: "seo-audit" },
     },
     related: ["seo", "technical-seo", "google-analytics"],

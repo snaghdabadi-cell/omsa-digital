@@ -15,6 +15,9 @@ export const Route = createFileRoute("/careers/$slug")({
       title: r ? `${r.title} — Careers | OMSA Digital & AI Studio` : "Career | OMSA Digital & AI Studio",
       description: r?.summary ?? "Career opportunity at OMSA Digital & AI Studio.",
       path: `/careers/${params.slug}`,
+      // No real opening exists yet for "soon" roles — keep them out of the
+      // index rather than submit a ComingSoon placeholder as a job page.
+      noindex: r?.status !== "open",
     });
   },
   component: RolePage,

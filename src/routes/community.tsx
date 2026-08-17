@@ -7,6 +7,8 @@ export const Route = createFileRoute("/community")({
     title: "Community — Newsletter, events and workshops",
     description: "Join the OMSA Digital & AI Studio community — newsletter, webinars, workshops and roundtables for ambitious GCC businesses.",
     path: "/community",
+    // Entirely a ComingSoon placeholder with no substantive content yet.
+    noindex: true,
   }),
   component: () => (
     <ComingSoon

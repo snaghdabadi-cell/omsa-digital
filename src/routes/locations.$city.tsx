@@ -18,6 +18,9 @@ export const Route = createFileRoute("/locations/$city")({
         title: `AI & Digital Growth Agency in ${loc.city}, ${loc.country} | OMSA`,
         description: loc.tagline,
         path: `/locations/${params.city}`,
+        // "soon" locations are not yet an active market — keep them out of
+        // the index until there's substantive, city-specific content live.
+        noindex: loc.status === "soon",
       }),
       scripts: [
         { type: "application/ld+json", children: JSON.stringify(breadcrumbJsonLd([

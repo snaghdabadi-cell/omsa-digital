@@ -22,6 +22,7 @@ export const SERVICES = [
   "seo",
   "technical-seo",
   "local-seo",
+  "digital-marketing",
   "ai-chatbots",
   "business-automation",
   "google-analytics",

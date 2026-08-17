@@ -17,6 +17,9 @@ export const Route = createFileRoute("/resources/$category/$slug")({
       description: r?.excerpt ?? "OMSA Digital & AI Studio resource.",
       path: `/resources/${params.category}/${params.slug}`,
       type: "article",
+      // Every resource item is currently "soon" and renders as a bare
+      // ComingSoon placeholder — keep out of the index until it's real.
+      noindex: true,
     });
   },
   component: ResourceItemPage,

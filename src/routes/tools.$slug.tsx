@@ -90,6 +90,12 @@ export const Route = createFileRoute("/tools/$slug")({
       title: tool ? `${tool.name} — OMSA Digital & AI Studio` : "Tool — OMSA Digital & AI Studio",
       description: tool?.tagline ?? "OMSA Digital & AI Studio tool.",
       path,
+      // Every tool other than SEO Audit renders as a bare ComingSoon
+      // placeholder with no substantive content — keep those out of the
+      // index. The SEO Audit branch above has its own pageMeta() call and
+      // is intentionally left indexable since it carries real editorial
+      // content explaining the framework.
+      noindex: true,
     });
   },
   component: ToolPage,
