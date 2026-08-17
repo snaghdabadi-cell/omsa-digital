@@ -146,7 +146,13 @@ export const Route = createFileRoute("/services/$slug")({
   loader: ({ params }) => {
     const service = getService(params.slug);
     if (!service) throw notFound();
-    return { service };
+    // `icon` is a component reference (LucideIcon), not serializable data —
+    // keeping it out of loaderData is what actually gets dehydrated/streamed
+    // to the client for hydration. The component re-derives it locally below
+    // from the static SERVICE_DETAILS import instead, which needs no
+    // serialization since it's identical on server and client.
+    const { icon: _icon, ...serializableService } = service;
+    return { service: serializableService };
   },
   head: ({ params, loaderData }) => {
     const s = loaderData?.service;
@@ -201,7 +207,7 @@ export const Route = createFileRoute("/services/$slug")({
 
 function ServiceDetailPage() {
   const { service } = Route.useLoaderData();
-  const Icon = service.icon;
+  const Icon = getService(service.slug)!.icon;
   const related = service.related
     .map((slug: string) => SERVICE_DETAILS.find((s) => s.slug === slug))
     .filter(Boolean) as typeof SERVICE_DETAILS;
