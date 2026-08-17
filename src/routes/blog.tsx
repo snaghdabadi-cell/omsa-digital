@@ -1,12 +1,7 @@
-import { createFileRoute, Outlet, useRouterState } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-router";
 import { ArrowUpRight, Clock } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
-import workAi from "@/assets/work-ai.jpg";
-import workHotel from "@/assets/work-hotel.jpg";
-import workDashboard from "@/assets/work-dashboard.jpg";
-import workCorporate from "@/assets/work-corporate.jpg";
-import workClinic from "@/assets/work-clinic.jpg";
-import workRealestate from "@/assets/work-realestate.jpg";
+import { BLOG_POSTS } from "@/lib/blog-data";
 import { abs, isLeafMatch } from "@/lib/seo";
 
 export const Route = createFileRoute("/blog")({
@@ -25,20 +20,14 @@ export const Route = createFileRoute("/blog")({
 
 const CATEGORIES = ["All", "SEO", "AI", "Digital Marketing", "Google Analytics", "Website Design", "Automation", "Business Growth"];
 
-const POSTS = [
-  { img: workAi, cat: "AI", title: "The honest case for AI assistants in luxury hospitality", date: "Jun 24, 2026", read: "8 min", excerpt: "Where AI genuinely improves the guest experience — and where it quietly damages your brand." },
-  { img: workDashboard, cat: "Google Analytics", title: "GA4 for hotel marketers: the events that actually matter", date: "Jun 17, 2026", read: "6 min", excerpt: "A short, practical guide to the GA4 setup we use for hospitality clients." },
-  { img: workHotel, cat: "SEO", title: "A local SEO playbook for hospitality brands in the GCC", date: "Jun 09, 2026", read: "10 min", excerpt: "How to build long-term visibility in markets where reputation, language and locality all matter." },
-  { img: workCorporate, cat: "Website Design", title: "What actually makes a corporate website feel premium", date: "May 28, 2026", read: "7 min", excerpt: "It isn't typography. It isn't motion. It's something quieter — and harder to fake." },
-  { img: workClinic, cat: "Business Growth", title: "How specialist clinics grow without buying every lead", date: "May 19, 2026", read: "9 min", excerpt: "The compounding economics of organic search, reputation, and a well-designed booking experience." },
-  { img: workRealestate, cat: "Digital Marketing", title: "Real estate landing pages that convert above 10%", date: "May 06, 2026", read: "12 min", excerpt: "The five things every high-converting bilingual landing page in the UAE gets right." },
-];
+const formatPostDate = (iso: string) =>
+  new Date(iso).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
 
 function BlogPage() {
   const isLeaf = useRouterState({ select: (s) => s.matches.at(-1)?.routeId === Route.id });
   if (!isLeaf) return <Outlet />;
 
-  const featured = POSTS[0];
+  const featured = BLOG_POSTS[0];
   return (
     <>
       <section className="pt-40 pb-16">
@@ -71,10 +60,15 @@ function BlogPage() {
       <section className="pb-16">
         <div className="container-luxe">
           <Reveal>
-            <article className="group grid overflow-hidden rounded-[2rem] border border-border bg-card lg:grid-cols-[1.2fr_1fr]">
+            <Link
+              to="/blog/$slug"
+              params={{ slug: featured.slug }}
+              aria-label={`Read article: ${featured.title}`}
+              className="group grid overflow-hidden rounded-[2rem] border border-border bg-card lg:grid-cols-[1.2fr_1fr]"
+            >
               <div className="aspect-[4/3] lg:aspect-auto overflow-hidden">
                 <img
-                  src={featured.img}
+                  src={featured.image}
                   alt={featured.title}
                   loading="lazy"
                   width={1200}
@@ -85,9 +79,9 @@ function BlogPage() {
               <div className="p-10 lg:p-16 flex flex-col justify-center">
                 <div className="flex items-center gap-3 text-xs uppercase tracking-[0.18em] text-muted-foreground">
                   <span className="rounded-full bg-[color:var(--gold)]/15 text-[color:var(--gold-deep)] px-2.5 py-1 normal-case tracking-wide">
-                    Featured · {featured.cat}
+                    Featured · {featured.category}
                   </span>
-                  <span className="flex items-center gap-1"><Clock className="h-3 w-3" /> {featured.read}</span>
+                  <span className="flex items-center gap-1"><Clock className="h-3 w-3" /> {featured.readMinutes} min</span>
                 </div>
                 <h2 className="mt-6 font-display text-3xl md:text-4xl font-bold tracking-tight">
                   {featured.title}
@@ -100,19 +94,24 @@ function BlogPage() {
                   Read the article <ArrowUpRight className="h-4 w-4" />
                 </div>
               </div>
-            </article>
+            </Link>
           </Reveal>
         </div>
       </section>
 
       <section className="pb-32">
         <div className="container-luxe grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {POSTS.slice(1).map((p, i) => (
-            <Reveal key={p.title} delay={i * 0.05}>
-              <article className="group h-full overflow-hidden rounded-3xl border border-border bg-card transition-all hover:-translate-y-1 hover:shadow-luxe">
+          {BLOG_POSTS.slice(1).map((p, i) => (
+            <Reveal key={p.slug} delay={i * 0.05}>
+              <Link
+                to="/blog/$slug"
+                params={{ slug: p.slug }}
+                aria-label={`Read article: ${p.title}`}
+                className="group block h-full overflow-hidden rounded-3xl border border-border bg-card transition-all hover:-translate-y-1 hover:shadow-luxe"
+              >
                 <div className="aspect-[16/10] overflow-hidden">
                   <img
-                    src={p.img}
+                    src={p.image}
                     alt={p.title}
                     loading="lazy"
                     width={1200}
@@ -122,20 +121,20 @@ function BlogPage() {
                 </div>
                 <div className="p-6">
                   <div className="flex items-center gap-3 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-                    <span className="text-[color:var(--gold-deep)]">{p.cat}</span>
+                    <span className="text-[color:var(--gold-deep)]">{p.category}</span>
                     <span>·</span>
-                    <span>{p.date}</span>
+                    <span>{formatPostDate(p.date)}</span>
                   </div>
                   <h3 className="mt-4 font-display text-lg font-semibold tracking-tight leading-snug">
                     {p.title}
                   </h3>
                   <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{p.excerpt}</p>
                   <div className="mt-5 flex items-center justify-between border-t border-border pt-4 text-xs text-muted-foreground">
-                    <span className="flex items-center gap-1"><Clock className="h-3 w-3" /> {p.read}</span>
+                    <span className="flex items-center gap-1"><Clock className="h-3 w-3" /> {p.readMinutes} min</span>
                     <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-[color:var(--gold)]" />
                   </div>
                 </div>
-              </article>
+              </Link>
             </Reveal>
           ))}
         </div>

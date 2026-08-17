@@ -1,9 +1,7 @@
 import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-router";
 import { ArrowRight, TrendingUp } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
-import workHotel from "@/assets/work-hotel.jpg";
-import workClinic from "@/assets/work-clinic.jpg";
-import workRealestate from "@/assets/work-realestate.jpg";
+import { CASE_STUDIES } from "@/lib/case-studies-data";
 import { abs, isLeafMatch } from "@/lib/seo";
 
 export const Route = createFileRoute("/case-studies")({
@@ -19,48 +17,6 @@ export const Route = createFileRoute("/case-studies")({
   }),
   component: CaseStudiesPage,
 });
-
-const CASES = [
-  {
-    img: workHotel,
-    industry: "Hospitality",
-    title: "A five-star Muscat hotel triples direct bookings",
-    challenge: "The property was heavily reliant on third-party booking platforms, with weak organic visibility and no clear picture of where guests came from or why they converted.",
-    strategy: "A brand-led website rebuild, full technical SEO overhaul, a bilingual content programme, and a GA4 implementation connected to a booking AI assistant.",
-    execution: "Delivered over ten weeks. More than 1,200 technical SEO issues resolved, structured data added across the site, and an Arabic/English AI assistant launched for room and spa reservations.",
-    metrics: [
-      { k: "+312%", v: "Direct bookings" },
-      { k: "+412%", v: "Organic traffic" },
-      { k: "−63%", v: "Cost per booking" },
-    ],
-  },
-  {
-    img: workRealestate,
-    industry: "Real Estate",
-    title: "A Dubai developer reaches 11.4% landing-page conversion",
-    challenge: "High monthly ad spend was producing low conversion. The landing experience felt generic, unqualified leads were overwhelming the sales team, and attribution was unclear.",
-    strategy: "A custom bilingual landing page built around the buyer's decision criteria, a qualifying chatbot routed to WhatsApp, and a structured CRO programme.",
-    execution: "Seven A/B variants tested over eight weeks. Lead-qualification questions embedded into the assistant flow. Real-time routing to the appropriate sales agent by language and unit type.",
-    metrics: [
-      { k: "11.4%", v: "Conversion rate" },
-      { k: "−48%", v: "Cost per lead" },
-      { k: "3.2x", v: "Sales ROI" },
-    ],
-  },
-  {
-    img: workClinic,
-    industry: "Healthcare",
-    title: "An Abu Dhabi clinic grows qualified patient leads by 220%",
-    challenge: "An outdated website, no local SEO presence, and a manual booking process were limiting patient acquisition despite strong word-of-mouth.",
-    strategy: "A conversion-focused website, a Local SEO authority programme, an AI booking assistant, and GA4 funnels mapped to the patient journey.",
-    execution: "Service-page architecture aligned to high-intent search. Google Business Profile optimized and connected to a reputation engine. Real-time appointment booking inside the website.",
-    metrics: [
-      { k: "+220%", v: "Qualified leads" },
-      { k: "+5×", v: "Google reviews" },
-      { k: "92%", v: "AI auto-resolution" },
-    ],
-  },
-];
 
 function CaseStudiesPage() {
   const isLeaf = useRouterState({ select: (s) => s.matches.at(-1)?.routeId === Route.id });
@@ -83,13 +39,18 @@ function CaseStudiesPage() {
 
       <section className="pb-32 space-y-10">
         <div className="container-luxe space-y-10">
-          {CASES.map((c, i) => (
-            <Reveal key={c.title}>
-              <article className="overflow-hidden rounded-[2rem] border border-border bg-card">
+          {CASE_STUDIES.map((c, i) => (
+            <Reveal key={c.slug}>
+              <Link
+                to="/case-studies/$slug"
+                params={{ slug: c.slug }}
+                aria-label={`Read case study: ${c.title}`}
+                className="block overflow-hidden rounded-[2rem] border border-border bg-card"
+              >
                 <div className="grid lg:grid-cols-2">
                   <div className={`relative ${i % 2 ? "lg:order-2" : ""}`}>
                     <img
-                      src={c.img}
+                      src={c.image}
                       alt={c.title}
                       loading="lazy"
                       width={1200}
@@ -133,7 +94,7 @@ function CaseStudiesPage() {
                     </div>
                   </div>
                 </div>
-              </article>
+              </Link>
             </Reveal>
           ))}
         </div>
