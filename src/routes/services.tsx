@@ -71,7 +71,7 @@ const DEEP_SERVICES = [
   },
   {
     title: "Digital Marketing",
-    summary: "Considered campaigns engineered for predictable, profitable growth.",
+    summary: "Coordinated campaigns built around measurable business outcomes.",
     items: [
       "Growth strategy and roadmap",
       "Content and editorial programmes",

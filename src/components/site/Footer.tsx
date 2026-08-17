@@ -50,7 +50,7 @@ export function Footer() {
 
           <FooterCol
             title="Services"
-            items={SERVICE_DETAILS.slice(0, 6).map((s) => ({ label: s.name, to: `/services/${s.slug}` }))}
+            items={SERVICE_DETAILS.map((s) => ({ label: s.name, to: `/services/${s.slug}` }))}
           />
           <FooterCol
             title="Industries"

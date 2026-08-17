@@ -10,8 +10,6 @@ import {
   Cpu,
   Megaphone,
   Globe,
-  Quote,
-  Star,
   Plus,
   Minus,
   CheckCircle2,
@@ -524,7 +522,7 @@ export const SERVICES = [
   { icon: Bot, title: "AI Solutions & Chatbots", desc: "Custom AI chatbots and intelligent solutions that improve customer support, capture leads, and create better digital experiences.", slug: "ai-chatbots" },
   { icon: BarChart3, title: "Analytics & Performance", desc: "Accurate tracking, dashboards, and actionable insights that help you understand performance and make better business decisions.", slug: "google-analytics" },
   { icon: Cpu, title: "AI Automation", desc: "Smart workflows and system integrations that reduce repetitive work, improve response times, and increase operational efficiency.", slug: "business-automation" },
-  { icon: Megaphone, title: "Digital Marketing", desc: "Google Ads, social media marketing, branding, and conversion strategies built to increase visibility, leads, and revenue." },
+  { icon: Megaphone, title: "Digital Marketing", desc: "Google Ads, paid campaigns, social media marketing, and conversion strategies built to generate qualified leads.", slug: "digital-marketing" },
 ];
 
 function Services() {
@@ -935,22 +933,25 @@ function Process() {
   );
 }
 
-/* ────────────────────────── TESTIMONIALS ────────────────────────── */
-export const TESTIMONIALS = [
+/* ────────────────────────── HOW WE WORK ────────────────────────── */
+// Deliberately not framed as testimonials — no repository evidence supports
+// named client quotes, so this section states OMSA's own working principles
+// instead of attributing them to invented customers.
+export const WORKING_PRINCIPLES = [
   {
-    quote: "OMSA Digital transformed our online presence with a strategy that combined website development, SEO, and conversion optimization. Within months, we saw a significant increase in qualified enquiries and direct bookings.",
-    name: "Layla Al-Harthy",
-    role: "Marketing Director, five-star hotel · Muscat",
+    icon: Target,
+    title: "Business-Focused Decisions",
+    desc: "Recommendations tied to your actual business objectives — not whatever happens to be trending in web design that quarter.",
   },
   {
-    quote: "Their team understands business goals before talking about design. From technical SEO to analytics and AI automation, every recommendation delivered measurable value for our company.",
-    name: "Omar Bin Saeed",
-    role: "Founder, real estate group · Dubai",
+    icon: Layers,
+    title: "Integrated Thinking",
+    desc: "Website, SEO, analytics, AI and automation considered together as one system, instead of handed to separate vendors that don't talk to each other.",
   },
   {
-    quote: "The new website and AI-powered workflows streamlined patient enquiries, reduced administrative workload, and created a much better experience for both our staff and patients.",
-    name: "Dr. Aisha Mansoor",
-    role: "Medical Director · Abu Dhabi",
+    icon: CheckCircle2,
+    title: "Practical Implementation",
+    desc: "A focus on actions that can actually be implemented, measured and adjusted — not a strategy deck that never turns into shipped work.",
   },
 ];
 
@@ -959,35 +960,22 @@ function Testimonials() {
     <section className="section-pad bg-[color:var(--ink)] text-white">
       <div className="container-luxe">
         <div className="max-w-2xl">
-          <p className="eyebrow !text-white/60">Client Success Stories</p>
+          <p className="eyebrow !text-white/60">How we work</p>
           <h2 className="mt-6 font-display text-4xl md:text-5xl font-bold tracking-tight">
-            Trusted by businesses <span className="text-gradient-gold">across Oman, UAE and the GCC.</span>
+            What working with OMSA is <span className="text-gradient-gold">designed to feel like.</span>
           </h2>
         </div>
 
         <div className="mt-14 grid gap-6 md:grid-cols-3">
-          {TESTIMONIALS.map((t, i) => (
-            <Reveal key={t.name} delay={i * 0.08}>
-              <figure className="h-full rounded-3xl border border-white/10 bg-white/[0.03] p-8 backdrop-blur">
-                <Quote className="h-7 w-7 text-[color:var(--gold)]" />
-                <blockquote className="mt-6 text-white/85 leading-relaxed">
-                  "{t.quote}"
-                </blockquote>
-                <div className="mt-6 flex items-center gap-1">
-                  {Array.from({ length: 5 }).map((_, idx) => (
-                    <Star key={idx} className="h-4 w-4 fill-[color:var(--gold)] text-[color:var(--gold)]" />
-                  ))}
-                </div>
-                <figcaption className="mt-6 flex items-center gap-3 border-t border-white/10 pt-5">
-                  <span className="grid h-11 w-11 place-items-center rounded-full bg-gradient-to-br from-[color:var(--gold-soft)] to-[color:var(--gold-deep)] font-display font-bold text-[color:var(--ink)]">
-                    {t.name.split(" ").map((n) => n[0]).join("").slice(0, 2)}
-                  </span>
-                  <div>
-                    <div className="font-display font-semibold">{t.name}</div>
-                    <div className="text-xs text-white/60">{t.role}</div>
-                  </div>
-                </figcaption>
-              </figure>
+          {WORKING_PRINCIPLES.map((p, i) => (
+            <Reveal key={p.title} delay={i * 0.08}>
+              <div className="h-full rounded-3xl border border-white/10 bg-white/[0.03] p-8 backdrop-blur">
+                <span className="grid h-11 w-11 place-items-center rounded-xl bg-white/5 text-[color:var(--gold)]">
+                  <p.icon className="h-5 w-5" />
+                </span>
+                <h3 className="mt-6 font-display text-lg font-semibold tracking-tight">{p.title}</h3>
+                <p className="mt-3 text-sm text-white/70 leading-relaxed">{p.desc}</p>
+              </div>
             </Reveal>
           ))}
         </div>
