@@ -36,15 +36,13 @@ import {
 } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import heroImg from "@/assets/hero.jpg";
-import workHotel from "@/assets/work-hotel.jpg";
 import workRestaurant from "@/assets/work-restaurant.jpg";
-import workRealestate from "@/assets/work-realestate.jpg";
-import workClinic from "@/assets/work-clinic.jpg";
 import workCorporate from "@/assets/work-corporate.jpg";
 import workDashboard from "@/assets/work-dashboard.jpg";
-import workAi from "@/assets/work-ai.jpg";
 import { Reveal } from "@/components/site/Reveal";
 import { Counter } from "@/components/site/Counter";
+import { Tag } from "@/components/site/Primitives";
+import { CASE_STUDIES } from "@/lib/case-studies-data";
 import { pageMeta, faqJsonLd } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
@@ -639,16 +637,71 @@ function Stats() {
 }
 
 /* ────────────────────────── PORTFOLIO ────────────────────────── */
-export const PROJECTS = [
-  { img: workHotel, title: "Luxury hotel digital growth", category: "Hospitality · SEO", services: ["Technical SEO", "Local SEO", "Content"], result: "+312% direct bookings" },
-  { img: workRestaurant, title: "Restaurant lead generation website", category: "F&B · Website", services: ["Website design", "Local SEO"], result: "+58% reservations" },
-  { img: workRealestate, title: "Luxury real estate landing page", category: "Real Estate · CRO", services: ["Landing page", "CRO"], result: "11.4% conversion rate" },
-  { img: workClinic, title: "Healthcare patient acquisition", category: "Healthcare · Web", services: ["Website", "GA4"], result: "+220% qualified leads" },
-  { img: workCorporate, title: "Corporate website transformation", category: "Corporate · Web", services: ["Design", "SEO"], result: "+180% inbound enquiries" },
-  { img: workAi, title: "AI customer support chatbot", category: "AI · Service", services: ["AI chatbot", "Automation"], result: "92% queries auto-resolved" },
-  { img: workDashboard, title: "Marketing analytics dashboard", category: "Analytics", services: ["GA4", "Looker"], result: "Single source of truth" },
-  { img: workDashboard, title: "GA4 & GTM implementation", category: "Analytics · Tracking", services: ["GA4", "GTM", "Events"], result: "Full-funnel visibility" },
-  { img: workAi, title: "Business workflow automation", category: "AI · Operations", services: ["AI", "Workflows"], result: "38 hours / week reclaimed" },
+// A deliberately small, honestly-labelled mix: three concept case studies
+// (sourced directly from CASE_STUDIES so title/image/slug can never drift
+// from the real case-study pages), one genuine OMSA internal product, and
+// two clearly-labelled concept projects. No item claims a verified client
+// relationship or a fabricated performance number.
+type PortfolioLink =
+  | { kind: "case-study"; slug: string }
+  | { kind: "tool"; slug: string };
+
+type Project = {
+  img: string;
+  title: string;
+  category: string;
+  services: string[];
+  status: string;
+  link?: PortfolioLink;
+};
+
+export const PROJECTS: Project[] = [
+  {
+    img: CASE_STUDIES[0].image,
+    title: CASE_STUDIES[0].title,
+    category: `${CASE_STUDIES[0].industry} · Concept Case Study`,
+    services: ["Technical SEO", "Local SEO", "AI Booking Assistant"],
+    status: "Concept Project",
+    link: { kind: "case-study", slug: CASE_STUDIES[0].slug },
+  },
+  {
+    img: CASE_STUDIES[1].image,
+    title: CASE_STUDIES[1].title,
+    category: `${CASE_STUDIES[1].industry} · Concept Case Study`,
+    services: ["Landing Page", "CRO", "AI Qualifying Assistant"],
+    status: "Concept Project",
+    link: { kind: "case-study", slug: CASE_STUDIES[1].slug },
+  },
+  {
+    img: CASE_STUDIES[2].image,
+    title: CASE_STUDIES[2].title,
+    category: `${CASE_STUDIES[2].industry} · Concept Case Study`,
+    services: ["Website", "Local SEO", "GA4"],
+    status: "Concept Project",
+    link: { kind: "case-study", slug: CASE_STUDIES[2].slug },
+  },
+  {
+    img: workDashboard,
+    title: "OMSA SEO Audit Tool",
+    category: "OMSA Internal Product",
+    services: ["Technical SEO", "On-Page Review", "Prioritisation Framework"],
+    status: "In Development",
+    link: { kind: "tool", slug: "seo-audit" },
+  },
+  {
+    img: workCorporate,
+    title: "Persian Professional Services Website Concept",
+    category: "Professional Services · Concept",
+    services: ["Bilingual Architecture", "Technical SEO", "Lead Capture"],
+    status: "Concept Project",
+  },
+  {
+    img: workRestaurant,
+    title: "Persian Local Business SEO Concept",
+    category: "Local Business · Concept",
+    services: ["Local Landing Pages", "Structured Data", "Search Visibility"],
+    status: "Concept Project",
+  },
 ];
 
 function Portfolio() {
@@ -659,7 +712,7 @@ function Portfolio() {
           <div className="max-w-2xl">
             <p className="eyebrow">Featured Projects</p>
             <h2 className="mt-6 font-display text-4xl md:text-5xl font-bold tracking-tight">
-              Real business solutions for <span className="text-gradient-gold">growing brands.</span>
+              Concept work built around <span className="text-gradient-gold">business outcomes.</span>
             </h2>
           </div>
           <Link to="/portfolio" className="btn-ghost-luxe text-sm">
@@ -680,10 +733,11 @@ function Portfolio() {
 }
 
 export function ProjectCard({
-  img, title, category, services, result,
-}: { img: string; title: string; category: string; services: string[]; result: string }) {
-  return (
-    <article className="group relative overflow-hidden rounded-3xl border border-border bg-card transition-all duration-500 hover:-translate-y-1 hover:shadow-luxe">
+  img, title, category, services, status, link,
+}: { img: string; title: string; category: string; services: string[]; status: string; link?: PortfolioLink }) {
+  const cardClass = "group relative overflow-hidden rounded-3xl border border-border bg-card transition-all duration-500 hover:-translate-y-1 hover:shadow-luxe";
+  const content = (
+    <>
       <div className="aspect-[4/3] overflow-hidden">
         <img
           src={img}
@@ -705,16 +759,36 @@ export function ProjectCard({
           ))}
         </div>
         <div className="mt-5 flex items-center justify-between border-t border-border pt-4">
-          <span className="text-sm font-semibold text-[color:var(--gold-deep)]">{result}</span>
+          <span className="text-sm font-semibold text-[color:var(--gold-deep)]">{status}</span>
           <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-[color:var(--gold)]" />
         </div>
       </div>
-    </article>
+    </>
   );
+
+  if (link?.kind === "case-study") {
+    return (
+      <Link to="/case-studies/$slug" params={{ slug: link.slug }} className={`block ${cardClass}`}>
+        {content}
+      </Link>
+    );
+  }
+  if (link?.kind === "tool") {
+    return (
+      <Link to="/tools/$slug" params={{ slug: link.slug }} className={`block ${cardClass}`}>
+        {content}
+      </Link>
+    );
+  }
+  return <article className={cardClass}>{content}</article>;
 }
 
 /* ────────────────────── CASE STUDY (feature) ────────────────────── */
+// Sourced directly from CASE_STUDIES[0] — no separately hardcoded copy —
+// so this block can never drift out of sync with the real case-study page
+// it links to (see /case-studies/muscat-hotel-direct-bookings).
 function CaseStudy() {
+  const featured = CASE_STUDIES[0];
   return (
     <section className="section-pad">
       <div className="container-luxe">
@@ -722,8 +796,8 @@ function CaseStudy() {
           <div className="grid gap-0 lg:grid-cols-2">
             <div className="relative">
               <img
-                src={workHotel}
-                alt="Luxury Hotel case study"
+                src={featured.image}
+                alt={featured.title}
                 loading="lazy"
                 width={1200}
                 height={900}
@@ -732,32 +806,27 @@ function CaseStudy() {
               <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[color:var(--ink)]/60" />
             </div>
             <div className="p-10 lg:p-16">
-              <p className="eyebrow !text-white/60">Featured Success Story · Hospitality</p>
+              <div className="flex flex-wrap items-center gap-3">
+                <p className="eyebrow !text-white/60">Featured Concept · {featured.industry}</p>
+                <Tag>{featured.status}</Tag>
+              </div>
               <h3 className="mt-6 font-display text-3xl md:text-4xl font-bold tracking-tight">
-                How a luxury hotel increased <span className="text-gradient-gold">direct bookings by 47%</span>
+                {featured.title}
               </h3>
               <p className="mt-5 text-white/70">
-                The hotel relied heavily on OTAs and had limited organic visibility.
-                We redesigned the website, implemented technical SEO,
-                created multilingual content, connected GA4 and AI automation,
-                and optimized the booking journey to increase direct reservations
-                while reducing dependency on third-party booking platforms.
-                </p>
+                {featured.strategy}
+              </p>
 
               <div className="mt-8 grid grid-cols-3 gap-4">
-                {[
-                  { k: "+47%", v: "Direct bookings" },
-                  { k: "+185%", v: "Organic traffic" },
-                  { k: "-32%", v: "Cost per booking" },
-                ].map((m) => (
+                {featured.metrics.map((m) => (
                   <div key={m.v} className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                    <div className="font-display text-xl font-bold text-gradient-gold">{m.k}</div>
+                    <div className="font-display text-lg font-bold text-gradient-gold">{m.k}</div>
                     <p className="mt-1 text-[11px] uppercase tracking-wider text-white/60">{m.v}</p>
                   </div>
                 ))}
               </div>
 
-              <Link to="/case-studies" className="mt-10 inline-flex btn-gold">
+              <Link to="/case-studies/$slug" params={{ slug: featured.slug }} className="mt-10 inline-flex btn-gold">
                 Explore the Full Case Study <ArrowRight className="h-4 w-4" />
               </Link>
             </div>

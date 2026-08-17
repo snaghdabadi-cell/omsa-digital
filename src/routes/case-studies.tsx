@@ -1,16 +1,17 @@
 import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-router";
 import { ArrowRight, TrendingUp } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
+import { Tag } from "@/components/site/Primitives";
 import { CASE_STUDIES } from "@/lib/case-studies-data";
 import { abs, isLeafMatch } from "@/lib/seo";
 
 export const Route = createFileRoute("/case-studies")({
   head: ({ matches, match }) => ({
     meta: [
-      { title: "Case Studies — Real Growth for GCC Businesses" },
-      { name: "description", content: "See how OMSA Digital & AI Studio helps businesses across Oman and the GCC achieve measurable growth through web design, SEO and AI automation." },
+      { title: "Case Studies — Concept Work for GCC Businesses" },
+      { name: "description", content: "Concept case studies from OMSA Digital & AI Studio showing how we approach digital growth challenges for businesses across Oman and the GCC through web design, SEO and AI automation." },
       { property: "og:title", content: "Case Studies — OMSA Digital & AI Studio" },
-      { property: "og:description", content: "Strategy you can measure: real growth stories from GCC businesses." },
+      { property: "og:description", content: "Concept case studies: how OMSA approaches growth problems for GCC businesses." },
       { property: "og:url", content: abs("/case-studies") },
     ],
     links: isLeafMatch(matches, match) ? [{ rel: "canonical", href: abs("/case-studies") }] : [],
@@ -28,11 +29,11 @@ function CaseStudiesPage() {
         <div className="container-luxe">
           <p className="eyebrow">Case studies</p>
           <h1 className="mt-6 font-display text-5xl md:text-7xl font-bold tracking-tight leading-[1.02] max-w-4xl">
-            Strategy you can <span className="text-gradient-gold">measure.</span>
+            Strategy you can <span className="text-gradient-gold">see.</span>
           </h1>
           <p className="mt-8 max-w-2xl text-lg text-muted-foreground">
-            Three short stories about businesses that treated their digital presence as a growth
-            system — and the numbers that followed.
+            Three concept case studies showing how OMSA approaches real business problems — in
+            hospitality, real estate and healthcare — through website design, SEO and AI automation.
           </p>
         </div>
       </section>
@@ -59,7 +60,10 @@ function CaseStudiesPage() {
                     />
                   </div>
                   <div className="p-10 lg:p-16">
-                    <p className="eyebrow">{c.industry}</p>
+                    <div className="flex flex-wrap items-center gap-3">
+                      <p className="eyebrow">{c.industry}</p>
+                      <Tag>{c.status}</Tag>
+                    </div>
                     <h2 className="mt-5 font-display text-3xl md:text-4xl font-bold tracking-tight">
                       {c.title}
                     </h2>
@@ -83,7 +87,7 @@ function CaseStudiesPage() {
                       {c.metrics.map((m) => (
                         <div key={m.v} className="rounded-2xl bg-muted p-4">
                           <TrendingUp className="h-4 w-4 text-[color:var(--gold-deep)]" />
-                          <div className="mt-3 font-display text-xl font-bold text-gradient-gold">
+                          <div className="mt-3 font-display text-lg font-bold text-gradient-gold">
                             {m.k}
                           </div>
                           <p className="mt-1 text-[11px] uppercase tracking-wider text-muted-foreground">

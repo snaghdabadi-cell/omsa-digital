@@ -2,6 +2,13 @@ import workHotel from "@/assets/work-hotel.jpg";
 import workClinic from "@/assets/work-clinic.jpg";
 import workRealestate from "@/assets/work-realestate.jpg";
 
+// NOTE ON STATUS: none of the projects below correspond to a verified,
+// named client engagement documented in this repository (no client name,
+// contract reference, or independently verifiable data source exists for
+// any of them). They are presented honestly as Concept Projects — realistic
+// demonstrations of OMSA's approach to a category of business problem —
+// rather than as completed client work. Do not add numeric outcome claims
+// (%, x, revenue, leads, bookings) to this file without a verifiable source.
 export type CaseStudy = {
   slug: string;
   industry: string;
@@ -10,6 +17,7 @@ export type CaseStudy = {
   excerpt: string;
   image: string;
   datePublished: string;
+  status: string; // e.g. "Concept Project" — see note above
   challenge: string;
   strategy: string;
   execution: string;
@@ -24,25 +32,26 @@ export const CASE_STUDIES: CaseStudy[] = [
     slug: "muscat-hotel-direct-bookings",
     industry: "Hospitality",
     location: "Muscat, Oman",
-    title: "A five-star Muscat hotel triples direct bookings",
+    title: "Direct-Booking Growth Concept — Five-Star Hotel, Muscat",
     excerpt:
-      "Rebuilding a luxury hotel's digital presence to reduce dependence on OTAs and grow direct revenue.",
+      "A concept for rebuilding a luxury hotel's digital presence to reduce dependence on OTAs and strengthen direct revenue.",
     image: workHotel,
     datePublished: "2026-04-10",
+    status: "Concept Project",
     challenge:
-      "The property was heavily reliant on third-party booking platforms, with weak organic visibility and no clear picture of where guests came from or why they converted.",
+      "A property heavily reliant on third-party booking platforms, with weak organic visibility and no clear picture of where guests come from or why they convert.",
     strategy:
-      "A brand-led website rebuild, full technical SEO overhaul, a bilingual content programme, and a GA4 implementation connected to a booking AI assistant.",
+      "A brand-led website rebuild, a full technical SEO pass, a bilingual content programme, and a GA4 implementation connected to a booking AI assistant.",
     execution:
-      "Delivered over ten weeks. More than 1,200 technical SEO issues resolved, structured data added across the site, and an Arabic/English AI assistant launched for room and spa reservations.",
+      "A ten-week engagement shape: technical SEO architecture across the site, structured data implementation, and a bilingual Arabic/English AI assistant for room and spa enquiries.",
     results:
-      "Direct bookings tripled within six months, organic traffic grew over 4x, and cost per booking dropped by nearly two-thirds as direct channels overtook OTAs.",
+      "This concept demonstrates how a brand-led rebuild, technical SEO and a connected booking assistant can work together to strengthen a property's own direct-booking channel and reduce reliance on third-party platforms.",
     lessons:
       "Hospitality direct-booking growth is rarely a marketing problem alone. It's the compounding effect of search, technical excellence, and a guest experience that earns the booking once attention is captured.",
     metrics: [
-      { k: "+312%", v: "Direct bookings" },
-      { k: "+412%", v: "Organic traffic" },
-      { k: "−63%", v: "Cost per booking" },
+      { k: "Booking journey", v: "Rebuilt & connected to AI assistant" },
+      { k: "Technical SEO", v: "Full-site architecture pass" },
+      { k: "Content", v: "Bilingual Arabic/English programme" },
     ],
     relatedServices: ["website-design", "seo", "ai-chatbots", "google-analytics"],
   },
@@ -50,25 +59,26 @@ export const CASE_STUDIES: CaseStudy[] = [
     slug: "dubai-developer-landing-page",
     industry: "Real Estate",
     location: "Dubai, UAE",
-    title: "A Dubai developer reaches 11.4% landing-page conversion",
+    title: "Bilingual Landing-Page Concept — Dubai Development Launch",
     excerpt:
-      "Turning a generic launch page into a qualified-lead engine for a luxury residential development.",
+      "A concept for turning a generic launch page into a qualified-lead engine for a luxury residential development.",
     image: workRealestate,
     datePublished: "2026-03-02",
+    status: "Concept Project",
     challenge:
-      "High monthly ad spend was producing low conversion. The landing experience felt generic, unqualified leads overwhelmed the sales team, and attribution was unclear.",
+      "High monthly ad spend producing low conversion. A generic landing experience, unqualified leads overwhelming the sales team, and unclear attribution.",
     strategy:
-      "A custom bilingual landing page built around the buyer's decision criteria, a qualifying chatbot routed to WhatsApp, and a structured CRO programme.",
+      "A custom bilingual landing page built around the buyer's decision criteria, a qualifying chatbot routed to WhatsApp, and a structured CRO testing programme.",
     execution:
-      "Seven A/B variants tested over eight weeks. Lead-qualification questions embedded into the assistant flow. Real-time routing to the appropriate sales agent by language and unit type.",
+      "An eight-week testing shape: multiple landing-page variants, lead-qualification questions embedded in the assistant flow, and routing logic to the appropriate sales agent by language and unit type.",
     results:
-      "Conversion rate climbed to 11.4%, cost per lead fell by nearly half, and sales ROI more than tripled — driven mostly by the quality of the leads reaching the agents.",
+      "This concept demonstrates how a decision-criteria-led landing page, a WhatsApp-routed qualifying assistant and structured A/B testing can raise lead quality for a sales team, rather than simply adding more volume.",
     lessons:
       "Luxury real estate doesn't need more leads — it needs better ones. The landing page exists to filter, not to flatter.",
     metrics: [
-      { k: "11.4%", v: "Conversion rate" },
-      { k: "−48%", v: "Cost per lead" },
-      { k: "3.2x", v: "Sales ROI" },
+      { k: "Landing page", v: "Buyer decision-criteria architecture" },
+      { k: "Qualifying assistant", v: "WhatsApp-routed lead capture" },
+      { k: "Testing", v: "Structured A/B programme" },
     ],
     relatedServices: ["website-design", "ai-chatbots", "google-analytics"],
   },
@@ -76,25 +86,26 @@ export const CASE_STUDIES: CaseStudy[] = [
     slug: "abu-dhabi-clinic-patient-acquisition",
     industry: "Healthcare",
     location: "Abu Dhabi, UAE",
-    title: "An Abu Dhabi clinic grows qualified patient leads by 220%",
+    title: "Patient-Acquisition Concept — Specialist Clinic, Abu Dhabi",
     excerpt:
-      "A modern digital presence for a specialist clinic, rebuilt around the patient journey.",
+      "A concept for a modern digital presence built around the patient journey for a specialist clinic.",
     image: workClinic,
     datePublished: "2026-02-14",
+    status: "Concept Project",
     challenge:
-      "An outdated website, no local SEO presence, and a manual booking process were limiting patient acquisition despite strong word-of-mouth.",
+      "An outdated website, no local SEO presence, and a manual booking process limiting patient acquisition despite strong word-of-mouth.",
     strategy:
-      "A conversion-focused website, a Local SEO authority programme, an AI booking assistant, and GA4 funnels mapped to the patient journey.",
+      "A conversion-focused website, a Local SEO programme, an AI booking assistant, and GA4 funnels mapped to the patient journey.",
     execution:
-      "Service-page architecture aligned to high-intent search. Google Business Profile optimized and connected to a reputation engine. Real-time appointment booking inside the website.",
+      "Service-page architecture aligned to high-intent search, an optimized Google Business Profile connected to a review-generation workflow, and appointment booking built into the website.",
     results:
-      "Qualified patient enquiries grew 220% in a single quarter. Review volume increased fivefold. The AI assistant resolves 92% of enquiries autonomously, freeing front-desk capacity.",
+      "This concept demonstrates how service pages aligned to search intent, an optimized Google Business Profile and a booking-capable AI assistant can work together to support patient discovery and free up front-desk time for clinical priorities — without suggesting AI replaces clinical judgment.",
     lessons:
       "Specialist healthcare grows on trust signals — clear expertise, accessible booking, and recent reviews. Build for those three and acquisition compounds.",
     metrics: [
-      { k: "+220%", v: "Qualified leads" },
-      { k: "+5×", v: "Google reviews" },
-      { k: "92%", v: "AI auto-resolution" },
+      { k: "Service pages", v: "Aligned to patient search intent" },
+      { k: "Google Business Profile", v: "Optimized & review workflow" },
+      { k: "Booking", v: "AI-assisted appointment enquiries" },
     ],
     relatedServices: ["website-design", "local-seo", "ai-chatbots", "google-analytics"],
   },

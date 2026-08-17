@@ -42,6 +42,11 @@ function IndustryPage() {
         <Prose className="mt-6 max-w-2xl text-lg">{ind.tagline}</Prose>
         <Prose className="mt-4 max-w-2xl">{ind.description}</Prose>
 
+        <div className="mt-16 max-w-3xl">
+          <h2 className="font-display text-2xl font-bold">How OMSA helps {ind.name.toLowerCase()} businesses grow</h2>
+          <Prose className="mt-5">{ind.outcomes}</Prose>
+        </div>
+
         <div className="mt-16">
           <h2 className="font-display text-2xl font-bold">Recommended services</h2>
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

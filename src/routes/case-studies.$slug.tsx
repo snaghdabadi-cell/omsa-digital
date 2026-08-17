@@ -1,5 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, TrendingUp } from "lucide-react";
+import { Tag } from "@/components/site/Primitives";
 import { CASE_STUDIES, getCaseStudy } from "@/lib/case-studies-data";
 import { SERVICE_DETAILS } from "@/lib/services-data";
 import { abs, breadcrumbJsonLd, caseStudyJsonLd, pageMeta } from "@/lib/seo";
@@ -83,7 +84,10 @@ function CaseStudyPage() {
 
       <article className="pt-8 pb-24">
         <header className="container-luxe max-w-4xl">
-          <p className="eyebrow">{study.industry} · {study.location}</p>
+          <div className="flex flex-wrap items-center gap-3">
+            <p className="eyebrow">{study.industry} · {study.location}</p>
+            <Tag>{study.status}</Tag>
+          </div>
           <h1 className="mt-6 font-display text-4xl md:text-6xl font-bold tracking-tight leading-[1.05]">
             {study.title}
           </h1>
@@ -107,7 +111,7 @@ function CaseStudyPage() {
             {study.metrics.map((m: { k: string; v: string }) => (
               <div key={m.v} className="bg-background p-8">
                 <TrendingUp className="h-5 w-5 text-[color:var(--gold-deep)]" />
-                <div className="mt-4 font-display text-4xl font-bold tracking-tight text-gradient-gold">{m.k}</div>
+                <div className="mt-4 font-display text-lg font-bold tracking-tight text-gradient-gold">{m.k}</div>
                 <p className="mt-2 text-xs uppercase tracking-[0.18em] text-muted-foreground">{m.v}</p>
               </div>
             ))}
@@ -159,7 +163,7 @@ function CaseStudyPage() {
       {moreCases.length > 0 && (
         <section className="section-pad">
           <div className="container-luxe">
-            <p className="eyebrow">More client stories</p>
+            <p className="eyebrow">More concept case studies</p>
             <div className="mt-10 grid gap-8 md:grid-cols-2">
               {moreCases.map((m: typeof CASE_STUDIES[number]) => (
                 <Link
@@ -184,7 +188,7 @@ function CaseStudyPage() {
         <div className="container-luxe">
           <div className="rounded-[2rem] bg-[color:var(--ink)] text-white p-10 lg:p-16 text-center">
             <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight">
-              Want results like this for your business?
+              Want an approach like this for your business?
             </h2>
             <p className="mt-4 text-white/70 max-w-xl mx-auto">
               Book a free strategy call. We'll review your current setup and send back a tailored growth plan.

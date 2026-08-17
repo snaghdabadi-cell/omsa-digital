@@ -6,10 +6,10 @@ import { abs } from "@/lib/seo";
 export const Route = createFileRoute("/portfolio")({
   head: () => ({
     meta: [
-      { title: "Portfolio — AI & Digital Growth Projects | OMSA Digital & AI Studio" },
-      { name: "description", content: "Explore AI, SEO, analytics, automation and website projects delivered by OMSA Digital & AI Studio for businesses across Oman and the GCC." },
+      { title: "Portfolio — Concept Projects & Internal Products | OMSA Digital & AI Studio" },
+      { name: "description", content: "Concept case studies, internal products and demonstration projects from OMSA Digital & AI Studio — AI, SEO, automation and website design work for the GCC." },
       { property: "og:title", content: "Portfolio — OMSA Digital & AI Studio" },
-      { property: "og:description", content: "Real AI-powered digital growth projects delivering measurable business results across Oman and the GCC." },
+      { property: "og:description", content: "Concept projects and internal products showing OMSA's approach to AI, SEO, automation and website design." },
       { property: "og:url", content: abs("/portfolio") },
     ],
     links: [{ rel: "canonical", href: abs("/portfolio") }],
@@ -24,12 +24,12 @@ function PortfolioPage() {
         <div className="container-luxe">
           <p className="eyebrow">Portfolio</p>
           <h1 className="mt-6 font-display text-5xl md:text-7xl font-bold tracking-tight leading-[1.02] max-w-4xl">
-            Work measured in <span className="text-gradient-gold">business outcomes.</span>
+            Work shaped around <span className="text-gradient-gold">business outcomes.</span>
           </h1>
           <p className="mt-8 max-w-2xl text-lg text-muted-foreground">
-            A selection of recent engagements across hospitality, real estate, healthcare, food and
-            beverage, professional services and corporate groups — each one approached as a
-            business problem, not a design brief.
+            A mix of concept case studies, OMSA's own internal products and demonstration projects
+            across hospitality, real estate, healthcare and beyond — each one approached as a
+            business problem, not a design brief, and labelled honestly below.
           </p>
         </div>
       </section>
