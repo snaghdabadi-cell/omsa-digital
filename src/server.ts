@@ -87,6 +87,23 @@ async function handleContactForm(request: Request, env: unknown): Promise<Respon
     headers: { "content-type": "application/json" },
   });
 }
+// Legacy WordPress `?page_id=N` URLs (e.g. https://omsadigital.com/?page_id=13)
+// are still referenced by search engines from the pre-migration site. Only
+// mappings with a known, verified destination are redirected — anything else
+// falls through to normal routing rather than guessing a destination.
+const LEGACY_WORDPRESS_PAGE_ID_REDIRECTS: Record<string, string> = {
+  "13": "/services",
+  "17": "/portfolio",
+};
+
+function legacyWordPressRedirect(url: URL): Response | undefined {
+  const pageId = url.searchParams.get("page_id");
+  if (!pageId) return undefined;
+  const destination = LEGACY_WORDPRESS_PAGE_ID_REDIRECTS[pageId];
+  if (!destination) return undefined;
+  return Response.redirect(new URL(destination, url.origin).toString(), 301);
+}
+
 async function getServerEntry(): Promise<ServerEntry> {
   if (!serverEntryPromise) {
     serverEntryPromise = import("@tanstack/react-start/server-entry").then(
@@ -119,6 +136,11 @@ export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
       const url = new URL(request.url);
+
+      if (request.method === "GET" || request.method === "HEAD") {
+        const legacyRedirect = legacyWordPressRedirect(url);
+        if (legacyRedirect) return legacyRedirect;
+      }
 
       if (url.pathname === "/api/contact") {
         return await handleContactForm(request, env);
