@@ -92,7 +92,10 @@ export const organizationJsonLd = () => ({
     addressLocality: "Muscat",
     addressCountry: "OM",
   },
-  sameAs: [SOCIAL.linkedin, SOCIAL.instagram, SOCIAL.twitter],
+  // sameAs intentionally omitted: SOCIAL currently holds placeholder URLs
+  // (all pointing back at the homepage, not real social profiles), and a
+  // self-referential sameAs provides no genuine cross-referencing value.
+  // Add it back once real LinkedIn/Instagram/X profile URLs exist.
   knowsAbout: [
     "Website Design",
     "Search Engine Optimization",
