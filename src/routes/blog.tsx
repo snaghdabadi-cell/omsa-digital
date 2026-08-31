@@ -2,19 +2,17 @@ import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-r
 import { ArrowUpRight, Clock } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { BLOG_POSTS } from "@/lib/blog-data";
-import { abs, isLeafMatch } from "@/lib/seo";
+import { isLeafMatch, pageMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/blog")({
-  head: ({ matches, match }) => ({
-    meta: [
-      { title: "Insights — OMSA Digital & AI Studio Blog" },
-      { name: "description", content: "Expert insights on web design, SEO, AI automation, Google Analytics, and digital growth strategies for businesses in Oman and the GCC." },
-      { property: "og:title", content: "Insights — OMSA Digital & AI Studio Blog" },
-      { property: "og:description", content: "Practical articles, case studies, and expert guides on websites, SEO, AI automation, analytics, and digital marketing." },
-      { property: "og:url", content: abs("/blog") },
-    ],
-    links: isLeafMatch(matches, match) ? [{ rel: "canonical", href: abs("/blog") }] : [],
-  }),
+  head: ({ matches, match }) => {
+    const meta = pageMeta({
+      title: "Insights — OMSA Digital & AI Studio Blog",
+      description: "Expert insights on web design, SEO, AI automation, Google Analytics, and digital growth strategies for businesses in Oman and the GCC.",
+      path: "/blog",
+    });
+    return isLeafMatch(matches, match) ? meta : { ...meta, links: [] };
+  },
   component: BlogPage,
 });
 

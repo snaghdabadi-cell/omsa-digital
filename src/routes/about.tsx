@@ -2,18 +2,13 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Award, Compass, Globe2, HeartHandshake, Sparkles } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { Counter } from "@/components/site/Counter";
-import { abs } from "@/lib/seo";
+import { pageMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/about")({
-  head: () => ({
-    meta: [
-      { title: "About — OMSA Digital & AI Studio" },
-      { name: "description", content: "Today's businesses need more than a website. OMSA Digital & AI Studio combines strategy, premium web design, SEO, AI automation, and analytics to help ambitious companies grow across Oman and the GCC." },
-      { property: "og:title", content: "About — OMSA Digital & AI Studio" },
-      { property: "og:description", content: "Learn how OMSA Digital & AI Studio helps businesses build sustainable digital growth through strategy, websites, SEO, AI automation, and analytics." },
-      { property: "og:url", content: abs("/about") },
-    ],
-    links: [{ rel: "canonical", href: abs("/about") }],
+  head: () => pageMeta({
+    title: "About — OMSA Digital & AI Studio",
+    description: "Today's businesses need more than a website. OMSA Digital & AI Studio combines strategy, premium web design, SEO, AI automation, and analytics to help ambitious companies grow across Oman and the GCC.",
+    path: "/about",
   }),
   component: AboutPage,
 });

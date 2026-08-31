@@ -1,8 +1,17 @@
 import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, MapPin, Wrench } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { ServiceCard, SERVICES } from "./index";
 import { abs, isLeafMatch } from "@/lib/seo";
+
+// Technical SEO and Local SEO are full, independently-differentiated
+// service pages (see services-data.ts) but aren't part of the shared
+// SERVICES array the homepage also renders — kept scoped to this hub so
+// adding them here doesn't add cards to the homepage section too.
+const HUB_ONLY_SERVICES = [
+  { icon: Wrench, title: "Technical SEO", desc: "Crawlability, indexing, Core Web Vitals and structured data fixes that remove the technical barriers holding search visibility back.", slug: "technical-seo" },
+  { icon: MapPin, title: "Local SEO", desc: "Google Business Profile optimization, local visibility and location-relevant content that help nearby customers find and choose you.", slug: "local-seo" },
+];
 
 export const Route = createFileRoute("/services")({
   head: ({ matches, match }) => ({
@@ -102,7 +111,7 @@ function ServicesPage() {
 
       <section className="pb-24">
         <div className="container-luxe grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {SERVICES.map((s, i) => (
+          {[...SERVICES, ...HUB_ONLY_SERVICES].map((s, i) => (
             <Reveal key={s.title} delay={i * 0.05}>
               <ServiceCard {...s} />
             </Reveal>

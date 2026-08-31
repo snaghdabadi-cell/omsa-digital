@@ -3,22 +3,17 @@ import { Calendar, CheckCircle2, Clock, Mail, MapPin, MessageCircle, Phone, Send
 import { useEffect, useState } from "react";
 import { z } from "zod";
 import { Reveal } from "@/components/site/Reveal";
-import { abs } from "@/lib/seo";
+import { pageMeta } from "@/lib/seo";
 declare global {
   interface Window {
     dataLayer: any[];
   }
 }
 export const Route = createFileRoute("/contact")({
-  head: () => ({
-    meta: [
-      { title: "Contact — Start a Conversation About Growth" },
-      { name: "description", content: "Tell us about your business. We'll send back a tailored digital growth strategy within five working days — whether we end up working together or not." },
-      { property: "og:title", content: "Contact — OMSA Digital & AI Studio" },
-      { property: "og:description", content: "Start a conversation about your business growth." },
-      { property: "og:url", content: abs("/contact") },
-    ],
-    links: [{ rel: "canonical", href: abs("/contact") }],
+  head: () => pageMeta({
+    title: "Contact — Start a Conversation About Growth",
+    description: "Tell us about your business. We'll send back a tailored digital growth strategy within five working days — whether we end up working together or not.",
+    path: "/contact",
   }),
   component: ContactPage,
 });
