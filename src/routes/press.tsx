@@ -8,6 +8,10 @@ export const Route = createFileRoute("/press")({
     title: "Press & Awards — OMSA Digital & AI Studio",
     description: "Media mentions, awards, interviews and speaking engagements from the OMSA Digital & AI Studio team.",
     path: "/press",
+    // No real press mentions exist yet — the page renders only an
+    // EmptyState. Keep it out of the index until there's substantive
+    // content, matching the pattern used for other ComingSoon routes.
+    noindex: true,
   }),
   component: PressPage,
 });

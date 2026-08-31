@@ -162,7 +162,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: "real-estate-landing-pages-uae",
-    title: "Real estate landing pages that convert above 10%",
+    title: "Real estate landing pages in the UAE: what high-converting pages get right",
     excerpt:
       "The five things every high-converting bilingual landing page in the UAE gets right.",
     category: "Digital Marketing",

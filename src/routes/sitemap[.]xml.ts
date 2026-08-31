@@ -34,10 +34,12 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/tools", changefreq: "monthly", priority: "0.7" },
           { path: "/authors", changefreq: "monthly", priority: "0.5" },
           { path: "/careers", changefreq: "monthly", priority: "0.5" },
-          { path: "/press", changefreq: "monthly", priority: "0.4" },
           { path: "/contact", changefreq: "monthly", priority: "0.7" },
           // /community is intentionally omitted — entirely a ComingSoon
           // placeholder (see community.tsx, which also sets noindex: true).
+          // /press is intentionally omitted — PRESS is currently empty and
+          // the page renders only an EmptyState, so it's noindexed (see
+          // press.tsx) and shouldn't also be submitted via the sitemap.
         ];
 
         // Resource categories/items are omitted entirely — the whole
