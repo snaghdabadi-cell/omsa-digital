@@ -1,9 +1,15 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowRight, ArrowUpRight, Calendar, Clock } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Calendar, Clock, User } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { BLOG_POSTS, getPost } from "@/lib/blog-data";
 import { SERVICE_DETAILS } from "@/lib/services-data";
+import { getAuthor } from "@/lib/content/authors";
 import { abs, articleJsonLd, breadcrumbJsonLd, pageMeta } from "@/lib/seo";
+
+// Every current post is written under the same shared editorial identity, so
+// the author is resolved once here rather than duplicating an `author` field
+// across every BlogPost entry (see AUTHORS in lib/content/authors.ts).
+const POST_AUTHOR = getAuthor("omsa-editorial")!;
 
 export const Route = createFileRoute("/blog/$slug")({
   loader: ({ params }) => {
@@ -39,6 +45,7 @@ export const Route = createFileRoute("/blog/$slug")({
               path,
               image: p.image,
               datePublished: p.date,
+              author: POST_AUTHOR.name,
             }),
           ),
         },
@@ -96,6 +103,13 @@ function BlogPostPage() {
           </h1>
           <p className="mt-6 text-lg text-muted-foreground">{post.excerpt}</p>
           <div className="mt-6 flex items-center gap-5 text-xs text-muted-foreground">
+            <span className="flex items-center gap-1.5">
+              <User className="h-3.5 w-3.5" />
+              By{" "}
+              <Link to="/authors/$slug" params={{ slug: POST_AUTHOR.slug }} className="hover:text-foreground">
+                {POST_AUTHOR.name}
+              </Link>
+            </span>
             <span className="flex items-center gap-1.5">
               <Calendar className="h-3.5 w-3.5" />
               <time dateTime={post.date}>{new Date(post.date).toLocaleDateString("en-GB", { year: "numeric", month: "long", day: "numeric" })}</time>
