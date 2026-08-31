@@ -102,6 +102,20 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
     outcomes:
       "Patients typically research before they book, and a clinic's website is often the first real impression of quality and trust. The focus is clear service information that helps patients understand what a clinic offers, local visibility for the searches that matter, and an appointment journey that's simple to complete on any device. Multilingual information supports patients who search or communicate in more than one language, and analytics built around the discovery-to-appointment journey shows where that process breaks down. AI-assisted enquiries can handle common questions and booking requests responsibly — always as support for the clinical and administrative team, never as a substitute for clinical judgment.",
     services: ["website-design", "local-seo", "ai-chatbots", "google-analytics"],
+    challenges: [
+      "Patients researching a clinic online before deciding whether to trust it enough to book",
+      "Appointment booking that's difficult to complete outside phone calls during clinic hours",
+      "Service and specialism information that's unclear or scattered across the website",
+      "Local visibility that lags for the searches patients actually use — condition, specialism and location together",
+      "Patient communication that only works reliably in one language",
+    ],
+    caseStudySlug: "abu-dhabi-clinic-patient-acquisition",
+    faqs: [
+      { q: "Can an AI assistant handle patient enquiries safely?", a: "It can handle common, non-clinical questions — hours, services, appointment availability — and should always hand off to clinic staff for anything involving clinical judgment or urgent care. It's built as support for the team, not a substitute for it." },
+      { q: "Is local SEO worth it for a single clinic?", a: "Yes, particularly for \"near me\" and specialism-plus-location searches. A well-maintained Google Business Profile combined with clear service pages helps a clinic appear for the searches patients actually use before booking." },
+      { q: "Do we need a new website to start improving patient bookings?", a: "Not always — if the existing site can support a clearer appointment journey and local SEO foundations, improvements can often start there rather than a full rebuild." },
+      { q: "How is success measured for a healthcare digital project?", a: "Through analytics built around the discovery-to-appointment journey — enquiry volume and where the process breaks down — rather than traffic alone." },
+    ],
   },
   {
     slug: "retail",
@@ -111,6 +125,19 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
     outcomes:
       "Retail and e-commerce growth depends on how easily a customer can find the right product and complete a purchase without friction. The focus is category and site architecture that makes product discovery intuitive, technical SEO that keeps product and category pages properly indexed and competitive in search, and conversion journeys designed around how people actually browse and buy. Analytics tracks the full path from discovery to checkout, not just traffic volume, and automation — from abandoned-cart follow-ups to customer support — helps a retailer respond consistently without adding headcount for every interaction.",
     services: ["website-design", "seo", "google-analytics"],
+    challenges: [
+      "Customers unable to find the right product quickly, especially on mobile",
+      "Category and product pages that aren't properly indexed or competitive in search",
+      "Checkout journeys with unnecessary friction between browsing and purchase",
+      "Abandoned carts with no consistent follow-up",
+      "Limited visibility into which channels and pages actually drive purchases, not just traffic",
+    ],
+    faqs: [
+      { q: "What's the first thing to fix for an underperforming online store?", a: "Usually site architecture and technical SEO — if product and category pages aren't properly indexed and easy to navigate, no amount of traffic will convert well." },
+      { q: "Is automation useful for a smaller retail business?", a: "Yes, particularly abandoned-cart follow-ups and routine customer-support questions — it lets a small team respond consistently without needing to staff up for every interaction." },
+      { q: "How do you measure whether an online store is actually improving?", a: "Through analytics that follow the full path from discovery to checkout, not just traffic volume, so decisions are based on where customers actually drop off." },
+      { q: "Do you work with an existing e-commerce platform or only build new ones?", a: "Both — if the current platform can support clearer product and category architecture along with technical SEO improvements, upgrades can often start there rather than a full replatform." },
+    ],
   },
   {
     slug: "professional-services",
@@ -120,6 +147,19 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
     outcomes:
       "For legal, consulting and other professional-services firms, a website's job is to convert expertise into trust before the first conversation happens. The focus is clear service architecture that helps prospective clients understand exactly what a firm handles, local SEO for the searches that bring in genuinely relevant enquiries, and lead capture designed for how professional buyers actually evaluate a firm — carefully, and usually over more than one visit. Enquiry automation can qualify and route new contacts before they reach a partner's inbox, and analytics shows which pages and channels are actually contributing to real enquiries rather than just traffic.",
     services: ["website-design", "seo", "technical-seo"],
+    challenges: [
+      "A website that lists services but doesn't clearly explain what the firm actually handles",
+      "Enquiries that don't indicate whether a prospective client is a good fit before the first call",
+      "Search visibility that lags behind less-established competitors for relevant searches",
+      "Content that reads as generic rather than demonstrating real expertise",
+      "No clear way to see which pages or channels are producing genuine client enquiries",
+    ],
+    faqs: [
+      { q: "How long does it take to see results from SEO for a professional-services firm?", a: "Technical and on-page improvements can show movement within a few months; content-led authority and competitive rankings typically build over six to twelve months and continue compounding." },
+      { q: "Can enquiry forms be set up to qualify prospective clients before a call?", a: "Yes — the right qualifying questions can be built into a form or chatbot flow so a partner's time is spent on genuinely relevant enquiries." },
+      { q: "Do you write the service content yourselves or work from what we provide?", a: "Both are possible — it depends on how much existing material accurately reflects the firm's expertise and how much needs to be developed from scratch." },
+      { q: "Is local SEO relevant for a firm that serves clients regionally, not just locally?", a: "It can still matter for firms with a physical office or a specific service area, alongside broader SEO for clients searching beyond that area." },
+    ],
   },
   {
     slug: "construction",
@@ -129,6 +169,19 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
     outcomes:
       "Contractors, engineering firms and developers are often evaluated on trust and track record before a single conversation happens. The focus is a website that presents capability, project types and credentials clearly, technical SEO and local visibility for the tenders and enquiries that matter in a specific region, and structured lead-generation systems that route enquiries to the right team quickly. AI-assisted automation can help qualify project enquiries — scope, budget range, timeline — before they reach an estimator, and analytics shows which pages and channels are actually driving genuine project enquiries rather than general traffic.",
     services: ["website-design", "seo", "technical-seo", "google-analytics"],
+    challenges: [
+      "A website that doesn't clearly present capability, project types or credentials",
+      "Tenders and enquiries missed because of weak local and technical search visibility",
+      "Project and case-study pages that are outdated or difficult to maintain",
+      "Enquiries arriving with unclear scope, budget or timeline before reaching an estimator",
+      "Limited visibility into which channels are producing genuine project enquiries versus general traffic",
+    ],
+    faqs: [
+      { q: "What matters most for a construction company's website?", a: "Clear presentation of capability, project types and credentials, combined with technical SEO so the site is actually found for the tenders and searches that matter in a specific region." },
+      { q: "Can enquiries be qualified before reaching an estimator?", a: "Yes — scope, budget range and timeline can be captured upfront through a structured form or automated qualification step, so estimators spend time on genuinely viable projects." },
+      { q: "How important is technical SEO compared to general SEO for construction firms?", a: "Both matter, but technical SEO tends to matter more early on — if a site has crawl or indexing issues, content and local visibility improvements won't be seen by search engines in the first place." },
+      { q: "Is this a one-time project or ongoing work?", a: "It depends on the goal — a technical foundation and initial content are typically a defined project, while search visibility and lead generation tend to benefit from ongoing attention." },
+    ],
   },
   {
     slug: "education",
@@ -138,6 +191,19 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
     outcomes:
       "For schools, academies and training centres, a website often has to do two jobs at once: reassure parents or adult learners that a programme is credible, and make the enrolment process genuinely easy to start. The focus is clear, structured programme and course information, local and search visibility for the terms prospective students and parents actually search, and an enquiry-to-enrolment journey that doesn't lose interest in a long form. AI chat assistants can answer common admissions questions instantly, and analytics built around the enquiry journey shows which programmes, pages and channels are genuinely driving interest — not just general site traffic.",
     services: ["website-design", "seo", "ai-chatbots"],
+    challenges: [
+      "Programme and course information that's unclear or hard to compare",
+      "An enrolment journey that loses interest partway through a long form",
+      "Admissions questions arriving by phone or email with no faster alternative",
+      "Local and search visibility that lags for the specific programmes prospective students search for",
+      "Limited visibility into which programmes and pages are actually driving enquiries",
+    ],
+    faqs: [
+      { q: "Can an AI assistant actually help with admissions?", a: "Yes, for common questions — programme details, fees, deadlines, application steps — with a clear handoff to admissions staff for anything requiring judgment or a personal conversation." },
+      { q: "How specific should programme pages be?", a: "Specific enough that a prospective student or parent can tell exactly what a programme covers and who it's for — generic descriptions tend to lose interest faster than concrete ones." },
+      { q: "Is local SEO relevant for schools and training centres?", a: "Yes, particularly for location-plus-programme searches — families and adult learners often search for a specific course type near them." },
+      { q: "How is success measured for an education digital project?", a: "Through the enquiry-to-enrolment journey — which programmes and pages are actually driving genuine interest, not just overall site traffic." },
+    ],
   },
 ];
 
