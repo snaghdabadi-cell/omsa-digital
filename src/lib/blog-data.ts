@@ -23,6 +23,10 @@ export type BlogPost = {
     | "Digital Marketing"
     | "Business Growth";
   date: string; // ISO
+  // Only set this when a post has genuinely been revised with a known date —
+  // never backfilled for existing posts. Omitted, structured data falls back
+  // to the publish date (see articleJsonLd in lib/seo.ts).
+  dateModified?: string; // ISO
   readMinutes: number;
   image: string;
   relatedServices: string[]; // service slugs

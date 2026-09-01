@@ -45,6 +45,7 @@ export const Route = createFileRoute("/blog/$slug")({
               path,
               image: p.image,
               datePublished: p.date,
+              dateModified: p.dateModified,
               author: POST_AUTHOR.name,
             }),
           ),
