@@ -34,6 +34,7 @@ export const Route = createFileRoute("/case-studies/$slug")({
               path,
               image: c.image,
               datePublished: c.datePublished,
+              dateModified: c.dateModified,
               industry: c.industry,
             }),
           ),

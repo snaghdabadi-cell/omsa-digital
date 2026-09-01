@@ -186,6 +186,7 @@ export const caseStudyJsonLd = (c: {
   path: string;
   image?: string;
   datePublished: string;
+  dateModified?: string;
   industry?: string;
 }) => ({
   "@context": "https://schema.org",
@@ -196,6 +197,7 @@ export const caseStudyJsonLd = (c: {
   mainEntityOfPage: abs(c.path),
   image: c.image ? abs(c.image) : undefined,
   datePublished: c.datePublished,
+  dateModified: c.dateModified ?? c.datePublished,
   publisher: { "@id": `${SITE_URL}/#organization` },
 });
 

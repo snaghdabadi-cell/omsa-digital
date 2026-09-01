@@ -17,6 +17,10 @@ export type CaseStudy = {
   excerpt: string;
   image: string;
   datePublished: string;
+  // Only set this when a case study has genuinely been revised with a known
+  // date — never backfilled. Omitted, structured data falls back to
+  // datePublished (see caseStudyJsonLd in lib/seo.ts).
+  dateModified?: string;
   status: string; // e.g. "Concept Project" — see note above
   challenge: string;
   strategy: string;
