@@ -18,7 +18,8 @@ export const CONTACT = {
 };
 
 export const SOCIAL = {
-  linkedin: "https://omsadigital.com",
+  linkedin: "https://www.linkedin.com/company/omsa-digital-ai-studio/",
+  // Still placeholders — replace only with a verified profile URL, never guessed.
   instagram: "https://omsadigital.com",
   twitter: "https://omsadigital.com",
 };
@@ -92,10 +93,10 @@ export const organizationJsonLd = () => ({
     addressLocality: "Muscat",
     addressCountry: "OM",
   },
-  // sameAs intentionally omitted: SOCIAL currently holds placeholder URLs
-  // (all pointing back at the homepage, not real social profiles), and a
-  // self-referential sameAs provides no genuine cross-referencing value.
-  // Add it back once real LinkedIn/Instagram/X profile URLs exist.
+  // Only the verified LinkedIn Company Page is listed — SOCIAL.instagram
+  // and SOCIAL.twitter are still homepage placeholders, not real profiles,
+  // so they're excluded until genuinely verified.
+  sameAs: [SOCIAL.linkedin],
   knowsAbout: [
     "Website Design",
     "Search Engine Optimization",
