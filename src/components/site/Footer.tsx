@@ -103,7 +103,7 @@ export function Footer() {
             </form>
           </div>
           <address className="not-italic space-y-3 text-sm text-white/60">
-            <div className="flex items-center gap-2"><Mail className="h-4 w-4 text-[color:var(--gold)]" /> <a href={`mailto:${CONTACT.email}`} className="hover:text-white">{CONTACT.email}</a></div>
+            <div className="flex items-center gap-2"><Mail className="h-4 w-4 text-[color:var(--gold)]" /> <a href={`mailto:${CONTACT.publicEmail}`} className="hover:text-white">{CONTACT.publicEmail}</a></div>
             <div className="flex items-center gap-2"><Phone className="h-4 w-4 text-[color:var(--gold)]" /> <a href={`tel:${CONTACT.phone.replace(/\s/g, "")}`} className="hover:text-white">{CONTACT.phone}</a></div>
             <div className="flex items-center gap-2"><MapPin className="h-4 w-4 text-[color:var(--gold)]" /> Muscat · Dubai · Abu Dhabi</div>
           </address>
