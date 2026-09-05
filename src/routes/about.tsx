@@ -23,6 +23,11 @@ function AboutPage() {
             <h1 className="mt-6 font-display text-5xl md:text-6xl font-bold tracking-tight leading-[1.05]">
               Today's businesses need more than a website.
             </h1>
+            <p className="mt-6 text-muted-foreground leading-relaxed">
+              OMSA Digital & AI Studio is a digital and AI studio providing website design, SEO,
+              automation, analytics and related digital services to businesses across Oman, the
+              UAE and the GCC that want stronger digital visibility and smarter digital operations.
+            </p>
           </div>
           <p className="text-lg text-muted-foreground leading-relaxed">
             Customers research before they call. Competitors invest in search, content and AI.

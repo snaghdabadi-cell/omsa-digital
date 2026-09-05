@@ -1,9 +1,11 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowRight, MapPin } from "lucide-react";
+import { ArrowRight, ArrowUpRight, MapPin } from "lucide-react";
 import { Container, Eyebrow, Heading, Prose, Tag } from "@/components/site/Primitives";
+import { FaqItem } from "@/routes/index";
 import { getLocation, LOCATIONS } from "@/lib/content/locations";
 import { getService } from "@/lib/services-data";
-import { pageMeta, breadcrumbJsonLd } from "@/lib/seo";
+import { getCaseStudy } from "@/lib/case-studies-data";
+import { pageMeta, breadcrumbJsonLd, faqJsonLd } from "@/lib/seo";
 
 export const Route = createFileRoute("/locations/$city")({
   loader: ({ params }) => {
@@ -27,6 +29,12 @@ export const Route = createFileRoute("/locations/$city")({
           { name: "Locations", path: "/locations" },
           { name: loc.city, path: `/locations/${params.city}` },
         ])) },
+        // FAQPage schema only exists where the page also renders the same
+        // FAQs visibly (live cities with real, city-specific answers) — see
+        // the FAQ section in LocationPage below.
+        ...(loc.faqs && loc.faqs.length > 0
+          ? [{ type: "application/ld+json", children: JSON.stringify(faqJsonLd(loc.faqs)) }]
+          : []),
       ],
     };
   },
@@ -35,6 +43,7 @@ export const Route = createFileRoute("/locations/$city")({
 
 function LocationPage() {
   const { loc } = Route.useLoaderData();
+  const relatedCaseStudy = loc.relatedCaseStudySlug ? getCaseStudy(loc.relatedCaseStudySlug) : undefined;
   return (
     <section className="pt-40 pb-32">
       <Container>
@@ -71,6 +80,40 @@ function LocationPage() {
             })}
           </div>
         </div>
+
+        {relatedCaseStudy && (
+          <div className="mt-16">
+            <h2 className="font-display text-2xl font-bold">Related concept case study</h2>
+            <Link
+              to="/case-studies/$slug"
+              params={{ slug: relatedCaseStudy.slug }}
+              className="card-lift mt-6 block rounded-2xl border border-border bg-card p-6 sm:flex sm:items-center sm:justify-between sm:gap-6"
+            >
+              <div>
+                <div className="flex flex-wrap items-center gap-3">
+                  <Tag>{relatedCaseStudy.status}</Tag>
+                  <span className="text-xs uppercase tracking-wider text-muted-foreground">{relatedCaseStudy.location}</span>
+                </div>
+                <div className="mt-3 font-display text-lg font-semibold">{relatedCaseStudy.title}</div>
+                <p className="mt-2 text-sm text-muted-foreground max-w-xl">{relatedCaseStudy.excerpt}</p>
+              </div>
+              <span className="mt-4 inline-flex shrink-0 items-center gap-1 text-sm font-medium text-[color:var(--gold-deep)] sm:mt-0">
+                Read the concept case study <ArrowUpRight className="h-4 w-4" />
+              </span>
+            </Link>
+          </div>
+        )}
+
+        {loc.faqs && loc.faqs.length > 0 && (
+          <div className="mt-16 max-w-3xl">
+            <h2 className="font-display text-2xl font-bold">{loc.city} FAQs</h2>
+            <div className="mt-6 space-y-3">
+              {loc.faqs.map((f, i) => (
+                <FaqItem key={f.q} item={f} defaultOpen={i === 0} />
+              ))}
+            </div>
+          </div>
+        )}
 
         <div className="mt-16 rounded-3xl border border-border bg-card p-10">
           <h2 className="font-display text-2xl font-bold">Start in {loc.city}</h2>

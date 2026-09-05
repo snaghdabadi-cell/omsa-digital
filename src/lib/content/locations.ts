@@ -1,5 +1,7 @@
 import type { Country, ServiceSlug } from "./taxonomy";
 
+export type LocationFaq = { q: string; a: string };
+
 export type Location = {
   slug: string;
   city: string;
@@ -9,6 +11,12 @@ export type Location = {
   intro: string;
   services: ServiceSlug[];
   status: "live" | "soon";
+  // Populated only for "live" cities with genuinely city-specific answers —
+  // left undefined for "soon" cities rather than a templated placeholder.
+  faqs?: LocationFaq[];
+  // Slug of a CASE_STUDIES entry set in this same city, for one honest,
+  // contextually relevant cross-link (never a fabricated relationship).
+  relatedCaseStudySlug?: string;
 };
 
 export const LOCATIONS: Location[] = [
@@ -21,6 +29,13 @@ export const LOCATIONS: Location[] = [
     intro: "From Qurum to Al Mouj, we help hotels, clinics, developers and retail groups build digital systems that compound for years. Search behaviour here is genuinely bilingual — many customers search in Arabic, English or a mix of both — so local visibility and website content need to work in both, not read as an afterthought translation. With most local searches happening on a phone, a site that loads quickly and reads clearly on mobile tends to matter more here than in less mobile-first markets.",
     services: ["website-design", "seo", "local-seo", "ai-chatbots", "google-analytics"],
     status: "live",
+    relatedCaseStudySlug: "muscat-hotel-direct-bookings",
+    faqs: [
+      { q: "Does OMSA work with businesses based in Muscat?", a: "Yes. Muscat is OMSA's home market, and we work directly with businesses across the city on website design, SEO, AI chatbots and analytics." },
+      { q: "What digital services does OMSA provide for Muscat businesses?", a: "For Muscat, that typically includes website design, SEO and Local SEO, AI chatbots and Google Analytics — scoped to what a specific business actually needs rather than a fixed package." },
+      { q: "How does a project with OMSA typically begin?", a: "With a strategy call to understand the business, its current website and marketing setup, and its goals — followed by a written plan before any work starts." },
+      { q: "Can businesses in Muscat work with OMSA remotely?", a: "Yes. Most of the collaboration — calls, reviews and reporting — happens remotely, with in-person meetings arranged when useful." },
+    ],
   },
   {
     slug: "salalah",
@@ -51,6 +66,13 @@ export const LOCATIONS: Location[] = [
     intro: "From Downtown to Palm Jumeirah, we build bilingual platforms that perform in the world's most competitive market. Dubai's digital market is dense and highly competitive, so the businesses that stand out tend to be genuinely specific about who they serve — a developer, a clinic, a hospitality group — rather than speaking to everyone at once. Because the market spans Arabic and English speakers day to day, search visibility and content built to work naturally in both languages tend to reach a meaningfully wider audience.",
     services: ["website-design", "seo", "local-seo", "ai-chatbots", "business-automation", "google-analytics"],
     status: "live",
+    relatedCaseStudySlug: "dubai-developer-landing-page",
+    faqs: [
+      { q: "Does OMSA work with businesses in Dubai?", a: "Yes. OMSA works with businesses in Dubai on website design, SEO, AI chatbots, business automation and analytics." },
+      { q: "What digital services does OMSA provide for Dubai businesses?", a: "For Dubai, that typically includes website design, Local SEO, AI chatbots, business automation and Google Analytics — services chosen based on what the business actually needs, not a generic package." },
+      { q: "Can OMSA provide SEO, website design and AI automation together for a Dubai business?", a: "Yes. These services are usually more effective coordinated as one strategy rather than run separately, and that's how a Dubai engagement is typically scoped." },
+      { q: "Can businesses in Dubai work with OMSA remotely?", a: "Yes. Most of the day-to-day collaboration happens remotely, with meetings arranged as needed." },
+    ],
   },
   {
     slug: "abu-dhabi",
@@ -61,6 +83,13 @@ export const LOCATIONS: Location[] = [
     intro: "Long-term partnerships with brands building for the next decade, not the next quarter. Institutional and family-owned businesses here are often evaluated on credibility as much as capability, so a website and search presence need to read as considered and established rather than rushed. Corporate and professional-services organisations in particular benefit from clear, bilingual information that holds up to scrutiny from local and international audiences alike.",
     services: ["website-design", "seo", "ai-chatbots", "google-analytics"],
     status: "live",
+    relatedCaseStudySlug: "abu-dhabi-clinic-patient-acquisition",
+    faqs: [
+      { q: "Does OMSA work with businesses in Abu Dhabi?", a: "Yes. OMSA works with Abu Dhabi businesses on website design, SEO, AI chatbots and analytics." },
+      { q: "What digital services does OMSA provide for Abu Dhabi businesses?", a: "For Abu Dhabi, that typically includes website design, SEO, AI chatbots and Google Analytics, scoped around the business's actual goals rather than a fixed package." },
+      { q: "How does a project with OMSA typically begin?", a: "With a strategy call to understand the business and its goals, followed by a written plan before any work starts." },
+      { q: "Can businesses in Abu Dhabi work with OMSA remotely?", a: "Yes. Most collaboration happens remotely, with in-person meetings arranged when useful." },
+    ],
   },
   {
     slug: "sharjah",

@@ -35,6 +35,11 @@ function CaseStudiesPage() {
             Three concept case studies showing how OMSA approaches real business problems — in
             hospitality, real estate and healthcare — through website design, SEO and AI automation.
           </p>
+          <p className="mt-5 max-w-2xl text-sm text-muted-foreground">
+            Each one is a demonstration of our strategic and technical approach to a realistic
+            scenario — not a claimed client engagement or verified result. We label every concept
+            project clearly so what you're reading is always clear.
+          </p>
         </div>
       </section>
 

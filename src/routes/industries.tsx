@@ -30,6 +30,12 @@ function IndustriesPage() {
         <Prose className="mt-6 max-w-2xl text-lg">
           Every industry has its own commercial logic. Pick yours.
         </Prose>
+        <Prose className="mt-4 max-w-2xl">
+          OMSA currently works across seven industries — Hospitality, Real Estate, Healthcare,
+          Retail, Professional Services, Construction and Education — adapting website design,
+          SEO, automation and analytics to how each one actually acquires and keeps customers,
+          rather than applying one generic strategy everywhere.
+        </Prose>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {INDUSTRY_PAGES.map((i) => (
