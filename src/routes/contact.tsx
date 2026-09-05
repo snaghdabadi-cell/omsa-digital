@@ -3,7 +3,7 @@ import { Calendar, CheckCircle2, Clock, Mail, MapPin, MessageCircle, Phone, Send
 import { useEffect, useState } from "react";
 import { z } from "zod";
 import { Reveal } from "@/components/site/Reveal";
-import { pageMeta } from "@/lib/seo";
+import { CONTACT, pageMeta } from "@/lib/seo";
 declare global {
   interface Window {
     dataLayer: any[];
@@ -158,13 +158,13 @@ try {
                 </ol>
               </div>
 
-              <ContactCard icon={Mail} label="Email" value="contact@omsadigital.com" href="mailto:contact@omsadigital.com" />
-              <ContactCard icon={Phone} label="Phone" value="+968 9098 0683" href="tel:+96890980683" />
+              <ContactCard icon={Mail} label="Email" value={CONTACT.publicEmail} href={`mailto:${CONTACT.publicEmail}`} />
+              <ContactCard icon={Phone} label="Phone" value={CONTACT.phone} href={`tel:${CONTACT.phone.replace(/\s/g, "")}`} />
               <ContactCard
                 icon={MessageCircle}
                 label="WhatsApp"
                 value="Send us a message"
-                href="https://wa.me/96890000000"
+                href={`https://wa.me/${CONTACT.whatsapp.replace(/\D/g, "")}`}
                 accent
               />
               <ContactCard icon={MapPin} label="Studios" value="Muscat, Oman · Dubai, UAE" />

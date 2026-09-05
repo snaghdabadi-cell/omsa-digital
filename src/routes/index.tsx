@@ -105,7 +105,7 @@ function Objections() {
     {
       icon: Smartphone,
       title: "Is AI safe to use in our industry?",
-      desc: "We deploy AI inside guardrails — your data, your tone of voice, your approved answers. Healthcare, real estate and finance clients have been live for over a year without an incident.",
+      desc: "We deploy AI inside guardrails — your data, your tone of voice, your approved answers. Every assistant is tested against real scenarios and monitored after launch, with a clear handoff to your team for anything sensitive.",
     },
     {
       icon: TrendingUp,

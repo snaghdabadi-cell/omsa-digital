@@ -4,6 +4,7 @@ import "./lib/error-capture";
 
 import { consumeLastCapturedError } from "./lib/error-capture";
 import { renderErrorPage } from "./lib/error-page";
+import { CONTACT } from "./lib/seo";
 
 type ServerEntry = {
   fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;
@@ -52,7 +53,7 @@ async function handleContactForm(request: Request, env: unknown): Promise<Respon
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      from: "OMSA Digital <contact@omsadigital.com>",
+      from: `OMSA Digital <${CONTACT.publicEmail}>`,
       to: ["snaghdabadi@gmail.com"],
       subject: "New contact form submission - OMSA Digital",
       html: `

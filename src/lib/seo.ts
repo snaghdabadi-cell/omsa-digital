@@ -9,7 +9,13 @@ export const SITE_DESCRIPTION =
   "OMSA Digital & AI Studio helps businesses in Oman and the UAE grow through premium website development, SEO, AI solutions, automation, and digital marketing.";
 
 export const CONTACT = {
+  // Primary/verified — used for Organization/ProfessionalService structured
+  // data and anywhere a single canonical contact identity is required.
   email: "omsadigitalstudio@gmail.com",
+  // Branded public-facing address — safe to show in visible page copy
+  // (e.g. the Contact page) alongside the verified primary above, but never
+  // in structured data, so there's exactly one machine-readable identity.
+  publicEmail: "hello@omsadigital.com",
   phone: "+968 90980683",
   whatsapp: "+968 90980683",
   city: "Muscat",
