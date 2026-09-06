@@ -33,10 +33,18 @@ function onScroll() {
 function subscribe(listener: () => void) {
   if (listeners.size === 0) {
     window.addEventListener("scroll", onScroll, { passive: true });
-    // Capture the current position immediately (page can load already
-    // scrolled via an anchor link or bfcache restore), matching the
-    // synchronous initial read every one of these components used to do.
-    readScrollState();
+    // Capture the current position on the next frame rather than
+    // synchronously here — this function runs during mount/hydration, and a
+    // synchronous scrollHeight/clientHeight read forces a layout recalculation
+    // on that critical path. Deferring one frame still catches a page that
+    // loads already scrolled (bfcache restore, #anchor navigation, browser
+    // back/forward all apply their scroll position before this frame runs),
+    // it just no longer blocks the initial commit to do so. Reuses the same
+    // rafId the scroll handler uses, so there's never more than one pending
+    // frame at a time.
+    if (!rafId) {
+      rafId = requestAnimationFrame(readScrollState);
+    }
   }
   listeners.add(listener);
   return () => {

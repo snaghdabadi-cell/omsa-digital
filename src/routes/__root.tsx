@@ -96,6 +96,9 @@ export const Route = createRootRoute({
     links: [
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
       { rel: "stylesheet", href: appCss },
+      // GTM's script itself stays exactly as-is (async, unchanged below) —
+      // this just lets the browser start that connection earlier.
+      { rel: "preconnect", href: "https://www.googletagmanager.com" },
       // Fonts are self-hosted (see @font-face rules in styles.css) — no more
       // fonts.googleapis.com/fonts.gstatic.com round trip. Only the two
       // weights actually used above the fold (Inter for the eyebrow/body
