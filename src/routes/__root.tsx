@@ -1,8 +1,7 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
   Link,
-  createRootRouteWithContext,
+  createRootRoute,
   useRouter,
   useRouterState,
   HeadContent,
@@ -72,7 +71,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
-export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+export const Route = createRootRoute({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -153,7 +152,6 @@ function RootShell({ children }: { children: ReactNode }) {
 }
 
 function RootComponent() {
-  const { queryClient } = Route.useRouteContext();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   useEffect(() => {
@@ -175,25 +173,23 @@ function RootComponent() {
 }, [pathname]);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <LocaleProvider>
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-lg focus:bg-[color:var(--ink)] focus:px-4 focus:py-2 focus:text-white focus:shadow-luxe"
-        >
-          Skip to main content
-        </a>
-        <ScrollProgress />
-        <Navbar />
-        <main id="main">
-          <PageTransition>
-            <Outlet />
-          </PageTransition>
-        </main>
-        <Footer />
-        <BackToTop />
-        <MobileStickyCta />
-      </LocaleProvider>
-    </QueryClientProvider>
+    <LocaleProvider>
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-lg focus:bg-[color:var(--ink)] focus:px-4 focus:py-2 focus:text-white focus:shadow-luxe"
+      >
+        Skip to main content
+      </a>
+      <ScrollProgress />
+      <Navbar />
+      <main id="main">
+        <PageTransition>
+          <Outlet />
+        </PageTransition>
+      </main>
+      <Footer />
+      <BackToTop />
+      <MobileStickyCta />
+    </LocaleProvider>
   );
 }
