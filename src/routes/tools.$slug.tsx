@@ -17,7 +17,7 @@ import {
   Users,
 } from "lucide-react";
 import { ComingSoon } from "@/components/site/ComingSoon";
-import { FaqItem } from "@/routes/index";
+import { FaqItem } from "@/components/site/FaqItem";
 import { getTool } from "@/lib/content/tools";
 import { breadcrumbJsonLd, faqJsonLd, pageMeta } from "@/lib/seo";
 

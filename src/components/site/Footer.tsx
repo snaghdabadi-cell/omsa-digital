@@ -2,10 +2,8 @@ import { Link } from "@tanstack/react-router";
 // Footer uses plain <a> for dynamic /services/$slug-style URLs to avoid
 // fighting TanStack Link's strict path typing. Static routes use <Link>.
 import { Sparkles, Instagram, Linkedin, Twitter, Mail, Phone, MapPin } from "lucide-react";
-import { SERVICE_DETAILS } from "@/lib/services-data";
 import { CONTACT, SOCIAL } from "@/lib/seo";
-import { LOCATIONS } from "@/lib/content/locations";
-import { INDUSTRY_PAGES } from "@/lib/content/industries";
+import { SERVICE_NAV_LINKS, INDUSTRY_NAV_LINKS, LOCATION_NAV_LINKS } from "@/lib/content/nav-links";
 import { RESOURCE_CATEGORIES } from "@/lib/content/resources";
 import { LocaleSwitcher } from "./LocaleSwitcher";
 
@@ -50,15 +48,15 @@ export function Footer() {
 
           <FooterCol
             title="Services"
-            items={SERVICE_DETAILS.map((s) => ({ label: s.name, to: `/services/${s.slug}` }))}
+            items={SERVICE_NAV_LINKS.map((s) => ({ label: s.name, to: `/services/${s.slug}` }))}
           />
           <FooterCol
             title="Industries"
-            items={INDUSTRY_PAGES.slice(0, 6).map((i) => ({ label: i.name, to: `/industries/${i.slug}` }))}
+            items={INDUSTRY_NAV_LINKS.map((i) => ({ label: i.name, to: `/industries/${i.slug}` }))}
           />
           <FooterCol
             title="Locations"
-            items={LOCATIONS.slice(0, 6).map((l) => ({ label: l.city, to: `/locations/${l.slug}` }))}
+            items={LOCATION_NAV_LINKS.map((l) => ({ label: l.name, to: `/locations/${l.slug}` }))}
           />
           <FooterCol
             title="Resources"
@@ -84,9 +82,9 @@ export function Footer() {
 
         <div className="mt-16 grid gap-8 border-t border-white/10 pt-10 lg:grid-cols-[1.4fr_1fr]">
           <div>
-            <h4 className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-white/80">
+            <h3 className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-white/80">
               Stay Updated
-            </h4>
+            </h3>
             <p className="mt-4 max-w-md text-sm text-white/60">
               Get practical insights on AI, SEO, websites, and digital growth delivered straight to your inbox.
             </p>
@@ -134,9 +132,9 @@ function FooterCol({
 }) {
   return (
     <div>
-      <h4 className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-white/80">
+      <h3 className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-white/80">
         {title}
-      </h4>
+      </h3>
       <ul className="mt-4 space-y-3">
         {items.map((i) => (
           <li key={i.to}>

@@ -1,11 +1,24 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Container, Eyebrow, Heading, Prose, Tag } from "@/components/site/Primitives";
-import { FaqItem } from "@/routes/index";
-import { getIndustry, INDUSTRY_PAGES } from "@/lib/content/industries";
+import { FaqItem } from "@/components/site/FaqItem";
+import { getIndustry, type IndustryPage } from "@/lib/content/industries";
 import { getService } from "@/lib/services-data";
 import { getCaseStudy } from "@/lib/case-studies-data";
-import { pageMeta, breadcrumbJsonLd, faqJsonLd } from "@/lib/seo";
+import { pageMeta, breadcrumbJsonLd, faqJsonLd, SITE_DESCRIPTION } from "@/lib/seo";
+
+// `head()`'s loaderData param can be undefined before the loader resolves,
+// so this exists purely to satisfy that type — a type-safe placeholder, never
+// the full INDUSTRY_PAGES catalog, so this route's head() doesn't force that
+// entire catalog into every page's shared bundle (head can't be code-split).
+const INDUSTRY_HEAD_FALLBACK: IndustryPage = {
+  slug: "",
+  name: "Hospitality",
+  tagline: SITE_DESCRIPTION,
+  description: SITE_DESCRIPTION,
+  outcomes: SITE_DESCRIPTION,
+  services: [],
+};
 
 export const Route = createFileRoute("/industries/$slug")({
   loader: ({ params }) => {
@@ -14,7 +27,7 @@ export const Route = createFileRoute("/industries/$slug")({
     return { ind };
   },
   head: ({ params, loaderData }) => {
-    const ind = loaderData?.ind ?? INDUSTRY_PAGES[0];
+    const ind = loaderData?.ind ?? INDUSTRY_HEAD_FALLBACK;
     return {
       ...pageMeta({
         title: `${ind.name} — AI & Digital Growth Solutions | OMSA`,

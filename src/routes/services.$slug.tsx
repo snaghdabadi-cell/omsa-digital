@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, CheckCircle2 } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
-import { FaqItem } from "@/routes/index";
+import { FaqItem } from "@/components/site/FaqItem";
 import {
   SERVICE_DETAILS,
   getService,
@@ -338,16 +338,14 @@ function ServiceDetailPage() {
           </h2>
           <ol className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {service.process.map((p: { step: string; detail: string; link?: AnchorLink }, i: number) => (
-              <Reveal key={p.step} delay={i * 0.05}>
-                <li className="h-full rounded-3xl border border-border bg-background p-8">
-                  <span className="font-display text-4xl font-bold text-gradient-gold">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="mt-5 font-display text-lg font-semibold tracking-tight">{p.step}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                    <Linkify text={p.detail} link={p.link} />
-                  </p>
-                </li>
+              <Reveal as="li" key={p.step} delay={i * 0.05} className="h-full rounded-3xl border border-border bg-background p-8">
+                <span className="font-display text-4xl font-bold text-gradient-gold">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="mt-5 font-display text-lg font-semibold tracking-tight">{p.step}</h3>
+                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                  <Linkify text={p.detail} link={p.link} />
+                </p>
               </Reveal>
             ))}
           </ol>

@@ -20,7 +20,7 @@ export function Reveal({
   children: ReactNode;
   delay?: number;
   className?: string;
-  as?: "div" | "section" | "h1" | "h2" | "h3" | "p" | "span";
+  as?: "div" | "section" | "h1" | "h2" | "h3" | "p" | "span" | "li";
 }) {
   const reduced = useReducedMotion();
   const Comp = motion[as] as typeof motion.div;

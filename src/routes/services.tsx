@@ -1,7 +1,7 @@
 import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-router";
 import { ArrowRight, MapPin, Wrench } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
-import { ServiceCard, SERVICES } from "./index";
+import { ServiceCard, SERVICES } from "@/components/site/ServiceCard";
 import { abs, isLeafMatch } from "@/lib/seo";
 
 // Technical SEO and Local SEO are full, independently-differentiated

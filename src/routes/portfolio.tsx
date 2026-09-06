@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Reveal } from "@/components/site/Reveal";
-import { PROJECTS, ProjectCard } from "./index";
+import { PROJECTS, ProjectCard } from "@/components/site/ProjectCard";
 import { pageMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/portfolio")({

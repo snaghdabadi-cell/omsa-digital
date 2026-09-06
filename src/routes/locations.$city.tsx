@@ -1,11 +1,26 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, MapPin } from "lucide-react";
 import { Container, Eyebrow, Heading, Prose, Tag } from "@/components/site/Primitives";
-import { FaqItem } from "@/routes/index";
-import { getLocation, LOCATIONS } from "@/lib/content/locations";
+import { FaqItem } from "@/components/site/FaqItem";
+import { getLocation, type Location } from "@/lib/content/locations";
 import { getService } from "@/lib/services-data";
 import { getCaseStudy } from "@/lib/case-studies-data";
-import { pageMeta, breadcrumbJsonLd, faqJsonLd } from "@/lib/seo";
+import { pageMeta, breadcrumbJsonLd, faqJsonLd, SITE_DESCRIPTION } from "@/lib/seo";
+
+// `head()`'s loaderData param can be undefined before the loader resolves,
+// so this exists purely to satisfy that type — a type-safe placeholder, never
+// the full LOCATIONS catalog, so this route's head() doesn't force that
+// entire catalog into every page's shared bundle (head can't be code-split).
+const LOCATION_HEAD_FALLBACK: Location = {
+  slug: "",
+  city: "Muscat",
+  country: "Oman",
+  region: "GCC",
+  tagline: SITE_DESCRIPTION,
+  intro: SITE_DESCRIPTION,
+  services: [],
+  status: "live",
+};
 
 export const Route = createFileRoute("/locations/$city")({
   loader: ({ params }) => {
@@ -14,7 +29,7 @@ export const Route = createFileRoute("/locations/$city")({
     return { loc };
   },
   head: ({ params, loaderData }) => {
-    const loc = loaderData?.loc ?? LOCATIONS[0];
+    const loc = loaderData?.loc ?? LOCATION_HEAD_FALLBACK;
     return {
       ...pageMeta({
         title: `AI & Digital Growth Agency in ${loc.city}, ${loc.country} | OMSA`,

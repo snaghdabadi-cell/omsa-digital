@@ -11,5 +11,20 @@ export default defineConfig({
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
     server: { entry: "server" },
+    router: {
+      // `head` can never be split (router-plugin limitation), but `loader` can.
+      // Several $slug routes' loaders pull a full content catalog (services-data.ts
+      // etc.) just to look up one entry — left eager (the default), that catalog
+      // gets hoisted into the shared root chunk loaded by every route. Splitting
+      // `loader` moves it into the same lazily-fetched chunk as `component`.
+      codeSplittingOptions: {
+        defaultBehavior: [
+          ["component"],
+          ["pendingComponent"],
+          ["errorComponent", "notFoundComponent"],
+          ["loader"],
+        ],
+      },
+    },
   },
 });

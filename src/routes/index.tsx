@@ -8,10 +8,7 @@ import {
   Bot,
   BarChart3,
   Cpu,
-  Megaphone,
   Globe,
-  Plus,
-  Minus,
   CheckCircle2,
   LineChart,
   Layers,
@@ -32,14 +29,13 @@ import {
   Brain,
   Compass,
 } from "lucide-react";
-import { useId, useState, type ReactNode } from "react";
 import heroImg from "@/assets/hero.jpg";
-import workRestaurant from "@/assets/work-restaurant.jpg";
-import workCorporate from "@/assets/work-corporate.jpg";
-import workDashboard from "@/assets/work-dashboard.jpg";
 import { Reveal } from "@/components/site/Reveal";
 import { Counter } from "@/components/site/Counter";
 import { Tag } from "@/components/site/Primitives";
+import { FaqItem } from "@/components/site/FaqItem";
+import { SERVICES, ServiceCard } from "@/components/site/ServiceCard";
+import { PROJECTS, ProjectCard } from "@/components/site/ProjectCard";
 import { CASE_STUDIES } from "@/lib/case-studies-data";
 import { pageMeta, faqJsonLd } from "@/lib/seo";
 
@@ -175,44 +171,24 @@ function Hero() {
       <div className="container-luxe relative">
         <div className="grid items-center gap-16 lg:grid-cols-[1.15fr_1fr]">
           <div>
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="eyebrow"
-            >
+            <p className="eyebrow animate-hero-eyebrow">
               Trusted Digital Growth Partner for Businesses Across Oman & the GCC
-            </motion.p>
+            </p>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-6 font-display text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.02] tracking-[-0.03em]"
-            >
+            <h1 className="mt-6 font-display text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.02] tracking-[-0.03em] animate-hero-title">
               Custom Websites, SEO &{" "}
               <span className="text-gradient-gold">
                   AI Solutions Built for Business Growth
               </span>
-            </motion.h1>
+            </h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.15 }}
-              className="mt-7 max-w-xl text-lg text-muted-foreground leading-relaxed"
-            >
+            <p className="mt-7 max-w-xl text-lg text-muted-foreground leading-relaxed animate-hero-desc">
               We build high-performing websites, results-driven SEO strategies,
               AI automation, and digital growth solutions that help businesses attract
               more customers, generate qualified leads, and achieve sustainable growth across Oman, the UAE, and the GCC.
-            </motion.p>
+            </p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.3 }}
-              className="mt-10 flex flex-col gap-3"
-            >
+            <div className="mt-10 flex flex-col gap-3 animate-hero-cta">
               <div className="flex flex-wrap items-center gap-4">
                 <Link to="/contact" className="btn-gold">
                   Book a Free Strategy Call <ArrowRight className="h-4 w-4" />
@@ -224,16 +200,11 @@ function Hero() {
               <p className="text-xs text-muted-foreground">
                 Free Consultation • No Commitment • Tailored Digital Growth Strategy
               </p>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 0.6 }}
-              className="mt-12 flex items-center gap-6 text-sm text-muted-foreground"
-            >
-            
-          </motion.div>
+            <div className="mt-12 flex items-center gap-6 text-sm text-muted-foreground animate-hero-meta">
+
+          </div>
           </div>
 
           {/* Floating UI cards */}
@@ -492,19 +463,17 @@ function GrowthSystem() {
             <div aria-hidden className="absolute left-0 right-0 top-7 hidden h-px bg-gradient-to-r from-transparent via-[color:var(--gold)]/50 to-transparent lg:block" />
             <ol className="grid grid-cols-2 gap-6 sm:grid-cols-4 lg:grid-cols-8">
               {GROWTH_FLOW.map((s, i) => (
-                <Reveal key={s.label} delay={i * 0.05}>
-                  <li className="relative flex flex-col items-center text-center">
-                    <span className="relative z-10 grid h-14 w-14 place-items-center rounded-full border border-white/15 bg-[color:var(--ink)] transition-all duration-500 hover:border-[color:var(--gold)] hover:bg-white/[0.04]">
-                      <s.icon className="h-5 w-5 text-[color:var(--gold)]" />
-                    </span>
-                    <div className="mt-4 text-[10px] uppercase tracking-[0.18em] text-white/50">
-                      Stage {String(i + 1).padStart(2, "0")}
-                    </div>
-                    <div className="mt-1.5 font-display text-base font-semibold tracking-tight">
-                      {s.label}
-                    </div>
-                    <p className="mt-1 text-[11px] text-white/55 leading-relaxed">{s.note}</p>
-                  </li>
+                <Reveal as="li" key={s.label} delay={i * 0.05} className="relative flex flex-col items-center text-center">
+                  <span className="relative z-10 grid h-14 w-14 place-items-center rounded-full border border-white/15 bg-[color:var(--ink)] transition-all duration-500 hover:border-[color:var(--gold)] hover:bg-white/[0.04]">
+                    <s.icon className="h-5 w-5 text-[color:var(--gold)]" />
+                  </span>
+                  <div className="mt-4 text-[10px] uppercase tracking-[0.18em] text-white/50">
+                    Stage {String(i + 1).padStart(2, "0")}
+                  </div>
+                  <div className="mt-1.5 font-display text-base font-semibold tracking-tight">
+                    {s.label}
+                  </div>
+                  <p className="mt-1 text-[11px] text-white/55 leading-relaxed">{s.note}</p>
                 </Reveal>
               ))}
             </ol>
@@ -516,15 +485,6 @@ function GrowthSystem() {
 }
 
 /* ────────────────────────── SERVICES ────────────────────────── */
-export const SERVICES = [
-  { icon: Globe, title: "Web Design & Development", desc: "Custom, responsive, and SEO-ready websites built to strengthen your brand, improve user experience, and generate qualified leads.", slug: "website-design" },
-  { icon: Search, title: "SEO & Search Visibility", desc: "Technical SEO, local SEO, and content strategies designed to improve rankings and attract customers across Oman, the UAE, and the GCC.", slug: "seo" },
-  { icon: Bot, title: "AI Solutions & Chatbots", desc: "Custom AI chatbots and intelligent solutions that improve customer support, capture leads, and create better digital experiences.", slug: "ai-chatbots" },
-  { icon: BarChart3, title: "Analytics & Performance", desc: "Accurate tracking, dashboards, and actionable insights that help you understand performance and make better business decisions.", slug: "google-analytics" },
-  { icon: Cpu, title: "AI Automation", desc: "Smart workflows and system integrations that reduce repetitive work, improve response times, and increase operational efficiency.", slug: "business-automation" },
-  { icon: Megaphone, title: "Digital Marketing", desc: "Google Ads, paid campaigns, social media marketing, and conversion strategies built to generate qualified leads.", slug: "digital-marketing" },
-];
-
 function Services() {
   return (
     <section className="section-pad" id="services">
@@ -552,47 +512,6 @@ function Services() {
       </div>
     </section>
   );
-}
-
-export function ServiceCard({
-  icon: Icon,
-  title,
-  desc,
-  tag,
-  slug,
-}: {
-  icon: any;
-  title: string;
-  desc: string;
-  tag?: string;
-  slug?: string;
-}) {
-  const cardClassName = "group relative h-full rounded-3xl border border-border bg-card p-8 transition-all duration-500 hover:-translate-y-1 hover:border-[color:var(--gold)] hover:shadow-luxe";
-  const cardContent = (
-    <>
-      <div className="absolute right-6 top-6 text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-        {tag}
-      </div>
-      <span className="grid h-14 w-14 place-items-center rounded-2xl bg-primary text-primary-foreground transition-colors group-hover:bg-[color:var(--gold)] group-hover:text-[color:var(--ink)]">
-        <Icon className="h-6 w-6" />
-      </span>
-      <h3 className="mt-7 font-display text-2xl font-semibold tracking-tight">{title}</h3>
-      <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{desc}</p>
-      <div className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-foreground/70 group-hover:text-[color:var(--gold-deep)]">
-        View Service Details <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-      </div>
-    </>
-  );
-
-  if (slug) {
-    return (
-      <Link to="/services/$slug" params={{ slug }} className={`block ${cardClassName}`}>
-        {cardContent}
-      </Link>
-    );
-  }
-
-  return <div className={cardClassName}>{cardContent}</div>;
 }
 
 /* ────────────────────────── STATS ────────────────────────── */
@@ -635,73 +554,6 @@ function Stats() {
 }
 
 /* ────────────────────────── PORTFOLIO ────────────────────────── */
-// A deliberately small, honestly-labelled mix: three concept case studies
-// (sourced directly from CASE_STUDIES so title/image/slug can never drift
-// from the real case-study pages), one genuine OMSA internal product, and
-// two clearly-labelled concept projects. No item claims a verified client
-// relationship or a fabricated performance number.
-type PortfolioLink =
-  | { kind: "case-study"; slug: string }
-  | { kind: "tool"; slug: string };
-
-type Project = {
-  img: string;
-  title: string;
-  category: string;
-  services: string[];
-  status: string;
-  link?: PortfolioLink;
-};
-
-export const PROJECTS: Project[] = [
-  {
-    img: CASE_STUDIES[0].image,
-    title: CASE_STUDIES[0].title,
-    category: `${CASE_STUDIES[0].industry} · Concept Case Study`,
-    services: ["Technical SEO", "Local SEO", "AI Booking Assistant"],
-    status: "Concept Project",
-    link: { kind: "case-study", slug: CASE_STUDIES[0].slug },
-  },
-  {
-    img: CASE_STUDIES[1].image,
-    title: CASE_STUDIES[1].title,
-    category: `${CASE_STUDIES[1].industry} · Concept Case Study`,
-    services: ["Landing Page", "CRO", "AI Qualifying Assistant"],
-    status: "Concept Project",
-    link: { kind: "case-study", slug: CASE_STUDIES[1].slug },
-  },
-  {
-    img: CASE_STUDIES[2].image,
-    title: CASE_STUDIES[2].title,
-    category: `${CASE_STUDIES[2].industry} · Concept Case Study`,
-    services: ["Website", "Local SEO", "GA4"],
-    status: "Concept Project",
-    link: { kind: "case-study", slug: CASE_STUDIES[2].slug },
-  },
-  {
-    img: workDashboard,
-    title: "OMSA SEO Audit Tool",
-    category: "OMSA Internal Product",
-    services: ["Technical SEO", "On-Page Review", "Prioritisation Framework"],
-    status: "In Development",
-    link: { kind: "tool", slug: "seo-audit" },
-  },
-  {
-    img: workCorporate,
-    title: "Persian Professional Services Website Concept",
-    category: "Professional Services · Concept",
-    services: ["Bilingual Architecture", "Technical SEO", "Lead Capture"],
-    status: "Concept Project",
-  },
-  {
-    img: workRestaurant,
-    title: "Persian Local Business SEO Concept",
-    category: "Local Business · Concept",
-    services: ["Local Landing Pages", "Structured Data", "Search Visibility"],
-    status: "Concept Project",
-  },
-];
-
 function Portfolio() {
   return (
     <section className="section-pad" id="portfolio">
@@ -728,57 +580,6 @@ function Portfolio() {
       </div>
     </section>
   );
-}
-
-export function ProjectCard({
-  img, title, category, services, status, link,
-}: { img: string; title: string; category: string; services: string[]; status: string; link?: PortfolioLink }) {
-  const cardClass = "group relative overflow-hidden rounded-3xl border border-border bg-card transition-all duration-500 hover:-translate-y-1 hover:shadow-luxe";
-  const content = (
-    <>
-      <div className="aspect-[4/3] overflow-hidden">
-        <img
-          src={img}
-          alt={title}
-          loading="lazy"
-          width={1200}
-          height={900}
-          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-        />
-      </div>
-      <div className="p-6">
-        <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">{category}</p>
-        <h3 className="mt-3 font-display text-xl font-semibold tracking-tight">{title}</h3>
-        <div className="mt-4 flex flex-wrap gap-1.5">
-          {services.map((s) => (
-            <span key={s} className="rounded-full bg-muted px-2.5 py-1 text-[11px] font-medium text-foreground/70">
-              {s}
-            </span>
-          ))}
-        </div>
-        <div className="mt-5 flex items-center justify-between border-t border-border pt-4">
-          <span className="text-sm font-semibold text-[color:var(--gold-deep)]">{status}</span>
-          <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-[color:var(--gold)]" />
-        </div>
-      </div>
-    </>
-  );
-
-  if (link?.kind === "case-study") {
-    return (
-      <Link to="/case-studies/$slug" params={{ slug: link.slug }} className={`block ${cardClass}`}>
-        {content}
-      </Link>
-    );
-  }
-  if (link?.kind === "tool") {
-    return (
-      <Link to="/tools/$slug" params={{ slug: link.slug }} className={`block ${cardClass}`}>
-        {content}
-      </Link>
-    );
-  }
-  return <article className={cardClass}>{content}</article>;
 }
 
 /* ────────────────────── CASE STUDY (feature) ────────────────────── */
@@ -937,7 +738,7 @@ function Process() {
 // Deliberately not framed as testimonials — no repository evidence supports
 // named client quotes, so this section states OMSA's own working principles
 // instead of attributing them to invented customers.
-export const WORKING_PRINCIPLES = [
+const WORKING_PRINCIPLES = [
   {
     icon: Target,
     title: "Business-Focused Decisions",
@@ -985,7 +786,7 @@ function Testimonials() {
 }
 
 /* ────────────────────────── FAQ ────────────────────────── */
-export const FAQS = [
+const FAQS = [
   { q: "What digital marketing and AI services do you offer?", a: "We provide website design and development, ecommerce solutions, SEO, Local SEO, Technical SEO, AI automation, AI chatbots, AI solutions, Google Ads, social media marketing, branding, analytics, and digital growth strategy." },
   { q: "How long does it take to design and develop a website?", a: "Most business websites are completed within four to eight weeks, depending on project complexity, content readiness, required integrations, and feedback turnaround." },
   { q: "How long does SEO take to deliver results?", a: "SEO is a long-term growth strategy. Initial improvements may appear within three to six months, while stronger rankings, organic traffic, and qualified leads develop over time based on competition, website condition, content quality, and ongoing optimization." },
@@ -1025,41 +826,6 @@ function Faq() {
         </div>
       </div>
     </section>
-  );
-}
-
-export function FaqItem({ item, defaultOpen = false }: { item: { q: string; a: ReactNode }; defaultOpen?: boolean }) {
-  const [open, setOpen] = useState(defaultOpen);
-  const answerId = useId();
-  return (
-    <div className="rounded-2xl border border-border bg-card overflow-hidden">
-      <button
-        onClick={() => setOpen(!open)}
-        aria-expanded={open}
-        aria-controls={answerId}
-        className="flex w-full items-center justify-between gap-6 p-6 text-left"
-      >
-        <span className="font-display text-base md:text-lg font-semibold tracking-tight">{item.q}</span>
-        <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-border">
-          {open ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
-        </span>
-      </button>
-      {/* Answer is always rendered (not conditionally mounted) so it's present
-          in server-rendered HTML for plain-text extraction; the grid-rows
-          transition — not conditional JSX — controls its visible/collapsed
-          state, and it handles any answer length without a guessed max-height. */}
-      <div
-        id={answerId}
-        aria-hidden={!open}
-        className={`grid transition-[grid-template-rows] duration-300 ease-out ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
-      >
-        <div className="overflow-hidden">
-          <div className="px-6 pb-6 -mt-2 text-sm text-muted-foreground leading-relaxed">
-            {item.a}
-          </div>
-        </div>
-      </div>
-    </div>
   );
 }
 
