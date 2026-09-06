@@ -1,14 +1,8 @@
-import { useEffect, useState } from "react";
 import { ArrowUp } from "lucide-react";
+import { useScrollY } from "@/hooks/use-scroll-state";
 
 export function BackToTop() {
-  const [show, setShow] = useState(false);
-  useEffect(() => {
-    const onScroll = () => setShow(window.scrollY > 600);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const show = useScrollY() > 600;
   if (!show) return null;
   return (
     <button

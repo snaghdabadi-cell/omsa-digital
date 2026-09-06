@@ -1,17 +1,10 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
+import { useScrollY } from "@/hooks/use-scroll-state";
 
 export function MobileStickyCta() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 600);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const visible = useScrollY() > 600;
 
   if (pathname === "/contact") return null;
 

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X, Sparkles, Search } from "lucide-react";
 import { LocaleSwitcher } from "./LocaleSwitcher";
+import { useScrollY } from "@/hooks/use-scroll-state";
 
 declare global {
   interface Window {
@@ -32,17 +33,11 @@ const links = [
 ] as const;
 
 export function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+  const scrolled = useScrollY() > 16;
   const [open, setOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   useEffect(() => setOpen(false), [pathname]);
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 16);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   return (
     <header
