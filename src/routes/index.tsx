@@ -29,7 +29,7 @@ import {
   Brain,
   Compass,
 } from "lucide-react";
-import heroImg from "@/assets/hero.jpg";
+import heroImg from "@/assets/hero.webp";
 import { Reveal } from "@/components/site/Reveal";
 import { Counter } from "@/components/site/Counter";
 import { Tag } from "@/components/site/Primitives";
