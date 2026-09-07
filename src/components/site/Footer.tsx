@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 // Footer uses plain <a> for dynamic /services/$slug-style URLs to avoid
 // fighting TanStack Link's strict path typing. Static routes use <Link>.
-import { Sparkles, Instagram, Linkedin, Twitter, Mail, Phone, MapPin } from "lucide-react";
+import { Sparkles, Linkedin, Mail, Phone, MapPin } from "lucide-react";
 import { CONTACT, SOCIAL } from "@/lib/seo";
 import { SERVICE_NAV_LINKS, INDUSTRY_NAV_LINKS, LOCATION_NAV_LINKS } from "@/lib/content/nav-links";
 import { RESOURCE_CATEGORIES } from "@/lib/content/resources";
@@ -28,8 +28,6 @@ export function Footer() {
             <nav aria-label="Social" className="mt-6 flex gap-2">
               {[
                 { Icon: Linkedin, href: SOCIAL.linkedin, label: "LinkedIn" },
-                { Icon: Instagram, href: SOCIAL.instagram, label: "Instagram" },
-                { Icon: Twitter, href: SOCIAL.twitter, label: "Twitter / X" },
               ].map(({ Icon, href, label }) => (
                 <a
                   key={label}

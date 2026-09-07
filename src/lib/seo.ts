@@ -24,10 +24,10 @@ export const CONTACT = {
 };
 
 export const SOCIAL = {
+  // Only the verified LinkedIn Company Page is listed. Instagram/Twitter are
+  // deliberately absent rather than pointing at placeholder URLs — add them
+  // only once a real profile exists to verify.
   linkedin: "https://www.linkedin.com/company/omsa-digital-ai-studio/",
-  // Still placeholders — replace only with a verified profile URL, never guessed.
-  instagram: "https://omsadigital.com",
-  twitter: "https://omsadigital.com",
 };
 
 export const abs = (path: string) =>
@@ -99,9 +99,7 @@ export const organizationJsonLd = () => ({
     addressLocality: "Muscat",
     addressCountry: "OM",
   },
-  // Only the verified LinkedIn Company Page is listed — SOCIAL.instagram
-  // and SOCIAL.twitter are still homepage placeholders, not real profiles,
-  // so they're excluded until genuinely verified.
+  // Only the verified LinkedIn Company Page is listed.
   sameAs: [SOCIAL.linkedin],
   knowsAbout: [
     "Website Design",
