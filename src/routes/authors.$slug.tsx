@@ -1,7 +1,7 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { Container, Eyebrow, Heading, Prose, Tag } from "@/components/site/Primitives";
 import { getAuthor } from "@/lib/content/authors";
-import { pageMeta } from "@/lib/seo";
+import { authorEntityRef, authorRefFromContent, pageMeta, webPageJsonLd } from "@/lib/seo";
 
 export const Route = createFileRoute("/authors/$slug")({
   loader: ({ params }) => {
@@ -11,12 +11,42 @@ export const Route = createFileRoute("/authors/$slug")({
   },
   head: ({ params, loaderData }) => {
     const a = loaderData?.author;
-    return pageMeta({
+    const path = `/authors/${params.slug}`;
+    const base = pageMeta({
       title: a ? `${a.name} — OMSA Digital & AI Studio` : "Author — OMSA Digital & AI Studio",
       description: a?.bio ?? "OMSA Digital & AI Studio author profile.",
-      path: `/authors/${params.slug}`,
+      path,
       type: "profile",
     });
+    if (!a) return base;
+
+    // "Organization" authors ARE the existing Organization entity (already
+    // fully defined site-wide by organizationJsonLd() in __root.tsx) — this
+    // page's WebPage just points `about` at that same @id rather than
+    // restating a second, competing Organization object. A "Person" author
+    // doesn't exist anywhere else in the graph, so their entity is defined
+    // here in full, from the same content record used to render the page.
+    const authorRef = authorRefFromContent(a);
+    const entity = authorEntityRef(authorRef);
+    return {
+      ...base,
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify(
+            webPageJsonLd({ path, name: a.name, description: a.bio, about: entity }),
+          ),
+        },
+        ...(authorRef.type === "Person"
+          ? [
+              {
+                type: "application/ld+json",
+                children: JSON.stringify({ "@context": "https://schema.org", ...entity }),
+              },
+            ]
+          : []),
+      ],
+    };
   },
   component: AuthorPage,
 });

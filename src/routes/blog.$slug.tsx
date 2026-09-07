@@ -4,7 +4,7 @@ import { Reveal } from "@/components/site/Reveal";
 import { BLOG_POSTS, getPost } from "@/lib/blog-data";
 import { SERVICE_DETAILS } from "@/lib/services-data";
 import { getAuthor } from "@/lib/content/authors";
-import { abs, articleJsonLd, breadcrumbJsonLd, pageMeta } from "@/lib/seo";
+import { abs, articleJsonLd, authorRefFromContent, breadcrumbJsonLd, pageMeta } from "@/lib/seo";
 
 // Every current post is written under the same shared editorial identity, so
 // the author is resolved once here rather than duplicating an `author` field
@@ -46,7 +46,7 @@ export const Route = createFileRoute("/blog/$slug")({
               image: p.image,
               datePublished: p.date,
               dateModified: p.dateModified,
-              author: POST_AUTHOR.name,
+              author: authorRefFromContent(POST_AUTHOR),
             }),
           ),
         },

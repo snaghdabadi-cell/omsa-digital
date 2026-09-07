@@ -166,6 +166,57 @@ export const serviceJsonLd = (s: {
   ],
 });
 
+/**
+ * A byline entity for Article/BlogPosting schema.
+ * - "Organization": the post is published under OMSA's own editorial
+ *   identity, not a distinct entity — reuses the site's single canonical
+ *   Organization @id rather than minting a second, competing Organization
+ *   object with its own name.
+ * - "Person": a real named individual, described only by fields actually
+ *   supplied (nothing here is inferred, and nothing is fabricated).
+ */
+export type AuthorRef =
+  | { type: "Organization" }
+  | { type: "Person"; slug: string; name: string; jobTitle?: string; sameAs?: string[] };
+
+/** Resolves an AuthorRef to the entity (or entity reference) schema should embed. */
+export const authorEntityRef = (author?: AuthorRef) => {
+  if (!author || author.type === "Organization") {
+    return { "@id": `${SITE_URL}/#organization` };
+  }
+  const person: Record<string, unknown> = {
+    "@type": "Person",
+    "@id": `${abs(`/authors/${author.slug}`)}#person`,
+    name: author.name,
+  };
+  if (author.jobTitle) person.jobTitle = author.jobTitle;
+  if (author.sameAs && author.sameAs.length > 0) person.sameAs = author.sameAs;
+  return person;
+};
+
+/** Minimal shape shared with lib/content/authors.ts's Author record. */
+export type ContentAuthor = {
+  slug: string;
+  name: string;
+  type: "Organization" | "Person";
+  jobTitle?: string;
+  social?: { linkedin?: string; twitter?: string };
+};
+
+/** Converts a content Author record into the byline entity schema expects. */
+export const authorRefFromContent = (author: ContentAuthor): AuthorRef =>
+  author.type === "Organization"
+    ? { type: "Organization" }
+    : {
+        type: "Person",
+        slug: author.slug,
+        name: author.name,
+        jobTitle: author.jobTitle,
+        sameAs: author.social
+          ? Object.values(author.social).filter((v): v is string => Boolean(v))
+          : undefined,
+      };
+
 export const articleJsonLd = (a: {
   title: string;
   description: string;
@@ -173,7 +224,7 @@ export const articleJsonLd = (a: {
   image?: string;
   datePublished: string;
   dateModified?: string;
-  author?: string;
+  author?: AuthorRef;
 }) => ({
   "@context": "https://schema.org",
   "@type": "BlogPosting",
@@ -183,8 +234,34 @@ export const articleJsonLd = (a: {
   image: a.image ? abs(a.image) : undefined,
   datePublished: a.datePublished,
   dateModified: a.dateModified ?? a.datePublished,
-  author: { "@type": "Organization", name: a.author ?? SITE_LEGAL_NAME },
+  author: authorEntityRef(a.author),
   publisher: { "@id": `${SITE_URL}/#organization` },
+});
+
+/**
+ * A WebPage node connecting a specific page to the site's entity graph
+ * (Organization -> WebSite -> WebPage -> the page's specific entity). Only
+ * used where a page doesn't already have adequate entity-graph connectivity
+ * through its own schema (Service/Article already link out via
+ * provider/publisher @id references) — currently just author profile pages,
+ * which otherwise have no way to express "this page is about the
+ * Organization" vs "this page is about a named Person" without either
+ * duplicating the Organization entity or leaving the relationship unstated.
+ */
+export const webPageJsonLd = (opts: {
+  path: string;
+  name: string;
+  description: string;
+  about?: Record<string, unknown>;
+}) => ({
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": `${abs(opts.path)}#webpage`,
+  url: abs(opts.path),
+  name: opts.name,
+  description: opts.description,
+  isPartOf: { "@id": `${SITE_URL}/#website` },
+  about: opts.about,
 });
 
 export const caseStudyJsonLd = (c: {
