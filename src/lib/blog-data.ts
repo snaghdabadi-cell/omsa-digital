@@ -30,6 +30,10 @@ export type BlogPost = {
   readMinutes: number;
   image: string;
   relatedServices: string[]; // service slugs
+  // Slug of a CASE_STUDIES entry, set only where the post's actual topic
+  // (not just its category) genuinely matches that case study's industry —
+  // left unset rather than guessed for posts with no clear match.
+  relatedCaseStudySlug?: string;
   body: { h2: string; p: string[] }[];
 };
 
@@ -44,6 +48,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readMinutes: 8,
     image: workAi,
     relatedServices: ["ai-chatbots", "website-design"],
+    relatedCaseStudySlug: "muscat-hotel-direct-bookings",
     body: [
       { h2: "Why hospitality is the wrong place for a generic chatbot",
         p: [
@@ -75,6 +80,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readMinutes: 6,
     image: workDashboard,
     relatedServices: ["google-analytics", "seo"],
+    relatedCaseStudySlug: "muscat-hotel-direct-bookings",
     body: [
       { h2: "Out-of-the-box GA4 isn't enough",
         p: [
@@ -104,6 +110,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readMinutes: 10,
     image: workHotel,
     relatedServices: ["local-seo", "seo"],
+    relatedCaseStudySlug: "muscat-hotel-direct-bookings",
     body: [
       { h2: "Local search behaves differently in the GCC",
         p: [
@@ -151,6 +158,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readMinutes: 9,
     image: workClinic,
     relatedServices: ["seo", "local-seo", "ai-chatbots"],
+    relatedCaseStudySlug: "abu-dhabi-clinic-patient-acquisition",
     body: [
       { h2: "The three engines that compound",
         p: [
@@ -174,6 +182,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readMinutes: 12,
     image: workRealestate,
     relatedServices: ["website-design", "google-analytics"],
+    relatedCaseStudySlug: "dubai-developer-landing-page",
     body: [
       { h2: "Conversion is mostly about clarity",
         p: [

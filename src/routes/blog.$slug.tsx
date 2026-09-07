@@ -1,8 +1,10 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, Calendar, Clock, User } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
+import { Tag } from "@/components/site/Primitives";
 import { BLOG_POSTS, getPost } from "@/lib/blog-data";
 import { SERVICE_DETAILS } from "@/lib/services-data";
+import { getCaseStudy } from "@/lib/case-studies-data";
 import { getAuthor } from "@/lib/content/authors";
 import { abs, articleJsonLd, authorRefFromContent, breadcrumbJsonLd, pageMeta } from "@/lib/seo";
 
@@ -78,6 +80,7 @@ function BlogPostPage() {
   const related = post.relatedServices
     .map((s: string) => SERVICE_DETAILS.find((d) => d.slug === s))
     .filter(Boolean) as typeof SERVICE_DETAILS;
+  const relatedCaseStudy = post.relatedCaseStudySlug ? getCaseStudy(post.relatedCaseStudySlug) : undefined;
   const moreFromCategory = BLOG_POSTS.filter(
     (p) => p.category === post.category && p.slug !== post.slug,
   ).slice(0, 3);
@@ -169,6 +172,43 @@ function BlogPostPage() {
                 </Link>
               ))}
             </div>
+          </div>
+        </aside>
+      )}
+
+      {/* Related concept case study (internal linking) */}
+      {relatedCaseStudy && (
+        <aside className="section-pad">
+          <div className="container-luxe">
+            <div className="flex flex-wrap items-baseline justify-between gap-3">
+              <h2 className="eyebrow">Related concept case study</h2>
+              {relatedCaseStudy.relatedLocationSlug && (
+                <Link
+                  to="/locations/$city"
+                  params={{ city: relatedCaseStudy.relatedLocationSlug }}
+                  className="link-underline text-xs font-medium uppercase tracking-wider text-muted-foreground hover:text-foreground"
+                >
+                  {relatedCaseStudy.location}
+                </Link>
+              )}
+            </div>
+            <Link
+              to="/case-studies/$slug"
+              params={{ slug: relatedCaseStudy.slug }}
+              className="card-lift mt-6 block rounded-2xl border border-border bg-card p-6 sm:flex sm:items-center sm:justify-between sm:gap-6"
+            >
+              <div>
+                <div className="flex flex-wrap items-center gap-3">
+                  <Tag>{relatedCaseStudy.status}</Tag>
+                  <span className="text-xs uppercase tracking-wider text-muted-foreground">{relatedCaseStudy.industry}</span>
+                </div>
+                <div className="mt-3 font-display text-lg font-semibold">{relatedCaseStudy.title}</div>
+                <p className="mt-2 text-sm text-muted-foreground max-w-xl">{relatedCaseStudy.excerpt}</p>
+              </div>
+              <span className="mt-4 inline-flex shrink-0 items-center gap-1 text-sm font-medium text-[color:var(--gold-deep)] sm:mt-0">
+                Read the concept case study <ArrowUpRight className="h-4 w-4" />
+              </span>
+            </Link>
           </div>
         </aside>
       )}

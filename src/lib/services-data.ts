@@ -89,7 +89,7 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     category: "Build",
     metaTitle: "Website Design Oman | Professional Web Design | OMSA",
     metaDescription:
-      "Professional website design in Oman for businesses that need a fast, responsive and search-ready digital presence. OMSA designs strategic websites for Oman, Muscat and the GCC.",
+      "Professional website design in Oman, Muscat and the GCC — fast, responsive, search-ready websites built to convert visitors and grow your business.",
     problem:
       "A polished homepage is not the same as an effective website. Visitors arrive with questions — what you offer, whether your business is credible, whether your service is relevant to them — and if those answers are difficult to find, visual design alone will not solve the problem.",
     solution:
@@ -786,7 +786,7 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     category: "Visibility",
     metaTitle: "Local SEO Services in Oman & UAE | OMSA Digital & AI Studio",
     metaDescription:
-      "Local SEO services for businesses in Oman, Muscat, the UAE and the GCC — Google Business Profile, local visibility and location-relevant content built for real customers.",
+      "Local SEO for businesses in Oman, Muscat, the UAE and the GCC — Google Business Profile optimization, local visibility and location-relevant content.",
     problem:
       "A business can deliver excellent service and still lose local customers — not because of quality, but because a competitor is simply easier to find when someone searches nearby, in Google Search or on the map.",
     solution:

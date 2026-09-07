@@ -29,6 +29,9 @@ export type CaseStudy = {
   lessons: string;
   metrics: { k: string; v: string }[];
   relatedServices: string[];
+  // Slug of the matching LOCATIONS entry for `location` above (only set
+  // when that city has a real, live page to link to — never guessed).
+  relatedLocationSlug?: string;
 };
 
 export const CASE_STUDIES: CaseStudy[] = [
@@ -58,6 +61,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       { k: "Content", v: "Bilingual Arabic/English programme" },
     ],
     relatedServices: ["website-design", "seo", "ai-chatbots", "google-analytics"],
+    relatedLocationSlug: "muscat",
   },
   {
     slug: "dubai-developer-landing-page",
@@ -85,6 +89,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       { k: "Testing", v: "Structured A/B programme" },
     ],
     relatedServices: ["website-design", "ai-chatbots", "google-analytics"],
+    relatedLocationSlug: "dubai",
   },
   {
     slug: "abu-dhabi-clinic-patient-acquisition",
@@ -112,6 +117,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       { k: "Booking", v: "AI-assisted appointment enquiries" },
     ],
     relatedServices: ["website-design", "local-seo", "ai-chatbots", "google-analytics"],
+    relatedLocationSlug: "abu-dhabi",
   },
 ];
 

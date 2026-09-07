@@ -3,6 +3,7 @@ import { ArrowRight, ArrowUpRight, TrendingUp } from "lucide-react";
 import { Tag } from "@/components/site/Primitives";
 import { CASE_STUDIES, getCaseStudy } from "@/lib/case-studies-data";
 import { SERVICE_DETAILS } from "@/lib/services-data";
+import { getIndustryByCaseStudySlug } from "@/lib/content/industries";
 import { abs, breadcrumbJsonLd, caseStudyJsonLd, pageMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/case-studies/$slug")({
@@ -86,7 +87,20 @@ function CaseStudyPage() {
       <article className="pt-8 pb-24">
         <header className="container-luxe max-w-4xl">
           <div className="flex flex-wrap items-center gap-3">
-            <p className="eyebrow">{study.industry} · {study.location}</p>
+            <p className="eyebrow">
+              {study.industry} ·{" "}
+              {study.relatedLocationSlug ? (
+                <Link
+                  to="/locations/$city"
+                  params={{ city: study.relatedLocationSlug }}
+                  className="link-underline hover:text-foreground"
+                >
+                  {study.location}
+                </Link>
+              ) : (
+                study.location
+              )}
+            </p>
             <Tag>{study.status}</Tag>
           </div>
           <h1 className="mt-6 font-display text-4xl md:text-6xl font-bold tracking-tight leading-[1.05]">
@@ -164,7 +178,7 @@ function CaseStudyPage() {
       {moreCases.length > 0 && (
         <section className="section-pad">
           <div className="container-luxe">
-            <p className="eyebrow">More concept case studies</p>
+            <h2 className="eyebrow">More concept case studies</h2>
             <div className="mt-10 grid gap-8 md:grid-cols-2">
               {moreCases.map((m: typeof CASE_STUDIES[number]) => (
                 <Link

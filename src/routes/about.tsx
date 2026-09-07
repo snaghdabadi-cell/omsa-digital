@@ -25,8 +25,11 @@ function AboutPage() {
             </h1>
             <p className="mt-6 text-muted-foreground leading-relaxed">
               OMSA Digital & AI Studio is a digital and AI studio providing website design, SEO,
-              automation, analytics and related digital services to businesses across Oman, the
-              UAE and the GCC that want stronger digital visibility and smarter digital operations.
+              automation, analytics and related{" "}
+              <Link to="/services" className="link-underline font-medium text-[color:var(--gold-deep)]">digital services</Link>{" "}
+              to businesses across{" "}
+              <Link to="/locations" className="link-underline font-medium text-[color:var(--gold-deep)]">Oman, the UAE and the GCC</Link>{" "}
+              that want stronger digital visibility and smarter digital operations.
             </p>
           </div>
           <p className="text-lg text-muted-foreground leading-relaxed">

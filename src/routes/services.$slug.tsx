@@ -427,7 +427,7 @@ function ServiceDetailPage() {
                     <h3 className="mt-6 font-display text-lg font-semibold tracking-tight">{r.name}</h3>
                     <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{r.short}</p>
                     <span className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-foreground/70 group-hover:text-[color:var(--gold-deep)]">
-                      Learn more <ArrowUpRight className="h-4 w-4" />
+                      Explore {r.name} <ArrowUpRight className="h-4 w-4" />
                     </span>
                   </Link>
                 );

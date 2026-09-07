@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Calendar, CheckCircle2, Clock, Mail, MapPin, MessageCircle, Phone, Send, ShieldCheck } from "lucide-react";
 import { useEffect, useState } from "react";
 import { z } from "zod";
@@ -82,9 +82,10 @@ try {
             Let's talk about your <span className="text-gradient-gold">business growth.</span>
           </h1>
           <p className="mt-8 max-w-2xl text-lg text-muted-foreground">
-            Tell us where your business is today and where you want it to be. We'll send back a
-            tailored growth strategy within five working days — whether we end up working together
-            or not.
+            Tell us where your business is today and where you want it to be. Whatever your{" "}
+            <Link to="/industries" className="link-underline font-medium text-[color:var(--gold-deep)]">industry</Link>,
+            we'll send back a tailored growth strategy within five working days — whether we end
+            up working together or not.
           </p>
         </div>
       </section>

@@ -119,7 +119,18 @@ function IndustryPage() {
 
         {caseStudy && (
           <div className="mt-16">
-            <h2 className="font-display text-2xl font-bold">Related concept case study</h2>
+            <div className="flex flex-wrap items-baseline justify-between gap-3">
+              <h2 className="font-display text-2xl font-bold">Related concept case study</h2>
+              {caseStudy.relatedLocationSlug && (
+                <Link
+                  to="/locations/$city"
+                  params={{ city: caseStudy.relatedLocationSlug }}
+                  className="link-underline text-xs font-medium uppercase tracking-wider text-muted-foreground hover:text-foreground"
+                >
+                  {caseStudy.location}
+                </Link>
+              )}
+            </div>
             <Link
               to="/case-studies/$slug"
               params={{ slug: caseStudy.slug }}

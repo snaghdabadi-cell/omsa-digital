@@ -208,3 +208,10 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
 ];
 
 export const getIndustry = (slug: string) => INDUSTRY_PAGES.find((i) => i.slug === slug);
+
+// Reverse lookup for the industry<->case-study relationship already encoded
+// by `caseStudySlug` above — used to link a case study or location page back
+// to whichever industry page actually features that case study, without a
+// second, separately-maintained mapping that could drift out of sync.
+export const getIndustryByCaseStudySlug = (slug: string) =>
+  INDUSTRY_PAGES.find((i) => i.caseStudySlug === slug);

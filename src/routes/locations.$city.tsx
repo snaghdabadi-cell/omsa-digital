@@ -3,6 +3,7 @@ import { ArrowRight, ArrowUpRight, MapPin } from "lucide-react";
 import { Container, Eyebrow, Heading, Prose, Tag } from "@/components/site/Primitives";
 import { FaqItem } from "@/components/site/FaqItem";
 import { getLocation, type Location } from "@/lib/content/locations";
+import { getIndustryByCaseStudySlug } from "@/lib/content/industries";
 import { getService } from "@/lib/services-data";
 import { getCaseStudy } from "@/lib/case-studies-data";
 import { pageMeta, breadcrumbJsonLd, faqJsonLd, SITE_DESCRIPTION } from "@/lib/seo";
@@ -59,6 +60,7 @@ export const Route = createFileRoute("/locations/$city")({
 function LocationPage() {
   const { loc } = Route.useLoaderData();
   const relatedCaseStudy = loc.relatedCaseStudySlug ? getCaseStudy(loc.relatedCaseStudySlug) : undefined;
+  const relatedIndustry = relatedCaseStudy ? getIndustryByCaseStudySlug(relatedCaseStudy.slug) : undefined;
   return (
     <section className="pt-40 pb-32">
       <Container>
@@ -98,7 +100,18 @@ function LocationPage() {
 
         {relatedCaseStudy && (
           <div className="mt-16">
-            <h2 className="font-display text-2xl font-bold">Related concept case study</h2>
+            <div className="flex flex-wrap items-baseline justify-between gap-3">
+              <h2 className="font-display text-2xl font-bold">Related concept case study</h2>
+              {relatedIndustry && (
+                <Link
+                  to="/industries/$slug"
+                  params={{ slug: relatedIndustry.slug }}
+                  className="link-underline text-xs font-medium uppercase tracking-wider text-muted-foreground hover:text-foreground"
+                >
+                  {relatedIndustry.name}
+                </Link>
+              )}
+            </div>
             <Link
               to="/case-studies/$slug"
               params={{ slug: relatedCaseStudy.slug }}
