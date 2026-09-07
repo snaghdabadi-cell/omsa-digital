@@ -168,7 +168,7 @@ try {
                 href={`https://wa.me/${CONTACT.whatsapp.replace(/\D/g, "")}`}
                 accent
               />
-              <ContactCard icon={MapPin} label="Studios" value="Muscat, Oman · Dubai, UAE" />
+              <ContactCard icon={MapPin} label="Based in" value="Muscat, Oman — serving the UAE & GCC" />
 
               <div className="overflow-hidden rounded-[2rem] border border-border">
                 <iframe

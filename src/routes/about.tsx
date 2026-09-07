@@ -129,7 +129,7 @@ function AboutPage() {
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             {[
-              { icon: Globe2, t: "Oman and the UAE", d: "Local teams in Muscat and Dubai who understand the market — language, regulation, and how decisions are made." },
+              { icon: Globe2, t: "Oman and the UAE", d: "Based in Oman and working directly with businesses across the UAE — close enough to the market to understand language, regulation, and how decisions actually get made." },
               { icon: Award, t: "International craft", d: "Design and engineering standards shaped by the best technology companies in the world." },
             ].map((b) => (
               <div key={b.t} className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
