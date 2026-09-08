@@ -1,12 +1,45 @@
+import type { ReactNode } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, Calendar, Clock, User } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { Tag } from "@/components/site/Primitives";
-import { BLOG_POSTS, getPost } from "@/lib/blog-data";
+import { BLOG_POSTS, getPost, type BlogContentLink, type BlogParagraph } from "@/lib/blog-data";
 import { SERVICE_DETAILS } from "@/lib/services-data";
 import { getCaseStudy } from "@/lib/case-studies-data";
 import { getAuthor } from "@/lib/content/authors";
 import { abs, articleJsonLd, authorRefFromContent, breadcrumbJsonLd, pageMeta } from "@/lib/seo";
+
+// Resolves a BlogContentLink to a real typed route. Mirrors the
+// ContentAnchor pattern already used on service pages, scoped to this file
+// since blog body copy only ever needs these three destination kinds.
+function BlogContentAnchor({ link, label, className }: { link: BlogContentLink; label: string; className: string }) {
+  switch (link.kind) {
+    case "service":
+      return <Link to="/services/$slug" params={{ slug: link.slug }} className={className}>{label}</Link>;
+    case "industry":
+      return <Link to="/industries/$slug" params={{ slug: link.slug }} className={className}>{label}</Link>;
+    case "location":
+      return <Link to="/locations/$city" params={{ city: link.city }} className={className}>{label}</Link>;
+  }
+}
+
+// Renders one body paragraph, which is either a plain string (every existing
+// post) or an object carrying one AnchorLink over an exact substring (new
+// posts that need a natural in-text internal link).
+function renderParagraph(para: BlogParagraph): ReactNode {
+  if (typeof para === "string") return para;
+  const { text, link } = para;
+  if (!link) return text;
+  const idx = text.indexOf(link.anchor);
+  if (idx === -1) return text;
+  return (
+    <>
+      {text.slice(0, idx)}
+      <BlogContentAnchor link={link.link} label={link.anchor} className="link-underline font-medium text-[color:var(--gold-deep)]" />
+      {text.slice(idx + link.anchor.length)}
+    </>
+  );
+}
 
 // Every current post is written under the same shared editorial identity, so
 // the author is resolved once here rather than duplicating an `author` field
@@ -137,12 +170,22 @@ function BlogPostPage() {
         </figure>
 
         <div className="container-luxe mt-16 max-w-3xl space-y-12">
-          {post.body.map((section: { h2: string; p: string[] }) => (
+          {post.body.map((section) => (
             <section key={section.h2}>
               <h2 className="font-display text-2xl md:text-3xl font-bold tracking-tight">{section.h2}</h2>
               <div className="mt-5 space-y-5 text-muted-foreground leading-relaxed">
-                {section.p.map((para: string, i: number) => <p key={i}>{para}</p>)}
+                {section.p.map((para, i) => <p key={i}>{renderParagraph(para)}</p>)}
               </div>
+              {section.bullets && section.bullets.length > 0 && (
+                <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+                  {section.bullets.map((b) => (
+                    <li key={b} className="flex items-start gap-3 text-sm text-foreground/85 leading-relaxed">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[color:var(--gold)]" />
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </section>
           ))}
         </div>
