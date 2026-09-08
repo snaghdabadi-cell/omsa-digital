@@ -306,7 +306,7 @@ function FloatingCard({
 function TrustStrip() {
   const items = [
     "Professional Services", "Healthcare", "Real Estate", "Hospitality",
-    "Retail", "Construction", "Manufacturing", "Education", "Startups", "SMEs",
+    "Retail", "Construction", "Education", "Startups", "SMEs",
   ];
   return (
     <section className="border-y border-border bg-muted/30">
@@ -517,7 +517,7 @@ function Services() {
 /* ────────────────────────── STATS ────────────────────────── */
 function Stats() {
   const stats = [
-    { value: 13, suffix: "+", label: "Digital services" },
+    { value: 8, suffix: "", label: "Core service areas" },
     { value: 3, suffix: "", label: "Target markets" },
     { value: 24, suffix: "/7", label: "AI chatbot availability" },
     { value: 1, suffix: "", label: "Connected growth system" },
@@ -660,7 +660,7 @@ function WhyUs() {
           </div>
           <p className="text-muted-foreground max-w-lg">
             Businesses choose OMSA because we combine strategy, premium web design,
-            SEO, AI automation, branding, and analytics under one expert team.
+            SEO, AI automation, and analytics under one expert team.
             Instead of managing multiple agencies, you gain a single digital growth 
             partner focused on measurable business results.
           </p>
@@ -787,7 +787,7 @@ function Testimonials() {
 
 /* ────────────────────────── FAQ ────────────────────────── */
 const FAQS = [
-  { q: "What digital marketing and AI services do you offer?", a: "We provide website design and development, ecommerce solutions, SEO, Local SEO, Technical SEO, AI automation, AI chatbots, AI solutions, Google Ads, social media marketing, branding, analytics, and digital growth strategy." },
+  { q: "What digital marketing and AI services do you offer?", a: "We provide website design and development, SEO, Local SEO, Technical SEO, AI automation, AI chatbots, Google Ads, social media marketing, analytics, and digital growth strategy." },
   { q: "How long does it take to design and develop a website?", a: "Most business websites are completed within four to eight weeks, depending on project complexity, content readiness, required integrations, and feedback turnaround." },
   { q: "How long does SEO take to deliver results?", a: "SEO is a long-term growth strategy. Initial improvements may appear within three to six months, while stronger rankings, organic traffic, and qualified leads develop over time based on competition, website condition, content quality, and ongoing optimization." },
   { q: "Can you build bilingual English and Arabic websites?", a: "Yes. We design, develop, and optimize fully bilingual English and Arabic websites with proper RTL support, localized SEO, and a seamless experience for users across Oman, the UAE, and the wider GCC." },

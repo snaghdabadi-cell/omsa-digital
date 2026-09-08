@@ -69,7 +69,7 @@ export const LOCATIONS: Location[] = [
     relatedCaseStudySlug: "dubai-developer-landing-page",
     faqs: [
       { q: "Does OMSA work with businesses in Dubai?", a: "Yes. OMSA works with businesses in Dubai on website design, SEO, AI chatbots, business automation and analytics." },
-      { q: "What digital services does OMSA provide for Dubai businesses?", a: "For Dubai, that typically includes website design, Local SEO, AI chatbots, business automation and Google Analytics — services chosen based on what the business actually needs, not a generic package." },
+      { q: "What digital services does OMSA provide for Dubai businesses?", a: "For Dubai, that typically includes website design, SEO and Local SEO, AI chatbots, business automation and Google Analytics — services chosen based on what the business actually needs, not a generic package." },
       { q: "Can OMSA provide SEO, website design and AI automation together for a Dubai business?", a: "Yes. These services are usually more effective coordinated as one strategy rather than run separately, and that's how a Dubai engagement is typically scoped." },
       { q: "Can businesses in Dubai work with OMSA remotely?", a: "Yes. Most of the day-to-day collaboration happens remotely, with meetings arranged as needed." },
     ],
@@ -87,7 +87,6 @@ export const LOCATIONS: Location[] = [
     faqs: [
       { q: "Does OMSA work with businesses in Abu Dhabi?", a: "Yes. OMSA works with Abu Dhabi businesses on website design, SEO, AI chatbots and analytics." },
       { q: "What digital services does OMSA provide for Abu Dhabi businesses?", a: "For Abu Dhabi, that typically includes website design, SEO, AI chatbots and Google Analytics, scoped around the business's actual goals rather than a fixed package." },
-      { q: "How does a project with OMSA typically begin?", a: "With a strategy call to understand the business and its goals, followed by a written plan before any work starts." },
       { q: "Can businesses in Abu Dhabi work with OMSA remotely?", a: "Yes. Most collaboration happens remotely, with in-person meetings arranged when useful." },
     ],
   },
