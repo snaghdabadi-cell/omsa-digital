@@ -1,7 +1,7 @@
 import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-router";
 import { ArrowUpRight, Clock } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
-import { BLOG_POSTS } from "@/lib/blog-data";
+import { BLOG_POSTS, getFeaturedPost } from "@/lib/blog-data";
 import { isLeafMatch, pageMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/blog")({
@@ -16,7 +16,7 @@ export const Route = createFileRoute("/blog")({
   component: BlogPage,
 });
 
-const CATEGORIES = ["All", "SEO", "AI", "Digital Marketing", "Google Analytics", "Website Design", "Automation", "Business Growth"];
+const CATEGORIES = ["All", "SEO", "Technical SEO", "Local SEO", "AI", "Digital Marketing", "Google Analytics", "Website Design", "Automation", "Business Growth"];
 
 const formatPostDate = (iso: string) =>
   new Date(iso).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
@@ -25,7 +25,7 @@ function BlogPage() {
   const isLeaf = useRouterState({ select: (s) => s.matches.at(-1)?.routeId === Route.id });
   if (!isLeaf) return <Outlet />;
 
-  const featured = BLOG_POSTS[0];
+  const featured = getFeaturedPost();
   return (
     <>
       <section className="pt-40 pb-16">
@@ -85,8 +85,7 @@ function BlogPage() {
                   {featured.title}
                 </h2>
                 <p className="mt-5 text-muted-foreground leading-relaxed">
-                  {featured.excerpt} A practical guide to deploying AI in five-star environments
-                  without diluting the brand voice your guests recognise.
+                  {featured.excerpt}
                 </p>
                 <div className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-[color:var(--gold-deep)]">
                   Read the article <ArrowUpRight className="h-4 w-4" />
@@ -99,7 +98,7 @@ function BlogPage() {
 
       <section className="pb-32">
         <div className="container-luxe grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {BLOG_POSTS.slice(1).map((p, i) => (
+          {BLOG_POSTS.filter((p) => p.slug !== featured.slug).map((p, i) => (
             <Reveal key={p.slug} delay={i * 0.05}>
               <Link
                 to="/blog/$slug"

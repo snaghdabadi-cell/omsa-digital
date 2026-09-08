@@ -2,9 +2,11 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Container, Eyebrow, Heading, Prose, Tag } from "@/components/site/Primitives";
 import { FaqItem } from "@/components/site/FaqItem";
+import { RelatedInsights } from "@/components/site/RelatedInsights";
 import { getIndustry, type IndustryPage } from "@/lib/content/industries";
 import { getService } from "@/lib/services-data";
 import { getCaseStudy } from "@/lib/case-studies-data";
+import { getRelatedPostsForIndustry } from "@/lib/blog-data";
 import { pageMeta, breadcrumbJsonLd, faqJsonLd, SITE_DESCRIPTION } from "@/lib/seo";
 
 // `head()`'s loaderData param can be undefined before the loader resolves,
@@ -51,6 +53,7 @@ export const Route = createFileRoute("/industries/$slug")({
 function IndustryPage() {
   const { ind } = Route.useLoaderData();
   const caseStudy = ind.caseStudySlug ? getCaseStudy(ind.caseStudySlug) : undefined;
+  const relatedPosts = getRelatedPostsForIndustry(ind.slug);
 
   return (
     <section className="pt-40 pb-32">
@@ -159,6 +162,12 @@ function IndustryPage() {
                 <FaqItem key={f.q} item={f} defaultOpen={i === 0} />
               ))}
             </div>
+          </div>
+        )}
+
+        {relatedPosts.length > 0 && (
+          <div className="mt-16">
+            <RelatedInsights posts={relatedPosts} />
           </div>
         )}
 

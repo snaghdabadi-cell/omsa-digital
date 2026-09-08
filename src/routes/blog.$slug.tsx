@@ -20,6 +20,8 @@ function BlogContentAnchor({ link, label, className }: { link: BlogContentLink; 
       return <Link to="/industries/$slug" params={{ slug: link.slug }} className={className}>{label}</Link>;
     case "location":
       return <Link to="/locations/$city" params={{ city: link.city }} className={className}>{label}</Link>;
+    case "locations":
+      return <Link to="/locations" className={className}>{label}</Link>;
   }
 }
 

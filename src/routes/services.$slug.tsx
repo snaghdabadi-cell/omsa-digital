@@ -3,6 +3,8 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, CheckCircle2 } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { FaqItem } from "@/components/site/FaqItem";
+import { RelatedInsights } from "@/components/site/RelatedInsights";
+import { getRelatedPostsForService } from "@/lib/blog-data";
 import {
   SERVICE_DETAILS,
   getService,
@@ -211,6 +213,7 @@ function ServiceDetailPage() {
   const related = service.related
     .map((slug: string) => SERVICE_DETAILS.find((s) => s.slug === slug))
     .filter(Boolean) as typeof SERVICE_DETAILS;
+  const relatedPosts = getRelatedPostsForService(service.slug);
 
   return (
     <>
@@ -433,6 +436,15 @@ function ServiceDetailPage() {
                 );
               })}
             </div>
+          </div>
+        </section>
+      )}
+
+      {/* Related insights (blog reverse-links) */}
+      {relatedPosts.length > 0 && (
+        <section className="section-pad">
+          <div className="container-luxe">
+            <RelatedInsights posts={relatedPosts} />
           </div>
         </section>
       )}

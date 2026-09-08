@@ -15,7 +15,8 @@ import workRestaurant from "@/assets/work-restaurant.jpg";
 export type BlogContentLink =
   | { kind: "service"; slug: string }
   | { kind: "industry"; slug: string }
-  | { kind: "location"; city: string };
+  | { kind: "location"; city: string }
+  | { kind: "locations" };
 
 // Attaches a BlogContentLink to one exact substring ("anchor") of a
 // paragraph. Optional — most paragraphs are plain strings; only the ones
@@ -46,6 +47,11 @@ export type BlogPost = {
   readMinutes: number;
   image: string;
   relatedServices: string[]; // service slugs
+  // Industry slugs, set only where the post's actual topic — not just its
+  // category — genuinely matches that industry. Left unset rather than
+  // guessed, same convention as relatedCaseStudySlug below. Powers the
+  // "Related insights" reverse-link section on industry pages.
+  relatedIndustrySlugs?: string[];
   // Slug of a CASE_STUDIES entry, set only where the post's actual topic
   // (not just its category) genuinely matches that case study's industry —
   // left unset rather than guessed for posts with no clear match.
@@ -248,6 +254,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readMinutes: 9,
     image: workRestaurant,
     relatedServices: ["seo", "technical-seo"],
+    relatedIndustrySlugs: ["retail"],
     body: [
       { h2: "Ecommerce SEO is a distinct discipline",
         p: [
@@ -335,6 +342,206 @@ export const BLOG_POSTS: BlogPost[] = [
     ],
   },
   {
+    slug: "ai-admissions-assistants-gcc-schools",
+    title: "AI admissions assistants for GCC schools: what to automate, and what needs a human",
+    excerpt:
+      "What an AI admissions assistant can genuinely handle for a GCC school — and the decisions that must always stay with a person.",
+    category: "AI",
+    date: "2026-09-08",
+    readMinutes: 7,
+    image: workAi,
+    relatedServices: ["ai-chatbots"],
+    relatedIndustrySlugs: ["education"],
+    body: [
+      { h2: "Why admissions is a high-volume, repetitive conversation",
+        p: [
+          "Across Oman, the UAE and the wider GCC, school admissions teams field a similar set of questions dozens of times during peak enrolment periods: fees for a specific grade, available seats, curriculum details, transport routes, sibling-discount policies and document requirements. Answering the same question by phone or email, one family at a time, is where admissions staff lose the hours they'd rather spend on the applications that actually need judgment — a scholarship case, a mid-year transfer, a special-needs accommodation.",
+          "That's the gap an AI admissions assistant is built to close: not replacing the admissions team, but absorbing the repetitive first layer of enquiry so the team's time goes toward decisions, not repetition.",
+        ],
+      },
+      { h2: "What an AI admissions assistant actually does",
+        p: [
+          "An AI admissions assistant is a chatbot, usually embedded on the school's website or connected to WhatsApp, trained on the school's own admissions information — fee schedules, curriculum, term dates, seat availability by grade, and application steps — so it can answer a parent's specific question immediately rather than pointing them to a generic FAQ page.",
+          { text: "It's the same category of tool covered more broadly under AI chatbots — the education-specific value comes from what it's trained on and how tightly its answers are scoped to information the school has actually approved.",
+            link: { anchor: "AI chatbots", link: { kind: "service", slug: "ai-chatbots" } } },
+        ],
+      },
+      { h2: "What it can genuinely handle",
+        p: [
+          "For most schools, the useful ground is mechanical and factual, not judgment-based:",
+        ],
+        bullets: [
+          "Answering repeated factual questions — fees by grade, curriculum, term dates, uniform and transport policy — instantly and consistently across every enquiry.",
+          "Checking basic eligibility — age cut-offs, grade availability, whether a seat currently exists — before a family invests time in a full application.",
+          "Qualifying and routing — capturing which grade, campus and intake a family is asking about, then routing the enquiry to the right admissions officer.",
+          "Multilingual handling — answering in Arabic or English as the parent writes, which matters directly in a region where the same family may switch language mid-conversation.",
+          "Collecting structured enquiry details — so an admissions officer opens a conversation with the context already gathered, rather than starting from zero.",
+          "After-hours coverage — a family researching schools at 9 p.m. gets an accurate answer instead of waiting until the office reopens.",
+        ],
+      },
+      { h2: "Where AI should not make the decision",
+        p: [
+          "Every genuine admissions decision — offering a seat, granting a scholarship or fee concession, approving a special-needs accommodation, resolving a disputed document — belongs to a person with the authority and context to make it, not an automated flow. The assistant's role ends at giving accurate information and getting the right structured enquiry to that person quickly; it should never be positioned as making or implying an admissions outcome.",
+          "The same caution applies to anything sensitive about a specific child — medical information, behavioural history, custody or guardianship questions. Those conversations should route straight to a person, clearly and immediately, rather than attempt an automated answer.",
+        ],
+      },
+      { h2: "A practical example",
+        p: [
+          "Consider a mid-sized private school group running two campuses across a GCC city, each with its own grade-by-grade seat availability and fee structure. During the January–March enrolment window, the admissions inbox and phone line receive the same handful of questions from hundreds of different families. An assistant scoped to that school's real fee schedule and seat data can answer \"Is there a seat in Grade 3 at the city campus this year?\" precisely, in the family's language of choice, and hand off anything beyond that — a fee negotiation, a transfer request — to the admissions team with the context already captured.",
+        ],
+      },
+      { h2: "Implementation considerations",
+        p: [
+          "The assistant is only as accurate as the information it's trained on, which means fee schedules, seat availability and policy details need an owner inside the school responsible for keeping that source information current — an assistant answering from three-month-old seat data creates more frustration than it prevents.",
+          "Consent and privacy considerations apply directly here, arguably more than in most commercial contexts, because the data involves minors. At minimum: be explicit with parents about what information is collected and why, avoid collecting more than admissions genuinely requires at the enquiry stage, and keep any data collected inside systems the school controls. This isn't legal advice — a school should confirm its specific obligations with whoever handles its data protection and child-safeguarding policy, since requirements vary by jurisdiction and by the school's own governance framework.",
+        ],
+      },
+      { h2: "Where to start",
+        p: [
+          "Start with the questions that repeat the most during peak enrolment — fees, seat availability, application steps — and scope the assistant to answer those accurately before expanding further. Track how many conversations resolve without needing a person, and treat every unclear or sensitive question the assistant can't answer as a signal for what needs a clear handoff path, not a reason to force an automated answer.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "ga4-professional-services-gcc",
+    title: "GA4 for professional services firms in the GCC: measuring enquiries, not just traffic",
+    excerpt:
+      "Why session counts don't tell a services firm anything useful — and how to configure GA4 around actual enquiries instead.",
+    category: "Google Analytics",
+    date: "2026-09-08",
+    readMinutes: 7,
+    image: workDashboard,
+    relatedServices: ["google-analytics"],
+    relatedIndustrySlugs: ["professional-services"],
+    body: [
+      { h2: "Traffic isn't the number that matters for a services firm",
+        p: [
+          "A law firm, consultancy, accounting practice or architecture studio doesn't sell from a shopping cart — it sells from a conversation that usually starts with an enquiry form, a phone call, or a WhatsApp message. A default GA4 setup measures sessions, pageviews and bounce rate, none of which tell a partner whether the website is actually generating qualified enquiries or just traffic that reads a few pages and leaves.",
+          "The fix isn't more traffic reporting. It's configuring GA4 around the handful of actions that actually indicate someone wants to talk to the firm.",
+        ],
+      },
+      { h2: "The events worth measuring",
+        p: [
+          "For most professional services firms, three categories of action carry almost all the commercial signal:",
+        ],
+        bullets: [
+          "Enquiry form submissions — the clearest, most measurable conversion GA4 can capture directly.",
+          "Phone number clicks — on mobile, a tap-to-call action is a real intent signal and is measurable as an event, even though the resulting call itself isn't visible inside GA4.",
+          "WhatsApp link clicks — increasingly the first contact method in the GCC, measurable as an outbound click even though the conversation that follows happens outside the website.",
+          "Meaningful page engagement — time spent on service or expertise pages that signals genuine research rather than a bounce, useful as a supporting signal, not a conversion in itself.",
+        ],
+      },
+      { h2: "Qualified leads vs vanity traffic",
+        p: [
+          "A spike in sessions from a broad, unrelated keyword or a social post rarely turns into enquiries — reporting only that number to leadership creates a false sense of momentum. What tells the real story is enquiry volume and quality relative to traffic: a smaller, more targeted audience that converts into serious enquiries is worth more to a services firm than a large audience that never contacts them.",
+          "GA4 supports this distinction by letting a firm mark meaningful actions — a form submission, a call click — as key events, separating them from the dozens of lower-value interactions GA4 tracks by default.",
+        ],
+      },
+      { h2: "The limits of attribution",
+        p: [
+          "A professional services buying decision often spans weeks and multiple research sessions before someone actually reaches out, and GA4's default attribution can only reconstruct part of that journey — it won't capture a referral conversation that happened over lunch, or a colleague's recommendation that sent someone straight to the contact page. Treat GA4 as a measurement of what's trackable, not a complete account of how every enquiry actually originated.",
+          "Server-side or offline conversion imports can close part of that gap — for example, feeding a closed deal's origin back into GA4 — but that requires a CRM connection and deliberate setup, not something GA4 does automatically out of the box.",
+          "Consistent UTM tagging on outbound links — from LinkedIn posts, email signatures, directory listings, anything a firm actually controls — is a simpler, lower-effort way to preserve at least some source detail that GA4 would otherwise report as generic referral or direct traffic.",
+        ],
+      },
+      { h2: "A practical measurement plan",
+        p: [
+          "Start by defining, in plain language, what a \"qualified enquiry\" actually looks like for the firm — usually a form submission with a genuine business enquiry, a call longer than a token duration, or a WhatsApp conversation that goes beyond a single message. Configure GA4's key events around exactly those actions, connect Search Console to see which queries are actually generating them, and review the numbers monthly against enquiry volume the team can verify manually, not just what the dashboard reports.",
+        ],
+      },
+      { h2: "Privacy-aware measurement",
+        p: [
+          "Professional services clients are often disclosing sensitive commercial or personal information at the enquiry stage, which makes it worth being deliberate about what analytics actually captures — tracking that a form was submitted is useful; capturing the contents of that form inside an analytics tool usually isn't necessary and adds a category of data the firm then has to manage and secure. This isn't legal guidance on data protection obligations, which vary by jurisdiction — it's a practical principle: collect the minimum an analytics platform needs to prove the enquiry happened, not everything the form itself asked for.",
+          { text: "A properly scoped Google Analytics setup should tell a firm's leadership whether the website is working — not become a second, less secure copy of the client intake process.",
+            link: { anchor: "Google Analytics", link: { kind: "service", slug: "google-analytics" } } },
+        ],
+      },
+      { h2: "What this replaces",
+        p: [
+          "None of this requires new tools beyond GA4 itself, configured correctly around the firm's actual conversion points instead of left on its default settings. The value comes from deciding, deliberately, what counts as success before configuring anything — the measurement should follow the business definition of a qualified enquiry, not the other way around.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "local-seo-multi-location-gcc",
+    title: "Local SEO for multi-location GCC businesses: building city pages that actually rank",
+    excerpt:
+      "Why one shared locations page rarely works for more than one city — and the structural work that makes each one rank on its own.",
+    category: "Local SEO",
+    date: "2026-09-08",
+    readMinutes: 8,
+    image: workCorporate,
+    relatedServices: ["local-seo", "seo"],
+    relatedIndustrySlugs: ["retail"],
+    body: [
+      { h2: "Why one location page rarely works for more than one city",
+        p: [
+          { text: "A business operating in Muscat and Dubai, or across three or four GCC cities, can't rely on a single \"About us\" or generic locations page to rank for searches happening in each individual city — a customer searching for a service \"in Muscat\" is looking for evidence the business genuinely serves Muscat, not a paragraph mentioning it alongside four other cities. The businesses that rank consistently across multiple cities build a genuine page for each one, not a shared page wearing different city names.",
+            link: { anchor: "Muscat and Dubai", link: { kind: "locations" } } },
+          { text: "This is the structural half of local SEO — the part that decides whether each city even has a fair chance to compete in its own local search results, separate from content quality or reviews.",
+            link: { anchor: "local SEO", link: { kind: "service", slug: "local-seo" } } },
+        ],
+      },
+      { h2: "What a real city page needs",
+        p: [
+          "A city page earns its place when it says something specific to that city — the neighbourhoods or districts served, transport or delivery specifics relevant there, and language or cultural context that differs from the business's other locations. A page that's identical to the one for a different city except for a find-and-replace of the city name is easy for both users and search engines to recognise as thin, templated content, and it rarely ranks against genuinely local competitors.",
+        ],
+      },
+      { h2: "Google Business Profile: the other half of local visibility",
+        p: [
+          "A city page on the website and a Google Business Profile listing for that city do different jobs, and both matter. The website page targets organic search results and gives the business room to explain itself; the Business Profile is what shows up in Google Maps and the local map-pack, driven mostly by proximity, relevance and review signals rather than website content. A multi-location business needs a separately verified, accurately maintained profile for every city it genuinely serves, not one shared profile listing multiple cities.",
+        ],
+      },
+      { h2: "NAP and entity consistency across cities",
+        p: [
+          "Name, address and phone number — NAP — need to match exactly everywhere they appear: the website, each Google Business Profile, and every directory listing. A business address written three different ways across different platforms sends a small but real trust-signal problem to search engines, which use consistency across sources as one input for how much to trust a listed location.",
+        ],
+      },
+      { h2: "The duplicate and thin-content trap",
+        p: [
+          "The most common mistake in multi-city SEO is generating a page per city automatically, from a template, without any city-specific substance behind it — a dozen near-identical pages differing only in a city name and a swapped phone number. Search engines are specifically tuned to recognise this pattern, and the usual outcome isn't a dozen ranking pages — it's one page ranking, if any, with the rest treated as duplicates competing against each other rather than against outside competitors.",
+          "The honest fix is fewer, better pages: a genuine page for every city where the business truly operates, and no page at all for a city where it doesn't — resisting the temptation to list a city \"for SEO\" ahead of actually serving customers there.",
+        ],
+      },
+      { h2: "Avoiding false physical-presence claims",
+        p: [
+          "A page claiming a city as a \"location\" should only exist where that reflects something true — a genuine service area, a real local team, or a documented way the business serves that market — not simply because ranking for that city's searches would be valuable. Overstating physical presence in a city a business doesn't actually serve is a fast way to damage trust with customers who show up expecting an office that isn't there, and it's the kind of claim worth avoiding regardless of any SEO upside.",
+        ],
+      },
+      { h2: "Internal linking that supports multi-city SEO",
+        p: [
+          "Each city page should link to the specific services relevant to that market, and service pages should, where genuinely relevant, link back to the cities they're offered in — not as a mechanical requirement, but because it helps both users and search engines understand which services are actually available where. A locations hub page tying every city together gives search engines one clear entry point into the whole set, rather than leaving city pages to be discovered in isolation.",
+        ],
+      },
+      { h2: "Local intent is different from national intent",
+        p: [
+          "Someone searching \"[service] near me\" or \"[service] in [city]\" is closer to a decision than someone searching the same service without a location — they've usually already narrowed their options to businesses that serve their city specifically. Content built for that intent should answer local questions directly: does this business serve my area, how quickly, and what does that look like here versus their other locations — rather than repeating the same generic pitch used sitewide.",
+        ],
+      },
+      { h2: "A practical checklist",
+        p: [
+          "Before treating a multi-city setup as done, it's worth checking each of the following directly:",
+        ],
+        bullets: [
+          "A genuine, non-templated page exists for every city actually served — and no page exists for cities not genuinely served.",
+          "Each city's Google Business Profile is separately verified and actively maintained.",
+          "NAP details match exactly across the website, every Business Profile, and every directory listing.",
+          "City pages link to relevant services, and services link back to the cities they're offered in.",
+          "No city page implies an office or physical team the business doesn't actually have.",
+          "A locations hub page connects every city into one discoverable structure.",
+        ],
+      },
+      { h2: "Why this is worth doing properly",
+        p: [
+          { text: "For GCC businesses genuinely operating across multiple cities, this is one of the more overlooked forms of SEO — not because it's technically difficult, but because doing it honestly takes more page-by-page effort than a templated shortcut. The businesses that invest in it properly are usually the ones still ranking in each city a year later.",
+            link: { anchor: "SEO", link: { kind: "service", slug: "seo" } } },
+        ],
+      },
+    ],
+  },
+  {
     slug: "ga4-events-for-hotels",
     title: "GA4 for hotel marketers: the events that actually matter",
     excerpt:
@@ -402,6 +609,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readMinutes: 7,
     image: workCorporate,
     relatedServices: ["website-design", "seo"],
+    relatedIndustrySlugs: ["professional-services"],
     body: [
       { h2: "The premium feeling is a sum, not a feature",
         p: [
@@ -467,3 +675,24 @@ export const BLOG_POSTS: BlogPost[] = [
 ];
 
 export const getPost = (slug: string) => BLOG_POSTS.find((p) => p.slug === slug);
+
+// The most recently published post — used as the blog hub's featured slot
+// so newly published articles surface there automatically instead of a
+// manually-pinned post silently going stale.
+export const getFeaturedPost = () =>
+  [...BLOG_POSTS].sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0))[0];
+
+// Powers the "Related insights" reverse-link section on service and
+// industry pages — data-driven off relatedServices/relatedIndustrySlugs so
+// it never needs manual upkeep as posts are added. Sorted newest-first and
+// capped so a page never shows more than a handful of genuinely relevant
+// articles.
+export const getRelatedPostsForService = (slug: string, limit = 3) =>
+  BLOG_POSTS.filter((p) => p.relatedServices.includes(slug))
+    .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0))
+    .slice(0, limit);
+
+export const getRelatedPostsForIndustry = (slug: string, limit = 3) =>
+  BLOG_POSTS.filter((p) => p.relatedIndustrySlugs?.includes(slug))
+    .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0))
+    .slice(0, limit);
