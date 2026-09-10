@@ -44,7 +44,7 @@ const DEEP_SERVICES = [
     items: [
       "Technical SEO audits and fixes",
       "On-page and content optimization",
-      "Authority building and digital PR",
+      "Internal linking and site authority",
       "Local SEO across Oman, UAE and GCC",
     ],
   },
@@ -100,7 +100,7 @@ function ServicesPage() {
         <div className="container-luxe">
           <p className="eyebrow">Services</p>
           <h1 className="mt-6 font-display text-5xl md:text-7xl font-bold tracking-tight leading-[1.02] max-w-4xl">
-            Six disciplines. <span className="text-gradient-gold">One growth system.</span>
+            Every discipline. <span className="text-gradient-gold">One growth system.</span>
           </h1>
           <p className="mt-8 max-w-2xl text-lg text-muted-foreground">
             Strategy, design, engineering, SEO, AI and analytics — delivered under one roof by

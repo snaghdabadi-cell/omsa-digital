@@ -8,7 +8,7 @@ export const Route = createFileRoute("/careers")({
   head: ({ matches, match }) => {
     const meta = pageMeta({
       title: "Careers — Join OMSA Digital & AI Studio",
-      description: "We're hiring strategists, designers and engineers to build the leading AI digital growth agency in the GCC.",
+      description: "We're hiring strategists, designers and engineers to build AI-powered digital growth systems for businesses across the GCC.",
       path: "/careers",
     });
     return isLeafMatch(matches, match) ? meta : { ...meta, links: [] };

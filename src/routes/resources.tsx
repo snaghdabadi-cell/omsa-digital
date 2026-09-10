@@ -28,7 +28,7 @@ function ResourcesPage() {
           Considered <span className="text-gradient-gold">knowledge</span>, freely shared.
         </Heading>
         <Prose className="mt-6 max-w-2xl text-lg">
-          The same playbooks, templates and frameworks we use with clients.
+          The playbooks, templates and frameworks behind our approach.
         </Prose>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

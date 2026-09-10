@@ -704,7 +704,7 @@ function Process() {
           <div className="max-w-2xl">
             <p className="eyebrow">How We Work</p>
             <h2 className="mt-6 font-display text-4xl md:text-5xl font-bold tracking-tight">
-              A Proven Process. <span className="text-gradient-gold">Built for Results.</span>
+              A Structured Process. <span className="text-gradient-gold">Built for Results.</span>
             </h2>
           </div>
           <p className="max-w-md text-muted-foreground">
@@ -794,7 +794,7 @@ const FAQS = [
   { q: "Do you work with businesses in Dubai, Abu Dhabi and the wider UAE?", a: "Yes. Alongside Oman, we provide website design, SEO, AI chatbots, automation and analytics for businesses in Dubai, Abu Dhabi and across the UAE, scoped to each market." },
   { q: "What can an AI chatbot do for my business?", a: "An AI chatbot can answer customer questions 24/7, qualify leads, book appointments, recommend services, collect enquiries, and integrate with your CRM or business systems to automate repetitive tasks while improving customer experience." },
   { q: "How is pricing structured?", a: "Every project is quoted based on your business goals, required features, integrations, content, and growth strategy. After a free consultation, we provide a transparent proposal tailored to your needs with no hidden costs." },
-  { q: "Do you handle analytics and tracking?", a: "Yes. Google Analytics 4, Tag Manager, Search Console, event tracking, server-side tagging and custom dashboards are standard parts of every engagement." },
+  { q: "Do you handle analytics and tracking?", a: "Yes. Google Analytics 4, Tag Manager, Search Console, event tracking and custom dashboards can be included where relevant to the engagement." },
   { q: "Can you handle paid media alongside SEO?", a: "Yes. We run integrated growth programmes — SEO for compounding long-term visibility, paid media for short-term acceleration — measured together in a single dashboard." },
   { q: "Where does AI actually create value for my business?", a: "In four places: customer-facing assistants, content and operations workflows, internal reporting, and personalization. We apply it where it earns its place." },
   { q: "How do we start a conversation?", a: "Book a 30-minute strategy call. We'll discuss your business, review your current digital footprint, and send a tailored proposal within five working days." },

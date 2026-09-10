@@ -10,7 +10,7 @@ export type Role = {
 
 export const ROLES: Role[] = [
   { slug: "senior-frontend-engineer", title: "Senior Frontend Engineer", team: "Engineering", location: "Remote · GCC time zone", type: "Full-time", status: "soon", summary: "Build premium digital systems with TanStack Start, React and modern motion design." },
-  { slug: "seo-strategist", title: "SEO Strategist", team: "Strategy", location: "Muscat or Dubai", type: "Full-time", status: "soon", summary: "Lead SEO programmes for our hospitality and real estate clients across the GCC." },
+  { slug: "seo-strategist", title: "SEO Strategist", team: "Strategy", location: "Muscat or Dubai", type: "Full-time", status: "soon", summary: "Lead SEO programmes for businesses across sectors such as hospitality and real estate in the GCC." },
   { slug: "brand-designer", title: "Brand Designer", team: "Design", location: "Remote · GCC time zone", type: "Full-time", status: "soon", summary: "Define brand systems and design languages for premium GCC businesses." },
 ];
 

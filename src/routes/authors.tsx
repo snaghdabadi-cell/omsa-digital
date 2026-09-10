@@ -26,7 +26,7 @@ function AuthorsPage() {
         <Heading as="h1" size="xl" className="mt-6 max-w-3xl">
           The people behind the <span className="text-gradient-gold">work</span>.
         </Heading>
-        <Prose className="mt-6 max-w-2xl text-lg">Strategists, engineers and designers working across hospitality, real estate and healthcare in the GCC.</Prose>
+        <Prose className="mt-6 max-w-2xl text-lg">Strategists, engineers and designers writing about digital growth across hospitality, real estate and healthcare in the GCC.</Prose>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {AUTHORS.map((a) => (
