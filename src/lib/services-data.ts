@@ -449,6 +449,7 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
         paragraphs: [
           { text: "Search behaviour, competition, location and customer expectations can differ meaningfully across GCC markets — a strategy built for one city or country doesn't automatically transfer to another." },
           { text: "A business focused on Muscat has different local competition and search patterns to one competing across Dubai or the wider UAE. Search happens in both English and Arabic, often with different intent and phrasing in each.", link: { anchor: "Muscat", link: { kind: "location", city: "muscat" } } },
+          { text: "Abu Dhabi's institutional and corporate audiences add another layer — search behaviour here often reflects a more considered, credibility-driven research process before a business is ever contacted.", link: { anchor: "Abu Dhabi", link: { kind: "location", city: "abu-dhabi" } } },
           { text: "Where genuinely useful, this can mean building dedicated local landing pages for specific service areas — without duplicating near-identical content across multiple locations purely to occupy more URLs." },
           { text: "The right regional approach depends on where your customers actually are, not on listing every GCC country on every page." },
         ],
@@ -1130,6 +1131,7 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
         paragraphs: [
           { text: "Customers across Oman, the UAE and the wider GCC increasingly expect a fast digital response, mobile-first interactions, and service information available outside standard business hours." },
           { text: "A chatbot can help meet that expectation — handling initial enquiries, providing information and capturing leads while your team is unavailable — without claiming to replace the judgment a person brings to a genuinely complex conversation." },
+          { text: "For Abu Dhabi's institutional and family-owned businesses in particular, an assistant that reflects a considered, professional tone matters as much as speed.", link: { anchor: "Abu Dhabi", link: { kind: "location", city: "abu-dhabi" } } },
           { text: "We don't have regional adoption figures to quote, and we won't invent them. What we can offer is a chatbot built around how your specific customers actually reach out." },
         ],
       },
@@ -1859,6 +1861,7 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
         paragraphs: [
           { text: "Competition, customer expectations and search behaviour vary meaningfully across Oman, the UAE and the wider GCC — a campaign built for one market rarely transfers cleanly to another." },
           { text: "A local campaign focused on Muscat needs different targeting, messaging and competitive awareness than a regional campaign covering multiple GCC markets at once — and the two shouldn't be planned identically.", link: { anchor: "Muscat", link: { kind: "location", city: "muscat" } } },
+          { text: "A campaign built for Abu Dhabi's institutional and family-owned businesses tends to prioritise credibility and considered messaging over short-term promotional pushes.", link: { anchor: "Abu Dhabi", link: { kind: "location", city: "abu-dhabi" } } },
           { text: "That extends to language. Search happens in both English and Arabic across the region, often with different phrasing and intent in each — which affects targeting, messaging and landing-page content, not just translation." },
           { text: "Geographic targeting and landing-page localization should reflect where a business actually operates and serves customers, and measurement should be structured so performance can be compared consistently across markets rather than blended into one unclear number." },
           { text: "OMSA is based in Oman; where a UAE or wider GCC campaign is scoped, the strategy is built around your actual service area rather than an assumed presence." },
