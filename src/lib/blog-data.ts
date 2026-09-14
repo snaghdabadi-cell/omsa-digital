@@ -16,7 +16,10 @@ export type BlogContentLink =
   | { kind: "service"; slug: string }
   | { kind: "industry"; slug: string }
   | { kind: "location"; city: string }
-  | { kind: "locations" };
+  | { kind: "locations" }
+  // External citation — mirrors services-data.ts's ContentLink "external"
+  // kind, added here for posts that cite a primary source inline.
+  | { kind: "external"; href: string };
 
 // Attaches a BlogContentLink to one exact substring ("anchor") of a
 // paragraph. Optional — most paragraphs are plain strings; only the ones
@@ -28,6 +31,12 @@ export type BlogPost = {
   slug: string;
   title: string;
   excerpt: string;
+  // Optional SEO-tuned overrides, mirroring services-data.ts's
+  // metaTitle/metaDescription split — used only where the H1/excerpt
+  // themselves run long for a <title>/meta description tag. Falls back to
+  // `${title} — OMSA Digital & AI Studio` / excerpt for every existing post.
+  metaTitle?: string;
+  metaDescription?: string;
   category:
     | "SEO"
     | "Technical SEO"
@@ -57,6 +66,11 @@ export type BlogPost = {
   // left unset rather than guessed for posts with no clear match.
   relatedCaseStudySlug?: string;
   body: { h2: string; p: BlogParagraph[]; bullets?: string[] }[];
+  // Optional visible FAQ, rendered near the end of the article and mirrored
+  // into FAQPage JSON-LD (see blog.$slug.tsx) — same pattern already used by
+  // services/industries/locations. Left unset for posts where a visible FAQ
+  // wouldn't add anything beyond the body copy.
+  faqs?: { q: string; a: string }[];
 };
 
 export const BLOG_POSTS: BlogPost[] = [
@@ -874,6 +888,157 @@ export const BLOG_POSTS: BlogPost[] = [
           "A specific headline, a single primary CTA, a bilingual layout that doesn't feel translated, fast-loading rich media, and a qualifying assistant — usually WhatsApp — that routes serious enquiries to the right agent immediately. Together, they remove every extra decision between a buyer landing on the page and reaching a human who can answer their specific question.",
         ],
       },
+    ],
+  },
+  {
+    slug: "ai-search-business-visibility",
+    title: "From Google Search to AI Discovery: How Customers Are Finding Businesses in 2026",
+    excerpt:
+      "Search is becoming a conversation, and answers increasingly arrive before a website ever loads. Here's what that shift changes about how businesses get discovered — and what to do about it.",
+    metaTitle: "AI Search & Business Visibility: What Changes in 2026 | OMSA",
+    metaDescription:
+      "AI is changing how customers discover businesses. Learn what AI search optimization, GEO and AEO mean, and how to stay visible across search and AI answers.",
+    category: "AI",
+    date: "2026-09-14",
+    readMinutes: 13,
+    image: workAi,
+    relatedServices: ["seo", "technical-seo", "local-seo", "digital-marketing"],
+    relatedIndustrySlugs: ["professional-services"],
+    body: [
+      { h2: "Search is becoming a conversation",
+        p: [
+          "Your next customer may never search for your business the way you expect. For years, businesses competed for a position among ten blue links. Increasingly, a person asks a question in plain language and receives a generated answer before a single website ever loads.",
+          "That customer might ask an AI assistant which company can help a growing business improve its online visibility in Muscat, or which digital marketing agency a company in Dubai should consider. Instead of opening several search results to compare, they start from an answer and a short list of names.",
+          "This is what people mean when they describe search as becoming a conversation. Fragmented queries — \"seo agency oman\", \"digital marketing dubai\" — are giving way to fuller questions expecting a direct, contextual answer. Voice search pushed in this direction for years; what's new is that the answer itself can now be generated, not just retrieved.",
+        ],
+      },
+      { h2: "From search results to AI-generated answers",
+        p: [
+          "Traditional search and AI-assisted discovery are related, but not identical, and the difference is worth being precise about. Being crawled means a search engine can access your pages. Being indexed means those pages are stored and eligible to appear in results. Being understood is a further step — a system correctly identifies what a business does, who it serves and where it operates. Being considered relevant means that understanding matches a specific question. Being cited means an AI-generated answer draws on the content. Being recommended is the last step, where a system actively suggests the business.",
+          "Traditional SEO has mostly optimized for the earlier steps — crawling, indexing, ranking. AI-driven discovery leans just as heavily on the later ones, and no responsible strategy can promise a citation or a recommendation. What a business can influence is how clearly it presents itself for that understanding to happen at all.",
+        ],
+      },
+      { h2: "Why AI search matters for businesses",
+        p: [
+          "This isn't a purely technical shift. It changes how customers discover, shortlist and evaluate a business before making contact. A procurement manager preparing a shortlist for a B2B project might ask an AI assistant to summarise providers in a category before visiting a single website. In that moment, the business being described — or left out — didn't get to make its own case; it was represented by whatever the system had already pieced together about it.",
+          "The stakes are consideration and competitive positioning, not just clicks. A company can rank respectably in conventional search while being effectively invisible at this earlier, AI-mediated stage of research.",
+        ],
+      },
+      { h2: "SEO is not dead — it's becoming part of a larger visibility system",
+        p: [
+          "SEO is not dead, and the claim that AI killed it misreads what SEO has always been. Search engine optimization was never only about ranking position — it has always been about making a website easy to find, understand and trust. That work now feeds a larger system, not a single results page.",
+          "Technical foundations, content that actually answers what people ask, semantic structure, entity signals that identify who a business is, accumulated authority, and the newer practices of AEO and GEO increasingly function together. None of this is a literal formula with published weights — no platform discloses that — but conceptually, it's one visibility system, not five separate jobs.",
+          { text: "In practice, a technically sound SEO foundation is still the base layer everything else sits on. A site that can't be crawled efficiently or explained clearly to a search engine won't fare any better with an AI system trying to understand it.",
+            link: { anchor: "a technically sound SEO foundation", link: { kind: "service", slug: "seo" } } },
+        ],
+      },
+      { h2: "What is AI search optimization?",
+        p: [
+          "AI search optimization is the practice of structuring a website's content, data and technical foundations so AI-driven search tools and answer engines can accurately understand, represent and reference a business. It sits alongside traditional SEO, applying the same core principles — clarity, structure, relevance — to an environment where the immediate output is a generated answer rather than a ranked list.",
+          "In practice, that means answering real questions directly, describing services and locations in plain, consistent language, and using structured data so machines don't have to infer basic facts. None of it guarantees inclusion in a specific AI answer — no legitimate provider can promise that — but it improves the odds of being understood correctly.",
+        ],
+      },
+      { h2: "What is GEO (Generative Engine Optimization)?",
+        p: [
+          "Generative Engine Optimization, or GEO, is the practice of optimizing content so it's more likely to be surfaced, cited or referenced by generative AI tools that produce written answers, including AI-powered search features and conversational assistants. It's newer and less standardised than SEO, shaped by observed patterns rather than one published rule set.",
+          "GEO overlaps heavily with SEO rather than replacing it — well-structured, factually clear, genuinely useful content tends to perform well in both. It just isn't a documented ranking system controlled by any single company, whatever some agencies imply.",
+        ],
+      },
+      { h2: "What is AEO (Answer Engine Optimization)?",
+        p: [
+          "Answer Engine Optimization, or AEO, is the practice of structuring content so it can be extracted and presented as a direct answer — in a featured snippet, a voice response or an AI-generated summary — rather than requiring a click through to a full page. It leans on question-led formatting, concise answers near the top of a section, and structured data linking a question to its answer explicitly.",
+          "AEO predates generative AI — featured snippets and voice assistants created the same incentive years earlier — but it matters more now that so much discovery happens through direct-answer surfaces.",
+        ],
+      },
+      { h2: "SEO vs AEO vs GEO: what's the difference?",
+        p: [
+          "In simple terms: SEO is visibility across search engines generally. AEO is visibility as a direct answer, wherever it appears. GEO is visibility within generative, AI-driven discovery environments specifically. Each term points at a different destination for the same underlying goal — being found, understood and trusted.",
+          "In practice, the three overlap far more than the acronyms suggest. A page that clearly answers a real question tends to perform across all three at once, because clarity is the common ingredient. Treating them as three separate workstreams usually just duplicates effort.",
+        ],
+      },
+      { h2: "How do AI systems understand a business?",
+        p: [
+          "AI systems build an understanding of a business from relationships, not isolated pages: a company provides certain services, a company operates in certain locations, a company has expertise in certain topics, an article is authored and published by an identifiable entity, and a service is relevant to a specific audience. The clearer these relationships are made, in visible content and in the underlying markup, the easier it is for any system to piece together an accurate picture.",
+          "Several ingredients feed that picture: a consistent business name, clear service pages that don't blur together, explicit location information, genuine supporting content, internal links between related topics, structured data that states facts rather than implying them, visible authorship, and credible outside mentions. None of these works alone, and no proprietary system publishes exactly how it weighs them — but together, they shape how completely a business can be described when asked about.",
+        ],
+      },
+      { h2: "Why a beautiful website may still be invisible to AI",
+        p: [
+          "A polished website and a machine-legible one are not the same thing, and the gap surprises a lot of business owners. Visual design communicates almost entirely to human eyes — layout, imagery, motion, typography. None of it tells a crawler or a language model what a business does, unless the same information also exists as clear text and structure.",
+          "A site can look excellent while quietly failing to state, in plain terms, who the company is, what it specializes in, where it operates, and how its pages relate to each other. Service names buried inside decorative graphics and location details split across a contact form are common on beautiful sites — and each one makes the business slightly harder for a machine to describe, even if no human visitor ever notices.",
+        ],
+      },
+      { h2: "The emerging AI visibility gap",
+        p: [
+          "Imagine two businesses — Business A and Business B — offering nearly identical services. Both have professionally designed websites and perform reasonably well in conventional search. Business A has clearly stated service pages, consistent information everywhere it appears, genuine supporting content, structured data, and a handful of credible external mentions. Business B has a set of attractive but disconnected marketing pages, inconsistent naming, and little supporting content beyond the pages themselves.",
+          "An AI system asked about that category is likely to build a far more complete, confident picture of Business A — not because it paid for placement, but because it gave the system more to work with. We call that difference the AI visibility gap: a conceptual term for the widening distance between businesses that are easy for AI systems to understand and businesses that aren't, regardless of how their websites compare visually. It isn't an official metric published by Google, OpenAI or anyone else — it's a way of naming a pattern that's becoming easier to observe.",
+        ],
+      },
+      { h2: "How can businesses improve their visibility in AI search?",
+        p: [
+          "There's no checklist that guarantees a citation or a recommendation from any AI system, and any claim otherwise is worth doubting. What follows are foundations that genuinely improve the odds, each addressing a different part of how AI systems build understanding.",
+        ],
+        bullets: [
+          "Clarify your business entity — use the same name and details everywhere it appears, so no system has to guess which version is correct.",
+          "Strengthen service pages — give each service its own clear page instead of folding several into one, so what the business offers is explicit.",
+          "Build topical authority — publish enough genuinely useful content that a system can recognise real depth, not one page mentioning a keyword.",
+          "Improve semantic internal linking — connect related services, locations and articles with descriptive text, so their relationships are stated, not implied.",
+          "Implement structured data — use Schema.org markup to state services, location and authorship explicitly, rather than leaving them to be inferred.",
+          "Strengthen authorship and trust signals — attribute content to a real, identifiable entity and keep publication dates honest.",
+          "Improve local signals — keep address, service-area and contact information consistent across the website and everywhere else it appears.",
+          "Publish question-led content — answer the real questions customers ask, in plain language, not just keyword phrases.",
+          "Maintain consistent brand information — misaligned names and details across directories and profiles reduce confidence in what's found.",
+          "Earn credible external mentions — genuine coverage and references reinforce that a business is real and established; never fabricate or purchase them.",
+          "Keep technical SEO healthy — a slow or hard-to-crawl site limits how much of the above any system can even access.",
+          "Monitor both search and AI discovery — it's worth periodically checking how AI tools describe the business, not only where it ranks.",
+        ],
+      },
+      { h2: "What AI search means for local businesses in Oman and the UAE",
+        p: [
+          "Local discovery adds its own layer. A search like \"law firm in Muscat\", \"real estate company in Dubai\" or \"business consultant nearby\" carries obvious local intent, whether typed into a search bar or asked of an assistant. Systems drawing on web content and public information are more likely to build a confident picture of a business whose location, service area and contact details are stated clearly and consistently across the places it appears.",
+          { text: "For businesses across Oman, the UAE and the wider GCC, the fundamentals that already support strong local search — an accurate business profile, dedicated location pages where a business genuinely serves multiple cities, consistent citations and real customer reviews — continue to matter as the discovery layer around them changes.",
+            link: { anchor: "local search", link: { kind: "service", slug: "local-seo" } } },
+          { text: "A hotel in Muscat, a real estate company in Dubai, or a consultant anywhere in the region is easier for any system to describe accurately when its services and location are stated plainly, not split across a contact form. We haven't verified that any AI assistant uses Google Business Profile data directly as an input — but the same clarity and consistency behind a well-run local presence also helps any system describe a business correctly.",
+            link: { anchor: "Muscat", link: { kind: "location", city: "muscat" } } },
+        ],
+      },
+      { h2: "Will AI replace Google Search?",
+        p: [
+          { text: "Not on any evidence available today, and asking whether one interface will fully replace another is the less useful question. Google continues to build AI Overviews and AI Mode as layers within Search, not as its replacement — its own Search team reported in May 2026 that AI Mode, launched roughly a year earlier, had already surpassed one billion monthly users, with queries more than doubling every quarter since launch.",
+            link: { anchor: "reported in May 2026", link: { kind: "external", href: "https://blog.google/products-and-platforms/products/search/search-io-2026/" } } },
+          { text: "The more consequential change is that discovery is fragmenting across more surfaces at once. OpenAI disclosed that ChatGPT had reached 900 million weekly active users in a February 2026 update, alongside maps, local discovery and social platforms where people increasingly ask questions directly. A business built around ranking in one channel is exposed to that fragmentation; a business with a coherent presence across several is not.",
+            link: { anchor: "reached 900 million weekly active users", link: { kind: "external", href: "https://searchengineland.com/chatgpt-900-million-weekly-active-users-470492" } } },
+          "Is SEO still worth investing in during 2026? Yes — increasingly as one part of a broader strategy rather than the whole of it. Strong technical foundations, clear content and consistent entity information don't only earn rankings; they're the same qualities that make a business easier for an AI system to understand.",
+        ],
+      },
+      { h2: "What businesses should do now",
+        p: [
+          "The most useful starting point isn't a specific AI tactic — it's an honest audit of how clearly the business can currently be understood, by people and by machines. That means reviewing technical SEO health, service architecture, entity signals, structured data, internal linking, content depth, local information and authorship.",
+          { text: "From there, prioritise the largest gaps rather than whatever's newest. A business with strong technical foundations but thin content has a different problem than one with excellent content buried behind a site search engines struggle to crawl — fixing the actual constraint matters more than adopting every practice under the umbrella of a broader digital marketing strategy at once.",
+            link: { anchor: "broader digital marketing strategy", link: { kind: "service", slug: "digital-marketing" } } },
+        ],
+      },
+      { h2: "The future of digital visibility",
+        p: [
+          "Visibility is shifting from a single, measurable outcome — a ranking position — toward a broader one: being discovered, understood, trusted and surfaced in the right context, across whichever surface a customer happens to be using that day. None of this makes the fundamentals obsolete. It makes them foundational to more than one system at once — a stronger reason to get them right, not a weaker one.",
+        ],
+      },
+      { h2: "Final thoughts",
+        p: [
+          "For years, one of the most important digital marketing questions was: where do we rank? That question still matters, and it isn't going away.",
+          "But another question now matters just as much: when an AI system is asked about the services a business provides, does it understand enough about that business to consider it relevant? Businesses that can answer yes to both are building visibility that holds up regardless of which interface a customer chooses to start with.",
+        ],
+      },
+    ],
+    faqs: [
+      { q: "What is AI search optimization?", a: "The practice of structuring a website's content, data and technical foundations so AI-driven search tools and answer engines can accurately understand, represent and reference a business — alongside traditional SEO, not instead of it." },
+      { q: "What is GEO in digital marketing?", a: "GEO, or Generative Engine Optimization, is the practice of optimizing content so it's more likely to be surfaced, cited or referenced by generative AI tools that produce written answers, such as AI-powered search features and conversational assistants." },
+      { q: "What is AEO?", a: "AEO, or Answer Engine Optimization, is the practice of structuring content so it can be extracted and presented as a direct answer — in a featured snippet, voice response or AI-generated summary — rather than requiring a click through to a full page." },
+      { q: "Is SEO still important in 2026?", a: "Yes. Strong technical SEO, clear content and consistent entity information remain foundational, and the same qualities that earn search rankings also make a business easier for AI systems to understand." },
+      { q: "How can businesses improve their visibility in AI search?", a: "By clarifying their business entity, strengthening service pages, publishing genuinely useful content, implementing structured data, and keeping brand information and technical SEO healthy." },
+      { q: "Can AI search optimization guarantee that ChatGPT recommends a business?", a: "No. No legitimate provider can guarantee inclusion in a specific AI-generated answer. AI search optimization improves the odds of being accurately understood — it doesn't guarantee a specific outcome." },
+      { q: "Does structured data help AI understand a business?", a: "Generally, yes. Structured data, typically implemented using Schema.org vocabulary, states facts like services, location and authorship explicitly rather than leaving a system to infer them — though it's not a guarantee of how any given AI system uses it." },
+      { q: "How should local businesses prepare for AI-powered search?", a: "By keeping local search fundamentals in order: an accurate business profile, consistent contact and location details across the web, dedicated pages for each location genuinely served, and real customer reviews." },
     ],
   },
 ];

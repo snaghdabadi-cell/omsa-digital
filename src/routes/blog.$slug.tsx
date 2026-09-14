@@ -3,11 +3,12 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, Calendar, Clock, User } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { Tag } from "@/components/site/Primitives";
+import { FaqItem } from "@/components/site/FaqItem";
 import { BLOG_POSTS, getPost, type BlogContentLink, type BlogParagraph } from "@/lib/blog-data";
 import { SERVICE_DETAILS } from "@/lib/services-data";
 import { getCaseStudy } from "@/lib/case-studies-data";
 import { getAuthor } from "@/lib/content/authors";
-import { abs, articleJsonLd, authorRefFromContent, breadcrumbJsonLd, pageMeta } from "@/lib/seo";
+import { abs, articleJsonLd, authorRefFromContent, breadcrumbJsonLd, faqJsonLd, pageMeta } from "@/lib/seo";
 
 // Resolves a BlogContentLink to a real typed route. Mirrors the
 // ContentAnchor pattern already used on service pages, scoped to this file
@@ -22,6 +23,12 @@ function BlogContentAnchor({ link, label, className }: { link: BlogContentLink; 
       return <Link to="/locations/$city" params={{ city: link.city }} className={className}>{label}</Link>;
     case "locations":
       return <Link to="/locations" className={className}>{label}</Link>;
+    case "external":
+      return (
+        <a href={link.href} target="_blank" rel="noopener noreferrer" className={className}>
+          {label}
+        </a>
+      );
   }
 }
 
@@ -59,8 +66,8 @@ export const Route = createFileRoute("/blog/$slug")({
     if (!p) return { meta: [{ title: "Article — OMSA Digital & AI Studio" }] };
     const path = `/blog/${params.slug}`;
     const base = pageMeta({
-      title: `${p.title} — OMSA Digital & AI Studio`,
-      description: p.excerpt,
+      title: p.metaTitle ?? `${p.title} — OMSA Digital & AI Studio`,
+      description: p.metaDescription ?? p.excerpt,
       path,
       image: p.image,
       type: "article",
@@ -97,6 +104,9 @@ export const Route = createFileRoute("/blog/$slug")({
             ]),
           ),
         },
+        ...(p.faqs && p.faqs.length > 0
+          ? [{ type: "application/ld+json", children: JSON.stringify(faqJsonLd(p.faqs)) }]
+          : []),
       ],
     };
   },
@@ -191,6 +201,20 @@ function BlogPostPage() {
             </section>
           ))}
         </div>
+
+        {/* FAQ */}
+        {post.faqs && post.faqs.length > 0 && (
+          <div className="container-luxe mt-16 max-w-3xl">
+            <h2 className="font-display text-2xl md:text-3xl font-bold tracking-tight">
+              Frequently asked questions
+            </h2>
+            <div className="mt-6 space-y-3">
+              {post.faqs.map((f, i) => (
+                <FaqItem key={f.q} item={f} defaultOpen={i === 0} />
+              ))}
+            </div>
+          </div>
+        )}
       </article>
 
       {/* Related services (internal linking) */}
