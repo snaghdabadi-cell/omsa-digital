@@ -29,6 +29,8 @@ function BlogContentAnchor({ link, label, className }: { link: BlogContentLink; 
           {label}
         </a>
       );
+    case "post":
+      return <Link to="/blog/$slug" params={{ slug: link.slug }} className={className}>{label}</Link>;
   }
 }
 
