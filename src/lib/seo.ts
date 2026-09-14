@@ -50,6 +50,13 @@ export function pageMeta(opts: {
   description: string;
   path: string;
   image?: string;
+  // Optional — only emitted when the caller actually knows the asset's real
+  // pixel dimensions/alt text (e.g. a blog post's featured image). Every
+  // existing caller omits these and keeps emitting exactly the same
+  // og:image/twitter:image tags as before.
+  imageWidth?: number;
+  imageHeight?: number;
+  imageAlt?: string;
   type?: "website" | "article" | "profile";
   noindex?: boolean;
 }) {
@@ -72,6 +79,12 @@ export function pageMeta(opts: {
   if (image) {
     meta.push({ property: "og:image", content: image });
     meta.push({ name: "twitter:image", content: image });
+    if (opts.imageWidth) meta.push({ property: "og:image:width", content: String(opts.imageWidth) });
+    if (opts.imageHeight) meta.push({ property: "og:image:height", content: String(opts.imageHeight) });
+    if (opts.imageAlt) {
+      meta.push({ property: "og:image:alt", content: opts.imageAlt });
+      meta.push({ name: "twitter:image:alt", content: opts.imageAlt });
+    }
   }
   return { meta, links: [{ rel: "canonical", href: url }] };
 }

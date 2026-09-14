@@ -70,6 +70,9 @@ export const Route = createFileRoute("/blog/$slug")({
       description: p.metaDescription ?? p.excerpt,
       path,
       image: p.image,
+      imageWidth: p.imageWidth,
+      imageHeight: p.imageHeight,
+      imageAlt: p.imageAlt ?? p.title,
       type: "article",
     });
     return {
@@ -173,8 +176,9 @@ function BlogPostPage() {
         <figure className="container-luxe mt-12">
           <img
             src={post.image}
-            alt={post.title}
+            alt={post.imageAlt ?? post.title}
             loading="eager"
+            fetchPriority="high"
             width={1600}
             height={900}
             className="aspect-[16/9] w-full rounded-[2rem] object-cover"

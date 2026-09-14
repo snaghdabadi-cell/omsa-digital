@@ -7,6 +7,7 @@ import workCorporate from "@/assets/work-corporate.jpg";
 import workClinic from "@/assets/work-clinic.jpg";
 import workRealestate from "@/assets/work-realestate.jpg";
 import workRestaurant from "@/assets/work-restaurant.jpg";
+import aiSearchBusinessVisibility from "@/assets/ai-search-business-visibility.webp";
 
 // Blog-scoped link types, deliberately separate from services-data.ts's
 // ContentLink/AnchorLink (which has no "industry" kind and is used by the
@@ -55,6 +56,17 @@ export type BlogPost = {
   dateModified?: string; // ISO
   readMinutes: number;
   image: string;
+  // Optional descriptive alt text for `image`, used wherever it's rendered
+  // as the article's own visual (hero figure, OG/Twitter image). Falls back
+  // to `title` for every existing post, which already used the title as alt
+  // text before this field existed — no behavior change for them.
+  imageAlt?: string;
+  // Optional real pixel dimensions of `image`, emitted as og:image:width /
+  // og:image:height when present (see pageMeta in lib/seo.ts). Left unset
+  // for existing posts rather than guessed — those simply keep emitting
+  // og:image with no width/height, exactly as before.
+  imageWidth?: number;
+  imageHeight?: number;
   relatedServices: string[]; // service slugs
   // Industry slugs, set only where the post's actual topic — not just its
   // category — genuinely matches that industry. Left unset rather than
@@ -901,7 +913,10 @@ export const BLOG_POSTS: BlogPost[] = [
     category: "AI",
     date: "2026-09-14",
     readMinutes: 13,
-    image: workAi,
+    image: aiSearchBusinessVisibility,
+    imageAlt: "AI search and business discovery replacing the traditional search journey",
+    imageWidth: 1600,
+    imageHeight: 895,
     relatedServices: ["seo", "technical-seo", "local-seo", "digital-marketing"],
     relatedIndustrySlugs: ["professional-services"],
     body: [
