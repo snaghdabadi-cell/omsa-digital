@@ -176,15 +176,23 @@ function BlogPostPage() {
         </header>
 
         <figure className="container-luxe mt-12">
-          <img
-            src={post.image}
-            alt={post.imageAlt ?? post.title}
-            loading="eager"
-            fetchPriority="high"
-            width={1600}
-            height={900}
-            className="aspect-[16/9] w-full rounded-[2rem] object-cover"
-          />
+          {/* Constrains displayed width (not height) on larger screens so the
+              hero reads as a contained editorial image rather than a
+              near-full-screen banner — the full 16:9 frame stays intact,
+              just smaller, instead of cropping the image to fit a capped
+              height. Below xl (1280px), container-luxe's own width already
+              lands at or under this cap, so nothing changes there. */}
+          <div className="xl:max-w-[960px] xl:mx-auto">
+            <img
+              src={post.image}
+              alt={post.imageAlt ?? post.title}
+              loading="eager"
+              fetchPriority="high"
+              width={1600}
+              height={900}
+              className="aspect-[16/9] w-full rounded-[2rem] object-cover"
+            />
+          </div>
         </figure>
 
         <div className="container-luxe mt-16 max-w-3xl space-y-12">
