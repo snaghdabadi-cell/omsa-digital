@@ -48,13 +48,21 @@ function BlogContentAnchor({ link, label, className }: { link: BlogContentLink; 
   }
 }
 
-// Light inline markup for block content only: **bold**, *italic*, `code`.
+// Light inline markup for block content only: **bold**, *italic*, `code`,
+// and {{ar:…}} for an inline Arabic run, which gets its own lang/dir so it
+// renders right-to-left without switching the surrounding English to RTL.
 // Legacy p/bullets text never goes through this, so it renders verbatim.
-const INLINE_MARKUP = /(\*\*[^*]+\*\*|\*[^*]+\*|`[^`]+`)/g;
+const INLINE_MARKUP = /(\{\{ar:[^}]+\}\}|\*\*[^*]+\*\*|\*[^*]+\*|`[^`]+`)/g;
 function renderInline(text: string): ReactNode {
   const parts = text.split(INLINE_MARKUP);
   if (parts.length === 1) return text;
   return parts.map((part, i) => {
+    if (part.startsWith("{{ar:") && part.endsWith("}}"))
+      return (
+        <span key={i} lang="ar" dir="rtl">
+          {part.slice(5, -2)}
+        </span>
+      );
     if (part.startsWith("**") && part.endsWith("**") && part.length > 4)
       return (
         <strong key={i} className="font-semibold text-foreground">
@@ -269,6 +277,7 @@ export const Route = createFileRoute("/blog/$slug")({
               datePublished: p.date,
               dateModified: p.dateModified,
               author: authorRefFromContent(POST_AUTHOR),
+              inLanguage: p.inLanguage,
             }),
           ),
         },
@@ -411,7 +420,7 @@ function BlogPostPage() {
             </h2>
             <div className="mt-6 space-y-3">
               {post.faqs.map((f, i) => (
-                <FaqItem key={f.q} item={f} defaultOpen={i === 0} />
+                <FaqItem key={f.q} item={f} defaultOpen={i === 0} asHeading />
               ))}
             </div>
           </div>

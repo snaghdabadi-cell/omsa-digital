@@ -13,6 +13,7 @@ import chatgptSponsoredAgents from "@/assets/chatgpt-sponsored-agents-conversati
 import googleRankingVsAiVisibility from "@/assets/google-ranking-vs-ai-visibility.webp";
 import googleSearchConsoleMultimodalSearch from "@/assets/google-search-console-multimodal-search.webp";
 import aiSearchVisibilityMeasurementGcc from "@/assets/ai-search-visibility-measurement-gcc.webp";
+import aiSearchBusinessDiscoverabilityGcc from "@/assets/ai-search-business-discoverability-gcc.webp";
 
 // Blog-scoped link types, deliberately separate from services-data.ts's
 // ContentLink/AnchorLink (which has no "industry" kind and is used by the
@@ -52,7 +53,8 @@ export type BlogTable = { label: string; head: string[]; rows: string[][] };
 // Ordered content blocks for sections that need more than "paragraphs then
 // bullets": H3 subsections, lists between paragraphs, numbered steps and
 // tables. Text in blocks supports light inline markup (**bold**, *italic*,
-// `code`); legacy `p`/`bullets` text is rendered exactly as written.
+// `code`, and {{ar:…}} for an inline Arabic run rendered with lang="ar"
+// dir="rtl"); legacy `p`/`bullets` text is rendered exactly as written.
 export type BlogBlock =
   | { type: "p"; content: BlogParagraph }
   | { type: "h3"; text: string }
@@ -113,6 +115,10 @@ export type BlogPost = {
   // og:image with no width/height, exactly as before.
   imageWidth?: number;
   imageHeight?: number;
+  // Optional BCP 47 language of the article copy, emitted as BlogPosting
+  // inLanguage. Left unset for existing posts so their structured data is
+  // unchanged.
+  inLanguage?: string;
   relatedServices: string[]; // service slugs
   // Industry slugs, set only where the post's actual topic — not just its
   // category — genuinely matches that industry. Left unset rather than
@@ -2732,6 +2738,854 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         q: "Does Google report visibility in AI Overviews and AI Mode?",
         a: "Yes. Search Console's Generative AI performance report shows impressions in AI Overviews and AI Mode by page, country, device and date. It doesn't show clicks or the queries that triggered the AI feature, and in GA4, clicks from these features are counted as Organic Search.",
+      },
+    ],
+  },
+  {
+    slug: "is-your-business-visible-in-ai-search-gcc",
+    title: "Is Your Business Visible in AI Search? How GCC Companies Can Find Out",
+    excerpt:
+      "A company can rank on Google and still be patchily represented when AI assembles a shortlist. A practical diagnostic for GCC businesses: what to ask, what to record, and what to fix first.",
+    metaTitle: "Is Your Business Visible in AI Search? A GCC Check | OMSA",
+    metaDescription:
+      "A practical diagnostic to check whether ChatGPT, Google AI and Copilot can find and accurately describe your business in Oman, the UAE and the GCC.",
+    ogTitle: "Is Your Business Visible in AI Search? How GCC Companies Can Find Out",
+    ogDescription:
+      "There's no single \"ChatGPT ranking\" to check. Here's how to find out whether AI search knows, understands and surfaces your business, across Oman, the UAE, English and Arabic.",
+    category: "AI",
+    date: "2026-10-03",
+    readMinutes: 22,
+    image: aiSearchBusinessDiscoverabilityGcc,
+    imageAlt:
+      "An Omani businessman at a laptop showing an AI search visibility dashboard, with ChatGPT, Google, Bing and Gemini answering questions about digital marketing agencies in Oman, the UAE and the GCC.",
+    imageWidth: 1678,
+    imageHeight: 937,
+    inLanguage: "en",
+    relatedServices: ["seo", "local-seo", "technical-seo", "google-analytics"],
+    relatedPostSlugs: [
+      "how-to-measure-ai-search-visibility-gcc",
+      "google-ranking-vs-ai-visibility",
+      "bilingual-seo-gcc-arabic-english",
+    ],
+    intro: [
+      "Here's a quick test. Open ChatGPT and ask it to name a few companies in Oman that do what your company does. Leave your company's name out of the question. Ask Google's AI Mode the same thing, then Microsoft Copilot. Then ask all three again, in Arabic.",
+      "Business owners who try this for the first time rarely find a simple yes or no. Their company may be missing. More often the result is subtler: the company is named but described by a service it dropped years ago. Or it's placed in Dubai when it operates from Muscat. It might appear in English answers and not in Arabic ones. Or a directory listing describes it while its own website isn't cited at all.",
+      "None of this means the business is bad at marketing. A company can have a well-built website, solid Google rankings, active social profiles and a strong reputation, and still be patchily represented when an AI system puts together a shortlist for a buyer. Ranking a page is one job. Being recognised, understood and retrieved as a credible answer to a category question is a related but different one.",
+      "This article is a diagnostic. It shows how to find out, honestly and without tricks, five things. Do AI search systems know your business? Do they understand what you do? Do they surface you when buyers haven't named you? Do they describe you accurately? And do they draw on sources you'd want them to? It's written for companies in Oman, the UAE and the wider GCC, where differences in market and language make a single test misleading.",
+      {
+        text: "If you already know you have a gap and want to track it over time, our companion article on how to measure AI search visibility sets out a full measurement framework. This one deals with the question that comes first: when buyers ask AI for help, does your business show up, and is it described correctly?",
+        link: {
+          anchor: "how to measure AI search visibility",
+          link: { kind: "post", slug: "how-to-measure-ai-search-visibility-gcc" },
+        },
+      },
+    ],
+    body: [
+      {
+        h2: 'What "visible in AI search" actually means',
+        blocks: [
+          {
+            type: "p",
+            content:
+              "By AI discoverability we mean whether an AI-assisted search experience recognises your business, understands what it does and where, and includes it accurately when a buyer asks a relevant question.",
+          },
+          {
+            type: "p",
+            content: "Four ideas are often used as if they meant the same thing. They don't:",
+          },
+          {
+            type: "ul",
+            items: [
+              "**Mention:** your business is named in the answer.",
+              "**Recommendation:** your business is presented as a suitable option for the buyer's need.",
+              "**Citation:** a page from your website, or about your business, is linked as a source.",
+              "**Representation:** what the answer actually says about you, accurate or not.",
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "These don't move together. A business can be cited without being recommended: its blog post explains a concept used in the answer, while competitors are the ones named. It can be recommended without being cited, because the answer relies on a directory, a news article or the model's existing knowledge. It can be mentioned and badly misrepresented. A useful diagnostic looks at each separately.",
+          },
+        ],
+      },
+      {
+        h2: 'Can you check your "ChatGPT ranking"?',
+        blocks: [
+          {
+            type: "p",
+            content:
+              "Not in the way you can check a Google ranking, and it helps to understand why before you start testing.",
+          },
+          {
+            type: "p",
+            content:
+              "A traditional search result is an ordered list of pages for a query, in a location, at a point in time. It changes, but it is stable enough to track as a position. An AI-generated answer is built for each conversation. The platforms document several reasons it varies:",
+          },
+          {
+            type: "ul",
+            items: [
+              {
+                text: '**Google** says AI Overviews and AI Mode may use a "query fan-out" technique: they issue multiple related searches across subtopics to build a response. Google also notes that AI Mode can be personalised through "Personal Intelligence" when search history and recommendations are enabled.',
+                links: [
+                  {
+                    anchor: "query fan-out",
+                    link: {
+                      kind: "external",
+                      href: "https://developers.google.com/search/docs/appearance/ai-features",
+                    },
+                  },
+                  {
+                    anchor: "Personal Intelligence",
+                    link: {
+                      kind: "external",
+                      href: "https://support.google.com/websearch/answer/16011537",
+                    },
+                  },
+                ],
+              },
+              {
+                text: "**Microsoft** documents that when Copilot uses web search, it turns the user's prompt into search queries that it sends to Bing, then grounds its response in what comes back.",
+                link: {
+                  anchor: "documents that when Copilot uses web search",
+                  link: {
+                    kind: "external",
+                    href: "https://learn.microsoft.com/en-us/microsoft-365/copilot/manage-public-web-access",
+                  },
+                },
+              },
+              {
+                text: "**OpenAI** says ChatGPT may use your IP address to estimate your general location, may share that approximate location with search providers to improve results, and that saved memory can also influence search results.",
+                link: {
+                  anchor: "estimate your general location",
+                  link: {
+                    kind: "external",
+                    href: "https://help.openai.com/en/articles/9237897-searching-the-web-with-chatgpt",
+                  },
+                },
+              },
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "So whether and where your business appears depends on the exact phrasing, the follow-up questions, the user's location and settings, the platform, the language and the date. We found no OpenAI documentation describing a ranking position for businesses in ChatGPT, or a tool for checking one. Third-party tools that report an \"AI rank\" are sampling prompts and summarising the results. That can be useful as an estimate. It isn't an official position.",
+          },
+          {
+            type: "p",
+            content: {
+              text: "Some first-party data does exist. Google Search Console now has a Generative AI performance report showing impressions in AI Overviews and AI Mode by page, country, device and date (it does not show queries or clicks). Bing Webmaster Tools has an AI Performance report showing citations and the grounding queries behind them across Copilot, Bing's AI summaries and select partner experiences. Both are worth using. Neither covers ChatGPT, and neither tells you whether you were recommended or how you were described.",
+              links: [
+                {
+                  anchor: "Generative AI performance report",
+                  link: {
+                    kind: "external",
+                    href: "https://support.google.com/webmasters/answer/16984139",
+                  },
+                },
+                {
+                  anchor: "AI Performance report",
+                  link: {
+                    kind: "external",
+                    href: "https://blogs.bing.com/webmaster/February-2026/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview",
+                  },
+                },
+              ],
+            },
+          },
+          {
+            type: "p",
+            content:
+              'So instead of asking "what\'s my rank?", work through a set of diagnostic questions in order.',
+          },
+        ],
+      },
+      {
+        h2: "The discoverability diagnostic: six questions, in order",
+        blocks: [
+          {
+            type: "ol",
+            items: [
+              "**Do AI systems know you exist?** Recognition.",
+              "**Do they understand what you do, where, and for whom?** Understanding.",
+              "**Do they surface you when buyers don't name you?** Discovery.",
+              "**How do they describe you?** Representation.",
+              "**Which sources appear to support that description?** Source footprint.",
+              "**Does the picture hold across platforms, markets and languages?** Consistency.",
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "The order matters. If a system can't reliably identify your business when asked about it by name, non-branded tests will tell you very little. And if it understands you well but never surfaces you for category questions, the problem isn't recognition, so fixes aimed at recognition won't help.",
+          },
+        ],
+      },
+      {
+        h2: "Does AI know you, and does it understand you?",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "Start with branded questions. These are questions that name your business directly, the way a referred prospect, a journalist or a procurement officer checking a supplier might ask:",
+          },
+          {
+            type: "ul",
+            items: [
+              '"What is [company]?"',
+              '"What services does [company] offer?"',
+              '"Where is [company] based, and which countries does it work in?"',
+              '"Does [company] work with businesses in Oman?" or "…in the UAE?"',
+              '"Who are [company]\'s typical clients?"',
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "Ask these neutrally. Avoid questions that presuppose the answer, such as \"Why is [company] the best SEO agency in Oman?\" A leading question tests the model's willingness to agree with you, not its understanding of your business. Use a new conversation each time, and where you can, test logged out or with memory turned off so your previous chats don't shape the response.",
+          },
+          { type: "p", content: "Then read the answers for six things:" },
+          {
+            type: "ul",
+            items: [
+              '**Entity recognition.** Does it identify the right organisation? Many GCC businesses share names or name elements. Trading names often differ from registered names (with or without "LLC", "SPC" or "SAOC"). And brands are transliterated in more than one way. If the answer blends you with another company, or asks which one you mean, you have an ambiguity problem.',
+              "**Service understanding.** Does it name your core services, or only the most visible one? A firm that does strategy, implementation and training may be described only by whichever service its homepage emphasises.",
+              "**Location understanding.** Does it place you in the right city and country? Does it know about every market you serve, or only the one where you're registered?",
+              "**Factual accuracy.** Check founding year, leadership, address, contact routes and sectors served.",
+              '**Ambiguity.** Hedged answers ("it appears to be…", "may offer…") usually mean the system has limited or conflicting evidence.',
+              "**Outdated information.** A former name, a closed branch, a retired service line or an old address all suggest that older sources still carry weight.",
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "Branded visibility is a necessary starting point, but it proves less than it seems. Someone who types your company's name already knows about you. A good branded answer tells you that AI systems can recognise and describe your business. It doesn't tell you whether they'll put you in front of someone who has never heard of you.",
+          },
+        ],
+      },
+      {
+        h2: "Can AI find you when buyers don't know your name?",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "This is the most important part of the diagnostic, and the part most businesses skip.",
+          },
+          { type: "p", content: "Compare two questions:" },
+          {
+            type: "ul",
+            items: [
+              '"What does [company] do?"',
+              '"Which companies provide [service] in [market]?"',
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "The first tests whether a system can describe you. The second is much closer to real discovery: a buyer with a need, no shortlist yet, and an AI system deciding which names to put in front of them.",
+          },
+          {
+            type: "p",
+            content:
+              "Write non-branded questions the way your buyers actually ask them. Three types are worth testing:",
+          },
+          {
+            type: "p",
+            content: "**Category questions**, where the buyer names the service and market:",
+          },
+          {
+            type: "ul",
+            items: [
+              '"Which digital marketing agencies in Oman work with B2B companies?"',
+              '"Who are reputable SEO companies in Muscat that also work in Arabic?"',
+              '"Which corporate law firms in Oman advise foreign companies on setting up?"',
+              '"Recommended business consultants in Dubai for family-owned companies"',
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "**Problem questions**, where the buyer describes a situation rather than a service:",
+          },
+          {
+            type: "ul",
+            items: [
+              '"Our website gets traffic but very few enquiries. Who in the UAE can help fix that?"',
+              '"We need a booking system for a multi-branch clinic in Dubai that works in Arabic. What are the options?"',
+            ],
+          },
+          {
+            type: "p",
+            content: "**Shortlist or comparison questions**, where the buyer is further along:",
+          },
+          {
+            type: "ul",
+            items: [
+              '"Compare B2B software providers in the UAE that offer Arabic-language invoicing"',
+              '"What should I look for when choosing a dermatology clinic in Dubai, and which clinics are well reviewed?"',
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "These are examples of realistic intent, not keywords with verified search volume. Your own list should come from what prospects actually say on sales calls, in enquiry forms and in WhatsApp messages.",
+          },
+          { type: "p", content: "For each answer, note which of four outcomes you got:" },
+          {
+            type: "ol",
+            items: [
+              "**Named and cited:** you're listed, and one of your pages is a source.",
+              "**Named, not cited:** you're listed, but the answer relies on other sources.",
+              "**Cited, not named:** your content informs the answer, but you aren't presented as an option.",
+              "**Absent:** neither.",
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "Each outcome points to a different problem. A business that appears only when its name is in the question has an *association* problem: the system recognises the entity but doesn't connect it strongly enough with the category and market. A business that is cited but never named may be publishing useful content without making clear that it *provides* the service it writes about. A business that is absent from both branded and non-branded answers has a more basic *recognition* problem.",
+          },
+          {
+            type: "p",
+            content:
+              "Don't draw conclusions from a single answer. Ask each question more than once, and pay attention to the competitors and entities that do appear. They show you what the system currently treats as a credible answer.",
+          },
+        ],
+      },
+      {
+        h2: "How does AI describe you?",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "When your business does appear, read the description as a prospective client would. You're looking for:",
+          },
+          {
+            type: "ul",
+            items: [
+              "**Core service.** Is it the one you lead with?",
+              "**Specialisms and sectors.** Are your strongest areas mentioned, or only generic ones?",
+              "**Markets.** Are they all there, with nothing invented?",
+              '**Positioning.** A premium consultancy described as "an affordable option", or a specialist described as a generalist, has a positioning gap even if every fact is correct.',
+              "**Company.** Who else are you grouped with? Being listed beside the firms you actually compete with is a meaningful signal. Being listed beside firms in a different tier or category is one too.",
+              "**Tone.** Is it neutral, positive or qualified? If it's qualified, by what?",
+            ],
+          },
+          {
+            type: "p",
+            content: {
+              text: "Google's own help documentation notes that AI Mode \"doesn't always get it right\", and the same caution applies to every platform. If an answer contains an error, record it and look for where it might have come from. Correcting the chatbot in conversation may change that one reply, but it doesn't change the sources the next buyer's answer is built from.",
+              link: {
+                anchor: "Google's own help documentation",
+                link: {
+                  kind: "external",
+                  href: "https://support.google.com/websearch/answer/16011537",
+                },
+              },
+            },
+          },
+        ],
+      },
+      {
+        h2: "Where is that picture coming from?",
+        blocks: [
+          {
+            type: "p",
+            content:
+              'Of all the steps, this one is the most useful, because it moves you from "what does AI say?" to "what can we actually change?"',
+          },
+          {
+            type: "p",
+            content: {
+              text: "Where a platform shows sources, inspect every one. ChatGPT search shows links to its sources. Google's AI Overviews and AI Mode show supporting links. Copilot shows citations, and Microsoft documents that in Microsoft 365 Copilot the web search queries sent to Bing are also displayed. Sort what you find:",
+              link: {
+                anchor: "Microsoft documents",
+                link: {
+                  kind: "external",
+                  href: "https://learn.microsoft.com/en-us/microsoft-365/copilot/manage-public-web-access",
+                },
+              },
+            },
+          },
+          {
+            type: "ul",
+            items: [
+              "**Your own website.** Which page? A service page, the About page, a blog article, an outdated PDF? Is it the page you'd choose to represent you?",
+              "**Business profiles.** Google Business Profile, Bing Places and similar listings.",
+              "**Directories and listing sites.** General, industry or regional.",
+              "**Publishers.** News coverage, trade media, interviews.",
+              "**Industry and institutional sources.** Associations, chambers of commerce, event and award pages, partner pages.",
+              "**Review and discussion platforms.**",
+              "**Competitors' content.** Especially guides and comparison pages answering the question you'd want to answer.",
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "Then ask practical questions. Is your own site among the sources at all? Are third parties describing you accurately and with current details? Are competitors' pages answering the buyer's question more directly than yours?",
+          },
+          {
+            type: "p",
+            content:
+              "Be clear about the limits. Citations show what was linked, not everything that shaped the answer. A model's existing knowledge can influence a description without any citation. When a platform shows no sources, you can't observe source influence directly. The best you can do is notice when an answer's wording closely matches a particular page or profile, and treat that as a clue rather than proof. Anyone who claims to see exactly how a proprietary retrieval system weighs your sources is overstating what's knowable.",
+          },
+          {
+            type: "p",
+            content:
+              "First-party data helps here too. Bing Webmaster Tools shows which of your pages were cited and the grounding queries behind those citations. Search Console's Generative AI report shows which of your pages earned impressions in Google's AI features. Together they show part of your source footprint from the inside.",
+          },
+          {
+            type: "p",
+            content: {
+              text: "If your website never appears as a source anywhere, check access before anything else. OpenAI states that sites opted out of its search crawler, OAI-SearchBot, will not be shown in ChatGPT search answers (though they can still appear as navigational links). Google states that a page must be indexed and eligible to be shown with a snippet to appear in AI Overviews or AI Mode. Search Console now also has a setting that lets site owners keep their content out of Google's generative AI features. Robots.txt rules, firewall or CDN bot-blocking, and well-meant settings changes can all switch off visibility without anyone in the marketing team noticing.",
+              links: [
+                {
+                  anchor: "OpenAI states",
+                  link: { kind: "external", href: "https://developers.openai.com/api/docs/bots" },
+                },
+                {
+                  anchor: "Google states",
+                  link: {
+                    kind: "external",
+                    href: "https://developers.google.com/search/docs/appearance/ai-features",
+                  },
+                },
+                {
+                  anchor:
+                    "a setting that lets site owners keep their content out of Google's generative AI features",
+                  link: {
+                    kind: "external",
+                    href: "https://blog.google/products-and-platforms/products/search/new-controls-website-owners/",
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+      {
+        h2: "Why testing one platform isn't enough",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "ChatGPT, Google's AI experiences and Microsoft Copilot are separate systems. Based on what each company documents:",
+          },
+          {
+            type: "ul",
+            items: [
+              {
+                text: '**Google AI Overviews and AI Mode** are, in Google\'s words, "rooted in our core Search ranking and quality systems". They draw on pages in Google\'s index that are eligible to show a snippet, and they use query fan-out. Google also says Google Business Profile can help local businesses be visible "in both AI responses and other Google Search results".',
+                link: {
+                  anchor: "rooted in our core Search ranking and quality systems",
+                  link: {
+                    kind: "external",
+                    href: "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide",
+                  },
+                },
+              },
+              {
+                text: "**ChatGPT search** depends on OpenAI's own crawler (OAI-SearchBot) to surface websites, and OpenAI names Bing and specialised data providers among the search providers it shares approximate location with.",
+                link: {
+                  anchor: "OpenAI's own crawler (OAI-SearchBot)",
+                  link: { kind: "external", href: "https://developers.openai.com/api/docs/bots" },
+                },
+              },
+              {
+                text: "**Microsoft Copilot** grounds web answers through the Bing search service. Bing's AI Performance reporting covers Copilot, AI-generated summaries in Bing and select partner AI experiences.",
+                link: {
+                  anchor: "Bing's AI Performance reporting",
+                  link: {
+                    kind: "external",
+                    href: "https://blogs.bing.com/search/June-2026/New-AI-Visibility-Insights-in-Bing-Webmaster-Tools-Intents-Topics-Citation-Share-Compare",
+                  },
+                },
+              },
+              "**Other AI experiences**, such as the Gemini app, Perplexity and assistants built into other products, can also matter to your buyers. Where a company hasn't documented how its system selects sources, treat what you see as observation, not mechanism.",
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "The practical result is that the same business can look quite different from one platform to the next. They use different indexes and retrieval methods, draw on different source ecosystems, apply different location and personalisation signals, refresh at different speeds, and present answers differently: a prose summary in one, a list of options in another, map-style local results in a third. A business with a strong presence in Google's ecosystem but a neglected Bing footprint (no Bing Places listing, no Bing Webmaster Tools verification) may find that Copilot tells a different story.",
+          },
+          {
+            type: "p",
+            content:
+              'None of this tells you which platform is "best", and that isn\'t the point. Test the platforms your buyers actually use, and expect them to disagree.',
+          },
+        ],
+      },
+      {
+        h2: "Oman, the UAE and the wider GCC are separate tests",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "A GCC business rarely has one market. It may be based in Muscat and win work in Dubai, or headquartered in Dubai with a team in Abu Dhabi and clients across the region. AI systems need evidence for each of those relationships, and the results can differ by market.",
+          },
+          {
+            type: "p",
+            content: {
+              text: "Location affects answers directly. OpenAI says ChatGPT estimates location from IP address, and that a VPN or network setting can change it. Google's local results are based mainly on relevance, distance and prominence. So a question asked from Muscat and the same question asked from Dubai may surface different businesses. Test from where your buyers are, or state the location the way a buyer naturally would.",
+              link: {
+                anchor: "based mainly on relevance, distance and prominence",
+                link: { kind: "external", href: "https://support.google.com/business/answer/7091" },
+              },
+            },
+          },
+          {
+            type: "p",
+            content:
+              'Test markets through genuine buyer intent. Don\'t add "in Muscat" to every prompt. Some buyers ask at country level ("…in Oman"), some at city level ("…in Abu Dhabi"), and some at regional level ("an agency that covers Oman and the UAE"). Test the levels that match how you actually sell.',
+          },
+          {
+            type: "p",
+            content: {
+              text: "Here is a common pattern. An Oman-based firm appears reasonably well for Oman questions but is absent from UAE questions, even though it has UAE clients. When you look closer, its website has no UAE service page, no UAE case studies and no mention of UAE work, and no third-party source connects it to the UAE either. That isn't a mysterious ranking problem. The system has little evidence that the business serves the UAE, so it doesn't say so. The fix is to publish that evidence honestly, not to pretend to a presence you don't have. Our guide to local SEO for multi-location GCC businesses covers how to build location pages that reflect real operations.",
+              link: {
+                anchor: "local SEO for multi-location GCC businesses",
+                link: { kind: "post", slug: "local-seo-multi-location-gcc" },
+              },
+            },
+          },
+          {
+            type: "p",
+            content:
+              "Regional, GCC-wide questions are worth testing too. Expect them to favour businesses with clear multi-market evidence. If you're a strong Oman specialist, it's more useful to know how you appear for Oman questions than to worry about a pan-GCC shortlist.",
+          },
+        ],
+      },
+      {
+        h2: "English and Arabic: test matched intent, not translated words",
+        blocks: [
+          {
+            type: "p",
+            content: {
+              text: "For many GCC businesses, testing only in English leaves out a large part of the picture. Google has expanded AI Overviews to Arabic and launched AI Mode in Modern Standard Arabic, so Arabic-language AI search is part of how buyers in the region can now discover businesses. What matters is how you appear in it.",
+              links: [
+                {
+                  anchor: "expanded AI Overviews to Arabic",
+                  link: {
+                    kind: "external",
+                    href: "https://blog.google/intl/en-mena/product-updates/explore-get-answers/bringing-ai-overviews-to-mena-and-in-arabic-globally/",
+                  },
+                },
+                {
+                  anchor: "launched AI Mode in Modern Standard Arabic",
+                  link: {
+                    kind: "external",
+                    href: "https://blog.google/products-and-platforms/products/search/ai-mode-expands-languages-locations/",
+                  },
+                },
+              ],
+            },
+          },
+          {
+            type: "p",
+            content:
+              "The key is matched intent: the same buyer need, phrased the way an Arabic-speaking buyer would phrase it. Word-for-word translation isn't the same thing. Have a native speaker who knows your market write the Arabic questions. For example:",
+          },
+          {
+            type: "table",
+            table: {
+              label: "English and Arabic matched-intent question examples",
+              head: ["Buyer need", "English question", "Natural Arabic question"],
+              rows: [
+                [
+                  "Digital marketing agency",
+                  '"Which digital marketing agencies in Muscat are good for B2B companies?"',
+                  "{{ar:«ما هي أفضل شركات التسويق الإلكتروني في مسقط للشركات؟»}}",
+                ],
+                [
+                  "SEO provider",
+                  '"SEO company in Oman"',
+                  "{{ar:«شركة تحسين محركات البحث في سلطنة عمان»}}",
+                ],
+                [
+                  "Corporate lawyer",
+                  '"Corporate lawyer in Dubai for company formation"',
+                  "{{ar:«محامي شركات في دبي لتأسيس الشركات»}}",
+                ],
+              ],
+            },
+          },
+          {
+            type: "p",
+            content:
+              "A few details show why literal translation falls short. Gulf buyers often say {{ar:«تسويق إلكتروني»}} (e-marketing) where a translation tool would produce {{ar:«تسويق رقمي»}} (digital marketing). Some search for {{ar:«سيو»}} rather than the formal {{ar:«تحسين محركات البحث»}}. And without diacritics, {{ar:«عمان»}} can mean Oman ({{ar:عُمان}}) or Amman ({{ar:عمّان}}), the capital of Jordan. That's why Arabic buyers, and Arabic content, often say {{ar:«سلطنة عمان»}} to be explicit. Test both natural forms.",
+          },
+          { type: "p", content: "Compare the English and Arabic answers on:" },
+          {
+            type: "ul",
+            items: [
+              "whether your brand appears",
+              "how your services are described, and in which terms",
+              "whether your location and markets are right",
+              "factual accuracy",
+              "which sources are cited, and whether your Arabic pages are among them",
+              "which competitors and other entities appear",
+              "differences in terminology or category framing",
+            ],
+          },
+          {
+            type: "p",
+            content: {
+              text: "When the two languages diverge, the cause is usually on the evidence side: an Arabic site that is a thinner translation of the English one, an Arabic brand name spelled several different ways, Arabic pages that aren't properly indexed or linked to their English equivalents, or little Arabic-language coverage from third parties. Our article on bilingual SEO for GCC websites covers the technical side. Treat a difference between languages as a signal about your own footprint. It isn't evidence that AI search in one language is better than in the other.",
+              link: {
+                anchor: "bilingual SEO for GCC websites",
+                link: { kind: "post", slug: "bilingual-seo-gcc-arabic-english" },
+              },
+            },
+          },
+        ],
+      },
+      {
+        h2: "A practical AI discoverability check",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "Here's a check a business owner or marketing lead can run without special tools.",
+          },
+          {
+            type: "p",
+            content:
+              "**The 10-minute version.** Choose the AI platform your buyers are most likely to use. Ask four questions in English and the same four in Arabic, eight answers in total:",
+          },
+          {
+            type: "ol",
+            items: [
+              'one branded question ("What does [company] do, and where?")',
+              "two non-branded category or problem questions",
+              'one market question ("Which [service] providers work with companies in [Oman/the UAE]?")',
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "**The fuller first pass (around an hour).** Use seven questions: two branded, three non-branded and two location or market questions. Run them on ChatGPT (with search), Google (AI Mode, plus AI Overviews where one appears) and Microsoft Copilot, in both English and Arabic.",
+          },
+          {
+            type: "p",
+            content:
+              "Before you start: open a new conversation for each question, test logged out or with memory off where possible, and note the location you're testing from.",
+          },
+          { type: "p", content: "Record each answer in a simple sheet:" },
+          {
+            type: "table",
+            table: {
+              label: "AI discoverability check record sheet",
+              head: [
+                "Question",
+                "Platform",
+                "Language",
+                "Brand appears?",
+                "Description accurate?",
+                "Services accurate?",
+                "Market accurate?",
+                "Recommended or listed?",
+                "Website cited?",
+                "Other sources cited",
+              ],
+              rows: [
+                [
+                  "",
+                  "",
+                  "",
+                  "Y / N",
+                  "Y / Partly / N",
+                  "Y / Partly / N",
+                  "Y / Partly / N",
+                  "Y / N",
+                  "Y / N (which page)",
+                  "List them",
+                ],
+              ],
+            },
+          },
+          {
+            type: "p",
+            content:
+              "When you've finished, look for patterns rather than individual answers. Do you appear in branded answers but not non-branded ones? In English but not Arabic? On one platform but not others? Are the same third-party sources cited every time? Is the same error repeated?",
+          },
+          {
+            type: "p",
+            content:
+              "One important caveat: this is a diagnostic snapshot, not a measurement. AI answers vary from run to run, so a handful of questions on one day can show you where problems might be, but it can't tell you how visible you are with any statistical confidence or whether things are improving. That needs a larger, fixed question set, repeated testing and first-party data, which is what the measurement framework further down this article is for.",
+          },
+        ],
+      },
+      {
+        h2: "Seven signs your business has an AI discoverability problem",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "None of these is unusual, and none is a crisis. Each points to a specific area to fix.",
+          },
+          {
+            type: "ol",
+            items: [
+              "**AI can't clearly explain what you do.** Answers are vague, hedged or generic. This usually means your website doesn't state your services, sectors and markets plainly, or that your business is easy to confuse with another.",
+              "**Your information is outdated or inconsistent.** Old addresses, former names, retired services or conflicting phone numbers suggest that older or inconsistent sources still carry weight.",
+              "**You appear only when your name is in the question.** Recognition is fine, but association with your category and market is weak.",
+              "**Important services aren't connected to you.** You're known for one service and invisible for others that matter commercially. This often happens when secondary services have no dedicated page or supporting content.",
+              "**Your market is wrong or missing.** You're placed in the wrong city or country, or the UAE (or Oman) work you do isn't reflected anywhere.",
+              "**English and Arabic tell different stories.** Different services, different locations, or presence in one language and absence in the other.",
+              "**Others speak for you.** Directories, competitors' guides or third-party pages are cited consistently, while your own useful content is missing from the sources.",
+            ],
+          },
+        ],
+      },
+      {
+        h2: "What to fix first",
+        blocks: [
+          {
+            type: "p",
+            content: {
+              text: 'Google is explicit that there are "no additional requirements" and no special optimisations needed to appear in AI Overviews or AI Mode beyond being indexable and snippet-eligible. Its guidance also says structured data and AI-specific text files are not required for its generative AI features. So the work below isn\'t a trick for getting into AI answers, and nothing here can guarantee inclusion on any platform. It makes your business clearer, easier to access and better evidenced. Those are the qualities that search and AI systems, and human buyers, rely on.',
+              links: [
+                {
+                  anchor: "no additional requirements",
+                  link: {
+                    kind: "external",
+                    href: "https://developers.google.com/search/docs/appearance/ai-features",
+                  },
+                },
+                {
+                  anchor: "Its guidance also says",
+                  link: {
+                    kind: "external",
+                    href: "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide",
+                  },
+                },
+              ],
+            },
+          },
+          {
+            type: "p",
+            content: "Work in this order. Each step makes the next one more effective.",
+          },
+          {
+            type: "ol",
+            items: [
+              "**Entity clarity.** Use one consistent business name, and state the relationship between your trading and registered names. Your About page should say plainly who you are, what you do, where you are based, which markets you serve and since when. Make your key profiles match it.",
+              "**Service clarity.** Give each core service its own crawlable page that explains it in plain language. Avoid relying on images, sliders or PDFs to communicate what you do.",
+              "**Location clarity.** Separate where you are based from where you serve, and state both. Create location pages only where you genuinely operate, and support each one with real evidence.",
+              "**Content coverage.** Answer the category and problem questions your buyers actually ask, with original insight, worked examples and evidence. Bing's guidance highlights freshness, clear structure and supporting evidence. Google's emphasises unique, people-first content over commodity text.",
+              {
+                text: "**Technical accessibility.** Confirm that key pages are indexed and snippet-eligible. Check that robots.txt and any CDN or firewall rules aren't blocking crawlers you want, including OAI-SearchBot if you want to appear in ChatGPT search. Review Search Console's AI features setting. Make sure important content doesn't depend on JavaScript that crawlers can't render. Consider IndexNow so Bing hears about updates quickly. Our technical SEO work covers this layer.",
+                link: {
+                  anchor: "technical SEO",
+                  link: { kind: "service", slug: "technical-seo" },
+                },
+              },
+              {
+                text: "**Structured data.** Add Organization markup (name, URL, logo, address, contact points and `sameAs` links to your official profiles), plus LocalBusiness markup where it applies. Google says Organization markup helps it understand administrative details and disambiguate your organisation. It's a clarity signal, not a ranking switch.",
+                links: [
+                  {
+                    anchor: "Organization markup",
+                    link: { kind: "external", href: "https://schema.org/Organization" },
+                  },
+                  {
+                    anchor: "LocalBusiness markup",
+                    link: { kind: "external", href: "https://schema.org/LocalBusiness" },
+                  },
+                  {
+                    anchor: "Google says",
+                    link: {
+                      kind: "external",
+                      href: "https://developers.google.com/search/docs/appearance/structured-data/organization",
+                    },
+                  },
+                ],
+              },
+              "**Internal entity connections.** Link services to the sectors they serve, to the locations where they're delivered, to case studies that prove them and to the people who deliver them. Context helps machines and people understand how the pieces fit.",
+              "**External entity footprint.** Keep Google Business Profile and Bing Places complete and accurate, then focus on credible third-party references: industry associations, chambers of commerce, partner pages, trade media and reputable directories. Google warns that seeking inauthentic mentions \"isn't as helpful as it might seem\". Earn references, don't manufacture them.",
+              "**English/Arabic alignment.** Make sure services, locations, names and key facts match across both language versions, and that the Arabic version is written for Arabic-speaking buyers rather than translated for completeness.",
+              "**Ongoing testing.** Re-run the same diagnostic after changes have had time to be crawled and processed, then move to structured measurement.",
+            ],
+          },
+        ],
+      },
+      {
+        h2: 'From "are we visible?" to "are we improving?"',
+        blocks: [
+          {
+            type: "p",
+            content:
+              "A diagnostic tells you where you stand and what to fix. It doesn't tell you whether your fixes are working, how you compare with competitors over time, or whether AI visibility is leading to enquiries.",
+          },
+          {
+            type: "p",
+            content: {
+              text: "That takes a fixed set of buyer questions, consistent testing conditions, separate tracking by market and language, and first-party data from Search Console, Bing Webmaster Tools and analytics. Our framework for measuring AI search visibility in the GCC sets that process out step by step. For the analytics side, our guide to GA4 for professional services firms in the GCC explains how to measure enquiries rather than just traffic.",
+              links: [
+                {
+                  anchor: "framework for measuring AI search visibility in the GCC",
+                  link: { kind: "post", slug: "how-to-measure-ai-search-visibility-gcc" },
+                },
+                {
+                  anchor: "GA4 for professional services firms in the GCC",
+                  link: { kind: "post", slug: "ga4-professional-services-gcc" },
+                },
+              ],
+            },
+          },
+        ],
+      },
+      {
+        h2: "Being found, not just being online",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "Most GCC businesses have already done the visible work: a website, profiles, listings and some rankings. The open question is whether that work adds up to a clear, consistent, well-supported picture when an AI system has a few seconds to decide which businesses to put in front of a buyer, in English or Arabic, in Muscat or Dubai.",
+          },
+          {
+            type: "p",
+            content: {
+              text: "You can find out. Ask the questions your buyers ask, in the languages they ask them, on the platforms they use, and read the answers as evidence. Most of what you find will lead back to things you control: how clearly you describe yourself, how well you support what you claim, and how consistently that picture appears across the web. That's also why ranking on Google and being recommended by AI aren't competing goals. Both depend on the same foundations.",
+              link: {
+                anchor: "ranking on Google and being recommended by AI",
+                link: { kind: "post", slug: "google-ranking-vs-ai-visibility" },
+              },
+            },
+          },
+          {
+            type: "p",
+            content: {
+              text: "If you'd like help running this diagnostic across your markets and both languages, or turning the findings into a plan, our SEO team works with businesses across Oman, the UAE and the GCC. We can't promise a place in any AI answer, and nobody honestly can. What we can do is make sure your business is clear, accessible and well evidenced wherever buyers look. Talk to us.",
+              links: [
+                { anchor: "SEO team", link: { kind: "service", slug: "seo" } },
+                { anchor: "Talk to us", link: { kind: "contact" } },
+              ],
+            },
+          },
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "Why does ChatGPT give a different answer each time I ask about my industry?",
+        a: "AI answers are generated for each conversation. They can vary with the exact wording, the follow-up questions, your approximate location, memory and personalisation settings, and the sources retrieved at that moment. That's why a single answer is a weak signal, and why patterns across repeated questions matter more.",
+      },
+      {
+        q: "If AI doesn't mention our business, does that mean our SEO is failing?",
+        a: "Not necessarily. Strong rankings for specific pages don't guarantee that AI systems associate your business with a category and market, describe it accurately or choose it for a shortlist. The diagnostic in this article shows which part is missing: recognition, understanding, association, representation or sources.",
+      },
+      {
+        q: "Will adding schema markup make AI recommend my business?",
+        a: "No. Google states that structured data isn't required for its generative AI features. Organization and LocalBusiness markup can help search systems understand and disambiguate your business, which makes it a useful clarity signal, but it doesn't guarantee inclusion in any AI answer.",
+      },
+      {
+        q: "Should we block AI crawlers from our website?",
+        a: "It depends on your goals, but be deliberate about it. OpenAI separates its search crawler (OAI-SearchBot), which surfaces sites in ChatGPT search, from its training crawler (GPTBot), and sites that block OAI-SearchBot won't be shown in ChatGPT search answers. Google offers controls through robots.txt, snippet settings and a Search Console setting for its AI features. Check what your site currently allows before deciding.",
+      },
+      {
+        q: "Do we need to test in Arabic if most of our clients use English?",
+        a: "If any meaningful share of your buyers or decision-makers use Arabic, yes. AI systems can describe the same business differently in each language, and Arabic answers may rely on different sources. Even a short matched-intent test in Arabic often shows gaps that English testing misses.",
       },
     ],
   },

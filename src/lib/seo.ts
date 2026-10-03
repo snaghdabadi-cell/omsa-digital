@@ -242,6 +242,9 @@ export const articleJsonLd = (a: {
   datePublished: string;
   dateModified?: string;
   author?: AuthorRef;
+  // Optional — emitted only when the caller sets it, so existing articles'
+  // structured data is unchanged.
+  inLanguage?: string;
 }) => ({
   "@context": "https://schema.org",
   "@type": "BlogPosting",
@@ -253,6 +256,7 @@ export const articleJsonLd = (a: {
   dateModified: a.dateModified ?? a.datePublished,
   author: authorEntityRef(a.author),
   publisher: { "@id": `${SITE_URL}/#organization` },
+  ...(a.inLanguage ? { inLanguage: a.inLanguage } : {}),
 });
 
 /**
