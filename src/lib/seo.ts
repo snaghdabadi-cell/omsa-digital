@@ -57,24 +57,30 @@ export function pageMeta(opts: {
   imageWidth?: number;
   imageHeight?: number;
   imageAlt?: string;
+  // Optional social-card overrides; og:/twitter: title and description fall
+  // back to `title`/`description` when unset (every existing caller).
+  ogTitle?: string;
+  ogDescription?: string;
   type?: "website" | "article" | "profile";
   noindex?: boolean;
 }) {
   const url = abs(opts.path);
   const image = opts.image ? abs(opts.image) : undefined;
+  const ogTitle = opts.ogTitle ?? opts.title;
+  const ogDescription = opts.ogDescription ?? opts.description;
   const meta: Array<Record<string, string>> = [
     { title: opts.title },
     { name: "description", content: opts.description },
     { name: "robots", content: opts.noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
-    { property: "og:title", content: opts.title },
-    { property: "og:description", content: opts.description },
+    { property: "og:title", content: ogTitle },
+    { property: "og:description", content: ogDescription },
     { property: "og:type", content: opts.type ?? "website" },
     { property: "og:url", content: url },
     { property: "og:site_name", content: SITE_NAME },
     { property: "og:locale", content: SITE_LOCALE },
     { name: "twitter:card", content: "summary_large_image" },
-    { name: "twitter:title", content: opts.title },
-    { name: "twitter:description", content: opts.description },
+    { name: "twitter:title", content: ogTitle },
+    { name: "twitter:description", content: ogDescription },
   ];
   if (image) {
     meta.push({ property: "og:image", content: image });

@@ -1,10 +1,18 @@
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, Calendar, Clock, User } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { Tag } from "@/components/site/Primitives";
 import { FaqItem } from "@/components/site/FaqItem";
-import { BLOG_POSTS, getPost, type BlogContentLink, type BlogParagraph } from "@/lib/blog-data";
+import {
+  BLOG_POSTS,
+  getPost,
+  type BlogBlock,
+  type BlogContentLink,
+  type BlogParagraph,
+  type BlogPost,
+  type BlogTable,
+} from "@/lib/blog-data";
 import { SERVICE_DETAILS } from "@/lib/services-data";
 import { getCaseStudy } from "@/lib/case-studies-data";
 import { getAuthor } from "@/lib/content/authors";
@@ -31,25 +39,188 @@ function BlogContentAnchor({ link, label, className }: { link: BlogContentLink; 
       );
     case "post":
       return <Link to="/blog/$slug" params={{ slug: link.slug }} className={className}>{label}</Link>;
+    case "contact":
+      return (
+        <Link to="/contact" className={className}>
+          {label}
+        </Link>
+      );
   }
 }
 
+// Light inline markup for block content only: **bold**, *italic*, `code`.
+// Legacy p/bullets text never goes through this, so it renders verbatim.
+const INLINE_MARKUP = /(\*\*[^*]+\*\*|\*[^*]+\*|`[^`]+`)/g;
+function renderInline(text: string): ReactNode {
+  const parts = text.split(INLINE_MARKUP);
+  if (parts.length === 1) return text;
+  return parts.map((part, i) => {
+    if (part.startsWith("**") && part.endsWith("**") && part.length > 4)
+      return (
+        <strong key={i} className="font-semibold text-foreground">
+          {part.slice(2, -2)}
+        </strong>
+      );
+    if (part.startsWith("`") && part.endsWith("`") && part.length > 2)
+      return (
+        <code
+          key={i}
+          className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-[0.85em] text-foreground"
+        >
+          {part.slice(1, -1)}
+        </code>
+      );
+    if (part.startsWith("*") && part.endsWith("*") && part.length > 2)
+      return <em key={i}>{part.slice(1, -1)}</em>;
+    return part;
+  });
+}
+
 // Renders one body paragraph, which is either a plain string (every existing
-// post) or an object carrying one AnchorLink over an exact substring (new
-// posts that need a natural in-text internal link).
-function renderParagraph(para: BlogParagraph): ReactNode {
-  if (typeof para === "string") return para;
-  const { text, link } = para;
-  if (!link) return text;
-  const idx = text.indexOf(link.anchor);
-  if (idx === -1) return text;
+// post) or an object carrying AnchorLinks over exact substrings (posts that
+// need natural in-text links). `rich` enables inline markup for block content.
+function renderParagraph(para: BlogParagraph, rich = false): ReactNode {
+  const fmt = (s: string) => (rich ? renderInline(s) : s);
+  if (typeof para === "string") return fmt(para);
+  const { text } = para;
+  const links = [...(para.link ? [para.link] : []), ...(para.links ?? [])]
+    .map((l) => ({ l, idx: text.indexOf(l.anchor) }))
+    .filter((f) => f.idx !== -1)
+    .sort((a, b) => a.idx - b.idx);
+  if (links.length === 0) return fmt(text);
+  const out: ReactNode[] = [];
+  let cursor = 0;
+  links.forEach(({ l, idx }, i) => {
+    if (idx < cursor) return;
+    out.push(<Fragment key={`t${i}`}>{fmt(text.slice(cursor, idx))}</Fragment>);
+    out.push(
+      <BlogContentAnchor
+        key={`a${i}`}
+        link={l.link}
+        label={l.anchor}
+        className="link-underline font-medium text-[color:var(--gold-deep)]"
+      />,
+    );
+    cursor = idx + l.anchor.length;
+  });
+  out.push(<Fragment key="end">{fmt(text.slice(cursor))}</Fragment>);
+  return <>{out}</>;
+}
+
+function BulletItem({ children }: { children: ReactNode }) {
   return (
-    <>
-      {text.slice(0, idx)}
-      <BlogContentAnchor link={link.link} label={link.anchor} className="link-underline font-medium text-[color:var(--gold-deep)]" />
-      {text.slice(idx + link.anchor.length)}
-    </>
+    <li className="flex items-start gap-3 text-sm text-foreground/85 leading-relaxed">
+      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[color:var(--gold)]" />
+      <span>{children}</span>
+    </li>
   );
+}
+
+// Semantic, horizontally scrollable table. The scroll container (not the
+// page) absorbs overflow on small screens; the min-width keeps columns
+// readable instead of crushing them.
+function ArticleTable({ table }: { table: BlogTable }) {
+  return (
+    <div
+      role="region"
+      aria-label={table.label}
+      tabIndex={0}
+      className="overflow-x-auto rounded-2xl border border-border bg-card focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--gold)]"
+    >
+      <table
+        className="w-full border-collapse text-left text-sm"
+        style={{ minWidth: `${table.head.length * 130}px` }}
+      >
+        <caption className="sr-only">{table.label}</caption>
+        <thead>
+          <tr className="border-b border-border bg-muted/40">
+            {table.head.map((h) => (
+              <th
+                key={h}
+                scope="col"
+                className="px-4 py-3 align-bottom text-[11px] font-semibold uppercase tracking-[0.14em] text-[color:var(--gold-deep)]"
+              >
+                {h}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {table.rows.map((row, r) => (
+            <tr key={r} className="border-b border-border last:border-0">
+              {row.map((cell, c) =>
+                c === 0 ? (
+                  <th
+                    key={c}
+                    scope="row"
+                    className="px-4 py-3 align-top font-medium text-foreground"
+                  >
+                    {renderInline(cell)}
+                  </th>
+                ) : (
+                  <td key={c} className="px-4 py-3 align-top text-muted-foreground leading-relaxed">
+                    {renderInline(cell)}
+                  </td>
+                ),
+              )}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function renderBlock(block: BlogBlock, key: number): ReactNode {
+  switch (block.type) {
+    case "p":
+      return <p key={key}>{renderParagraph(block.content, true)}</p>;
+    case "h3":
+      return (
+        <h3
+          key={key}
+          className="pt-5 font-display text-xl md:text-2xl font-semibold tracking-tight text-foreground"
+        >
+          {block.text}
+        </h3>
+      );
+    case "ul":
+      return (
+        <ul key={key} className="grid gap-3 sm:grid-cols-2">
+          {block.items.map((item, i) => (
+            <BulletItem key={i}>{renderParagraph(item, true)}</BulletItem>
+          ))}
+        </ul>
+      );
+    case "ol":
+      return (
+        <ol key={key} className="space-y-3">
+          {block.items.map((item, i) => (
+            <li key={i} className="flex items-start gap-4 text-foreground/85 leading-relaxed">
+              <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-[color:var(--gold)] font-display text-xs font-semibold text-[color:var(--gold-deep)]">
+                {i + 1}
+              </span>
+              <span className="pt-0.5">{renderParagraph(item, true)}</span>
+            </li>
+          ))}
+        </ol>
+      );
+    case "table":
+      return <ArticleTable key={key} table={block.table} />;
+  }
+}
+
+// Curated companions when a post sets relatedPostSlugs; otherwise the
+// existing same-category list.
+function continueReading(post: BlogPost) {
+  const curated = (post.relatedPostSlugs ?? [])
+    .map((s) => getPost(s))
+    .filter((p): p is BlogPost => !!p && p.slug !== post.slug);
+  if (curated.length > 0) return { heading: "Related insights", posts: curated.slice(0, 3) };
+  const sameCategory = BLOG_POSTS.filter(
+    (p) => p.category === post.category && p.slug !== post.slug,
+  );
+  return { heading: `More in ${post.category}`, posts: sameCategory.slice(0, 3) };
 }
 
 // Every current post is written under the same shared editorial identity, so
@@ -75,6 +246,8 @@ export const Route = createFileRoute("/blog/$slug")({
       imageWidth: p.imageWidth,
       imageHeight: p.imageHeight,
       imageAlt: p.imageAlt ?? p.title,
+      ogTitle: p.ogTitle,
+      ogDescription: p.ogDescription,
       type: "article",
     });
     return {
@@ -131,9 +304,7 @@ function BlogPostPage() {
     .map((s: string) => SERVICE_DETAILS.find((d) => d.slug === s))
     .filter(Boolean) as typeof SERVICE_DETAILS;
   const relatedCaseStudy = post.relatedCaseStudySlug ? getCaseStudy(post.relatedCaseStudySlug) : undefined;
-  const moreFromCategory = BLOG_POSTS.filter(
-    (p) => p.category === post.category && p.slug !== post.slug,
-  ).slice(0, 3);
+  const { heading: moreHeading, posts: moreFromCategory } = continueReading(post);
 
   return (
     <>
@@ -196,12 +367,23 @@ function BlogPostPage() {
         </figure>
 
         <div className="container-luxe mt-16 max-w-3xl space-y-12">
+          {post.intro && post.intro.length > 0 && (
+            <div className="space-y-5 text-muted-foreground leading-relaxed">
+              {post.intro.map((para, i) => (
+                <p key={i}>{renderParagraph(para, true)}</p>
+              ))}
+            </div>
+          )}
           {post.body.map((section) => (
             <section key={section.h2}>
               <h2 className="font-display text-2xl md:text-3xl font-bold tracking-tight">{section.h2}</h2>
-              <div className="mt-5 space-y-5 text-muted-foreground leading-relaxed">
-                {section.p.map((para, i) => <p key={i}>{renderParagraph(para)}</p>)}
-              </div>
+              {section.p && section.p.length > 0 && (
+                <div className="mt-5 space-y-5 text-muted-foreground leading-relaxed">
+                  {section.p.map((para, i) => (
+                    <p key={i}>{renderParagraph(para)}</p>
+                  ))}
+                </div>
+              )}
               {section.bullets && section.bullets.length > 0 && (
                 <ul className="mt-6 grid gap-3 sm:grid-cols-2">
                   {section.bullets.map((b) => (
@@ -211,6 +393,11 @@ function BlogPostPage() {
                     </li>
                   ))}
                 </ul>
+              )}
+              {section.blocks && section.blocks.length > 0 && (
+                <div className="mt-5 space-y-5 text-muted-foreground leading-relaxed">
+                  {section.blocks.map((block, i) => renderBlock(block, i))}
+                </div>
               )}
             </section>
           ))}
@@ -302,7 +489,7 @@ function BlogPostPage() {
           <div className="container-luxe">
             <p className="eyebrow">Continue reading</p>
             <h2 className="mt-5 font-display text-2xl md:text-3xl font-bold tracking-tight">
-              More in {post.category}
+              {moreHeading}
             </h2>
             <div className="mt-10 grid gap-6 md:grid-cols-3">
               {moreFromCategory.map((m, i) => (

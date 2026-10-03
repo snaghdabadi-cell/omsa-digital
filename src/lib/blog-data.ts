@@ -12,6 +12,7 @@ import websiteTrafficVsBusinessGrowth from "@/assets/website-traffic-vs-business
 import chatgptSponsoredAgents from "@/assets/chatgpt-sponsored-agents-conversational-advertising.webp";
 import googleRankingVsAiVisibility from "@/assets/google-ranking-vs-ai-visibility.webp";
 import googleSearchConsoleMultimodalSearch from "@/assets/google-search-console-multimodal-search.webp";
+import aiSearchVisibilityMeasurementGcc from "@/assets/ai-search-visibility-measurement-gcc.webp";
 
 // Blog-scoped link types, deliberately separate from services-data.ts's
 // ContentLink/AnchorLink (which has no "industry" kind and is used by the
@@ -29,13 +30,44 @@ export type BlogContentLink =
   // reference each other's topic (e.g. the AI-search and traffic-quality
   // articles). Uses the same typed /blog/$slug route as the "More in
   // category" cards already do.
-  | { kind: "post"; slug: string };
+  | { kind: "post"; slug: string }
+  // The /contact page, for a closing call to action inside body copy.
+  | { kind: "contact" };
 
 // Attaches a BlogContentLink to one exact substring ("anchor") of a
 // paragraph. Optional — most paragraphs are plain strings; only the ones
-// carrying a natural internal link use the object form.
+// carrying a natural internal link use the object form. `links` allows
+// several anchors in one paragraph (e.g. an internal link plus a primary
+// source citation); `link` stays for every existing single-link paragraph.
 export type BlogAnchorLink = { anchor: string; link: BlogContentLink };
-export type BlogParagraph = string | { text: string; link?: BlogAnchorLink };
+export type BlogParagraph =
+  string | { text: string; link?: BlogAnchorLink; links?: BlogAnchorLink[] };
+
+// A simple data table rendered as semantic <table> markup. `label` names
+// the table for assistive technology (screen-reader caption and the
+// scrollable region's label); it isn't shown visually. The first cell of
+// each row is rendered as the row header.
+export type BlogTable = { label: string; head: string[]; rows: string[][] };
+
+// Ordered content blocks for sections that need more than "paragraphs then
+// bullets": H3 subsections, lists between paragraphs, numbered steps and
+// tables. Text in blocks supports light inline markup (**bold**, *italic*,
+// `code`); legacy `p`/`bullets` text is rendered exactly as written.
+export type BlogBlock =
+  | { type: "p"; content: BlogParagraph }
+  | { type: "h3"; text: string }
+  | { type: "ul"; items: BlogParagraph[] }
+  | { type: "ol"; items: BlogParagraph[] }
+  | { type: "table"; table: BlogTable };
+
+export type BlogSection = {
+  h2: string;
+  p?: BlogParagraph[];
+  bullets?: string[];
+  // Optional — rendered after `p`/`bullets`. Posts with richer structure
+  // put their whole section here instead of `p`/`bullets`.
+  blocks?: BlogBlock[];
+};
 
 export type BlogPost = {
   slug: string;
@@ -47,6 +79,11 @@ export type BlogPost = {
   // `${title} — OMSA Digital & AI Studio` / excerpt for every existing post.
   metaTitle?: string;
   metaDescription?: string;
+  // Optional Open Graph/Twitter overrides, for posts whose social title or
+  // description intentionally differs from the <title>/meta description.
+  // Fall back to the values above when unset.
+  ogTitle?: string;
+  ogDescription?: string;
   category:
     | "SEO"
     | "Technical SEO"
@@ -86,7 +123,13 @@ export type BlogPost = {
   // (not just its category) genuinely matches that case study's industry —
   // left unset rather than guessed for posts with no clear match.
   relatedCaseStudySlug?: string;
-  body: { h2: string; p: BlogParagraph[]; bullets?: string[] }[];
+  // Optional curated "Continue reading" posts (BLOG_POSTS slugs), used
+  // instead of the default same-category list when set — for posts whose
+  // closest companions sit in more than one category.
+  relatedPostSlugs?: string[];
+  // Optional opening paragraphs shown before the first H2.
+  intro?: BlogParagraph[];
+  body: BlogSection[];
   // Optional visible FAQ, rendered near the end of the article and mirrored
   // into FAQPage JSON-LD (see blog.$slug.tsx) — same pattern already used by
   // services/industries/locations. Left unset for posts where a visible FAQ
@@ -1723,6 +1766,973 @@ export const BLOG_POSTS: BlogPost[] = [
       { q: "Can I see Google Lens traffic separately from Circle to Search?", a: "Google's documentation describes a single multimodal search type and doesn't document a breakdown by entry point, so you shouldn't expect to separate Lens, Circle to Search, image uploads and Chrome image searches in the report." },
       { q: "How do I optimize for Google Lens and visual search?", a: "Google hasn't published a Lens-specific checklist. Its image SEO best practices are the most relevant guidance: original, high-quality images placed near relevant text, descriptive alt text without keyword stuffing, crawlable HTML image elements, supported formats and fast pages. None of these guarantees visibility." },
       { q: "Does structured data help with AI Overviews or AI Mode?", a: "Google says structured data isn't required for generative AI features and there's no special markup to add, though it recommends structured data as part of overall SEO because it supports rich result eligibility. No markup guarantees appearance in AI Overviews, AI Mode or Google Lens." },
+    ],
+  },
+  {
+    slug: "how-to-measure-ai-search-visibility-gcc",
+    title: "How to Measure AI Search Visibility: A Practical Framework for GCC Businesses",
+    excerpt:
+      'There is no permanent "ChatGPT ranking" to chase. Here is a transparent, layer-by-layer framework for measuring how GCC businesses appear, are described, are cited and are chosen in AI-generated answers, in English and Arabic.',
+    metaTitle: "How to Measure AI Search Visibility: A GCC Framework | OMSA",
+    metaDescription:
+      "A practical framework for measuring AI search visibility in Oman, the UAE and the GCC: buyer questions, citations, entity accuracy, Arabic testing and AI traffic.",
+    ogTitle: "How to Measure AI Search Visibility: A Practical Framework for GCC Businesses",
+    ogDescription:
+      "Why there is no permanent ChatGPT ranking, and what to measure instead: buyer questions, recommendations, citations, entity accuracy, AI referrals and business outcomes.",
+    category: "AI",
+    date: "2026-10-03",
+    readMinutes: 22,
+    image: aiSearchVisibilityMeasurementGcc,
+    imageAlt:
+      "Laptop showing an AI search visibility framework, from buyer questions and AI answers to citations, entity accuracy and business outcomes, for Oman, UAE and GCC markets in English and Arabic.",
+    imageWidth: 1637,
+    imageHeight: 961,
+    relatedServices: ["seo", "google-analytics", "local-seo", "technical-seo"],
+    relatedPostSlugs: [
+      "google-ranking-vs-ai-visibility",
+      "ai-search-business-visibility",
+      "google-search-console-multimodal-search-seo-ai-visibility",
+    ],
+    intro: [
+      "A business owner in Muscat asks ChatGPT which companies can handle an office fit-out. A procurement manager in Dubai asks Google's AI Mode to compare logistics providers. A clinic manager in Abu Dhabi asks Copilot, in Arabic, which booking systems support Arabic invoices. Each time, an answer is assembled, a handful of businesses are named, a few sources are linked, and a decision moves forward, often before anyone visits a website.",
+      "Most marketing reports can't see that moment. Rankings, clicks and sessions describe what happened on a results page or a website. They say little about whether a business was named in an AI-generated answer, how it was described, which sources the answer relied on, or whether the answer led anywhere.",
+      "That gap narrowed in 2026. Google, Microsoft and Google Analytics now report parts of AI search activity directly. But no platform reports all of it, and none answers the question leadership teams actually ask: when our buyers ask AI for help, are we found, described correctly and chosen?",
+      "This article sets out a practical, transparent framework for measuring that, layer by layer, across platforms, markets, and the two languages most GCC businesses operate in. Throughout, we separate what platforms have documented from our own analysis and recommendations.",
+    ],
+    body: [
+      {
+        h2: "What is AI search visibility?",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "AI search visibility is the extent to which a business appears, is accurately described, is cited as a source and is recommended in AI-generated answers to the questions its potential customers ask, across the AI platforms, markets and languages that matter to that business.",
+          },
+          {
+            type: "p",
+            content:
+              'The definition is deliberately plural. It covers several distinct things that are often blended into one vague idea of "showing up in AI":',
+          },
+          {
+            type: "ul",
+            items: [
+              "**Presence:** whether the business is named at all.",
+              "**Representation:** whether it is recommended, listed as one option among several, or only mentioned in passing.",
+              "**Citation:** whether its own pages, or third-party pages about it, are linked as sources.",
+              "**Accuracy:** whether what the answer says about it (services, locations, credentials, contact details) is correct.",
+              "**Outcome:** whether any of this produces visits, enquiries and revenue.",
+            ],
+          },
+          {
+            type: "p",
+            content:
+              '"AI search" here means answer experiences that retrieve and summarise web information: Google AI Overviews and AI Mode, ChatGPT search, Microsoft Copilot and Bing\'s AI summaries, Perplexity and Gemini, among others. They differ in how they retrieve sources, how they display them and what they report to site owners. Measurement therefore has to be platform-aware rather than generic.',
+          },
+        ],
+      },
+      {
+        h2: 'Why "ranking #1 on ChatGPT" is the wrong goal',
+        blocks: [
+          {
+            type: "p",
+            content:
+              'Some vendors sell "ChatGPT rankings" as if AI answers were a fixed list with positions a business can occupy. That model doesn\'t hold up, and a measurement programme built on it produces misleading reports. There are five reasons.',
+          },
+          {
+            type: "ul",
+            items: [
+              "**Answers are generated, not looked up.** Ask the same question twice and the businesses named, their order and the sources cited can change.",
+              '**Wording changes the answer.** "Best accounting firm in Muscat" and "Which accountants in Muscat handle VAT for small companies?" are different questions to an AI system, even when the buyer\'s need is the same.',
+              "**Context changes the answer.** Location, language, conversation history and account settings can all affect what a given user sees.",
+              {
+                text: '**The system searches on the user\'s behalf.** Google says AI Overviews and AI Mode may use a "query fan-out" technique, issuing multiple related searches across subtopics and data sources to develop a response. The sources behind an answer depend on searches the user never sees.',
+                link: {
+                  anchor: "query fan-out",
+                  link: {
+                    kind: "external",
+                    href: "https://developers.google.com/search/docs/appearance/ai-features",
+                  },
+                },
+              },
+              "**Platforms change continually.** Models, indexes and interfaces are updated. An answer observed in March is evidence about March.",
+            ],
+          },
+          {
+            type: "p",
+            content: {
+              text: 'The platforms\' own reporting reflects this. Google\'s Generative AI performance report in Search Console reports impressions, not positions. Microsoft states that its AI Performance dashboard "does not indicate ranking, authority, or the role of any page within an individual answer", and describes its Citation Share metric as "an observational metric – not a ranking system".',
+              links: [
+                {
+                  anchor: "Generative AI performance report",
+                  link: {
+                    kind: "external",
+                    href: "https://support.google.com/webmasters/answer/16984139",
+                  },
+                },
+                {
+                  anchor: "Microsoft states",
+                  link: {
+                    kind: "external",
+                    href: "https://blogs.bing.com/webmaster/February-2026/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview",
+                  },
+                },
+                {
+                  anchor: "Citation Share metric",
+                  link: {
+                    kind: "external",
+                    href: "https://blogs.bing.com/search/June-2026/New-AI-Visibility-Insights-in-Bing-Webmaster-Tools-Intents-Topics-Citation-Share-Compare",
+                  },
+                },
+              ],
+            },
+          },
+          {
+            type: "p",
+            content:
+              "The useful replacement for a ranking is a rate. Across a defined set of buyer questions, run on defined platforms, in defined markets and languages, on defined dates: how often is the business present, recommended, cited and accurately described? A rate measured the same way over time is something a business can track and act on. A screenshot of one good answer isn't.",
+          },
+          {
+            type: "p",
+            content: {
+              text: "This is also why a strong Google ranking doesn't settle the question. We've written separately about businesses ranking well on Google but missing from AI answers. This article is about how to measure that gap properly.",
+              link: {
+                anchor: "ranking well on Google but missing from AI answers",
+                link: { kind: "post", slug: "google-ranking-vs-ai-visibility" },
+              },
+            },
+          },
+        ],
+      },
+      {
+        h2: "The measurement model: seven layers, seven different questions",
+        blocks: [
+          {
+            type: "p",
+            content: "The framework follows the path from a buyer's question to a business result:",
+          },
+          {
+            type: "p",
+            content:
+              "**Buyer question → AI presence → Brand representation → Citation and source → Entity accuracy → Traffic → Business outcome**",
+          },
+          {
+            type: "p",
+            content:
+              "Each layer answers a different question and uses different evidence. Just as important, no layer proves the one after it.",
+          },
+          {
+            type: "table",
+            table: {
+              label: "The seven-layer AI search visibility measurement model",
+              head: ["Layer", "The question it answers", "Main evidence", "What it does not prove"],
+              rows: [
+                [
+                  "1. Buyer question",
+                  "Which questions matter commercially, in which markets and languages?",
+                  "Sales and enquiry records, customer conversations, Search Console queries, Bing grounding queries",
+                  "That buyers ask AI those exact words",
+                ],
+                [
+                  "2. AI presence",
+                  "Is the business named in the answer?",
+                  "Controlled prompt testing",
+                  "That it was recommended",
+                ],
+                [
+                  "3. Brand representation",
+                  "Is it recommended, listed or only mentioned, and how is it framed?",
+                  "Controlled prompt testing",
+                  "That the user acted on it",
+                ],
+                [
+                  "4. Citation and source",
+                  "Which pages, ours and others', are used as sources?",
+                  "Prompt testing, Bing AI Performance, Search Console Generative AI report",
+                  "That the business was recommended",
+                ],
+                [
+                  "5. Entity accuracy",
+                  "Is what AI says about the business correct?",
+                  "Branded prompt testing against a verified fact sheet",
+                  "That accurate answers create demand",
+                ],
+                [
+                  "6. Traffic",
+                  "Do AI answers send visits, and to which pages?",
+                  "GA4 channels, referrers and UTM parameters",
+                  "The full extent of AI influence",
+                ],
+                [
+                  "7. Business outcome",
+                  "Do AI-related visits and journeys produce enquiries, opportunities and revenue?",
+                  "Key events, CRM source fields, self-reported attribution",
+                  "That AI was the sole cause",
+                ],
+              ],
+            },
+          },
+          { type: "p", content: "Four distinctions keep reports honest:" },
+          {
+            type: "ul",
+            items: [
+              '**A mention is not a recommendation.** Being named among "other providers", or in a cautionary context, is presence, not preference.',
+              "**A citation is not a recommendation.** An answer can cite your article to explain a concept and then recommend a competitor.",
+              "**A recommendation is not a visit.** Many answers are read and acted on without a click.",
+              "**A visit is not a lead.** And an AI-influenced journey can end in a phone call, a WhatsApp message or a branded Google search, with no AI referrer recorded anywhere.",
+            ],
+          },
+        ],
+      },
+      {
+        h2: "What the platforms report today (as of October 2026)",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "The measurement picture changed materially in 2026. Three first-party sources now provide direct data on AI search activity. None of them covers the whole landscape.",
+          },
+          { type: "h3", text: "Google Search Console: the Generative AI performance report" },
+          {
+            type: "p",
+            content: {
+              text: "Google introduced Search Generative AI performance reports in Search Console in June 2026, and its help documentation states that, as of August 31, 2026, the insights have been rolled out to all websites worldwide. The Search version shows how many times links to your site were shown in generative AI features on Google Search, currently AI Overviews and AI Mode, with breakdowns by page, country, device and date. The search type can be filtered between text-based and multimodal web searches.",
+              links: [
+                {
+                  anchor: "introduced Search Generative AI performance reports in Search Console",
+                  link: {
+                    kind: "external",
+                    href: "https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports",
+                  },
+                },
+                {
+                  anchor: "help documentation",
+                  link: {
+                    kind: "external",
+                    href: "https://support.google.com/webmasters/answer/16984139",
+                  },
+                },
+              ],
+            },
+          },
+          {
+            type: "p",
+            content:
+              "The metric is impressions. The report doesn't show clicks or the queries that triggered the AI feature. Google also notes that a property needs sufficient impressions for data to appear, that Search Labs experiments are excluded, and that when several links from the same site appear in one feature, they count as a single impression in chart totals.",
+          },
+          {
+            type: "p",
+            content:
+              "In practice, a site can now see which of its pages Google surfaces in AI Overviews and AI Mode, and in which countries. That's useful for checking whether a page earns AI visibility in Oman but not in the UAE, for example. What the report can't tell you is which questions led to those impressions, or whether your page was presented as a recommendation or as background.",
+          },
+          {
+            type: "p",
+            content: {
+              text: "Two more points matter for interpretation. First, Google's documentation says traffic from AI features is included in the overall Web search data in the standard Performance report, so AI Overview and AI Mode clicks aren't separated there. Second, Search Console now has a setting to include or exclude a site from Search generative AI features. If AI impressions drop to nothing, check that setting before drawing conclusions. For the related multimodal filter, see our explainer on how Search Console now reports multimodal searches.",
+              links: [
+                {
+                  anchor: "how Search Console now reports multimodal searches",
+                  link: {
+                    kind: "post",
+                    slug: "google-search-console-multimodal-search-seo-ai-visibility",
+                  },
+                },
+                {
+                  anchor: "Google's documentation says",
+                  link: {
+                    kind: "external",
+                    href: "https://developers.google.com/search/docs/appearance/ai-features",
+                  },
+                },
+              ],
+            },
+          },
+          { type: "h3", text: "Google Analytics 4: the AI Assistant channel" },
+          {
+            type: "p",
+            content: {
+              text: "GA4's default channel definitions now include an AI Assistant channel, which Google describes as the channel by which users arrive \"from sources like ChatGPT, Gemini, Deepseek, Copilot, or Grok\". Google's definition explicitly excludes AI Overviews and AI Mode. Visits from those features are classified as Organic Search, alongside other organic Google traffic.",
+              link: {
+                anchor: "AI Assistant channel",
+                link: {
+                  kind: "external",
+                  href: "https://support.google.com/analytics/answer/9756891",
+                },
+              },
+            },
+          },
+          {
+            type: "p",
+            content:
+              "So GA4 can show visits from AI assistants as their own channel, but clicks from Google's own AI search features can't be separated from organic search in the default channel reports. It's also worth checking where traffic from assistants outside Google's examples, such as Perplexity or Claude, lands in your property. If it sits under Referral, a custom channel group will bring it together.",
+          },
+          { type: "h3", text: "Bing Webmaster Tools: AI Performance" },
+          {
+            type: "p",
+            content: {
+              text: 'Microsoft launched AI Performance in Bing Webmaster Tools as a public preview on February 10, 2026. It reports total citations, average cited pages, page-level citation activity and grounding queries, which Microsoft describes as the "key phrases the AI used when retrieving content". Coverage spans Microsoft Copilot, AI-generated summaries in Bing and select partner integrations. Microsoft notes that the grounding query data is a sample of overall citation activity.',
+              link: {
+                anchor: "launched AI Performance in Bing Webmaster Tools",
+                link: {
+                  kind: "external",
+                  href: "https://blogs.bing.com/webmaster/February-2026/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview",
+                },
+              },
+            },
+          },
+          {
+            type: "p",
+            content: {
+              text: "In June 2026, Microsoft added four preview capabilities: Intents, which classifies grounding queries into categories such as informational, commercial and local; Topics, which clusters related queries into themes; Citation Share, the percentage of citations attributed to your site out of all citations shown for the same grounding query; and Compare, which overlays a previous period.",
+              link: {
+                anchor: "added four preview capabilities",
+                link: {
+                  kind: "external",
+                  href: "https://blogs.bing.com/search/June-2026/New-AI-Visibility-Insights-in-Bing-Webmaster-Tools-Intents-Topics-Citation-Share-Compare",
+                },
+              },
+            },
+          },
+          {
+            type: "p",
+            content:
+              "This is currently the most detailed first-party citation data available. Grounding queries are especially useful because they show the retrieval language an AI system actually used, which you can compare with the questions you test. The limit is scope: it covers Microsoft's surfaces only.",
+          },
+          { type: "h3", text: "OpenAI and ChatGPT search" },
+          {
+            type: "p",
+            content: {
+              text: "OpenAI's publisher guidance says ChatGPT automatically adds `utm_source=chatgpt.com` to referral URLs from ChatGPT search, so those clicks can be identified in standard analytics tools. OpenAI's crawler documentation explains that OAI-SearchBot is used to surface websites in ChatGPT's search features, and that sites which opt out of OAI-SearchBot will not be shown in ChatGPT search answers, though they can still appear as navigational links.",
+              links: [
+                {
+                  anchor: "OpenAI's publisher guidance",
+                  link: {
+                    kind: "external",
+                    href: "https://help.openai.com/en/articles/12627856-publishers-and-developers-faq",
+                  },
+                },
+                {
+                  anchor: "crawler documentation",
+                  link: { kind: "external", href: "https://developers.openai.com/api/docs/bots" },
+                },
+              ],
+            },
+          },
+          {
+            type: "p",
+            content:
+              "We haven't found an OpenAI reporting dashboard for site owners comparable to Search Console or Bing Webmaster Tools. For ChatGPT, measurement therefore relies on your own analytics plus controlled testing.",
+          },
+          { type: "h3", text: "First-party data versus prompt monitoring" },
+          {
+            type: "table",
+            table: {
+              label: "First-party AI search data compared with prompt monitoring",
+              head: ["Source", "Type", "What it shows", "What it doesn't show"],
+              rows: [
+                [
+                  "Search Console Generative AI report",
+                  "First-party (Google)",
+                  "Impressions in AI Overviews and AI Mode by page, country, device and date",
+                  "Clicks, triggering queries, how the page was used in the answer",
+                ],
+                [
+                  "Search Console Performance report (Web)",
+                  "First-party (Google)",
+                  "Clicks and impressions, with AI features included in Web totals",
+                  "AI-feature clicks as a separate figure",
+                ],
+                [
+                  "Bing Webmaster Tools AI Performance",
+                  "First-party (Microsoft)",
+                  "Citations, cited pages, sampled grounding queries, intents, topics, citation share",
+                  "Rankings, a page's role in an answer, non-Microsoft platforms",
+                ],
+                [
+                  "Google Analytics 4",
+                  "First-party (your analytics)",
+                  "AI-assistant referral sessions, landing pages, engagement, key events",
+                  "AI influence without a tracked click; Google AI feature clicks separately from organic",
+                ],
+                [
+                  "Controlled prompt testing (manual or tool-based)",
+                  "Observational sampling",
+                  "Mentions, recommendations, framing, cited sources, accuracy",
+                  "How often real users see the same answer",
+                ],
+              ],
+            },
+          },
+          {
+            type: "p",
+            content:
+              "Prompt monitoring, whether in a spreadsheet or a commercial platform, works by asking AI systems questions, much as a user would. It's valuable for scale and consistency. It doesn't give anyone privileged access to how an AI system selects or orders sources, and any \"visibility score\" a tool produces reflects that tool's own prompt set and method. Before relying on one, ask which prompts, platforms, locations, languages and run frequencies sit behind the number.",
+          },
+        ],
+      },
+      {
+        h2: "The framework: ten steps to a measurable baseline",
+        blocks: [
+          { type: "h3", text: "Step 1: Build a controlled buyer question set" },
+          {
+            type: "p",
+            content:
+              "Start from evidence of real demand, not from questions designed to make your brand appear. Good inputs include the questions prospects ask on sales calls and in enquiry forms, Search Console queries, Bing grounding queries, customer service conversations (including WhatsApp), and the way competitors describe the category.",
+          },
+          {
+            type: "p",
+            content:
+              "Organise the questions by intent. For a hypothetical commercial interiors company working in Muscat and Dubai, that might look like this:",
+          },
+          {
+            type: "ul",
+            items: [
+              '**Discovery:** "Who are the main office fit-out companies in Muscat?"',
+              '**Problem and solution:** "How long does a 500 square metre office fit-out usually take in Dubai, and what affects the timeline?"',
+              '**Comparison:** "What should I compare when choosing between fit-out contractors for a new office in Dubai?"',
+              '**Commercial investigation:** "Which fit-out companies in Oman offer design and build for corporate offices?"',
+            ],
+          },
+          {
+            type: "p",
+            content:
+              'Avoid prompts that describe your own differentiators, such as "Which fit-out firm in Muscat has an in-house joinery workshop and 20 years of experience?" Those test whether AI can find you when someone already describes you, not whether buyers will find you. If you use them at all, keep them in the branded set.',
+          },
+          {
+            type: "p",
+            content:
+              "As a starting point, 30 to 60 questions per language is manageable for most SMEs; businesses with several service lines and markets will need more. That's a practical recommendation, not a statistical threshold. Give the set a version number, and log every change.",
+          },
+          { type: "h3", text: "Step 2: Measure branded and non-branded questions separately" },
+          { type: "p", content: "They measure different things." },
+          {
+            type: "ul",
+            items: [
+              "**Non-branded questions** measure category discovery: whether AI introduces your business to someone who doesn't know it yet. This is usually the harder layer, and commercially the more valuable one.",
+              '**Branded questions** measure entity understanding: when someone asks about you by name ("What does [Company] do?", "Does [Company] work in Abu Dhabi?", "[Company] or [Competitor] for a corporate fit-out?"), is the answer accurate and fair?',
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "Blending the two inflates results, because branded questions almost always produce a mention. Report them side by side, never as one figure.",
+          },
+          { type: "h3", text: "Step 3: Segment by market" },
+          {
+            type: "p",
+            content:
+              "GCC buyers don't ask one regional question. A small company in Muscat and a large enterprise in Dubai may ask about the same service with different expectations around regulation, pricing, language and suppliers. Segment results by Oman, the UAE and the wider GCC where that reflects how you operate, and by city, such as Muscat, Dubai or Abu Dhabi, where your buyers search that way.",
+          },
+          {
+            type: "p",
+            content: {
+              text: "Don't add locations to prompts that buyers wouldn't add. Do record where each test was run from, because answers can reflect the tester's location as well as the words in the prompt. For Google, the country dimension in the Generative AI report gives a first-party view of the same split. A business with a real presence in Muscat and a growing one in Dubai should expect different results in each, and should measure them separately.",
+              link: { anchor: "Muscat", link: { kind: "location", city: "muscat" } },
+            },
+          },
+          { type: "h3", text: "Step 4: Test English and Arabic as matched pairs" },
+          {
+            type: "p",
+            content:
+              "Arabic and English AI answers can differ in which businesses appear, which sources are cited and how a business is described. Don't assume one mirrors the other.",
+          },
+          {
+            type: "p",
+            content:
+              "Test matched intent, not literal translation. Write each Arabic question the way an Arabic-speaking buyer would actually ask it. For formal B2B questions that may be Modern Standard Arabic; for everyday questions it may include Gulf phrasing. If your buyers use both, test both.",
+          },
+          { type: "p", content: "For each English and Arabic pair, record differences in:" },
+          {
+            type: "ul",
+            items: [
+              "presence: is the business named in one language but not the other?",
+              "recommendations: is it recommended in both, or only listed in one?",
+              "citations: does the Arabic answer cite your Arabic pages, your English pages, or third-party Arabic sources?",
+              "service understanding: are your services described the same way?",
+              "location understanding: does the answer place you in the right cities?",
+              "entity accuracy: is your name rendered consistently in Arabic script?",
+            ],
+          },
+          {
+            type: "p",
+            content: {
+              text: "That last point matters more than it looks. If a business's name is transliterated three different ways across its website, directory listings and social profiles, AI systems have three candidate names to reconcile. In our experience, this is one of the most common sources of Arabic entity errors. Our guide to bilingual SEO covers the site-level side.",
+              link: {
+                anchor: "bilingual SEO",
+                link: { kind: "post", slug: "bilingual-seo-gcc-arabic-english" },
+              },
+            },
+          },
+          {
+            type: "p",
+            content:
+              "Patterns worth looking for, treated as hypotheses to check rather than expectations: a business visible in English but absent in Arabic because it has no real Arabic service pages; Arabic answers citing directories rather than the business's own site; or Arabic answers placing the business in the wrong city.",
+          },
+          { type: "h3", text: "Step 5: Fix the testing protocol" },
+          {
+            type: "p",
+            content:
+              'Comparisons over time only mean something if the method stays the same. If prompts, platforms or test conditions change from month to month, a "change in visibility" may simply be a change in the test. Record every run in a consistent structure:',
+          },
+          {
+            type: "table",
+            table: {
+              label: "AI search visibility testing protocol fields",
+              head: ["Field", "What to record", "Example"],
+              rows: [
+                ["Prompt ID", "A stable identifier", "NB-DIS-014"],
+                [
+                  "Prompt text",
+                  "The exact wording",
+                  '"Who are the main office fit-out companies in Muscat?"',
+                ],
+                ["Market", "Country and city", "Oman, Muscat"],
+                ["Language", "Language and variety", "Arabic (Gulf phrasing)"],
+                ["Intent", "Discovery, problem/solution, comparison or commercial", "Discovery"],
+                ["Branded", "Branded or non-branded", "Non-branded"],
+                ["Topic", "Service line", "Office fit-out"],
+                ["Platform", "Platform and mode", "ChatGPT (search), Google AI Mode, Copilot"],
+                ["Test date and run", "Date and run number", "2026-10-06, run 2 of 3"],
+                [
+                  "Test conditions",
+                  "Account state, network location, device",
+                  "Logged out, Muscat network, desktop",
+                ],
+                ["Brand mentioned", "Yes or no", "Yes"],
+                [
+                  "Representation",
+                  "Recommended, listed, mentioned or absent",
+                  "Listed, fourth of six",
+                ],
+                ["Website cited", "Yes or no, and which URL", "Yes, office fit-out service page"],
+                [
+                  "Entity accuracy",
+                  "Accurate, minor error, material error or not applicable",
+                  "Minor error: says Dubai only",
+                ],
+                ["Sources", "Every cited domain, by type", "Directory, news site, competitor site"],
+                ["Competitors named", "Names", "(as observed)"],
+                ["Observations", "Anything notable", 'Framed as "smaller option"'],
+              ],
+            },
+          },
+          { type: "p", content: "A few rules make the data more reliable:" },
+          {
+            type: "ul",
+            items: [
+              "Run each prompt more than once per cycle (three runs is a reasonable default) and record the spread, not a single answer.",
+              "Start each run in a fresh session with no prior conversation.",
+              "Keep account state, device and network location consistent between cycles.",
+              "Save the full answer text or a screenshot, so findings can be checked later.",
+              "Change the prompt set only between cycles, and log what changed.",
+            ],
+          },
+          { type: "h3", text: "Step 6: Score presence on five separate dimensions" },
+          {
+            type: "p",
+            content: "Each dimension answers a different question, so keep them apart:",
+          },
+          {
+            type: "ul",
+            items: [
+              "**Mention presence:** the share of runs in which the business is named.",
+              "**Recommendation or list presence:** the share of runs in which it's recommended or included as an option for the buyer's need. Note the framing as well: positive, neutral or cautionary.",
+              "**Citation presence:** the share of runs in which at least one of your own URLs is cited.",
+              "**Entity accuracy:** the share of branded answers with no material errors, with every error logged next to the correct fact.",
+              "**Source influence:** which third-party sources are cited when you're described or recommended, and which are cited when competitors are.",
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "Report each dimension by platform, market and language. Averaging across them hides the answers you need.",
+          },
+          { type: "h3", text: "Step 7: Analyse citations and sources" },
+          {
+            type: "p",
+            content:
+              "For each answer, sort the cited sources into types: your own pages; third-party pages about you; directories and listings; news and publishers; forums and community sites; official and research sources such as government bodies, regulators or chambers of commerce; and competitor sites. Then ask:",
+          },
+          {
+            type: "ul",
+            items: [
+              "Which of your pages are cited, and for which topics? Are they the pages you'd want cited?",
+              "When you're absent, which sources are cited instead, and what do they offer that your pages don't? Look for specificity, local detail, Arabic coverage, recency and independent verification.",
+              "Are competitors represented through their own sites or through third parties?",
+              "Which sources describe your business inaccurately?",
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "Then compare with first-party data. If the pages cited in your tests also appear in Search Console's Generative AI report and in Bing's page-level citations, you can be more confident in the pattern. Where they disagree, investigate rather than pick the more flattering source.",
+          },
+          { type: "h3", text: "Step 8: Connect testing with first-party data" },
+          {
+            type: "p",
+            content:
+              "Your prompt set is a sample you chose. First-party data is a record of what actually happened on a platform, but without the full context. Use each to check the other:",
+          },
+          {
+            type: "ul",
+            items: [
+              "Bing grounding queries and intents show which questions retrieve your content. Add relevant ones you didn't anticipate to the next version of your prompt set.",
+              "The Search Console Generative AI report shows which pages earn AI impressions, in which countries, and how that changes over time. Compare those pages' AI impressions with their Web search performance.",
+              "When tests show you cited but first-party data shows little, or the reverse, note it. Tests are a sample; first-party data is limited to one platform.",
+            ],
+          },
+          { type: "h3", text: "Step 9: Measure AI referral traffic carefully" },
+          { type: "p", content: "What can reliably be measured:" },
+          {
+            type: "ul",
+            items: [
+              "sessions from recognised AI assistants, through GA4's AI Assistant channel, referrers, or `utm_source=chatgpt.com`",
+              "landing pages, which show what content AI is sending people to",
+              "engagement, such as engaged sessions and pages viewed",
+              "key events, such as form submissions, calls, WhatsApp clicks and bookings",
+              "enquiries and conversions from those sessions",
+            ],
+          },
+          {
+            type: "p",
+            content: {
+              text: 'Three practical steps help. Check where each AI source lands in your GA4 property, and build a custom channel group to capture assistants not covered by the default definition. Set up key events for real enquiries; our guide to measuring enquiries rather than traffic in GA4 covers this in detail. And add an optional "How did you hear about us?" field to enquiry forms, with an option such as "AI assistant (ChatGPT, Gemini, Copilot or similar)", and ask the same question on sales calls. Self-reported answers are imperfect, but they capture journeys analytics can\'t.',
+              link: {
+                anchor: "measuring enquiries rather than traffic in GA4",
+                link: { kind: "post", slug: "ga4-professional-services-gcc" },
+              },
+            },
+          },
+          { type: "p", content: "The limitations are real:" },
+          {
+            type: "ul",
+            items: [
+              "Clicks from Google AI Overviews and AI Mode are counted as Organic Search in GA4.",
+              "Not every click from an AI platform arrives with a referrer or UTM parameter; copied links and some apps or browsers lose them, and those visits typically appear as Direct.",
+              "Many AI-influenced journeys involve no click at all. Someone reads an answer, then searches your name, calls, or sends a WhatsApp message.",
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "So don't reclassify Direct traffic as AI traffic. A rise in direct visits or branded searches after your AI visibility improves is a signal worth noting, not proof.",
+          },
+          { type: "h3", text: "Step 10: Connect visibility to business outcomes" },
+          {
+            type: "p",
+            content:
+              "The full chain runs from AI discovery to brand or website interaction, then to an enquiry, a qualified lead, an opportunity and revenue. Not every stage is observable, so report what you can see and label it clearly:",
+          },
+          {
+            type: "ul",
+            items: [
+              "**Observable:** AI-referred sessions and their key events; CRM leads with a recorded source; self-reported AI discovery; revenue from those leads.",
+              "**Partly observable:** trends in branded search and direct traffic; mentions of AI on sales calls.",
+              "**Not observable:** answers read without any action; shortlists you were left off; decisions made inside AI conversations you never see.",
+            ],
+          },
+          {
+            type: "p",
+            content: {
+              text: 'Report "AI-attributed" outcomes (tracked directly) separately from "AI-influenced" outcomes (self-reported or inferred). Visibility that never connects to enquiries is a vanity metric, and more traffic isn\'t the same as more business.',
+              link: {
+                anchor: "more traffic isn't the same as more business",
+                link: { kind: "post", slug: "website-traffic-vs-business-growth" },
+              },
+            },
+          },
+        ],
+      },
+      {
+        h2: "An AI search visibility scorecard",
+        blocks: [
+          {
+            type: "p",
+            content:
+              'A single "AI visibility score" is tempting, but it would mean weighting unlike things against each other: a citation in Copilot, a recommendation in an Arabic ChatGPT answer, a qualified lead. Any such weighting is a judgement call, and the combined number hides the specific gap you need to fix. A multidimensional scorecard reports each dimension separately, with its method and its data source.',
+          },
+          {
+            type: "table",
+            table: {
+              label: "AI search visibility scorecard",
+              head: [
+                "Dimension",
+                "What it measures",
+                "How it's measured",
+                "Data source",
+                "Reported as",
+              ],
+              rows: [
+                [
+                  "Prompt coverage",
+                  "How much of the agreed buyer question set is being tested",
+                  "Questions tested ÷ questions in the set, by service, market and language",
+                  "Internal",
+                  "Count and percentage",
+                ],
+                [
+                  "Non-branded discovery",
+                  "Presence when the buyer doesn't know you",
+                  "Mention rate across non-branded runs",
+                  "Prompt testing",
+                  "Percentage by platform, market and language",
+                ],
+                [
+                  "Branded understanding",
+                  "Quality of answers about you by name",
+                  "Share of branded answers that are accurate and complete",
+                  "Prompt testing",
+                  "Percentage plus error log",
+                ],
+                [
+                  "Recommendation presence",
+                  "Being recommended or listed, not just named",
+                  "Recommendation and list rate, with framing",
+                  "Prompt testing",
+                  "Percentage plus framing notes",
+                ],
+                [
+                  "Citation visibility",
+                  "Your own pages used as sources",
+                  "Own-URL citation rate; Bing citations and citation share; Search Console AI impressions by page",
+                  "Testing and first-party",
+                  "Percentage and trend",
+                ],
+                [
+                  "Entity accuracy",
+                  "Correct name, services, locations, contact details and credentials",
+                  "Errors per branded answer, checked against a verified fact sheet",
+                  "Prompt testing",
+                  "Error count by severity",
+                ],
+                [
+                  "Market coverage",
+                  "Consistency across Oman, the UAE, the GCC and key cities",
+                  "Discovery and recommendation rates per market",
+                  "Testing and Search Console country data",
+                  "Comparison by market",
+                ],
+                [
+                  "Language coverage",
+                  "Parity between English and Arabic",
+                  "Matched-pair comparison across all layers",
+                  "Prompt testing",
+                  "Gap per layer",
+                ],
+                [
+                  "Source ecosystem",
+                  "Third-party sources that describe you and competitors",
+                  "Cited domains by type and frequency",
+                  "Testing and Bing",
+                  "Source map",
+                ],
+                [
+                  "Referral traffic",
+                  "Volume and quality of AI-referred visits",
+                  "Sessions, landing pages, engagement, key events",
+                  "GA4",
+                  "Trend",
+                ],
+                [
+                  "Business outcomes",
+                  "Enquiries, leads and revenue linked to AI",
+                  "CRM source fields and self-reported attribution",
+                  "CRM",
+                  "Attributed versus influenced",
+                ],
+              ],
+            },
+          },
+          {
+            type: "p",
+            content:
+              "Every figure on the scorecard should carry its sample: the number of prompts and runs, the platforms, and the test dates.",
+          },
+        ],
+      },
+      {
+        h2: "A worked example (hypothetical)",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "*This is an illustration of how the framework reads in practice. It is not a client result, and the findings are invented for explanation.*",
+          },
+          {
+            type: "p",
+            content:
+              "A mid-sized professional services firm with offices in Muscat and Dubai runs its first baseline: 40 non-branded and 15 branded questions in English, matched Arabic versions, three runs each on ChatGPT, Google AI Mode and Copilot, tested from Muscat and Dubai.",
+          },
+          {
+            type: "p",
+            content:
+              "The results tell several separate stories. Branded answers in English are accurate, but Arabic answers describe the firm as Dubai-only. The firm appears in UAE comparison questions but rarely in Oman discovery questions. When it is cited, the source is usually a business directory rather than its own service pages. Bing's grounding queries show its blog articles being retrieved for informational topics, while its service pages aren't. GA4 shows a small number of AI-assistant sessions, mostly landing on blog posts and producing few enquiries.",
+          },
+          {
+            type: "p",
+            content:
+              "Each finding points to different work: correcting Arabic entity information, building Oman-specific service content, strengthening service pages so they answer buyer questions directly, checking directory listings for accuracy, and improving the routes from blog content to an enquiry. A single score would have hidden all of it.",
+          },
+        ],
+      },
+      {
+        h2: "Limitations: what this framework can't tell you",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "Any honest AI visibility report should state its limits. These are the main ones:",
+          },
+          {
+            type: "ul",
+            items: [
+              "**Variability:** generated answers vary between runs. Results are estimates from samples, not fixed facts.",
+              "**Sampling:** the prompt set is a chosen sample and can't represent every question buyers ask. Results describe the tested set.",
+              "**Prompt wording:** small wording changes can change answers. Comparisons hold only for identical wording.",
+              "**Platform differences:** results on one platform say little about another.",
+              "**Language:** Arabic and English results can differ, and so can different varieties of Arabic.",
+              "**Location:** answers can depend on where the user is. Tests from one network may not match what buyers elsewhere see.",
+              "**Personalisation:** logged-in users with conversation history or saved preferences may see different answers from your test conditions.",
+              "**Changing systems:** models, retrieval systems and indexes change. A trend may reflect a platform change rather than anything you did.",
+              "**Different signals:** mentions, citations and recommendations are different things, and combining them overstates visibility.",
+              "**Referral attribution:** it's incomplete. Google's AI feature clicks are counted within organic search, and visits without a referrer appear as direct traffic.",
+              "**Platform reporting:** Search Console's Generative AI report shows impressions without queries or clicks; Bing's report covers Microsoft surfaces only and samples grounding queries; we found no comparable OpenAI dashboard for site owners.",
+              "**Invisible journeys:** no method observes answers that were read and acted on without a trace.",
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "For that reason, every report should open with a short methodology statement covering:",
+          },
+          {
+            type: "ul",
+            items: [
+              "**What was tested:** prompt set version, number of prompts, intent mix, branded and non-branded split.",
+              "**Where:** platforms and modes, markets, and the locations tests were run from.",
+              "**When:** test dates and number of runs.",
+              "**How:** account state, devices, scoring definitions, and who scored the answers.",
+              "**What was observable:** the data sources used and what each one covers.",
+              "**What was not observable:** the gaps listed above that apply to this report.",
+            ],
+          },
+        ],
+      },
+      {
+        h2: "Turning measurement into action",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "Measurement is only useful if it changes what you do. Each type of gap points to a different area of work, though none of these steps guarantees inclusion in any AI answer.",
+          },
+          {
+            type: "p",
+            content: {
+              text: "Absence from non-branded discovery usually points to content depth and authority: pages that genuinely answer the questions buyers ask, and a presence in the third-party sources AI systems cite for your category. That is core SEO strategy work rather than a separate AI tactic.",
+              link: { anchor: "SEO strategy", link: { kind: "service", slug: "seo" } },
+            },
+          },
+          { type: "p", content: "The other gaps map out like this:" },
+          {
+            type: "ul",
+            items: [
+              "**Mentioned but not recommended:** add specificity and evidence, such as credentials, project detail, clear statements of who the service is for and where it's delivered.",
+              "**Cited only through third parties:** build your own pages that answer the question directly.",
+              "**Arabic gaps:** create genuine Arabic content, not thin machine translations of English pages.",
+              "**Traffic without enquiries:** fix landing pages and conversion routes.",
+            ],
+          },
+          {
+            type: "p",
+            content: {
+              text: "Entity errors need consistency first: the same business name, services, locations and contact details across your website, Google Business Profile, directories and social profiles, in both languages, with structured data that matches visible content. Much of that overlaps with good local SEO.",
+              link: { anchor: "local SEO", link: { kind: "service", slug: "local-seo" } },
+            },
+          },
+          {
+            type: "p",
+            content: {
+              text: "AI-referred traffic that doesn't convert is usually a measurement and conversion problem as much as a visibility one, which is where analytics and tracking come in.",
+              link: {
+                anchor: "analytics and tracking",
+                link: { kind: "service", slug: "google-analytics" },
+              },
+            },
+          },
+          {
+            type: "p",
+            content: {
+              text: "Google is direct about the limits of optimisation. It says its generative AI features are rooted in its core Search ranking and quality systems, that SEO best practices remain relevant, that there's no special schema.org markup or AI text file needed to appear in them, and that indexing and serving aren't guaranteed even when a page meets every requirement. The same honesty applies to every platform: better information makes accurate inclusion more likely, not certain. For the broader picture of how customers are finding businesses through AI, see our earlier guide.",
+              links: [
+                {
+                  anchor: "how customers are finding businesses through AI",
+                  link: { kind: "post", slug: "ai-search-business-visibility" },
+                },
+                {
+                  anchor: "core Search ranking and quality systems",
+                  link: {
+                    kind: "external",
+                    href: "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide",
+                  },
+                },
+              ],
+            },
+          },
+          {
+            type: "p",
+            content:
+              "As a cadence, we recommend running the core prompt set monthly, a full review each quarter (including Arabic pairs, source analysis and first-party data), and a fresh baseline after any major site change or migration.",
+          },
+        ],
+      },
+      {
+        h2: "Where to start",
+        blocks: [
+          { type: "p", content: "You can build a credible first baseline in a few weeks:" },
+          {
+            type: "ol",
+            items: [
+              "Confirm eligibility: important pages are indexable and eligible for snippets, robots.txt doesn't block Googlebot, Bingbot or OAI-SearchBot, and Search Console's generative AI setting is what you intend.",
+              "Open the data you already have: Search Console's Generative AI report, Bing Webmaster Tools' AI Performance report, and GA4's AI Assistant channel.",
+              "Write a verified fact sheet for your business in English and Arabic: legal and trading names, Arabic spelling, services, locations, contact details and credentials.",
+              "Build version one of your buyer question set and run the first baseline.",
+              "Write the methodology statement before you read the results.",
+            ],
+          },
+          {
+            type: "p",
+            content: {
+              text: "Technical eligibility comes first because none of the later layers can be measured for pages AI systems can't reach.",
+              link: { anchor: "eligibility", link: { kind: "service", slug: "technical-seo" } },
+            },
+          },
+          {
+            type: "p",
+            content: {
+              text: "If you'd like help building that baseline, from the bilingual prompt set and testing protocol to first-party data and reporting, talk to us. We'll be as clear about what the measurement can't show as about what it can.",
+              link: { anchor: "talk to us", link: { kind: "contact" } },
+            },
+          },
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "Can a business rank #1 on ChatGPT?",
+        a: "Not in any stable sense. AI answers are generated for each question and can change with wording, context, location and platform updates. What a business can measure is how often it is mentioned, recommended, cited and accurately described across a defined set of buyer questions, tested consistently over time.",
+      },
+      {
+        q: "How often should AI search visibility be measured?",
+        a: "A monthly run of a fixed core prompt set, with a fuller quarterly review that covers Arabic and English pairs, citation sources and first-party platform data, is a practical rhythm for most businesses. Re-baseline after major website changes.",
+      },
+      {
+        q: "Can ChatGPT traffic be tracked in Google Analytics?",
+        a: "Partly. OpenAI says ChatGPT search adds utm_source=chatgpt.com to referral links, and GA4's AI Assistant channel groups visits from sources such as ChatGPT, Gemini and Copilot. Visits that arrive without a referrer or UTM parameter appear elsewhere, usually as direct traffic, and journeys without a click aren't tracked at all.",
+      },
+      {
+        q: "Does Google report visibility in AI Overviews and AI Mode?",
+        a: "Yes. Search Console's Generative AI performance report shows impressions in AI Overviews and AI Mode by page, country, device and date. It doesn't show clicks or the queries that triggered the AI feature, and in GA4, clicks from these features are counted as Organic Search.",
+      },
     ],
   },
 ];
