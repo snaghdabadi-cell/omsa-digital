@@ -40,9 +40,12 @@ import { Route as IndustriesSlugRouteImport } from './routes/industries.$slug'
 import { Route as LocationsCityRouteImport } from './routes/locations.$city'
 import { Route as ResourcesCategoryRouteImport } from './routes/resources.$category'
 import { Route as ReviewAlBaraa7k4mRouteImport } from './routes/review.al-baraa-7k4m'
+import { Route as ReviewDahDesign4m8kRouteImport } from './routes/review.dah-design-4m8k'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 import { Route as ToolsSlugRouteImport } from './routes/tools.$slug'
 import { Route as ResourcesCategorySlugRouteImport } from './routes/resources.$category.$slug'
+import { Route as ReviewDahDesign4m8kIndexRouteImport } from './routes/review.dah-design-4m8k.index'
+import { Route as ReviewDahDesign4m8kPlanRouteImport } from './routes/review.dah-design-4m8k.plan'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -200,6 +203,11 @@ const ReviewAlBaraa7k4mRoute = ReviewAlBaraa7k4mRouteImport.update({
   path: '/review/al-baraa-7k4m',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ReviewDahDesign4m8kRoute = ReviewDahDesign4m8kRouteImport.update({
+  id: '/review/dah-design-4m8k',
+  path: '/review/dah-design-4m8k',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicesSlugRoute = ServicesSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -214,6 +222,17 @@ const ResourcesCategorySlugRoute = ResourcesCategorySlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => ResourcesCategoryRoute,
+} as any)
+const ReviewDahDesign4m8kIndexRoute =
+  ReviewDahDesign4m8kIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => ReviewDahDesign4m8kRoute,
+  } as any)
+const ReviewDahDesign4m8kPlanRoute = ReviewDahDesign4m8kPlanRouteImport.update({
+  id: '/plan',
+  path: '/plan',
+  getParentRoute: () => ReviewDahDesign4m8kRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -248,9 +267,12 @@ export interface FileRoutesByFullPath {
   '/locations/$city': typeof LocationsCityRoute
   '/resources/$category': typeof ResourcesCategoryRouteWithChildren
   '/review/al-baraa-7k4m': typeof ReviewAlBaraa7k4mRoute
+  '/review/dah-design-4m8k': typeof ReviewDahDesign4m8kRouteWithChildren
   '/services/$slug': typeof ServicesSlugRoute
   '/tools/$slug': typeof ToolsSlugRoute
   '/resources/$category/$slug': typeof ResourcesCategorySlugRoute
+  '/review/dah-design-4m8k/plan': typeof ReviewDahDesign4m8kPlanRoute
+  '/review/dah-design-4m8k/': typeof ReviewDahDesign4m8kIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -287,6 +309,8 @@ export interface FileRoutesByTo {
   '/services/$slug': typeof ServicesSlugRoute
   '/tools/$slug': typeof ToolsSlugRoute
   '/resources/$category/$slug': typeof ResourcesCategorySlugRoute
+  '/review/dah-design-4m8k/plan': typeof ReviewDahDesign4m8kPlanRoute
+  '/review/dah-design-4m8k': typeof ReviewDahDesign4m8kIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -321,9 +345,12 @@ export interface FileRoutesById {
   '/locations/$city': typeof LocationsCityRoute
   '/resources/$category': typeof ResourcesCategoryRouteWithChildren
   '/review/al-baraa-7k4m': typeof ReviewAlBaraa7k4mRoute
+  '/review/dah-design-4m8k': typeof ReviewDahDesign4m8kRouteWithChildren
   '/services/$slug': typeof ServicesSlugRoute
   '/tools/$slug': typeof ToolsSlugRoute
   '/resources/$category/$slug': typeof ResourcesCategorySlugRoute
+  '/review/dah-design-4m8k/plan': typeof ReviewDahDesign4m8kPlanRoute
+  '/review/dah-design-4m8k/': typeof ReviewDahDesign4m8kIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -359,9 +386,12 @@ export interface FileRouteTypes {
     | '/locations/$city'
     | '/resources/$category'
     | '/review/al-baraa-7k4m'
+    | '/review/dah-design-4m8k'
     | '/services/$slug'
     | '/tools/$slug'
     | '/resources/$category/$slug'
+    | '/review/dah-design-4m8k/plan'
+    | '/review/dah-design-4m8k/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -398,6 +428,8 @@ export interface FileRouteTypes {
     | '/services/$slug'
     | '/tools/$slug'
     | '/resources/$category/$slug'
+    | '/review/dah-design-4m8k/plan'
+    | '/review/dah-design-4m8k'
   id:
     | '__root__'
     | '/'
@@ -431,9 +463,12 @@ export interface FileRouteTypes {
     | '/locations/$city'
     | '/resources/$category'
     | '/review/al-baraa-7k4m'
+    | '/review/dah-design-4m8k'
     | '/services/$slug'
     | '/tools/$slug'
     | '/resources/$category/$slug'
+    | '/review/dah-design-4m8k/plan'
+    | '/review/dah-design-4m8k/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -461,6 +496,7 @@ export interface RootRouteChildren {
   TermsRoute: typeof TermsRoute
   ToolsRoute: typeof ToolsRouteWithChildren
   ReviewAlBaraa7k4mRoute: typeof ReviewAlBaraa7k4mRoute
+  ReviewDahDesign4m8kRoute: typeof ReviewDahDesign4m8kRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -682,6 +718,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ReviewAlBaraa7k4mRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/review/dah-design-4m8k': {
+      id: '/review/dah-design-4m8k'
+      path: '/review/dah-design-4m8k'
+      fullPath: '/review/dah-design-4m8k'
+      preLoaderRoute: typeof ReviewDahDesign4m8kRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services/$slug': {
       id: '/services/$slug'
       path: '/$slug'
@@ -702,6 +745,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/resources/$category/$slug'
       preLoaderRoute: typeof ResourcesCategorySlugRouteImport
       parentRoute: typeof ResourcesCategoryRoute
+    }
+    '/review/dah-design-4m8k/': {
+      id: '/review/dah-design-4m8k/'
+      path: '/'
+      fullPath: '/review/dah-design-4m8k/'
+      preLoaderRoute: typeof ReviewDahDesign4m8kIndexRouteImport
+      parentRoute: typeof ReviewDahDesign4m8kRoute
+    }
+    '/review/dah-design-4m8k/plan': {
+      id: '/review/dah-design-4m8k/plan'
+      path: '/plan'
+      fullPath: '/review/dah-design-4m8k/plan'
+      preLoaderRoute: typeof ReviewDahDesign4m8kPlanRouteImport
+      parentRoute: typeof ReviewDahDesign4m8kRoute
     }
   }
 }
@@ -819,6 +876,19 @@ const ToolsRouteChildren: ToolsRouteChildren = {
 
 const ToolsRouteWithChildren = ToolsRoute._addFileChildren(ToolsRouteChildren)
 
+interface ReviewDahDesign4m8kRouteChildren {
+  ReviewDahDesign4m8kPlanRoute: typeof ReviewDahDesign4m8kPlanRoute
+  ReviewDahDesign4m8kIndexRoute: typeof ReviewDahDesign4m8kIndexRoute
+}
+
+const ReviewDahDesign4m8kRouteChildren: ReviewDahDesign4m8kRouteChildren = {
+  ReviewDahDesign4m8kPlanRoute: ReviewDahDesign4m8kPlanRoute,
+  ReviewDahDesign4m8kIndexRoute: ReviewDahDesign4m8kIndexRoute,
+}
+
+const ReviewDahDesign4m8kRouteWithChildren =
+  ReviewDahDesign4m8kRoute._addFileChildren(ReviewDahDesign4m8kRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SplatRoute: SplatRoute,
@@ -845,6 +915,7 @@ const rootRouteChildren: RootRouteChildren = {
   TermsRoute: TermsRoute,
   ToolsRoute: ToolsRouteWithChildren,
   ReviewAlBaraa7k4mRoute: ReviewAlBaraa7k4mRoute,
+  ReviewDahDesign4m8kRoute: ReviewDahDesign4m8kRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
