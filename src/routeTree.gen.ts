@@ -39,6 +39,7 @@ import { Route as CaseStudiesSlugRouteImport } from './routes/case-studies.$slug
 import { Route as IndustriesSlugRouteImport } from './routes/industries.$slug'
 import { Route as LocationsCityRouteImport } from './routes/locations.$city'
 import { Route as ResourcesCategoryRouteImport } from './routes/resources.$category'
+import { Route as ReviewAlBaraa7k4mRouteImport } from './routes/review.al-baraa-7k4m'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 import { Route as ToolsSlugRouteImport } from './routes/tools.$slug'
 import { Route as ResourcesCategorySlugRouteImport } from './routes/resources.$category.$slug'
@@ -194,6 +195,11 @@ const ResourcesCategoryRoute = ResourcesCategoryRouteImport.update({
   path: '/$category',
   getParentRoute: () => ResourcesRoute,
 } as any)
+const ReviewAlBaraa7k4mRoute = ReviewAlBaraa7k4mRouteImport.update({
+  id: '/review/al-baraa-7k4m',
+  path: '/review/al-baraa-7k4m',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicesSlugRoute = ServicesSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -241,6 +247,7 @@ export interface FileRoutesByFullPath {
   '/industries/$slug': typeof IndustriesSlugRoute
   '/locations/$city': typeof LocationsCityRoute
   '/resources/$category': typeof ResourcesCategoryRouteWithChildren
+  '/review/al-baraa-7k4m': typeof ReviewAlBaraa7k4mRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/tools/$slug': typeof ToolsSlugRoute
   '/resources/$category/$slug': typeof ResourcesCategorySlugRoute
@@ -276,6 +283,7 @@ export interface FileRoutesByTo {
   '/industries/$slug': typeof IndustriesSlugRoute
   '/locations/$city': typeof LocationsCityRoute
   '/resources/$category': typeof ResourcesCategoryRouteWithChildren
+  '/review/al-baraa-7k4m': typeof ReviewAlBaraa7k4mRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/tools/$slug': typeof ToolsSlugRoute
   '/resources/$category/$slug': typeof ResourcesCategorySlugRoute
@@ -312,6 +320,7 @@ export interface FileRoutesById {
   '/industries/$slug': typeof IndustriesSlugRoute
   '/locations/$city': typeof LocationsCityRoute
   '/resources/$category': typeof ResourcesCategoryRouteWithChildren
+  '/review/al-baraa-7k4m': typeof ReviewAlBaraa7k4mRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/tools/$slug': typeof ToolsSlugRoute
   '/resources/$category/$slug': typeof ResourcesCategorySlugRoute
@@ -349,6 +358,7 @@ export interface FileRouteTypes {
     | '/industries/$slug'
     | '/locations/$city'
     | '/resources/$category'
+    | '/review/al-baraa-7k4m'
     | '/services/$slug'
     | '/tools/$slug'
     | '/resources/$category/$slug'
@@ -384,6 +394,7 @@ export interface FileRouteTypes {
     | '/industries/$slug'
     | '/locations/$city'
     | '/resources/$category'
+    | '/review/al-baraa-7k4m'
     | '/services/$slug'
     | '/tools/$slug'
     | '/resources/$category/$slug'
@@ -419,6 +430,7 @@ export interface FileRouteTypes {
     | '/industries/$slug'
     | '/locations/$city'
     | '/resources/$category'
+    | '/review/al-baraa-7k4m'
     | '/services/$slug'
     | '/tools/$slug'
     | '/resources/$category/$slug'
@@ -448,6 +460,7 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
   ToolsRoute: typeof ToolsRouteWithChildren
+  ReviewAlBaraa7k4mRoute: typeof ReviewAlBaraa7k4mRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -662,6 +675,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResourcesCategoryRouteImport
       parentRoute: typeof ResourcesRoute
     }
+    '/review/al-baraa-7k4m': {
+      id: '/review/al-baraa-7k4m'
+      path: '/review/al-baraa-7k4m'
+      fullPath: '/review/al-baraa-7k4m'
+      preLoaderRoute: typeof ReviewAlBaraa7k4mRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services/$slug': {
       id: '/services/$slug'
       path: '/$slug'
@@ -824,6 +844,7 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
   ToolsRoute: ToolsRouteWithChildren,
+  ReviewAlBaraa7k4mRoute: ReviewAlBaraa7k4mRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

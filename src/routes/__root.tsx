@@ -132,6 +132,9 @@ export const Route = createRootRoute({
   errorComponent: ErrorComponent,
 });
 
+/** Private prospect review pages: English, rendered without site chrome. */
+const isReviewPath = (pathname: string) => pathname.startsWith("/review/");
+
 function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
@@ -157,6 +160,8 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  // Private prospect review pages render their own minimal header/footer.
+  const chromeless = isReviewPath(pathname);
 
   useEffect(() => {
   
@@ -184,16 +189,16 @@ function RootComponent() {
       >
         Skip to main content
       </a>
-      <ScrollProgress />
-      <Navbar />
+      {!chromeless && <ScrollProgress />}
+      {!chromeless && <Navbar />}
       <main id="main">
         <PageTransition>
           <Outlet />
         </PageTransition>
       </main>
-      <Footer />
-      <BackToTop />
-      <MobileStickyCta />
+      {!chromeless && <Footer />}
+      {!chromeless && <BackToTop />}
+      {!chromeless && <MobileStickyCta />}
     </LocaleProvider>
   );
 }
