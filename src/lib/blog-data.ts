@@ -15,6 +15,7 @@ import googleSearchConsoleMultimodalSearch from "@/assets/google-search-console-
 import aiSearchVisibilityMeasurementGcc from "@/assets/ai-search-visibility-measurement-gcc.webp";
 import aiSearchBusinessDiscoverabilityGcc from "@/assets/ai-search-business-discoverability-gcc.webp";
 import googleCrawlingIndexingTimes2026 from "@/assets/google-crawling-indexing-times-2026.webp";
+import googleAiContentHumanReview from "@/assets/google-ai-content-human-review-fact-checking.webp";
 
 // Blog-scoped link types, deliberately separate from services-data.ts's
 // ContentLink/AnchorLink (which has no "industry" kind and is used by the
@@ -4170,6 +4171,679 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         q: "Does faster indexing improve AI Search visibility?",
         a: "Not directly. Faster indexing doesn't make a page more likely to be cited in AI answers. But information that machines can't discover, access or interpret has little chance of being used, so reliable crawling and indexing are part of the foundation for AI Search visibility, alongside clear, accurate and trustworthy content. For Google's own AI features, Google says its core Search systems and SEO best practices still apply.",
+      },
+    ],
+  },
+  {
+    slug: "google-ai-content-human-review-fact-checking",
+    title:
+      "Google's AI Content Guidance Is Clearer: The Real Risk Isn't AI — It's Publishing Without Verification",
+    excerpt:
+      "Google has clarified its guidance on generative AI content. The question that matters was never whether AI helped write a page. It's whether anyone checked that the page is true before it went live.",
+    metaTitle: "Google AI Content Guidance: Why Human Fact-Checking Matters",
+    metaDescription:
+      "Google has clarified its guidance on generative AI content. The key issue isn't whether AI helped create the content — it's accuracy, quality, usefulness and human verification before publishing.",
+    category: "SEO",
+    date: "2026-10-04",
+    readMinutes: 11,
+    image: googleAiContentHumanReview,
+    imageAlt:
+      "AI-generated content moving through human fact-checking and quality review before publication.",
+    imageWidth: 1678,
+    imageHeight: 937,
+    inLanguage: "en",
+    relatedServices: ["seo", "technical-seo", "digital-marketing"],
+    relatedPostSlugs: [
+      "google-ranking-vs-ai-visibility",
+      "ai-search-business-visibility",
+      "how-to-measure-ai-search-visibility-gcc",
+    ],
+    intro: [
+      "The biggest SEO risk of AI-generated content isn't that Google might detect AI.",
+      "It's that nobody checked whether the AI was right.",
+      'For the past few years, much of the conversation about generative AI and SEO has circled one question: "Can Google tell this was written by AI?" In our view, Google\'s latest guidance points businesses toward a far more useful one: **would we confidently publish this information under our own name?**',
+      "That shift matters because AI can dramatically reduce the cost of producing content. It can also dramatically reduce the cost of producing the same mistake hundreds of times.",
+      {
+        text: "On October 1, 2026, Google updated its Search Central guide to using generative AI content. **A note on sources:** throughout this article, we separate three things: what Google's own documentation says, what secondary reporting has added, and our interpretation as an SEO and AI Search studio. Where we quote Google, the quote comes from Google's documentation.",
+        link: {
+          anchor: "guide to using generative AI content",
+          link: {
+            kind: "external",
+            href: "https://developers.google.com/search/docs/fundamentals/using-gen-ai-content",
+          },
+        },
+      },
+    ],
+    body: [
+      {
+        h2: "What did Google actually change?",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** Google revised one page of its documentation to make the accuracy expectation explicit: generative AI output can be wrong, so it should be fact-checked and reviewed by a person before publishing, including the metadata. It was a documentation update, not a new ranking penalty.",
+          },
+          {
+            type: "p",
+            content: {
+              text: "Google's Search Central changelog entry for October 1, 2026 records that the generative AI content guide was updated with information from the Search Quality Raters guidelines. The stated reason was to bring the documentation in line with what Google presents at its developer events.",
+              link: {
+                anchor: "Search Central changelog",
+                link: { kind: "external", href: "https://developers.google.com/search/updates" },
+              },
+            },
+          },
+          { type: "p", content: "The updated guide now states, in Google's words:" },
+          {
+            type: "ul",
+            items: [
+              'Generative AI outputs "may contain inaccuracies (also known as hallucinations)."',
+              'Generative models "don\'t retrieve facts, but predict a likely sequence of words based on their training data."',
+              'It is "critical to manually factcheck and review all AI-generated content for accuracy and trustworthiness before publishing."',
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "The guide adds that this review also applies to metadata: `<title>` elements, meta descriptions, structured data and image alt text, all of which can appear in Search results.",
+          },
+          {
+            type: "p",
+            content: {
+              text: "The guide also restates an existing position: using generative AI to produce many pages without adding value for users may violate Google's spam policy on scaled content abuse. That policy isn't new, and it describes scaled content abuse as a problem no matter how the content is created.",
+              link: {
+                anchor: "spam policy on scaled content abuse",
+                link: {
+                  kind: "external",
+                  href: "https://developers.google.com/search/docs/essentials/spam-policies#scaled-content",
+                },
+              },
+            },
+          },
+          {
+            type: "p",
+            content: {
+              text: "*Secondary reporting:* Search Engine Journal compared the new page with its December 2025 version and reported that the three sentences on hallucinations and manual fact-checking were added in this update, while metadata was already covered before. That comparison is SEJ's, not Google's.",
+              link: {
+                anchor: "Search Engine Journal",
+                link: {
+                  kind: "external",
+                  href: "https://www.searchenginejournal.com/google-fact-check-ai-content-before-publishing/591782/",
+                },
+              },
+            },
+          },
+          {
+            type: "p",
+            content:
+              "Just as important is what the update did **not** contain. Google didn't announce a new penalty for AI-generated content or a new ranking signal. The guide itself notes that the rater guidelines are used to evaluate Google's ranking systems and that rater ratings don't directly influence ranking. In our reading, the update made an existing quality expectation harder to misread.",
+          },
+        ],
+      },
+      {
+        h2: "Google isn't telling businesses to stop using AI",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** No. Google's position since 2023 has been that it focuses on the quality of content, not how it was produced. The update reinforces what quality means when AI is involved.",
+          },
+          {
+            type: "p",
+            content: {
+              text: "Google said as much in its 2023 guidance on AI-generated content, and its guidance on creating helpful, reliable, people-first content applies to every page, however it was made. Read together with the October update, the message is consistent: low-quality, inaccurate, misleading or unreviewed information is a risk. Efficient production doesn't change that, in either direction.",
+              links: [
+                {
+                  anchor: "2023 guidance on AI-generated content",
+                  link: {
+                    kind: "external",
+                    href: "https://developers.google.com/search/blog/2023/02/google-search-and-ai-content",
+                  },
+                },
+                {
+                  anchor: "helpful, reliable, people-first content",
+                  link: {
+                    kind: "external",
+                    href: "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+                  },
+                },
+              ],
+            },
+          },
+          {
+            type: "p",
+            content:
+              "Our reading is simple. AI is a production tool, like a CMS, a template or a freelance writer. Publishing responsibility stays with the business whose name is on the page.",
+          },
+          {
+            type: "p",
+            content: "**AI can generate the draft. It cannot own the consequences.**",
+          },
+        ],
+      },
+      {
+        h2: 'The wrong question: "Can Google detect AI content?"',
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** Detection is the wrong frame. A business that spends its energy making AI content look human is solving a problem that matters far less than whether the content is correct.",
+          },
+          {
+            type: "p",
+            content:
+              "Consider what actually goes wrong when an AI-assisted page goes bad. It isn't that a reader or a search system noticed the phrasing. It's that the page quoted a price you no longer charge, named a service you don't offer, cited a regulation that changed last year, or made a claim nobody can support.",
+          },
+          { type: "p", content: "The better questions are about quality control:" },
+          {
+            type: "ul",
+            items: [
+              "Is this accurate?",
+              "Is this useful to the person reading it?",
+              "Can we support the claims it makes?",
+              "Is anything outdated?",
+              "Does it correctly describe our products and services?",
+              "Would a qualified expert approve it?",
+              "Would we put our company's name behind it?",
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "That reframes AI content from a detection problem into a quality-control problem, which is something a business can actually manage.",
+          },
+        ],
+      },
+      {
+        h2: "AI errors don't scale like human errors",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** A person makes one mistake on one page. An automated workflow can repeat the same mistake on every page it touches, consistently and confidently.",
+          },
+          {
+            type: "p",
+            content:
+              "Human errors tend to be scattered. One writer gets a date wrong in one article. Another misremembers a figure. The damage is real but contained.",
+          },
+          {
+            type: "p",
+            content:
+              "Automated errors behave differently. If the source data is wrong, or the prompt carries a false assumption, or the model fills a gap with a plausible guess, that error can reach:",
+          },
+          {
+            type: "ul",
+            items: [
+              "50 service pages",
+              "500 product descriptions",
+              "1,000 location pages",
+              "Hundreds of titles, descriptions and schema fields",
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "And because AI writing is fluent, the error doesn't look like an error. It reads as well as everything around it, which is exactly why it survives a quick skim.",
+          },
+          {
+            type: "p",
+            content:
+              "Automation lowers the cost of production. Without verification, it also lowers the cost of scaling mistakes. **The real risk isn't AI-generated content. It's AI-generated error at scale.**",
+          },
+        ],
+      },
+      {
+        h2: "AI content is bigger than blog articles",
+        blocks: [
+          {
+            type: "p",
+            content:
+              '**Short answer:** When businesses hear "AI content", they think of blog posts. In practice, generative AI increasingly touches almost every text field on a website.',
+          },
+          {
+            type: "ul",
+            items: [
+              "Page titles and meta descriptions",
+              "Product and service descriptions",
+              "Location pages",
+              "FAQs",
+              "Image alt text",
+              "Structured data and schema inputs",
+              "Landing pages",
+              "Knowledge-base and help content",
+              "Internal summaries that feed other content",
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "Google's guide explicitly names several of these. For online retailers, it also points to Google Merchant Center's policies for AI-generated content, which require specific metadata on AI-generated product images and labelling of AI-generated product data such as titles and descriptions.",
+          },
+          {
+            type: "p",
+            content:
+              "The practical consequence is that AI governance belongs to the whole website, not just the editorial calendar.",
+          },
+        ],
+      },
+      {
+        h2: "A better AI content workflow",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** Put verified information in, let AI do the heavy lifting in the middle, and put human judgment between the draft and the publish button.",
+          },
+          {
+            type: "p",
+            content:
+              "The workflow we recommend is: **Source → AI → Human verification → Publish → Monitor.**",
+          },
+          { type: "h3", text: "1. Source" },
+          {
+            type: "p",
+            content:
+              "Start with reliable information: your own service details, pricing, product data, policies, expert input and primary sources. AI shouldn't be expected to invent the factual foundation. If the input is a guess, the output will be a well-written guess.",
+          },
+          { type: "h3", text: "2. AI" },
+          {
+            type: "p",
+            content:
+              "Use AI where it genuinely saves time: structuring, summarising, drafting, rewriting, expanding, classifying and adapting content for different formats.",
+          },
+          { type: "h3", text: "3. Human verification" },
+          { type: "p", content: "A knowledgeable person checks what the AI can't vouch for:" },
+          {
+            type: "ul",
+            items: [
+              "Facts, names and dates",
+              "Statistics and their sources",
+              "Claims and comparisons",
+              "Links",
+              "Product and service details",
+              "Legal, financial or medical statements, where relevant",
+              "Brand accuracy and tone",
+            ],
+          },
+          { type: "h3", text: "4. Publish" },
+          {
+            type: "p",
+            content: "Only publish information the business is willing to stand behind.",
+          },
+          { type: "h3", text: "5. Monitor" },
+          {
+            type: "p",
+            content: {
+              text: "Content that was correct at launch can become wrong later. Prices change, services evolve, teams move. High-value pages should be reviewed on a schedule, and corrections should be made knowing that search and AI systems take time to pick them up.",
+              link: {
+                anchor: "take time to pick them up",
+                link: { kind: "post", slug: "google-crawling-indexing-times-2026" },
+              },
+            },
+          },
+        ],
+      },
+      {
+        h2: "Why this matters even more for SEO, AEO and GEO",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** Search visibility increasingly depends on machines reading, interpreting and reusing your information. Unreliable information is a weak foundation for all of them.",
+          },
+          {
+            type: "ul",
+            items: [
+              "**SEO** asks whether content can be discovered, understood and ranked.",
+              "**AEO** (Answer Engine Optimization) asks whether information clearly answers a specific question.",
+              "**GEO** (Generative Engine Optimization) considers how a brand and its information are represented in AI-generated responses.",
+            ],
+          },
+          {
+            type: "p",
+            content: {
+              text: "When systems summarise, combine and retrieve information, clarity and factual reliability matter more, not less. A wrong detail on your own site can be repeated in an AI answer, separated from the context that might have signalled it was out of date. We covered that dynamic in our guide to how AI is changing business discovery.",
+              link: {
+                anchor: "how AI is changing business discovery",
+                link: { kind: "post", slug: "ai-search-business-visibility" },
+              },
+            },
+          },
+          {
+            type: "p",
+            content: {
+              text: "To be precise: human review doesn't directly cause AI citations or higher rankings, and no one can promise that it will. What it does is produce a better information asset: content that is clear, accurate and well supported, for people and machines alike. That is the foundation that strong SEO work and AI visibility both build on. It's also why ranking on Google and being represented well in AI answers are two different outcomes.",
+              links: [
+                {
+                  anchor: "strong SEO work",
+                  link: { kind: "service", slug: "seo" },
+                },
+                {
+                  anchor: "being represented well in AI answers",
+                  link: { kind: "post", slug: "google-ranking-vs-ai-visibility" },
+                },
+              ],
+            },
+          },
+        ],
+      },
+      {
+        h2: "Your metadata can be wrong too",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** Yes. Google's guidance says the review applies to titles, meta descriptions, structured data and image alt text, not just the page itself.",
+          },
+          {
+            type: "p",
+            content:
+              "These fields look minor, so they're the first to be automated and the last to be checked. But they're also the parts of a page most likely to be read by machines, and the ones that appear directly in search results.",
+          },
+          {
+            type: "p",
+            content: {
+              text: "Here's a realistic example. A company closes one branch and opens another. An AI workflow then generates 100 location pages, with titles, descriptions and LocalBusiness schema, using the old address list. The writing is excellent. The underlying information is wrong on every page, and it's wrong in the fields most likely to be shown to customers. Anyone managing multi-location local SEO will recognise how quickly that kind of inconsistency spreads.",
+              link: {
+                anchor: "multi-location local SEO",
+                link: { kind: "post", slug: "local-seo-multi-location-gcc" },
+              },
+            },
+          },
+          {
+            type: "p",
+            content: {
+              text: "That's why content QA has to cover machine-readable information as well as visible body copy. Checking that schema, metadata and on-page text agree is routine technical SEO, and it matters more once those fields are being generated automatically.",
+              link: {
+                anchor: "routine technical SEO",
+                link: { kind: "service", slug: "technical-seo" },
+              },
+            },
+          },
+        ],
+      },
+      {
+        h2: "What should human review actually check?",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** Seven checks, each one a single question that a knowledgeable reviewer can answer.",
+          },
+          {
+            type: "table",
+            table: {
+              label: "Human review checklist for AI-assisted content",
+              head: ["Check", "The question to ask"],
+              rows: [
+                ["Accuracy", "Are the factual statements correct?"],
+                ["Source", "Can each important claim be traced to reliable information?"],
+                ["Freshness", "Is the information still current?"],
+                ["Expertise", "Is this what a knowledgeable professional would actually say?"],
+                [
+                  "Brand accuracy",
+                  "Does it correctly describe our services, products, people and locations?",
+                ],
+                ["Search intent", "Does it genuinely answer the question the reader came with?"],
+                [
+                  "Machine consistency",
+                  "Do the visible content, metadata and structured data tell the same story?",
+                ],
+              ],
+            },
+          },
+        ],
+      },
+      {
+        h2: "Human review doesn't mean humans must write everything",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** Verification is not the same as manual writing. A scalable workflow can still use AI extensively. The point is to put human judgment where factual responsibility sits.",
+          },
+          {
+            type: "p",
+            content:
+              "AI can draft 20 service descriptions. A qualified person then verifies the factual framework, terminology and claims before they go live.",
+          },
+          {
+            type: "p",
+            content:
+              "AI can generate metadata for a thousand products. A person, or a controlled validation step that checks output against the product database, confirms that each title and description accurately represents its page.",
+          },
+          {
+            type: "p",
+            content:
+              "Review effort should follow risk. A blog summary needs a lighter touch than a page stating prices, medical guidance or contractual terms.",
+          },
+          {
+            type: "p",
+            content: "**The goal is not slower production. The goal is controlled production.**",
+          },
+        ],
+      },
+      {
+        h2: "The competitive advantage is moving from generation to judgment",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** When producing words costs almost nothing, the ability to produce them stops being an advantage. Knowing which words deserve to be published becomes the advantage.",
+          },
+          { type: "p", content: "The value is shifting toward:" },
+          {
+            type: "ul",
+            items: [
+              "Knowing what deserves to be published",
+              "Knowing which sources to trust",
+              "Knowing what is genuinely useful",
+              "Knowing what needs expert review",
+              "Knowing when the AI is wrong",
+              "Knowing what needs updating",
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "None of that is automated away by a better model. If anything, more fluent models make it more important, because their mistakes are harder to spot.",
+          },
+          {
+            type: "p",
+            content: "**When everyone can generate, judgment becomes the differentiator.**",
+          },
+        ],
+      },
+      {
+        h2: "What Google's update does not mean",
+        blocks: [
+          {
+            type: "ul",
+            items: [
+              "**Updated AI guidance ≠ a new AI-content penalty.**",
+              "**Using AI ≠ automatic ranking loss.**",
+              "**Human review ≠ writing every sentence by hand.**",
+              "**Fast content production ≠ good content strategy.**",
+              "**AI-generated information ≠ verified information.**",
+            ],
+          },
+        ],
+      },
+      {
+        h2: "What businesses should do now",
+        blocks: [
+          {
+            type: "p",
+            content: "If your business already uses generative AI anywhere in its content:",
+          },
+          {
+            type: "ol",
+            items: [
+              "**Map where AI is used** across the website, not just in the blog: product data, location pages, metadata, FAQs and schema included.",
+              "**Identify high-risk information:** prices, statistics, locations, product specifications, legal claims, professional advice, dates and company details.",
+              "**Define which content needs human approval**, and who is qualified to give it.",
+              "**Maintain trusted source material** for AI workflows to draw from, so drafts start from facts rather than guesses.",
+              "**Verify machine-readable information**, including titles, descriptions, structured data and alt text, as well as visible copy.",
+              "**Monitor important content after publication** and re-review it when the underlying facts change.",
+              "**Measure the right thing.** Don't judge AI productivity only by how much was published. Judge whether the content stayed accurate and useful.",
+            ],
+          },
+          {
+            type: "p",
+            content: {
+              text: "If AI visibility is part of your goals, our framework for how to measure AI search visibility shows how to track whether AI systems describe your business correctly.",
+              link: {
+                anchor: "how to measure AI search visibility",
+                link: { kind: "post", slug: "how-to-measure-ai-search-visibility-gcc" },
+              },
+            },
+          },
+        ],
+      },
+      {
+        h2: "AI makes publishing easier. Trust still has to be earned.",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "Generative AI has changed the economics of content. A small marketing team can now research, structure and produce at a scale that once required a much larger operation.",
+          },
+          {
+            type: "p",
+            content:
+              "But cheaper generation doesn't make accuracy cheaper. And faster publishing doesn't reduce responsibility.",
+          },
+          {
+            type: "p",
+            content:
+              "That's why Google's updated guidance is useful. It moves the conversation away from an increasingly unhelpful obsession, \"Will Google know AI wrote this?\", toward a better question: **is this information accurate enough and useful enough for us to publish under our name?**",
+          },
+          {
+            type: "p",
+            content:
+              "AI can accelerate production. Human judgment protects the quality of what gets published. For SEO, AEO and GEO alike, that is the distinction worth building around.",
+          },
+          {
+            type: "p",
+            content: {
+              text: "If you'd like to see how your business is currently represented in AI search, start with our AI search visibility diagnostic. If you want help building a content workflow that is fast and accurate, talk to us.",
+              links: [
+                {
+                  anchor: "AI search visibility diagnostic",
+                  link: { kind: "post", slug: "is-your-business-visible-in-ai-search-gcc" },
+                },
+                { anchor: "talk to us", link: { kind: "contact" } },
+              ],
+            },
+          },
+        ],
+      },
+      {
+        h2: "Sources",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "Google statements in this article come from Google's own documentation. Secondary reporting is labelled as such. Interpretation and recommendations are OMSA's own and are not Google statements.",
+          },
+          {
+            type: "ul",
+            items: [
+              {
+                text: "Google Search Central: Using generative AI content (last updated October 1, 2026)",
+                link: {
+                  anchor: "Using generative AI content",
+                  link: {
+                    kind: "external",
+                    href: "https://developers.google.com/search/docs/fundamentals/using-gen-ai-content",
+                  },
+                },
+              },
+              {
+                text: "Google Search Central: Latest documentation updates (October 1, 2026 entry)",
+                link: {
+                  anchor: "Latest documentation updates",
+                  link: { kind: "external", href: "https://developers.google.com/search/updates" },
+                },
+              },
+              {
+                text: "Google Search Central: Spam policies, scaled content abuse",
+                link: {
+                  anchor: "Spam policies, scaled content abuse",
+                  link: {
+                    kind: "external",
+                    href: "https://developers.google.com/search/docs/essentials/spam-policies#scaled-content",
+                  },
+                },
+              },
+              {
+                text: "Google Search Central: Creating helpful, reliable, people-first content",
+                link: {
+                  anchor: "Creating helpful, reliable, people-first content",
+                  link: {
+                    kind: "external",
+                    href: "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+                  },
+                },
+              },
+              {
+                text: "Google Search Central Blog: Google Search's guidance about AI-generated content (February 2023)",
+                link: {
+                  anchor: "Google Search's guidance about AI-generated content",
+                  link: {
+                    kind: "external",
+                    href: "https://developers.google.com/search/blog/2023/02/google-search-and-ai-content",
+                  },
+                },
+              },
+              {
+                text: "Secondary reporting: Search Engine Journal, Google Tells Sites To Fact-Check AI Content Before Publishing",
+                link: {
+                  anchor: "Google Tells Sites To Fact-Check AI Content Before Publishing",
+                  link: {
+                    kind: "external",
+                    href: "https://www.searchenginejournal.com/google-fact-check-ai-content-before-publishing/591782/",
+                  },
+                },
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "Does Google penalize AI-generated content?",
+        a: "Google hasn't announced a penalty for content simply because AI helped create it. Its guidance focuses on quality, accuracy and usefulness. Using AI to produce many pages without adding value for users may violate Google's existing spam policy on scaled content abuse, which applies however the pages were made.",
+      },
+      {
+        q: "Can I use ChatGPT to write website content?",
+        a: "Yes. Google's guidance doesn't prohibit generative AI tools. What matters is that the published content is accurate, useful and reviewed. Google's documentation says AI-generated content should be manually fact-checked for accuracy and trustworthiness before publishing.",
+      },
+      {
+        q: "Does Google require human review of AI content?",
+        a: "Google's guide to using generative AI content says it is critical to manually fact-check and review all AI-generated content before publishing. It's guidance for site owners rather than an announced ranking rule, but it clearly sets the expectation.",
+      },
+      {
+        q: "Why should AI-generated content be fact-checked?",
+        a: "Because generative models predict likely sequences of words rather than retrieving facts, so their output can contain inaccuracies, often called hallucinations. Those errors read as fluently as correct information, and in automated workflows they can be repeated across many pages.",
+      },
+      {
+        q: "Can AI-generated content rank on Google?",
+        a: "It can. Google evaluates content on its quality and usefulness rather than how it was produced. There's no guarantee any page will rank, whether written by a person or with AI assistance.",
+      },
+      {
+        q: "Should AI-generated metadata also be reviewed?",
+        a: "Yes. Google's guidance on generative AI content says the review also applies to title elements, meta descriptions, structured data and image alt text, since these can appear in Search results.",
+      },
+      {
+        q: "Does using AI hurt SEO?",
+        a: "Using AI doesn't hurt SEO in itself. Inaccurate, thin or unhelpful content can hurt performance however it was produced. AI simply makes it faster to produce both good and bad content, which is why review matters.",
+      },
+      {
+        q: "How should businesses safely scale AI content?",
+        a: "Start from trusted source information, use AI for drafting and structuring, have a qualified person verify facts and claims before publishing, check metadata and structured data as well as visible copy, and review important pages after publication. Scale volume only as fast as you can keep accuracy.",
       },
     ],
   },
