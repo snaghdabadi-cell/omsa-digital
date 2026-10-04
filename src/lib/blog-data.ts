@@ -14,6 +14,7 @@ import googleRankingVsAiVisibility from "@/assets/google-ranking-vs-ai-visibilit
 import googleSearchConsoleMultimodalSearch from "@/assets/google-search-console-multimodal-search.webp";
 import aiSearchVisibilityMeasurementGcc from "@/assets/ai-search-visibility-measurement-gcc.webp";
 import aiSearchBusinessDiscoverabilityGcc from "@/assets/ai-search-business-discoverability-gcc.webp";
+import googleCrawlingIndexingTimes2026 from "@/assets/google-crawling-indexing-times-2026.webp";
 
 // Blog-scoped link types, deliberately separate from services-data.ts's
 // ContentLink/AnchorLink (which has no "industry" kind and is used by the
@@ -3586,6 +3587,586 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         q: "Do we need to test in Arabic if most of our clients use English?",
         a: "If any meaningful share of your buyers or decision-makers use Arabic, yes. AI systems can describe the same business differently in each language, and Arabic answers may rely on different sources. Even a short matched-intent test in Arabic often shows gaps that English testing misses.",
+      },
+    ],
+  },
+  {
+    slug: "google-crawling-indexing-times-2026",
+    title: "How Long Does Google Really Take to Crawl and Index Changes?",
+    excerpt:
+      "Reported timelines from Google's Search Central Live Deep Dive Europe 2026 show how long discovery, indexing, canonical changes, structured data, site migrations and core update recovery typically take, and why the same fundamentals underpin AI Search.",
+    metaTitle: "Google Crawling & Indexing Times: New 2026 Data Explained",
+    metaDescription:
+      "New Google data reveals typical timelines for crawling, indexing, canonical changes, structured data, site migrations and ranking recovery — and what they mean for SEO and AI Search.",
+    ogTitle: "How Long Does Google Really Take to Crawl and Index Changes?",
+    category: "Technical SEO",
+    date: "2026-10-04",
+    readMinutes: 15,
+    image: googleCrawlingIndexingTimes2026,
+    imageAlt:
+      "SEO crawling and indexing timeline illustrating typical Google processing times from URL discovery to site migration and core update recovery.",
+    imageWidth: 1678,
+    imageHeight: 937,
+    inLanguage: "en",
+    relatedServices: ["technical-seo", "seo", "website-design"],
+    relatedPostSlugs: [
+      "technical-seo-migrations-redesigns-gcc",
+      "ai-search-business-visibility",
+      "is-your-business-visible-in-ai-search-gcc",
+    ],
+    intro: [
+      "SEO changes are often judged far too quickly.",
+      'A new page goes live on Monday. Rankings are checked on Tuesday. By Friday, someone is asking why the SEO strategy "isn\'t working".',
+      "But publishing a change and Google reflecting that change are two very different things. Discovery, crawling, processing, indexing, canonicalisation and ranking recovery each run on their own timeline, and some of those timelines are measured in weeks or months, not hours.",
+      "New information presented at Google's Search Central Live Deep Dive Europe in Barcelona gives a useful look at just how different those timelines can be.",
+      {
+        text: "**A note on the source.** The detailed figures in this article come from an attendee's recap of a Google presentation, as reported by PPC Land, not from a standalone table published by Google. They are reported typical timelines, not Google guarantees or service levels. Throughout, we separate three things: what Google officially documents, what was reported from the Barcelona session, and our own interpretation as an SEO and AI Search studio.",
+        link: {
+          anchor: "as reported by PPC Land",
+          link: {
+            kind: "external",
+            href: "https://ppc.land/google-says-new-pages-take-about-20-hours-to-be-found-some-never-are/",
+          },
+        },
+      },
+    ],
+    body: [
+      {
+        h2: "What Google revealed at Search Central Live Barcelona",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** On October 2, 2026, the closing day of Search Central Live Deep Dive Europe in Barcelona, Google's Gary Illyes presented typical timelines for crawling, indexing and serving. The detailed numbers currently available come from attendee reporting of that session, not from an official Google publication.",
+          },
+          {
+            type: "p",
+            content: {
+              text: "Search Central Live Deep Dive Europe is Google's own event for the search community, as Google's announcement on its Search Central Blog confirms. The session was Google's. The table of figures that has circulated since, however, comes from a recap by John Campbell of the agency ROAST, which PPC Land relayed and summarised on October 3, 2026. PPC Land itself describes these as an attendee's account of live sessions rather than a Google publication.",
+              links: [
+                {
+                  anchor: "Google's announcement",
+                  link: {
+                    kind: "external",
+                    href: "https://developers.google.com/search/blog/2026/07/search-central-live-deep-dive-europe-2026",
+                  },
+                },
+                {
+                  anchor: "PPC Land",
+                  link: {
+                    kind: "external",
+                    href: "https://ppc.land/google-says-new-pages-take-about-20-hours-to-be-found-some-never-are/",
+                  },
+                },
+              ],
+            },
+          },
+          {
+            type: "p",
+            content:
+              "That distinction matters. The figures are valuable because they come from Google's own presentation, and the recap describes them as based on Google's internal analysis. But at the time of writing, Google hasn't published them as documentation, the wording of individual rows may differ from the original slides, and none of them is a commitment about how any particular website will be treated.",
+          },
+          {
+            type: "p",
+            content: {
+              text: "What Google *does* officially document is the underlying principle. Its guide to how Google Search works states plainly that Google doesn't guarantee it will crawl, index or serve a page, even one that follows its guidelines.",
+              link: {
+                anchor: "how Google Search works",
+                link: {
+                  kind: "external",
+                  href: "https://developers.google.com/search/docs/fundamentals/how-search-works",
+                },
+              },
+            },
+          },
+        ],
+      },
+      {
+        h2: "Publishing a page is only the beginning",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** Publishing makes a page available. It doesn't make it known, stored or visible. Between the moment you press publish and the moment a page appears for a relevant search, several separate processes have to happen, and each one takes its own time.",
+          },
+          {
+            type: "p",
+            content:
+              "Google's documentation describes three broad stages: crawling, indexing and serving. Broken into the steps a business owner actually experiences, the journey looks like this:",
+          },
+          {
+            type: "ol",
+            items: [
+              "**Publish:** the page or change goes live on your website. At this point, nothing outside your own site has necessarily noticed it.",
+              "**Discovery:** Google learns that the URL exists, usually through a link from a page it already knows or through an XML sitemap.",
+              "**Crawl:** Googlebot, Google's crawler, requests the page and downloads its content.",
+              "**Render and process:** Google runs the page's code where needed and works out what the page contains: text, links, images, structured data and signals such as canonical tags.",
+              "**Index:** Google decides whether to store the page in its index, and how to treat it alongside similar or duplicate pages.",
+              "**Serve and rank:** when someone searches, Google chooses which indexed pages to show, and in what order.",
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "The key message is simple: **publishing ≠ indexing ≠ ranking.** A page can be live and undiscovered. It can be crawled and not indexed. It can be indexed and still not appear for the searches you care about.",
+          },
+        ],
+      },
+      {
+        h2: "How long do SEO changes actually take?",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** According to the recap of Google's Barcelona presentation, typical timelines range from about an hour and a half for indexing, once the necessary earlier steps are complete, to three to six months for recovery after a core update.",
+          },
+          {
+            type: "table",
+            table: {
+              label:
+                "Reported typical Google processing timelines from Search Central Live Deep Dive Europe 2026",
+              head: ["Change", "Reported typical timeline"],
+              rows: [
+                ["New URL discovery", "~20 hours"],
+                ["Sitemap processing", "~24 hours"],
+                ["Indexing after prerequisites", "~1.5 hours"],
+                ["Canonical change", "1–3 weeks"],
+                ["Structured data update", "Hours to 1–2 weeks"],
+                ["Image processing", "Hours to days"],
+                ["Site migration", "1–3 months"],
+                ["Core update recovery", "3–6 months"],
+              ],
+            },
+          },
+          {
+            type: "p",
+            content:
+              "**These figures represent reported typical timelines, not guaranteed processing times. Individual pages and websites may take considerably longer.**",
+          },
+          {
+            type: "p",
+            content:
+              'These are typical cases. The same recap makes clear that slower cases exist, and for some stages the slowest outcome is listed as "never".',
+          },
+          {
+            type: "p",
+            content:
+              "One more point from the recap is worth keeping in mind: many of these processes are linked. A page can't be indexed before it has been crawled, so delays can stack.",
+          },
+        ],
+      },
+      {
+        h2: "A new URL taking 20 hours to be discovered does not mean it ranks in 20 hours",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** No. Discovery is the first step in the pipeline, not the last. A typical discovery time of around 20 hours only tells you when Google is likely to learn that a URL exists.",
+          },
+          {
+            type: "p",
+            content:
+              "After discovery, Google still has to crawl the URL, process it and decide whether to index it. Ranking is a separate question entirely. Being in the index makes a page eligible to appear; where it appears depends on how relevant and useful it is compared with everything else available for that search.",
+          },
+          {
+            type: "p",
+            content:
+              "Discovery itself isn't fixed, either. In our experience, how quickly a new URL is found depends largely on practical, controllable factors:",
+          },
+          {
+            type: "ul",
+            items: [
+              "**Internal links:** a new page linked from relevant, already-crawled pages gives Googlebot a clear path to it. An orphan page with no internal links is much harder to find.",
+              "**XML sitemaps:** an accurate sitemap that lists the URL helps Google learn it exists. The recap puts typical sitemap processing at around 24 hours.",
+              "**Crawlability:** robots.txt rules, server errors or login walls can stop Googlebot reaching a page at all.",
+              {
+                text: "**Crawl demand:** Google's crawl budget documentation explains that more popular URLs tend to be crawled more often, so not every URL is treated the same.",
+                link: {
+                  anchor: "crawl budget documentation",
+                  link: {
+                    kind: "external",
+                    href: "https://developers.google.com/search/docs/crawling-indexing/large-site-managing-crawl-budget",
+                  },
+                },
+              },
+              "**Site structure:** pages buried many clicks deep in a confusing architecture are reached less easily than pages in a clear hierarchy.",
+            ],
+          },
+          {
+            type: "p",
+            content: {
+              text: "None of these are ranking factors in themselves. They influence whether, and how soon, a page gets the chance to be considered. That is the day-to-day substance of technical SEO.",
+              link: { anchor: "technical SEO", link: { kind: "service", slug: "technical-seo" } },
+            },
+          },
+        ],
+      },
+      {
+        h2: 'Why "never" might be the most important number',
+        blocks: [
+          {
+            type: "p",
+            content:
+              '**Short answer:** Because a technically accessible page can still fail to be indexed. In the recap of Google\'s presentation, the slowest case for several stages, including new URL discovery, sitemap processing and indexing, is listed as "never".',
+          },
+          {
+            type: "p",
+            content:
+              "It's tempting to read a table of typical timelines and focus on the fastest number. For business owners, the more important figure may be the one that sits outside the typical column: some URLs never reach the outcome their owners expected.",
+          },
+          {
+            type: "p",
+            content:
+              "This is consistent with Google's own documentation, which, as noted earlier, makes no promise to index any page. **Crawlable ≠ guaranteed to be indexed.**",
+          },
+          {
+            type: "p",
+            content:
+              "Why would Google decline to index a page it can reach? The recap attributes some of the slowest cases to quality. Google's own documentation also explains that, during indexing, it groups duplicate and near-duplicate pages and selects one as canonical, so a page that closely repeats another may be crawled but not shown as the main version.",
+          },
+          {
+            type: "p",
+            content:
+              'Our interpretation is that Google is constantly judging whether a URL warrants processing and storage. In our experience, pages that add little beyond what already exists, thin service or location pages produced at scale, near-identical variants and pages sending conflicting signals are the ones most likely to sit in the "crawled but not indexed" grey zone.',
+          },
+          {
+            type: "p",
+            content:
+              "That reframes the goal. Technical accessibility is a prerequisite, not a result. The real objective is a page that is accessible *and* worth indexing.",
+          },
+        ],
+      },
+      {
+        h2: "What this means for AI Search",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** AI Search doesn't remove the need for machine discoverability. Before a business can be described, cited or recommended in an AI-generated answer, its information has to be reachable, understandable and current.",
+          },
+          {
+            type: "p",
+            content: "The questions we hear most often from businesses now sound like this:",
+          },
+          {
+            type: "ul",
+            items: [
+              '"How do we get mentioned by ChatGPT?"',
+              '"How do we appear in AI answers?"',
+              '"How do we optimise for GEO?"',
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "Those are valid questions. But there is an earlier one: **can machines reliably discover, access, interpret and trust the information about your business?**",
+          },
+          {
+            type: "p",
+            content:
+              "It's important to be precise here. AI systems gather information in different ways. Some run their own crawlers, some draw on search results, some rely on what a model learned during training, and many combine several sources. We're not suggesting that ChatGPT, Perplexity or any other AI engine simply relies on Google's index. The principle is broader: whatever the system, it can only use information it is able to find, read and interpret. That is machine discoverability.",
+          },
+          {
+            type: "p",
+            content: {
+              text: "Google is the case where the connection is documented. Google's generative AI guidance says its AI features in Search are rooted in its core Search ranking and quality systems, and that SEO best practices remain relevant. In our reading, that makes the crawling and indexing pipeline described above part of the foundation for Google's AI Overviews and AI Mode, not a separate concern.",
+              link: {
+                anchor: "generative AI guidance",
+                link: {
+                  kind: "external",
+                  href: "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide",
+                },
+              },
+            },
+          },
+          {
+            type: "p",
+            content: "That's why we see the disciplines as layers rather than rivals:",
+          },
+          {
+            type: "ul",
+            items: [
+              "**SEO** creates much of the machine-readable foundation: crawlable pages, clear architecture, indexable content and consistent signals.",
+              "**AEO** (Answer Engine Optimization) improves answer readiness: clear questions, direct answers and content structured so it can be extracted.",
+              "**GEO** (Generative Engine Optimization) considers visibility across generative systems: how a business is understood, described and cited in AI-generated responses.",
+            ],
+          },
+          {
+            type: "p",
+            content: {
+              text: "These disciplines increasingly overlap, and our guide to AI-driven business discovery explains how they relate. But none of them makes technical accessibility, information architecture, entity clarity, quality or freshness irrelevant. GEO tactics layered on pages that machines can't reliably reach have very little to work with.",
+              link: {
+                anchor: "AI-driven business discovery",
+                link: { kind: "post", slug: "ai-search-business-visibility" },
+              },
+            },
+          },
+          {
+            type: "p",
+            content: {
+              text: "Foundations are necessary, not sufficient. A business can rank well on Google and still be overlooked in AI answers, because being found is only the first part of being understood and chosen.",
+              link: {
+                anchor: "overlooked in AI answers",
+                link: { kind: "post", slug: "google-ranking-vs-ai-visibility" },
+              },
+            },
+          },
+        ],
+      },
+      {
+        h2: "Why freshness isn't instant",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** Every search and AI system has to notice, re-process and re-store an update before it can reflect it. Publishing a correction on your website doesn't instantly change what those systems show.",
+          },
+          {
+            type: "p",
+            content: "Consider the kinds of changes businesses make all the time:",
+          },
+          {
+            type: "ul",
+            items: [
+              "Services added, renamed or discontinued",
+              "Prices and packages",
+              "A new location or address",
+              "Leadership and key people",
+              "Product information and availability",
+              "Structured data, such as opening hours or business details",
+              "Canonical configuration after a restructure",
+              "Core page content and messaging",
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "Even the reported typical figures show the lag. Structured data updates are reported at hours to one or two weeks, and canonical changes at one to three weeks. Other search engines and AI systems have their own crawling and update cycles, which generally aren't publicly documented in the same way.",
+          },
+          {
+            type: "p",
+            content:
+              "In practice, outdated information can keep circulating after you've corrected it: in search snippets, in third-party listings and in AI-generated answers. For businesses in fast-moving markets, where services, pricing, teams and locations change often, that lag is a real commercial risk. A customer acting on last quarter's price or a closed branch is a lost enquiry at best.",
+          },
+          {
+            type: "p",
+            content:
+              "The practical response is not to panic. It is to update important information consistently everywhere it lives, signal changed pages properly through internal links and sitemaps, and allow realistic time before judging whether an update has landed.",
+          },
+        ],
+      },
+      {
+        h2: "What businesses should monitor after making SEO changes",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** Check that Google can reach the change, has processed it and is reflecting it, in that order. Google Search Console is the primary tool for doing so.",
+          },
+          {
+            type: "ul",
+            items: [
+              "**Google Search Console:** Google's own view of how it sees your site. Start here.",
+              "**Indexing status:** use URL Inspection and the Page indexing report to see whether key URLs are indexed and, if not, why.",
+              "**XML sitemap:** confirm it is submitted, processed without errors and lists only the URLs you want indexed.",
+              "**Internal links:** make sure new and updated pages are linked from relevant, well-crawled pages.",
+              "**Canonical signals:** check that canonical tags, redirects, internal links and sitemaps agree, and compare your declared canonical with the one Google selected.",
+              "**Crawlability:** watch robots.txt rules, noindex directives and the Crawl stats report for unexpected blocks.",
+              "**Structured data:** validate markup with the Rich Results Test and watch the relevant reports for errors.",
+              "**Server health:** slow responses and server errors can reduce how much Google crawls, so watch for error spikes after a launch.",
+              "**Content quality:** ask honestly whether each page adds something genuinely useful and distinct.",
+              "**Updated information:** confirm each change is consistent across your website, Google Business Profile, directories and social profiles.",
+            ],
+          },
+          {
+            type: "p",
+            content: {
+              text: "If AI visibility matters to your business as well, our framework for measuring AI search visibility covers the AI side of the same monitoring discipline.",
+              link: {
+                anchor: "measuring AI search visibility",
+                link: { kind: "post", slug: "how-to-measure-ai-search-visibility-gcc" },
+              },
+            },
+          },
+        ],
+      },
+      {
+        h2: "Stop measuring SEO on the wrong timeline",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** Match the measurement window to the type of change. A sitemap fix, a canonical change, a site migration and core update recovery work on very different timescales, so they shouldn't be judged on the same schedule.",
+          },
+          {
+            type: "p",
+            content:
+              "We see the same pattern repeatedly. A change is made, results are checked almost immediately, and a decision is taken before the change has had any realistic chance to be processed. Sometimes good work is reversed. Sometimes a genuine problem is missed because everyone was looking at the wrong window.",
+          },
+          {
+            type: "p",
+            content: {
+              text: "A **site migration** shouldn't automatically be declared a failure after five days when the reported typical timeline is one to three months. That isn't a reason to wait passively, though: broken redirects, missing pages and indexing errors should be caught in the first days, which is why careful migration planning matters so much.",
+              link: {
+                anchor: "careful migration planning",
+                link: { kind: "post", slug: "technical-seo-migrations-redesigns-gcc" },
+              },
+            },
+          },
+          {
+            type: "p",
+            content:
+              "A **canonical change** shouldn't necessarily be judged after 24 hours when reported typical processing takes one to three weeks.",
+          },
+          {
+            type: "p",
+            content:
+              "Recovery after a **core update** is a long game. The reported typical timeline is three to six months, and in our experience recovery depends on genuine improvement rather than quick fixes.",
+          },
+          {
+            type: "p",
+            content:
+              "The opposite mistake matters just as much: **faster indexing doesn't mean higher rankings.** A page indexed in an hour is simply eligible to compete sooner.",
+          },
+          {
+            type: "p",
+            content: {
+              text: "A useful discipline is to set the review date when the change is made: what we expect to see, where we'll check, and when it is reasonable to judge. Then tie those checks to enquiries and revenue, since visibility and business growth are not the same thing.",
+              link: {
+                anchor: "visibility and business growth",
+                link: { kind: "post", slug: "website-traffic-vs-business-growth" },
+              },
+            },
+          },
+        ],
+      },
+      {
+        h2: "What these numbers do not mean",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** They are typical, reported timelines, not promises. They describe how long things usually take, not what will happen to any particular page.",
+          },
+          {
+            type: "ul",
+            items: [
+              "**20 hours ≠ ranking guarantee.** Discovery is the first step, not the result.",
+              "**1.5 hours ≠ every URL will be indexed.** Some pages never are.",
+              "**Structured data processing ≠ rich result guarantee.** Valid markup makes a page eligible; Google decides whether to show a rich result.",
+              "**Fast indexing ≠ higher rankings.** Indexing makes a page eligible to compete, nothing more.",
+              "**1–3 months ≠ every migration recovers within three months.** It is a typical figure, and some site moves take considerably longer.",
+              "**Typical ≠ guaranteed.** These are reported typical times, not service levels.",
+            ],
+          },
+        ],
+      },
+      {
+        h2: "The bigger lesson: AI Search still needs strong foundations",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "The interfaces of search are changing. People now discover businesses through:",
+          },
+          {
+            type: "ul",
+            items: [
+              "Traditional search results",
+              "AI-generated answers",
+              "Recommendation engines",
+              "Conversational search",
+              {
+                text: "Multimodal experiences that start with a photo or screenshot",
+                link: {
+                  anchor: "start with a photo or screenshot",
+                  link: {
+                    kind: "post",
+                    slug: "google-search-console-multimodal-search-seo-ai-visibility",
+                  },
+                },
+              },
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "Underneath every one of those interfaces, the requirement is the same. A business needs information that machines can:",
+          },
+          {
+            type: "ol",
+            items: [
+              "**Discover.**",
+              "**Access.**",
+              "**Understand.**",
+              "**Verify.**",
+              "**Connect to the correct entity.**",
+              "**Keep current.**",
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "The Barcelona timelines are a useful reminder that even the most established search system takes time, and sometimes declines, to process what businesses publish. That doesn't make AI Search optimisation less important. It makes the order of work clearer.",
+          },
+          {
+            type: "p",
+            content:
+              "Our view at OMSA is simple: **before asking how to become an AI citation, make sure your business has built information worth discovering, understanding and trusting.**",
+          },
+          {
+            type: "p",
+            content: {
+              text: "To see how AI search currently represents your company, our AI visibility diagnostic shows what to check first. If you'd like a clear view of how search engines are reaching, processing and indexing your key pages, our technical SEO team can help. Talk to us.",
+              links: [
+                {
+                  anchor: "AI visibility diagnostic",
+                  link: { kind: "post", slug: "is-your-business-visible-in-ai-search-gcc" },
+                },
+                { anchor: "technical SEO team", link: { kind: "service", slug: "technical-seo" } },
+                { anchor: "Talk to us", link: { kind: "contact" } },
+              ],
+            },
+          },
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "How long does Google take to discover a new URL?",
+        a: "According to a recap of Google's presentation at Search Central Live Deep Dive Europe 2026, typical discovery of a new URL takes around 20 hours. The figure comes from attendee reporting rather than an official Google table, and some URLs take considerably longer or are never discovered. Internal links and an accurate XML sitemap help Google find new pages.",
+      },
+      {
+        q: "How long does Google take to index a page?",
+        a: "The same recap reports that indexing typically takes about 1.5 hours once the necessary earlier steps, such as discovery and crawling, are complete. The full journey from publishing to indexing is usually longer because those steps stack. Google doesn't guarantee that any page will be indexed.",
+      },
+      {
+        q: "Is crawling the same as indexing?",
+        a: "No. Crawling is when Googlebot fetches a page. Indexing is when Google processes that page and decides whether to store it in its index. A page can be crawled and still not be indexed.",
+      },
+      {
+        q: "How long do canonical changes take?",
+        a: "Reported typical processing for a canonical change is one to three weeks, and some changes take longer. Google treats a canonical tag as a signal rather than a command, so consistent redirects, internal links and sitemaps help it settle on the preferred URL.",
+      },
+      {
+        q: "How long does structured data take to update?",
+        a: "According to the Barcelona recap, structured data updates typically take from several hours to one or two weeks to be reflected, and sometimes much longer. Valid structured data makes a page eligible for rich results but doesn't guarantee them.",
+      },
+      {
+        q: "How long does a website migration take?",
+        a: "The reported typical timeline for a site move is one to three months, and some site moves take considerably longer. Some ranking fluctuation during that period is normal, but redirect, crawl and indexing errors should be checked from the first day.",
+      },
+      {
+        q: "Why is my page crawlable but not indexed?",
+        a: "Being crawlable only means Googlebot can reach the page. Google still decides whether the page is worth indexing. Common reasons a page isn't indexed include duplication of another page, thin or low-value content, conflicting canonical signals or a noindex directive. The URL Inspection tool in Google Search Console shows the status Google reports for a specific URL.",
+      },
+      {
+        q: "Does faster indexing improve rankings?",
+        a: "No. Indexing makes a page eligible to appear in search results, but rankings depend on how relevant and useful the page is compared with other pages. Faster indexing only means a page can start competing sooner.",
+      },
+      {
+        q: "Does faster indexing improve AI Search visibility?",
+        a: "Not directly. Faster indexing doesn't make a page more likely to be cited in AI answers. But information that machines can't discover, access or interpret has little chance of being used, so reliable crawling and indexing are part of the foundation for AI Search visibility, alongside clear, accurate and trustworthy content. For Google's own AI features, Google says its core Search systems and SEO best practices still apply.",
       },
     ],
   },
