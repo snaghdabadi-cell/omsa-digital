@@ -1463,7 +1463,7 @@ export const BLOG_POSTS: BlogPost[] = [
     imageAlt: "Business comparing Google search visibility with AI recommendations across ChatGPT, Gemini and Perplexity",
     imageWidth: 1600,
     imageHeight: 900,
-    relatedServices: ["seo", "technical-seo", "local-seo", "digital-marketing"],
+    relatedServices: ["ai-search-visibility", "seo", "technical-seo", "local-seo", "digital-marketing"],
     relatedIndustrySlugs: ["real-estate", "professional-services"],
     body: [
       { h2: "Your business can be visible on Google and still be missing from AI conversations",
@@ -1605,7 +1605,7 @@ export const BLOG_POSTS: BlogPost[] = [
     imageAlt: "Smartphone camera framing a ceramic vase for a visual search, with matching image results",
     imageWidth: 1600,
     imageHeight: 900,
-    relatedServices: ["seo", "technical-seo", "local-seo", "google-analytics"],
+    relatedServices: ["ai-search-visibility", "seo", "technical-seo", "local-seo", "google-analytics"],
     relatedIndustrySlugs: ["retail", "hospitality", "real-estate"],
     body: [
       { h2: "When the search starts with a camera, not a keyword",
@@ -1794,7 +1794,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "Laptop showing an AI search visibility framework, from buyer questions and AI answers to citations, entity accuracy and business outcomes, for Oman, UAE and GCC markets in English and Arabic.",
     imageWidth: 1637,
     imageHeight: 961,
-    relatedServices: ["seo", "google-analytics", "local-seo", "technical-seo"],
+    relatedServices: ["ai-search-visibility", "seo", "google-analytics", "local-seo", "technical-seo"],
     relatedPostSlugs: [
       "google-ranking-vs-ai-visibility",
       "ai-search-business-visibility",
@@ -2717,7 +2717,10 @@ export const BLOG_POSTS: BlogPost[] = [
             type: "p",
             content: {
               text: "If you'd like help building that baseline, from the bilingual prompt set and testing protocol to first-party data and reporting, talk to us. We'll be as clear about what the measurement can't show as about what it can.",
-              link: { anchor: "talk to us", link: { kind: "contact" } },
+              links: [
+                { anchor: "help building that baseline", link: { kind: "service", slug: "ai-search-visibility" } },
+                { anchor: "talk to us", link: { kind: "contact" } },
+              ],
             },
           },
         ],
@@ -2762,7 +2765,7 @@ export const BLOG_POSTS: BlogPost[] = [
     imageWidth: 1678,
     imageHeight: 937,
     inLanguage: "en",
-    relatedServices: ["seo", "local-seo", "technical-seo", "google-analytics"],
+    relatedServices: ["ai-search-visibility", "seo", "local-seo", "technical-seo", "google-analytics"],
     relatedPostSlugs: [
       "how-to-measure-ai-search-visibility-gcc",
       "google-ranking-vs-ai-visibility",

@@ -5,6 +5,7 @@
 import {
   Globe,
   Search,
+  ScanSearch,
   Cpu,
   MapPin,
   Bot,
@@ -22,6 +23,8 @@ export type ContentLink =
   | { kind: "service"; slug: string }
   | { kind: "tool"; slug: string }
   | { kind: "location"; city: string }
+  | { kind: "industry"; slug: string }
+  | { kind: "post"; slug: string } // a BLOG_POSTS entry, for methodology/research references
   | { kind: "contact" }
   | { kind: "portfolio" }
   | { kind: "external"; href: string };
@@ -32,7 +35,10 @@ export type ContentLink =
 export type AnchorLink = { anchor: string; link: ContentLink };
 
 export type EditorialParagraph = { text: string; link?: AnchorLink };
-export type EditorialSubsection = { h3: string; body: string; link?: AnchorLink };
+// `label` is a short qualifier shown above the H3 (e.g. what data access a
+// review area needs); `items` renders a compact list under the body. Both
+// optional and unused by every page that predates them.
+export type EditorialSubsection = { h3: string; body: string; link?: AnchorLink; label?: string; items?: string[] };
 
 // A long-form H2 block for service pages whose approved copy goes beyond the
 // standard problem/solution + benefits + process shape. Optional and unused
@@ -75,7 +81,7 @@ export type ServiceDetail = {
   benefitsIntro?: string;
   postBenefitsSection?: EditorialSection; // rendered after the benefits grid
   whoForIntro?: string;
-  whoFor?: { title: string; body: string }[];
+  whoFor?: { title: string; body: string; link?: AnchorLink }[];
   preFaqSection?: EditorialSection; // rendered after "Who this is for", before FAQ
   finalCta?: { heading: string; body: string; primaryLabel: string; secondaryLabel: string; secondaryLink: ContentLink };
 };
@@ -482,6 +488,10 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
           { text: "Search is evolving beyond a simple list of blue links. Google's AI-powered search experiences and AI assistants such as ChatGPT and Perplexity increasingly synthesise answers from multiple sources rather than sending every visitor to a single page." },
           { text: "We can't promise inclusion in any AI-generated answer or assistant response — no credible partner can. What we can do is build content and sites the way these systems are understood to favour: clearly structured, genuinely useful, entity-aware, contextually complete and technically accessible." },
           { text: "A site with strong architecture, clear headings and well-organised content remains the strongest foundation for visibility, whether the searcher is reading a results page or an AI-generated summary." },
+          {
+            text: "Where a business needs that picture assessed directly, including how it is found, described and cited across AI-assisted discovery in English and Arabic, that is the focus of our AI Search Visibility service.",
+            link: { anchor: "AI Search Visibility service", link: { kind: "service", slug: "ai-search-visibility" } },
+          },
         ],
       },
     ],
@@ -976,6 +986,263 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     },
     related: ["seo", "technical-seo", "google-analytics"],
     auditToolAnchor: "SEO Audit Tool",
+  },
+  {
+    slug: "ai-search-visibility",
+    name: "AI Search Visibility",
+    short: "Understand and improve how search and AI systems find, describe and cite your business.",
+    icon: ScanSearch,
+    category: "Visibility",
+    metaTitle: "AI Search Visibility Services UAE, Oman & GCC | OMSA",
+    metaDescription:
+      "AI search visibility audits for the UAE, Oman and the GCC: see how Google and AI assistants find, describe and reference your business, and what to fix first.",
+    problem:
+      "Traditional SEO asks a clear question: can customers find your business in search? That question still matters, but it no longer covers every route to a decision. When a buyer asks an AI system which providers to consider, the answer may name some businesses, describe them in its own words and cite a handful of sources, often before anyone visits a website. A business can rank well on Google and still be missing, misdescribed or uncited in those answers.",
+    solution:
+      "AI Search Visibility adds a second question: can AI systems correctly discover, understand, represent and cite your business when people ask relevant questions? OMSA answers both together. We review how you appear in search and in AI answers, whether your business information is consistent across the web, whether your pages are clear enough to be used as sources, how you're described in English and Arabic, and what can be measured. The findings become a prioritized plan built on the same technical, content and authority foundations that good SEO already depends on.",
+    h1: "AI Search Visibility for Oman, UAE & GCC Businesses",
+    heroBody: [
+      "Customers can now discover a business through Google's organic and local results, AI-generated summaries in Search, or an AI assistant asked for a recommendation, in English or in Arabic.",
+      "OMSA Digital & AI Studio helps businesses in Oman, the UAE and the wider GCC understand and improve how they are discovered, represented and referenced across traditional search and AI-assisted discovery. We're explicit about what can be checked publicly and what needs access to your own analytics or enquiry data.",
+    ],
+    heroCta: {
+      primaryLabel: "Request a Search & AI Visibility Audit",
+      secondaryLabel: "See How AI Visibility Is Measured",
+      secondaryLink: { kind: "post", slug: "how-to-measure-ai-search-visibility-gcc" },
+    },
+    sections: [
+      {
+        id: "discovery-expanding",
+        eyebrow: "How discovery is changing",
+        h2: "Search Is Expanding Beyond Traditional Results",
+        paragraphs: [
+          { text: "The route from a question to a business is no longer a single results page. Depending on the question, the device and the platform, a customer may encounter your business through several different surfaces:" },
+        ],
+        bullets: [
+          "traditional organic search results",
+          "local results and Google Business Profile listings",
+          "AI-generated answers, such as Google's AI Overviews and AI Mode",
+          "AI assistants, some of which search the web on the user's behalf",
+          "the sources and citations linked alongside an AI answer",
+          "brand and entity information drawn from your website and third-party sources",
+          "searches made in English, in Arabic, or in both",
+          "image-led searches through Google Lens and similar tools",
+        ],
+        afterBullets: [
+          {
+            text: "None of this makes SEO obsolete. Google states that its generative AI features are rooted in its core Search ranking and quality systems, and that SEO best practices remain relevant.",
+            link: { anchor: "core Search ranking and quality systems", link: { kind: "external", href: "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide" } },
+          },
+          {
+            text: "What has changed is the size of the discovery environment a business needs to understand. Even image-led searches now have their own reporting in Search Console, a sign that visibility is no longer measured through typed keywords alone.",
+            link: { anchor: "their own reporting in Search Console", link: { kind: "post", slug: "google-search-console-multimodal-search-seo-ai-visibility" } },
+          },
+        ],
+      },
+      {
+        id: "definition",
+        eyebrow: "Definition",
+        h2: "What AI Search Visibility Actually Means",
+        paragraphs: [
+          { text: "AI Search Visibility is the extent to which a business is found, accurately described, cited as a source and recommended when people use AI-assisted search to ask the questions that lead to a purchase, across the platforms, markets and languages that matter to that business." },
+          { text: "It is not a single score. In practice, it breaks down into six connected parts:" },
+        ],
+        subsections: [
+          { h3: "Discoverability", body: "Can search engines and AI systems reach and retrieve useful information about the business? That starts with crawlable, indexable pages that aren't blocked from the systems that matter." },
+          { h3: "Entity Understanding", body: "Is it clear who the business is, what it does, where it operates and which topics it can speak to with authority, consistently, wherever that information appears?" },
+          { h3: "Representation", body: "When the business is named in a generated answer or summary, is the description accurate, current and useful? And is it recommended, listed among options or only mentioned in passing?" },
+          { h3: "Source & Citation Presence", body: "Are there authoritative pages, on your own site or on trusted third-party sources, that an answer can draw on and link to when it covers your services?" },
+          { h3: "Multilingual Visibility", body: "Does the business remain understandable and correctly described across English and Arabic discovery journeys, not only in the language the website was written in first?" },
+          {
+            h3: "Measurement",
+            body: "Can visibility be tracked consistently over time and connected to enquiries, rather than reduced to a screenshot or a vanity score?",
+          },
+        ],
+      },
+      {
+        id: "what-we-review",
+        eyebrow: "What OMSA reviews",
+        h2: "What OMSA Reviews Across Search and AI",
+        paragraphs: [
+          { text: "Each area of the review answers a different question and relies on different evidence. Some of it can be observed externally, from public search results, controlled AI testing and your public web presence. Some of it requires access to your own Search Console, analytics or CRM data." },
+          { text: "Each area below is labelled with the evidence it needs: observed externally (no access required), requires analytics access (Search Console, GA4 or Bing Webmaster Tools), or requires CRM or lead data. Where that access isn't available, the area is reported as not assessed rather than estimated." },
+        ],
+        subsections: [
+          { label: "Observed externally", h3: "Google Search Visibility", body: "Organic visibility for the searches that matter commercially: which pages appear, whether they match search intent, and where important services are hard to discover. Search Console access adds depth." },
+          { label: "Observed externally", h3: "AI Presence", body: "Whether and how the business appears across a defined set of buyer questions, tested on relevant AI-assisted search experiences in a documented, repeatable way. Results are recorded as rates across questions, not as rankings." },
+          { label: "Observed externally", h3: "Brand Representation", body: "How answers describe the company, including its name, services, positioning, locations and key facts, checked against a verified fact sheet you approve." },
+          { label: "Observed externally", h3: "Entity Consistency", body: "Whether your website, Google Business Profile, directories, social profiles and other public sources tell the same story about who you are, what you do and where you operate." },
+          { label: "Observed externally", h3: "Citation & Source Readiness", body: "Which pages, yours and third parties', are cited as sources in the answers we test, and whether your important pages contain clear, specific and supportable information that can serve as a reliable source." },
+          { label: "Observed externally", h3: "Content & Answer Readiness", body: "Whether your content directly answers the questions customers actually ask, with the specifics a useful answer needs: scope, location, eligibility and process." },
+          { label: "Observed externally · where relevant", h3: "English vs Arabic Visibility", body: "How representation differs between English and Arabic, tested with matched questions written for each language rather than direct translations." },
+          { label: "Observed externally · where relevant", h3: "Oman vs UAE Visibility", body: "Differences in search and AI visibility between markets, for businesses that operate in, or are expanding into, more than one GCC country." },
+          { label: "Requires analytics access", h3: "Analytics & Referral Evidence", body: "With access to GA4, Search Console and, where set up, Bing Webmaster Tools, we review AI assistant referrals, AI feature impressions and the landing pages they reach. Without that access, this area isn't assessed." },
+          { label: "Requires CRM or lead data", h3: "Business Outcomes", body: "Where enquiry or CRM data exists, we connect visibility to contact forms, WhatsApp actions, calls, bookings and qualified leads. AI influence that leaves no click or referrer can't be fully measured, and we report that limit rather than hide it." },
+        ],
+      },
+      {
+        id: "seo-and-ai",
+        eyebrow: "Connected disciplines",
+        h2: "Traditional SEO and AI Search Visibility Work Together",
+        paragraphs: [
+          {
+            text: "AI Search Visibility isn't a replacement for SEO, and it isn't a separate system built on new acronyms. It extends the same discipline to a wider set of discovery experiences. Much of what helps a business appear accurately in AI answers also helps it rank: accessible pages, useful content and credible evidence.",
+            link: { anchor: "SEO", link: { kind: "service", slug: "seo" } },
+          },
+          {
+            text: "Where an audit uncovers crawlability or indexing problems, that work belongs to Technical SEO first, because pages that search and AI systems can't reach can't be represented at all.",
+            link: { anchor: "Technical SEO", link: { kind: "service", slug: "technical-seo" } },
+          },
+        ],
+        subsections: [
+          {
+            h3: "Traditional SEO",
+            body: "Asks whether customers can find your business in search results.",
+            items: ["Crawlability and indexing", "Rankings for commercial searches", "Search intent", "Organic landing pages", "Local search"],
+          },
+          {
+            h3: "AI Search Visibility",
+            body: "Adds whether AI systems can correctly discover, understand, represent and cite your business.",
+            items: ["Entity understanding", "Answer readiness", "Source and citation potential", "Brand representation", "AI-assisted discovery", "Visibility across platforms"],
+          },
+          {
+            h3: "Shared Foundations",
+            body: "The groundwork both depend on, which is why the work rarely needs to be duplicated.",
+            items: ["A technically accessible website", "Useful, specific content", "Authority and credible evidence", "Structured information", "Clear, consistent entities", "A strong user experience"],
+          },
+        ],
+      },
+      {
+        id: "gcc",
+        eyebrow: "Oman, UAE & the GCC",
+        h2: "Built for GCC Search Behaviour",
+        paragraphs: [
+          {
+            text: "Visibility in one market doesn't transfer automatically to another. A business that is well represented when customers ask about Muscat may be absent when the same service is asked about in Dubai, and a page that answers well in English may have no useful Arabic equivalent.",
+            link: { anchor: "Muscat", link: { kind: "location", city: "muscat" } },
+          },
+          {
+            text: "We therefore treat Oman, the UAE and other GCC markets as separate tests, and English and Arabic as separate discovery journeys. Arabic questions are written for genuine Arabic search intent, not translated word for word, because a translated page and a page written for Arabic-speaking customers are often not the same thing.",
+            link: { anchor: "genuine Arabic search intent", link: { kind: "post", slug: "bilingual-seo-gcc-arabic-english" } },
+          },
+          { text: "Names and terms are a common source of confusion. A business may have an Arabic name, an English trading name and several transliterated spellings in use across maps, directories and listings, and the words customers use for a service or a district can differ between markets. We check whether these variants clearly point to the same business." },
+          {
+            text: "Local entities matter too. Service and location combinations, Google Business Profile details and consistent business information across directories all shape how a business is understood locally, the same territory our Local SEO work covers.",
+            link: { anchor: "Local SEO", link: { kind: "service", slug: "local-seo" } },
+          },
+          { text: "We don't make assumptions about how GCC consumers use AI tools. Where reliable regional data isn't available, the audit relies on what can be tested and measured for your business specifically." },
+        ],
+      },
+    ],
+    benefitsEyebrow: "The Search & AI Visibility Audit",
+    benefitsHeading: "What the OMSA Search & AI Visibility Audit Includes",
+    benefitsIntro: "Depending on scope and the data you're able to share, the audit can include:",
+    benefits: [
+      "A search visibility review for your priority services and markets",
+      "An AI answer review: whether and how your business is named and described across a defined set of buyer questions",
+      "A verified fact sheet of your business details, used to check accuracy",
+      "A consistency review of your business information across your website and key public sources",
+      "A citation and source-readiness assessment of your important pages",
+      "Priority content gaps, mapped to real customer questions",
+      "An English and Arabic visibility comparison, where relevant",
+      "An Oman and UAE market comparison, where relevant",
+      "Technical discoverability and structured-data observations",
+      "A documented baseline of the questions tested, so results can be re-checked later",
+      "Measurement recommendations for Search Console, GA4 and your CRM",
+      "A prioritized action roadmap",
+    ],
+    postBenefitsSection: {
+      id: "outcomes",
+      eyebrow: "Business value",
+      h2: "From Visibility to Business Outcomes",
+      paragraphs: [
+        { text: "Visibility isn't the final KPI. An AI answer that names your business is only valuable if it describes you accurately, earns enough trust to prompt action, and that action reaches you." },
+        { text: "Visibility → Accurate representation → Visit or contact → Lead → Qualified lead → Customer" },
+        { text: "Each step needs different evidence. Visibility and representation can be assessed externally. Visits need analytics access. Leads, lead quality and customers need your CRM or enquiry records. And some influence can't be measured at all: someone who reads an AI answer and later calls you, or searches for your name, leaves no AI referrer behind." },
+        {
+          text: "Each step in that chain can also break on its own. A business can be mentioned but misdescribed, cited but not recommended, or recommended in an answer that never produces a visit. A mention is not a recommendation, and a visit is not a lead.",
+        },
+        { text: "That's why measurement connects to the outcomes a business already tracks, wherever you can share the data:" },
+      ],
+      bullets: [
+        "qualified enquiries",
+        "contact form submissions",
+        "WhatsApp actions",
+        "phone calls",
+        "bookings and appointments",
+        "lead quality, not just lead volume",
+        "conversions",
+        "revenue, where CRM data allows",
+      ],
+      afterBullets: [
+        {
+          text: "It's the same principle behind all of OMSA's work: Visibility → Authority → Trust → Leads → Revenue. Where tracking isn't yet in place to see those steps, setting it up is often the first recommendation.",
+          link: { anchor: "setting it up", link: { kind: "service", slug: "google-analytics" } },
+        },
+      ],
+    },
+    process: [
+      { step: "Scope & Priorities", detail: "We agree the services, markets and languages that matter commercially, and which data (Search Console, GA4, CRM) you're able to share." },
+      { step: "Fact Sheet & Buyer Questions", detail: "We build a verified fact sheet for your business and a set of buyer questions in English and, where relevant, Arabic. Everything else is checked against this baseline." },
+      { step: "Search & Technical Review", detail: "We review organic visibility, indexability, crawler access and structured data, because pages that systems can't reach can't be represented." },
+      { step: "AI Answer Testing", detail: "The buyer questions are run on the agreed AI platforms using a documented, repeatable method, recording whether you're named, how you're described, whether the details are accurate and which sources are cited." },
+      { step: "Analytics & CRM Review (Where Available)", detail: "Where you grant access, data from Search Console, Bing Webmaster Tools, GA4 and your CRM is reviewed alongside the external findings." },
+      { step: "Findings & Prioritized Roadmap", detail: "You receive the findings, the methodology behind them and a prioritized plan, with observed results, measured results and limitations clearly separated. The plan can be implemented by your team or with OMSA, and re-tested against the same baseline." },
+    ],
+    whoForIntro: "The audit is most useful where being found, understood and trusted directly affects enquiries:",
+    whoFor: [
+      { title: "Professional Services", body: "Firms whose clients research and shortlist providers before making contact, and where accurate descriptions of expertise matter." },
+      {
+        title: "Healthcare and Clinics",
+        body: "Clinics and medical practices where correct services, locations and practitioner details shape patient trust, a core part of how we work with healthcare providers.",
+        link: { anchor: "healthcare providers", link: { kind: "industry", slug: "healthcare" } },
+      },
+      { title: "Real Estate", body: "Developers, brokerages and agencies whose projects, locations and credentials can easily be confused across sources." },
+      { title: "B2B Companies", body: "Businesses with long, research-heavy buying journeys, where buyers compare options before making contact." },
+      { title: "Hospitality and Tourism", body: "Hotels, restaurants and tourism operators that can be discovered through local, image-led and conversational searches." },
+      {
+        title: "Local and Multi-Location Businesses",
+        body: "Service businesses whose locations, Google Business Profile details and service areas need to stay consistent, from Muscat across Oman and beyond.",
+      },
+      { title: "Businesses Expanding Across the GCC", body: "Companies moving from Oman into the UAE, or across the wider GCC, that need to know how they are represented in each new market." },
+    ],
+    preFaqSection: {
+      id: "why-omsa",
+      eyebrow: "Why OMSA",
+      h2: "An Evidence-Led Approach to AI Search",
+      paragraphs: [
+        { text: "OMSA works across websites, SEO, analytics and AI as one connected discipline, so AI Search Visibility is treated as an extension of search work, not a separate product built on new acronyms." },
+        {
+          text: "Our methodology is published. Our framework for measuring AI search visibility sets out the measurement model, the evidence behind each layer and its limits, so you can see how findings are produced before you commission an audit.",
+          link: { anchor: "framework for measuring AI search visibility", link: { kind: "post", slug: "how-to-measure-ai-search-visibility-gcc" } },
+        },
+        {
+          text: "If you'd rather start with a self-check, our practical guide to checking visibility in AI search walks through the first questions to ask.",
+          link: { anchor: "checking visibility in AI search", link: { kind: "post", slug: "is-your-business-visible-in-ai-search-gcc" } },
+        },
+        { text: "We keep what platforms document separate from our own analysis, and what we can observe separate from what we can measure. And we don't promise rankings, citations or inclusion in AI answers, because no one outside those platforms controls them. What we commit to is a transparent process, accurate reporting and a clear plan." },
+      ],
+    },
+    faqs: [
+      { q: "What is AI Search Visibility?", a: "AI Search Visibility is the extent to which a business is found, accurately described, cited and recommended when people use AI-generated answers in search or AI assistants to ask questions relevant to its services. It covers presence, representation, citation, accuracy and the business outcomes that follow." },
+      { q: "Is AI Search Visibility the same as SEO?", a: "No, but the two are closely connected. SEO focuses on whether customers can find your business in search results. AI Search Visibility adds whether AI systems can correctly understand, represent and cite your business. Google states that its generative AI features are rooted in its core Search ranking and quality systems. Other AI platforms retrieve information in their own ways, but accessible, clear and credible pages are a shared foundation, which is why strong SEO remains the starting point.", link: { anchor: "strong SEO", link: { kind: "service", slug: "seo" } } },
+      { q: "Which search and AI platforms do you review?", a: "Google Search, including AI Overviews and AI Mode, plus the AI assistants most relevant to your market and audience, such as ChatGPT, Gemini, Microsoft Copilot or Perplexity. The set is agreed during scoping. We test these platforms the way a customer would use them; we have no privileged access to any platform's internal data. With your access, Search Console shows impressions in AI Overviews and AI Mode, and Bing Webmaster Tools shows citations in Copilot and Bing's AI-generated summaries." },
+      { q: "Can you guarantee that ChatGPT or other AI systems will cite my website?", a: "No. OMSA cannot guarantee inclusion, citation, recommendation or ranking in ChatGPT, Google's AI features or any other third-party AI system. Those platforms decide what they show, and answers can change with wording, context and platform updates. What we can do is improve the clarity, consistency and accessibility of the information those systems draw on, which makes accurate inclusion more likely, not certain." },
+      { q: "How do you measure AI Search Visibility?", a: "We run a defined set of buyer questions on relevant AI platforms using a documented, repeatable method, and record how often the business is present, recommended, cited and accurately described. Where access is available, we add first-party data from Search Console's Generative AI performance report, Bing Webmaster Tools' AI Performance report and GA4. Results are tracked as rates over time, not as rankings.", link: { anchor: "documented, repeatable method", link: { kind: "post", slug: "how-to-measure-ai-search-visibility-gcc" } } },
+      { q: "Can you compare English and Arabic AI visibility?", a: "Yes, where it's relevant to your business. We test matched questions written for each language rather than direct translations, then compare presence, accuracy and cited sources across the two, so gaps in either language become visible." },
+      { q: "Do I need traditional SEO before working on AI Search Visibility?", a: "You don't need a finished SEO programme to start with an audit, but the foundations matter. If important pages can't be crawled or indexed, they can't be represented in search results or AI answers. Many audit findings therefore lead back to technical SEO, content and entity work.", link: { anchor: "technical SEO", link: { kind: "service", slug: "technical-seo" } } },
+      { q: "What does an AI Visibility Audit include?", a: "Depending on scope and available data, it can include a search visibility review, AI presence testing, entity consistency and source-readiness analysis, priority content gaps, English and Arabic or Oman and UAE comparisons where relevant, technical and structured-data observations, measurement recommendations and a prioritized roadmap. Each finding is labelled as observed externally or measured from your own data." },
+      { q: "Can you measure leads coming from AI platforms?", a: "Partly. With GA4 access, visits from AI assistants such as ChatGPT can often be identified through referrers and UTM parameters, and connected to enquiries where conversion tracking is in place. Clicks from Google's AI Overviews and AI Mode are counted as organic search in GA4, and journeys that end in a call, a WhatsApp message or a later branded search may leave no AI referrer at all. We report what can be attributed and what can't.", link: { anchor: "conversion tracking", link: { kind: "service", slug: "google-analytics" } } },
+      { q: "What happens after the audit?", a: "You receive a prioritized roadmap. Your team can implement it, or OMSA can, typically through SEO, technical, content or analytics work depending on what the findings show. Because the buyer questions and method are documented, the same baseline can be re-tested later to see what has changed." },
+    ],
+    finalCta: {
+      heading: "Understand How Your Business Appears Across Search and AI",
+      body: "OMSA can review how your business is found, described and cited across search and AI-assisted discovery, covering search visibility, AI representation, entity accuracy, source readiness and measurement, and show you what to prioritize first.",
+      primaryLabel: "Request a Search & AI Visibility Audit",
+      secondaryLabel: "Explore SEO Services",
+      secondaryLink: { kind: "service", slug: "seo" },
+    },
+    related: ["seo", "local-seo", "google-analytics"],
   },
   {
     slug: "ai-chatbots",

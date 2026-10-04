@@ -46,9 +46,7 @@ export function FaqItem({
         className={`grid transition-[grid-template-rows] duration-300 ease-out ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
       >
         <div className="overflow-hidden">
-          <div className="px-6 pb-6 -mt-2 text-sm text-muted-foreground leading-relaxed">
-            {item.a}
-          </div>
+          <div className="px-6 pb-6 text-sm text-muted-foreground leading-relaxed">{item.a}</div>
         </div>
       </div>
     </div>

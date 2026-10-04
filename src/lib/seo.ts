@@ -125,6 +125,7 @@ export const organizationJsonLd = () => ({
     "Search Engine Optimization",
     "Technical SEO",
     "Local SEO",
+    "AI Search Visibility",
     "Google Analytics 4",
     "Conversion Rate Optimization",
     "AI Chatbots",

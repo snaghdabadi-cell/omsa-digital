@@ -12,6 +12,7 @@ export const SERVICE_NAV_LINKS = [
   { name: "SEO Services", slug: "seo" },
   { name: "Technical SEO", slug: "technical-seo" },
   { name: "Local SEO", slug: "local-seo" },
+  { name: "AI Search Visibility", slug: "ai-search-visibility" },
   { name: "AI Chatbots & Assistants", slug: "ai-chatbots" },
   { name: "Business Automation", slug: "business-automation" },
   { name: "Analytics & Tracking", slug: "google-analytics" },

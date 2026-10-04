@@ -50,6 +50,18 @@ function ContentAnchor({
           {label}
         </Link>
       );
+    case "industry":
+      return (
+        <Link to="/industries/$slug" params={{ slug: link.slug }} className={className}>
+          {label}
+        </Link>
+      );
+    case "post":
+      return (
+        <Link to="/blog/$slug" params={{ slug: link.slug }} className={className}>
+          {label}
+        </Link>
+      );
     case "contact":
       return (
         <Link to="/contact" className={className}>
@@ -131,10 +143,25 @@ function EditorialSectionBlock({ section, muted }: { section: EditorialSection; 
           <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {section.subsections.map((sub) => (
               <div key={sub.h3} className={cardClass}>
+                {sub.label && (
+                  <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-[color:var(--gold-deep)]">
+                    {sub.label}
+                  </p>
+                )}
                 <h3 className="font-display text-lg font-semibold tracking-tight">{sub.h3}</h3>
                 <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
                   <Linkify text={sub.body} link={sub.link} />
                 </p>
+                {sub.items && sub.items.length > 0 && (
+                  <ul className="mt-5 space-y-2.5">
+                    {sub.items.map((item) => (
+                      <li key={item} className="flex items-start gap-2.5 text-sm text-foreground/85 leading-relaxed">
+                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[color:var(--gold)]" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             ))}
           </div>
@@ -367,10 +394,12 @@ function ServiceDetailPage() {
               <p className="mt-5 max-w-md text-muted-foreground">{service.whoForIntro}</p>
             )}
             <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {service.whoFor.map((w: { title: string; body: string }) => (
+              {service.whoFor.map((w: { title: string; body: string; link?: AnchorLink }) => (
                 <div key={w.title} className="rounded-3xl border border-border bg-background p-8">
                   <h3 className="font-display text-lg font-semibold tracking-tight">{w.title}</h3>
-                  <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{w.body}</p>
+                  <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
+                    <Linkify text={w.body} link={w.link} />
+                  </p>
                 </div>
               ))}
             </div>

@@ -1,16 +1,17 @@
 import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-router";
-import { ArrowRight, MapPin, Wrench } from "lucide-react";
+import { ArrowRight, MapPin, ScanSearch, Wrench } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { ServiceCard, SERVICES } from "@/components/site/ServiceCard";
 import { abs, isLeafMatch } from "@/lib/seo";
 
-// Technical SEO and Local SEO are full, independently-differentiated
+// Technical SEO, Local SEO and AI Search Visibility are full, independently-differentiated
 // service pages (see services-data.ts) but aren't part of the shared
 // SERVICES array the homepage also renders — kept scoped to this hub so
 // adding them here doesn't add cards to the homepage section too.
 const HUB_ONLY_SERVICES = [
   { icon: Wrench, title: "Technical SEO", desc: "Crawlability, indexing, Core Web Vitals and structured data fixes that remove the technical barriers holding search visibility back.", slug: "technical-seo" },
   { icon: MapPin, title: "Local SEO", desc: "Google Business Profile optimization, local visibility and location-relevant content that help nearby customers find and choose you.", slug: "local-seo" },
+  { icon: ScanSearch, title: "AI Search Visibility", desc: "Understand and improve how Google and AI assistants find, describe and cite your business, in English and Arabic, across Oman, the UAE and the GCC.", slug: "ai-search-visibility" },
 ];
 
 export const Route = createFileRoute("/services")({
