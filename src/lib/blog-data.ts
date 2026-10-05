@@ -16,6 +16,7 @@ import aiSearchVisibilityMeasurementGcc from "@/assets/ai-search-visibility-meas
 import aiSearchBusinessDiscoverabilityGcc from "@/assets/ai-search-business-discoverability-gcc.webp";
 import googleCrawlingIndexingTimes2026 from "@/assets/google-crawling-indexing-times-2026.webp";
 import googleAiContentHumanReview from "@/assets/google-ai-content-human-review-fact-checking.webp";
+import smeConversionTrackingGoogleSiteKit from "@/assets/sme-conversion-tracking-google-site-kit.webp";
 
 // Blog-scoped link types, deliberately separate from services-data.ts's
 // ContentLink/AnchorLink (which has no "industry" kind and is used by the
@@ -4844,6 +4845,743 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         q: "How should businesses safely scale AI content?",
         a: "Start from trusted source information, use AI for drafting and structuring, have a qualified person verify facts and claims before publishing, check metadata and structured data as well as visible copy, and review important pages after publication. Scale volume only as fast as you can keep accuracy.",
+      },
+    ],
+  },
+  {
+    slug: "sme-conversion-tracking-google-site-kit",
+    title: "More Traffic Isn't the Answer: Why SMEs Need Better Conversion Tracking",
+    excerpt:
+      "Many small businesses don't have a traffic problem. They have a measurement problem. Google Site Kit is making conversion tracking easier for WordPress sites, but the real advantage is turning that data into better business decisions.",
+    metaTitle: "Conversion Tracking for SMEs: From Website Traffic to Business Results",
+    metaDescription:
+      "Google Site Kit is making conversion tracking easier for WordPress businesses. But the bigger opportunity for SMEs is understanding which traffic, pages and campaigns actually generate leads and sales.",
+    category: "Google Analytics",
+    date: "2026-10-04",
+    readMinutes: 12,
+    image: smeConversionTrackingGoogleSiteKit,
+    imageAlt:
+      "Digital marketing measurement journey connecting search visibility, customer actions and business growth.",
+    imageWidth: 1678,
+    imageHeight: 937,
+    inLanguage: "en",
+    relatedServices: ["google-analytics", "digital-marketing", "seo"],
+    relatedPostSlugs: [
+      "website-traffic-vs-business-growth",
+      "ga4-professional-services-gcc",
+      "how-to-measure-ai-search-visibility-gcc",
+    ],
+    intro: [
+      "A business gets 8,000 website visits this month. Is that good?",
+      "Without knowing what those visitors actually did, the number tells us surprisingly little.",
+      "A website can attract more traffic every month while producing almost no meaningful business growth. Another can attract a fraction of that traffic and generate valuable enquiries week after week. The difference isn't necessarily traffic. It's what happens after the click, and whether the business can measure it.",
+      "For many SMEs, this is still one of the biggest gaps in digital marketing. They know how many people visited. They don't always know which visits actually mattered.",
+      {
+        text: "That gap is getting easier to close. Google's Site Kit plugin for WordPress can record certain actions from a set of popular WordPress store and form plugins in Google Analytics, with far less setup than a custom implementation. Recent coverage by PPC Land has put the capability back in the spotlight, although it has been developing across several Site Kit releases rather than arriving overnight.",
+        link: {
+          anchor: "Recent coverage by PPC Land",
+          link: {
+            kind: "external",
+            href: "https://ppc.land/google-site-kit-auto-tracks-checkouts-and-form-leads-from-8-wordpress-plugins/",
+          },
+        },
+      },
+      "It's a useful development. But it's also a sign of something bigger: collecting conversion data is becoming easier, so the competitive advantage is shifting to what a business does with it. **A note on sources:** throughout this article, we separate what Google documents from our own interpretation as a digital and AI studio.",
+    ],
+    body: [
+      {
+        h2: "Traffic is not a business outcome",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** Traffic tells you people arrived. It doesn't tell you whether they did anything that mattered to the business. A pageview is activity, not value.",
+          },
+          {
+            type: "p",
+            content: "It helps to separate four things that marketing reports often blur together:",
+          },
+          {
+            type: "ul",
+            items: [
+              "**Traffic:** people arriving on the website.",
+              "**Engagement:** what they do once they're there: the pages they read, the journeys they take.",
+              "**Conversion:** a meaningful action, such as an enquiry, a booking or a purchase.",
+              "**Business outcome:** the commercial result: a customer, revenue, pipeline, a repeat client.",
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "Ten thousand visitors are not ten thousand valuable visitors. Some arrived by accident, some were researching, some were never going to buy. The useful question is how website activity connects to the actions that actually move a business forward:",
+          },
+          {
+            type: "ul",
+            items: [
+              "requesting a consultation",
+              "calling the business",
+              "submitting a qualified enquiry",
+              "booking an appointment",
+              "purchasing a product",
+              "requesting a quotation",
+            ],
+          },
+          {
+            type: "p",
+            content: {
+              text: "For a clinic in Muscat, that might be an appointment request. For a fit-out contractor in Dubai, a quotation request. For an online retailer serving the GCC, a completed order. The action differs by business. The principle doesn't. We explored the wider problem in our article on why more website traffic doesn't always mean more business.",
+              link: {
+                anchor: "why more website traffic doesn't always mean more business",
+                link: { kind: "post", slug: "website-traffic-vs-business-growth" },
+              },
+            },
+          },
+        ],
+      },
+      {
+        h2: "What Google Site Kit is making easier",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** Site Kit is Google's official WordPress plugin for connecting a website to Google services. Its plugin conversion tracking feature can record certain actions from eight supported ecommerce and form plugins in Google Analytics and, where connected, Google Ads.",
+          },
+          {
+            type: "p",
+            content: {
+              text: "Google describes Site Kit on WordPress.org as “the official WordPress plugin from Google for insights about how people find and use your site”. It connects a WordPress site to services including Google Analytics, Search Console, AdSense, PageSpeed Insights, Tag Manager and Google Ads, and shows key information inside the WordPress dashboard.",
+              link: {
+                anchor: "on WordPress.org",
+                link: { kind: "external", href: "https://wordpress.org/plugins/google-site-kit/" },
+              },
+            },
+          },
+          { type: "h3", text: "What Google's documentation says" },
+          {
+            type: "p",
+            content: {
+              text: "Site Kit's documentation describes plugin conversion tracking, which it notes was previously known as enhanced conversion tracking, as an integration with “a limited number of supported WordPress.org plugins”. Once it's enabled, certain actions from those plugins are recorded in Google Analytics and/or Google Ads. It's a single setting, shared between Site Kit's Analytics and Ads modules.",
+              link: {
+                anchor: "Site Kit's documentation",
+                link: {
+                  kind: "external",
+                  href: "https://sitekit.withgoogle.com/documentation/using-site-kit/plugin-conversion-tracking/",
+                },
+              },
+            },
+          },
+          { type: "p", content: "The supported plugins currently listed are:" },
+          {
+            type: "table",
+            table: {
+              label: "WordPress plugins supported by Site Kit plugin conversion tracking",
+              head: ["Type", "Supported plugins"],
+              rows: [
+                ["Ecommerce", "WooCommerce, Easy Digital Downloads"],
+                [
+                  "Forms and lead capture",
+                  "Contact Form 7, WPForms, Ninja Forms, Mailchimp, OptinMonster, Popup Maker",
+                ],
+              ],
+            },
+          },
+          {
+            type: "p",
+            content:
+              "Google's documentation adds that support for more third-party plugins may come in the future. If a site uses a different form builder or store plugin, this particular feature may not cover it. Google also doesn't publish a full list of the actions recorded, so it's worth checking in Google Analytics which events actually arrive from your site.",
+          },
+          {
+            type: "p",
+            content:
+              "None of this is a revolution in what Google Analytics can measure. Custom setups could always capture these actions. What has changed is the effort required to get a sensible baseline in place.",
+          },
+        ],
+      },
+      {
+        h2: "Why this matters for SMEs",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** Useful conversion measurement has usually been a technical project. For a small business, technical projects often don't get finished. Lowering that barrier matters.",
+          },
+          {
+            type: "p",
+            content:
+              "Historically, reliable conversion tracking could involve some combination of:",
+          },
+          {
+            type: "ul",
+            items: [
+              "Google Tag Manager",
+              "custom event configuration",
+              "developer time",
+              "plugin-specific setup",
+              "Google Analytics configuration",
+              "Google Ads conversion setup",
+              "CRM integration",
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "A larger marketing team can manage that. For an owner running a clinic, a law firm, a consultancy, a restaurant, an online store, a home-services business or a tourism company, measurement easily becomes one more job that's half done, or done once and never checked again.",
+          },
+          {
+            type: "p",
+            content:
+              "So simpler tracking isn't just a convenience. It lowers the cost of asking better business questions.",
+          },
+        ],
+      },
+      {
+        h2: "The question is no longer just “how much traffic did we get?”",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "Once meaningful actions are being recorded, the questions a business can ask change completely:",
+          },
+          {
+            type: "ul",
+            items: [
+              "Which landing page generated the enquiry?",
+              "Which service page produces the most conversions?",
+              "Did organic search generate leads, or just visits?",
+              "Did paid traffic produce qualified enquiries?",
+              "Which campaign generated sales?",
+              "Which content helped people get to a conversion?",
+              "Which locations generate commercial demand?",
+              "Which marketing channel deserves more investment?",
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "None of these can be answered from a traffic report. All of them are questions a business owner actually cares about.",
+          },
+        ],
+      },
+      {
+        h2: "From traffic to business decision",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** Measurement works in layers. Each layer answers a different question, and most SMEs stop at the first or second.",
+          },
+          {
+            type: "p",
+            content: "**Traffic → Behaviour → Conversion → Customer → Business outcome**",
+          },
+          { type: "h3", text: "1. Traffic" },
+          {
+            type: "p",
+            content:
+              "Where did the visitor come from? Google Search, Google Ads, social media, a referring website, an AI platform, or directly.",
+          },
+          { type: "h3", text: "2. Behaviour" },
+          {
+            type: "p",
+            content:
+              "What did they do? Which pages did they view, and did they engage with the content that matters, such as service pages, pricing or case studies?",
+          },
+          { type: "h3", text: "3. Conversion" },
+          {
+            type: "p",
+            content:
+              "Did they take a meaningful action? A form submission, a call, a booking, a purchase or a quote request.",
+          },
+          { type: "h3", text: "4. Customer" },
+          {
+            type: "p",
+            content:
+              "Was the lead actually qualified, and did the person become a customer? This is where website analytics usually runs out of information.",
+          },
+          { type: "h3", text: "5. Business outcome" },
+          {
+            type: "p",
+            content:
+              "What commercial value was created? Revenue, pipeline, a repeat customer, a higher-value service or a long-term account.",
+          },
+          {
+            type: "p",
+            content:
+              "Tools like Site Kit make the third layer easier to capture. The fourth and fifth layers depend on what the business does next.",
+          },
+        ],
+      },
+      {
+        h2: "A conversion is not always a customer",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** A form submission is a conversion event. It isn't revenue. Conversion tracking tells you an action happened; sales and CRM data tell you whether it was worth anything.",
+          },
+          {
+            type: "p",
+            content:
+              "Take a hypothetical law firm that receives 40 form submissions in a month. Analytics reports 40 leads. But in reality:",
+          },
+          {
+            type: "ul",
+            items: [
+              "15 are irrelevant: spam, job seekers or misdirected enquiries.",
+              "10 never respond to a follow-up.",
+              "8 need services the firm doesn't offer.",
+              "5 become consultations.",
+              "2 become paying clients.",
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "The analytics was correct. Forty forms were submitted. But the figure that matters commercially is two, and analytics alone won't produce it.",
+          },
+          {
+            type: "p",
+            content:
+              "**Analytics can tell you that a lead happened. It cannot always tell you whether that lead was worth having.**",
+          },
+          {
+            type: "p",
+            content: {
+              text: "Google's own terminology reflects the same distinction. In Google Analytics, actions important to a business are called key events, while a conversion in Google Ads is used to measure and optimise ad campaigns. They're related but not identical.",
+              link: {
+                anchor: "key events",
+                link: {
+                  kind: "external",
+                  href: "https://support.google.com/analytics/answer/13965727",
+                },
+              },
+            },
+          },
+        ],
+      },
+      {
+        h2: "Where Site Kit stops",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** Site Kit can make it easier to collect certain website events. It is not a CRM, and it doesn't determine lead quality, customer value or profit.",
+          },
+          { type: "p", content: "On its own, plugin conversion tracking does not solve:" },
+          {
+            type: "ul",
+            items: [
+              "lead quality and sales qualification",
+              "offline conversions, such as a deal closed by phone or in person",
+              "CRM attribution: which marketing source produced which customer",
+              "customer lifetime value",
+              "profitability",
+              "complex multi-touch attribution across long buying journeys",
+              "actions from plugins or systems it doesn't support",
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "Depending on the business, those need additional systems or integrations: a CRM, call tracking, offline conversion imports or a more tailored analytics setup. For many SMEs, a good baseline plus a simple monthly lead review is a sensible place to start.",
+          },
+        ],
+      },
+      {
+        h2: "Measurement is becoming easier. Decision-making becomes the advantage.",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** As plugins, platforms and AI make data collection routine, simply having analytics stops being a differentiator. Interpreting it well becomes the advantage.",
+          },
+          {
+            type: "p",
+            content: "A dashboard says: **37 leads.** That's information. A strategist asks:",
+          },
+          {
+            type: "ul",
+            items: [
+              "Where did the 37 leads come from?",
+              "Which service generated them?",
+              "Which landing page influenced them?",
+              "How many were qualified?",
+              "Which became customers?",
+              "How much revenue did they create?",
+              "What should we change next month?",
+            ],
+          },
+          {
+            type: "p",
+            content: "That's decision intelligence: using measurement to choose what to do next.",
+          },
+          {
+            type: "p",
+            content:
+              "**Data collection tells you what happened. Decision intelligence helps you decide what to do next.**",
+          },
+        ],
+      },
+      {
+        h2: "AI will make analytics easier to understand, but it still needs good signals",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** AI can help summarise and interpret marketing data. It can't reliably compensate for conversion signals that were never measured, or were measured badly.",
+          },
+          {
+            type: "p",
+            content: "AI tools are increasingly useful for:",
+          },
+          {
+            type: "ul",
+            items: [
+              "summarising analytics",
+              "identifying patterns",
+              "comparing periods",
+              "flagging anomalies",
+              "segmenting performance",
+              "surfacing opportunities",
+              "explaining what changed",
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "But AI works with the evidence it's given. If a business only measures pageviews, an AI assistant has very little to say about commercial outcomes. If forms are double-counted or purchases aren't recorded, the analysis will be confidently wrong.",
+          },
+          {
+            type: "p",
+            content:
+              "**AI can analyse the signals you collect. It cannot recover business signals you never measured.**",
+          },
+        ],
+      },
+      {
+        h2: "Why this matters for SEO",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** Rankings, impressions, clicks and traffic are upstream indicators. Business-focused SEO should eventually connect them to enquiries, bookings and sales.",
+          },
+          {
+            type: "p",
+            content:
+              "Those upstream metrics matter. They show whether a site is visible and whether that visibility attracts clicks. But they aren't the full outcome.",
+          },
+          {
+            type: "p",
+            content:
+              "A page moving from position 8 to position 3 is useful information. A page generating qualified customers is business information.",
+          },
+          {
+            type: "p",
+            content: {
+              text: "When conversions are tracked by landing page, SEO decisions get sharper: which pages to improve first, which topics bring buyers rather than browsers, and where organic visibility actually pays for itself. That's how we approach SEO measurement, and it's the same logic behind our guide to GA4 for professional services firms.",
+              links: [
+                { anchor: "SEO measurement", link: { kind: "service", slug: "seo" } },
+                {
+                  anchor: "GA4 for professional services firms",
+                  link: { kind: "post", slug: "ga4-professional-services-gcc" },
+                },
+              ],
+            },
+          },
+        ],
+      },
+      {
+        h2: "What about AI search traffic?",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** Where AI-driven visits can be identified, they should be judged by the same commercial logic as any other channel. But attribution is incomplete, so treat it as directional.",
+          },
+          {
+            type: "p",
+            content: {
+              text: "Businesses increasingly receive visits from AI assistants and AI search experiences. Google Analytics now has a default AI Assistant channel for referrals from tools such as ChatGPT, Gemini and Copilot, although visits from Google's own AI Overviews and AI Mode are counted as Organic Search. Many AI interactions never produce a click at all.",
+              link: {
+                anchor: "AI Assistant channel",
+                link: {
+                  kind: "external",
+                  href: "https://support.google.com/analytics/answer/9756891",
+                },
+              },
+            },
+          },
+          { type: "p", content: "Where those visits are measurable, the questions are the same:" },
+          {
+            type: "ul",
+            items: [
+              "Did the visitor arrive?",
+              "What did they do?",
+              "Did they convert?",
+              "Was the lead qualified?",
+              "Did it create business value?",
+            ],
+          },
+          {
+            type: "p",
+            content: {
+              text: "AI visibility becomes more commercially meaningful when a business can connect it with outcomes. Our framework for how to measure AI search visibility covers what can and can't be tracked today.",
+              link: {
+                anchor: "how to measure AI search visibility",
+                link: { kind: "post", slug: "how-to-measure-ai-search-visibility-gcc" },
+              },
+            },
+          },
+        ],
+      },
+      {
+        h2: "What SMEs should measure",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** Four levels: how people found you, what they did, whether they took an important action, and what happened afterwards.",
+          },
+          {
+            type: "table",
+            table: {
+              label: "Four levels of SME marketing measurement",
+              head: ["Level", "The question", "Examples"],
+              rows: [
+                [
+                  "Acquisition",
+                  "How did people find us?",
+                  "Organic search, paid search, social, referral, AI sources where identifiable, direct",
+                ],
+                [
+                  "Engagement",
+                  "What did they do?",
+                  "Key landing pages, service-page engagement, important journeys",
+                ],
+                [
+                  "Conversion",
+                  "Did they take an important action?",
+                  "Lead, booking, call, purchase, quote request",
+                ],
+                [
+                  "Business outcome",
+                  "What happened afterwards?",
+                  "Qualified lead, customer, revenue, pipeline value, repeat business",
+                ],
+              ],
+            },
+          },
+          {
+            type: "p",
+            content:
+              "Not every SME needs an enterprise analytics stack. The measurement system should match the decisions the business actually needs to make.",
+          },
+        ],
+      },
+      {
+        h2: "More data is not automatically better",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "Easier tracking creates a new temptation: tracking everything because it's possible. A business doesn't need 200 events if nobody looks at them. Every unused metric adds noise to reports and makes the important numbers harder to find.",
+          },
+          {
+            type: "p",
+            content:
+              "Before adding an event, ask one question: **what decision will this information help us make?** If there's no answer, it probably doesn't need tracking yet.",
+          },
+        ],
+      },
+      {
+        h2: "A simple measurement framework for SMEs",
+        blocks: [
+          {
+            type: "ol",
+            items: [
+              "**Define the valuable action.** What actually matters to the business: an enquiry, a booking, an order, a call?",
+              "**Track the action.** Make sure important conversions are captured correctly, and test them. A form that fires twice is worse than no data.",
+              "**Connect it to acquisition.** Understand which channel, campaign and landing page the visitor came from.",
+              "**Evaluate quality.** Review whether conversions were commercially valuable, even if that's a simple monthly check against your CRM or inbox.",
+              "**Act on the information.** Invest more in what produces meaningful outcomes. Fix or reduce what doesn't.",
+            ],
+          },
+          {
+            type: "p",
+            content: {
+              text: "If you need help putting that in place, our Google Analytics service focuses on exactly this: measurement built around the business decisions that matter.",
+              link: {
+                anchor: "Google Analytics service",
+                link: { kind: "service", slug: "google-analytics" },
+              },
+            },
+          },
+        ],
+      },
+      {
+        h2: "What Google's Site Kit development really signals",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "The bigger story isn't one WordPress feature. It's the continuing reduction in the technical barrier to useful measurement.",
+          },
+          {
+            type: "p",
+            content:
+              "When tracking is easier, businesses have fewer reasons to make marketing decisions based only on traffic, followers, clicks or impressions. The next competitive layer is interpretation: knowing what the data means and acting on it.",
+          },
+          {
+            type: "ul",
+            items: [
+              "**Traffic ≠ conversion.**",
+              "**Conversion ≠ customer.**",
+              "**Customer ≠ automatically valuable customer.**",
+              "**Visibility ≠ business outcome.**",
+            ],
+          },
+        ],
+      },
+      {
+        h2: "Measure what helps you decide",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "For years, digital marketing gave businesses more data. That didn't necessarily give them better decisions.",
+          },
+          {
+            type: "p",
+            content:
+              "Now the infrastructure for collecting useful signals is getting easier, and Google Site Kit is one example of that shift. For SMEs, the opportunity isn't to build the biggest dashboard. It's to build the shortest reliable path between marketing activity and business outcome.",
+          },
+          {
+            type: "p",
+            content:
+              "Traffic tells you people arrived. Conversion tracking tells you something happened. Sales and customer data tell you whether it mattered. The businesses that connect those layers make much better marketing decisions.",
+          },
+          {
+            type: "p",
+            content:
+              "**Don't measure more because you can. Measure what helps you decide what to do next.**",
+          },
+          {
+            type: "p",
+            content: {
+              text: "If you'd like to connect your website, SEO and campaigns to real business outcomes, talk to us.",
+              link: { anchor: "talk to us", link: { kind: "contact" } },
+            },
+          },
+        ],
+      },
+      {
+        h2: "Sources",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "Statements about Site Kit and Google Analytics come from Google's own documentation and plugin listing. Secondary reporting is labelled as such. Interpretation and recommendations are OMSA's own and are not Google statements.",
+          },
+          {
+            type: "ul",
+            items: [
+              {
+                text: "Site Kit by Google documentation: Plugin conversion tracking",
+                link: {
+                  anchor: "Plugin conversion tracking",
+                  link: {
+                    kind: "external",
+                    href: "https://sitekit.withgoogle.com/documentation/using-site-kit/plugin-conversion-tracking/",
+                  },
+                },
+              },
+              {
+                text: "WordPress.org: Site Kit by Google plugin listing and changelog",
+                link: {
+                  anchor: "Site Kit by Google plugin listing and changelog",
+                  link: {
+                    kind: "external",
+                    href: "https://wordpress.org/plugins/google-site-kit/",
+                  },
+                },
+              },
+              {
+                text: "Google Analytics Help: Events and key events",
+                link: {
+                  anchor: "Events and key events",
+                  link: {
+                    kind: "external",
+                    href: "https://support.google.com/analytics/answer/13965727",
+                  },
+                },
+              },
+              {
+                text: "Google Analytics Help: Default channel group",
+                link: {
+                  anchor: "Default channel group",
+                  link: {
+                    kind: "external",
+                    href: "https://support.google.com/analytics/answer/9756891",
+                  },
+                },
+              },
+              {
+                text: "Secondary reporting: PPC Land, Google Site Kit auto-tracks checkouts and form leads from 8 WordPress plugins (October 3, 2026)",
+                link: {
+                  anchor:
+                    "Google Site Kit auto-tracks checkouts and form leads from 8 WordPress plugins",
+                  link: {
+                    kind: "external",
+                    href: "https://ppc.land/google-site-kit-auto-tracks-checkouts-and-form-leads-from-8-wordpress-plugins/",
+                  },
+                },
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "What is conversion tracking?",
+        a: "Conversion tracking records when a website visitor completes a meaningful action, such as submitting an enquiry, booking an appointment or making a purchase. It lets a business see which pages, channels and campaigns lead to those actions, rather than only how much traffic they bring.",
+      },
+      {
+        q: "What can Google Site Kit track?",
+        a: "Site Kit connects a WordPress site to Google services such as Google Analytics, Search Console and Google Ads. Its plugin conversion tracking feature can record certain actions from eight supported plugins: WooCommerce, Easy Digital Downloads, Contact Form 7, WPForms, Ninja Forms, Mailchimp, OptinMonster and Popup Maker. It doesn't automatically track every possible business conversion.",
+      },
+      {
+        q: "Can Google Site Kit track form submissions?",
+        a: "For supported plugins, yes. With plugin conversion tracking enabled, Site Kit can record certain actions from Contact Form 7, WPForms, Ninja Forms, Mailchimp, OptinMonster and Popup Maker in Google Analytics and, where connected, Google Ads. Forms built with unsupported plugins may need a separate setup, and it's worth confirming in Google Analytics that submissions are being recorded.",
+      },
+      {
+        q: "Can Site Kit track ecommerce purchases?",
+        a: "Site Kit's plugin conversion tracking supports two ecommerce plugins, WooCommerce and Easy Digital Downloads, and records certain store actions from them in Google Analytics and, where connected, Google Ads. Google doesn't publish the full list of actions, so check which events arrive in Google Analytics. Other ecommerce platforms and plugins are not covered by this feature.",
+      },
+      {
+        q: "Does Google Site Kit replace Google Analytics?",
+        a: "No. Site Kit is a WordPress plugin that connects a site to Google Analytics and other Google services, and shows selected data in the WordPress dashboard. The data is still collected and stored in Google Analytics, which remains the place for deeper analysis.",
+      },
+      {
+        q: "Does conversion tracking show whether a lead became a customer?",
+        a: "Not on its own. Conversion tracking shows that an action happened, such as a form submission. Whether that lead was qualified, became a customer or generated revenue usually requires CRM or sales data connected to the original source.",
+      },
+      {
+        q: "What conversions should an SME track?",
+        a: "The few actions that genuinely indicate commercial interest: enquiry or contact forms, bookings, calls, quote requests and purchases. Start with the actions that inform real decisions rather than tracking every possible click.",
+      },
+      {
+        q: "Why is website traffic alone not enough?",
+        a: "Traffic shows how many people arrived, not whether they did anything valuable. A site can grow its traffic without growing enquiries or sales. Measuring conversions and their quality shows which traffic actually contributes to the business.",
+      },
+      {
+        q: "How can SMEs measure marketing ROI?",
+        a: "Track meaningful conversions, connect each one to its acquisition source and campaign, check which leads became customers, and compare the resulting revenue with what each channel costs. Even a simple monthly review of leads against sales data is a significant improvement on traffic-only reporting.",
+      },
+      {
+        q: "Can AI help analyse marketing performance?",
+        a: "Yes. AI tools can summarise analytics, compare periods, spot anomalies and highlight patterns. But they depend on the data available: if conversions aren't tracked accurately, AI can't reliably tell a business which marketing produced customers.",
       },
     ],
   },
