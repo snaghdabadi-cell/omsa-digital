@@ -41,6 +41,7 @@ import { Route as LocationsCityRouteImport } from './routes/locations.$city'
 import { Route as ResourcesCategoryRouteImport } from './routes/resources.$category'
 import { Route as ReviewAlBaraa7k4mRouteImport } from './routes/review.al-baraa-7k4m'
 import { Route as ReviewDahDesign4m8kRouteImport } from './routes/review.dah-design-4m8k'
+import { Route as ReviewTansiqCustomerIntelligenceRouteImport } from './routes/review.tansiq-customer-intelligence'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 import { Route as ToolsSlugRouteImport } from './routes/tools.$slug'
 import { Route as ResourcesCategorySlugRouteImport } from './routes/resources.$category.$slug'
@@ -208,6 +209,12 @@ const ReviewDahDesign4m8kRoute = ReviewDahDesign4m8kRouteImport.update({
   path: '/review/dah-design-4m8k',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ReviewTansiqCustomerIntelligenceRoute =
+  ReviewTansiqCustomerIntelligenceRouteImport.update({
+    id: '/review/tansiq-customer-intelligence',
+    path: '/review/tansiq-customer-intelligence',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ServicesSlugRoute = ServicesSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -268,6 +275,7 @@ export interface FileRoutesByFullPath {
   '/resources/$category': typeof ResourcesCategoryRouteWithChildren
   '/review/al-baraa-7k4m': typeof ReviewAlBaraa7k4mRoute
   '/review/dah-design-4m8k': typeof ReviewDahDesign4m8kRouteWithChildren
+  '/review/tansiq-customer-intelligence': typeof ReviewTansiqCustomerIntelligenceRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/tools/$slug': typeof ToolsSlugRoute
   '/resources/$category/$slug': typeof ResourcesCategorySlugRoute
@@ -306,6 +314,7 @@ export interface FileRoutesByTo {
   '/locations/$city': typeof LocationsCityRoute
   '/resources/$category': typeof ResourcesCategoryRouteWithChildren
   '/review/al-baraa-7k4m': typeof ReviewAlBaraa7k4mRoute
+  '/review/tansiq-customer-intelligence': typeof ReviewTansiqCustomerIntelligenceRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/tools/$slug': typeof ToolsSlugRoute
   '/resources/$category/$slug': typeof ResourcesCategorySlugRoute
@@ -346,6 +355,7 @@ export interface FileRoutesById {
   '/resources/$category': typeof ResourcesCategoryRouteWithChildren
   '/review/al-baraa-7k4m': typeof ReviewAlBaraa7k4mRoute
   '/review/dah-design-4m8k': typeof ReviewDahDesign4m8kRouteWithChildren
+  '/review/tansiq-customer-intelligence': typeof ReviewTansiqCustomerIntelligenceRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/tools/$slug': typeof ToolsSlugRoute
   '/resources/$category/$slug': typeof ResourcesCategorySlugRoute
@@ -387,6 +397,7 @@ export interface FileRouteTypes {
     | '/resources/$category'
     | '/review/al-baraa-7k4m'
     | '/review/dah-design-4m8k'
+    | '/review/tansiq-customer-intelligence'
     | '/services/$slug'
     | '/tools/$slug'
     | '/resources/$category/$slug'
@@ -425,6 +436,7 @@ export interface FileRouteTypes {
     | '/locations/$city'
     | '/resources/$category'
     | '/review/al-baraa-7k4m'
+    | '/review/tansiq-customer-intelligence'
     | '/services/$slug'
     | '/tools/$slug'
     | '/resources/$category/$slug'
@@ -464,6 +476,7 @@ export interface FileRouteTypes {
     | '/resources/$category'
     | '/review/al-baraa-7k4m'
     | '/review/dah-design-4m8k'
+    | '/review/tansiq-customer-intelligence'
     | '/services/$slug'
     | '/tools/$slug'
     | '/resources/$category/$slug'
@@ -497,6 +510,7 @@ export interface RootRouteChildren {
   ToolsRoute: typeof ToolsRouteWithChildren
   ReviewAlBaraa7k4mRoute: typeof ReviewAlBaraa7k4mRoute
   ReviewDahDesign4m8kRoute: typeof ReviewDahDesign4m8kRouteWithChildren
+  ReviewTansiqCustomerIntelligenceRoute: typeof ReviewTansiqCustomerIntelligenceRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -725,6 +739,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ReviewDahDesign4m8kRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/review/tansiq-customer-intelligence': {
+      id: '/review/tansiq-customer-intelligence'
+      path: '/review/tansiq-customer-intelligence'
+      fullPath: '/review/tansiq-customer-intelligence'
+      preLoaderRoute: typeof ReviewTansiqCustomerIntelligenceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services/$slug': {
       id: '/services/$slug'
       path: '/$slug'
@@ -916,6 +937,7 @@ const rootRouteChildren: RootRouteChildren = {
   ToolsRoute: ToolsRouteWithChildren,
   ReviewAlBaraa7k4mRoute: ReviewAlBaraa7k4mRoute,
   ReviewDahDesign4m8kRoute: ReviewDahDesign4m8kRouteWithChildren,
+  ReviewTansiqCustomerIntelligenceRoute: ReviewTansiqCustomerIntelligenceRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
