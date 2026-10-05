@@ -17,6 +17,7 @@ import aiSearchBusinessDiscoverabilityGcc from "@/assets/ai-search-business-disc
 import googleCrawlingIndexingTimes2026 from "@/assets/google-crawling-indexing-times-2026.webp";
 import googleAiContentHumanReview from "@/assets/google-ai-content-human-review-fact-checking.webp";
 import smeConversionTrackingGoogleSiteKit from "@/assets/sme-conversion-tracking-google-site-kit.webp";
+import metaMuseCharmAiAgentSearch from "@/assets/meta-muse-charm-ai-agent-search-business-visibility.webp";
 
 // Blog-scoped link types, deliberately separate from services-data.ts's
 // ContentLink/AnchorLink (which has no "industry" kind and is used by the
@@ -5589,6 +5590,512 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         q: "Can AI help analyse marketing performance?",
         a: "Yes. AI tools can summarise analytics, compare periods, spot anomalies and highlight patterns. But they depend on the data available: if conversions aren't tracked accurately, AI can't reliably tell a business which marketing produced customers.",
+      },
+    ],
+  },
+  {
+    slug: "meta-muse-charm-ai-agents-search-business-visibility",
+    title: "Meta Muse Charm and the Next Shift in Search: When AI Agents Choose Businesses for You",
+    excerpt:
+      "Meta's Muse agent can browse, fill in forms and check out on a user's behalf, and Muse Charm puts it on a keychain. What personal AI agents could mean for SEO, AI search visibility and how businesses in Oman, the UAE and the GCC get chosen.",
+    metaTitle: "Meta Muse Charm: What AI Agents Mean for Search | OMSA",
+    metaDescription:
+      "Meta Muse is a personal AI agent that can research and act for users. What Muse Charm signals for SEO, AI search visibility and GCC business discovery.",
+    ogTitle: "Meta Muse Charm and the Next Shift in Search: When AI Agents Choose Businesses for You",
+    ogDescription:
+      "What happens to search when the person looking for a business is no longer the one doing the searching? What Meta's Muse agent signals for SEO, AI search and business visibility.",
+    category: "AI",
+    date: "2026-10-05",
+    readMinutes: 13,
+    image: metaMuseCharmAiAgentSearch,
+    imageAlt: "Meta Muse Charm illustrating the rise of personal AI agents and agentic search",
+    imageWidth: 1536,
+    imageHeight: 864,
+    inLanguage: "en",
+    relatedServices: ["ai-search-visibility", "seo", "local-seo", "technical-seo"],
+    relatedPostSlugs: [
+      "is-your-business-visible-in-ai-search-gcc",
+      "chatgpt-sponsored-agents-conversational-advertising",
+      "how-to-measure-ai-search-visibility-gcc",
+    ],
+    intro: [
+      "What happens to search when the person looking for a business is no longer the one doing the searching?",
+      "For two decades, being found online meant being found by a person: someone typing a query, scanning results and clicking through to a website. Generative AI added a layer, with answer engines that read sources and summarise them. A newer class of software goes a step further. Personal AI agents are designed to take a goal, research the options, compare them and, with the user's permission, act.",
+      {
+        text: "Meta's Muse is one of the clearest current examples. Launched in September 2026, it is described by Meta as a personal AI agent that can open a browser, fill out forms and complete tasks on a person's behalf. At Meta Connect 2026, the company went further and unveiled Muse Charm, a pocket-sized device built for talking to that agent.",
+        links: [
+          {
+            anchor: "described by Meta",
+            link: { kind: "external", href: "https://about.fb.com/news/2026/09/introducing-muse-personal-ai-agent/" },
+          },
+          {
+            anchor: "unveiled Muse Charm",
+            link: { kind: "external", href: "https://about.fb.com/news/2026/09/the-biggest-news-from-connect-2026/" },
+          },
+        ],
+      },
+      "This article isn't a product review. It uses Muse and Muse Charm as a concrete example of a broader shift, and asks what it could mean for how businesses are discovered, evaluated and chosen. **A note on sources:** we separate three things throughout: what Meta says Muse does today, what has been announced but not yet shipped, and our own analysis as a digital and AI studio of what this could mean. The cover image is an editorial illustration, not an official Meta product photograph.",
+    ],
+    body: [
+      {
+        h2: "What is Meta Muse?",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** Muse is Meta's personal AI agent. Instead of only answering questions, it is built to carry out tasks for a user, from sending an email or booking travel to working towards longer-term goals.",
+          },
+          {
+            type: "p",
+            content:
+              "It helps to separate three kinds of AI product that are often described with the same words:",
+          },
+          {
+            type: "ul",
+            items: [
+              "**A chatbot** answers questions in a conversation. It produces text; the user does everything else.",
+              "**An AI assistant** answers questions and handles simple, contained tasks, such as setting a reminder or drafting a message.",
+              "**A personal AI agent** takes a goal and works through the steps needed to achieve it: researching, navigating websites, filling in details and completing actions, checking back with the user where needed.",
+            ],
+          },
+          { type: "h3", text: "What Meta says Muse can do today" },
+          {
+            type: "p",
+            content: {
+              text: "According to Meta's launch announcement, Muse can handle tasks “like sending an email or booking travel”, and “can open a browser, fill out forms, and negotiate” on a person's behalf. For longer tasks, “Muse keeps working after people close the app, and comes back when something changes or when it needs approval.” It remembers what matters to a user so it can make suggestions unprompted, and when it's time to pay, it can check out with Link by Stripe.",
+              link: {
+                anchor: "Meta's launch announcement",
+                link: { kind: "external", href: "https://about.fb.com/news/2026/09/introducing-muse-personal-ai-agent/" },
+              },
+            },
+          },
+          {
+            type: "p",
+            content:
+              "Meta also describes a permission model built around that autonomy. Muse runs on its own dedicated computer in the cloud, a separate “Sentinel” agent must approve anything Muse sends to the internet, Muse has no visibility into passwords or payment methods, and it checks with the person before sensitive actions such as sending an email or making a purchase. Users decide which apps and services it can access.",
+          },
+          {
+            type: "p",
+            content:
+              "At launch, Muse is rolling out to users in the United States on iOS, Android and the web, and can also be messaged in WhatsApp. Meta says it is free for most uses, with subscription plans for heavier use.",
+          },
+          { type: "h3", text: "Why the distinction matters" },
+          {
+            type: "p",
+            content:
+              "A chatbot that recommends a business still leaves the decision and the action to the user. An agent can potentially research **and** act. That moves the AI system from being a source of information to being a participant in the customer's decision, which is the change that matters for business visibility.",
+          },
+        ],
+      },
+      {
+        h2: "What is Muse Charm?",
+        blocks: [
+          {
+            type: "p",
+            content: {
+              text: "**Short answer:** Muse Charm is a small, keychain-sized device announced at Meta Connect 2026 for talking to and interacting with Muse. Meta describes it as “the first device made for Muse”. It has not shipped yet, and Meta has not published a price or full specifications.",
+              link: {
+                anchor: "the first device made for Muse",
+                link: { kind: "external", href: "https://www.meta.com/muse-charm/" },
+              },
+            },
+          },
+          {
+            type: "p",
+            content: {
+              text: "In its Connect round-up, Meta says Muse Charm “brings the power of Muse with a state of the art real-time voice model into a device that fits in your pocket”, and that it will have more to share later this year. Reporting from the keynote describes a small screen showing the agent's animated avatar and a fingerprint sensor used to start talking to it, and quotes Mark Zuckerberg saying to expect the device to ship in time for the holidays in December. He also acknowledged that some details still needed to be finalised.",
+              links: [
+                {
+                  anchor: "Connect round-up",
+                  link: { kind: "external", href: "https://www.meta.com/blog/meta-connect-2026-everything-we-announced/" },
+                },
+                {
+                  anchor: "Reporting from the keynote",
+                  link: { kind: "external", href: "https://newatlas.com/consumer-tech/meta-muse-ai-agent-charm/" },
+                },
+                {
+                  anchor: "some details still needed to be finalised",
+                  link: { kind: "external", href: "https://www.shacknews.com/article/150807/muse-charm-revealed-at-meta-connect-2026" },
+                },
+              ],
+            },
+          },
+          {
+            type: "p",
+            content:
+              "Treat the hardware details as announced rather than final. The more important point for businesses isn't the device's screen or sensors. It's what a dedicated device represents.",
+          },
+          { type: "h3", text: "Why dedicated hardware matters conceptually" },
+          {
+            type: "p",
+            content:
+              "Most AI tools today live inside an app that a person deliberately opens. A device built only for talking to an agent, alongside Meta's stated plans to bring Muse to its AI glasses, points towards AI that accompanies people throughout the day rather than waiting to be opened. The more ambient the agent becomes, the more everyday requests (“find me…”, “book…”, “sort out…”) could be handed to it rather than typed into a search box.",
+          },
+        ],
+      },
+      {
+        h2: "The bigger shift: from search engines to agent-mediated discovery",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** Discovery is gaining layers. Traditional search, AI answers and AI agents are likely to coexist for a long time, but each layer changes who, or what, is evaluating a business.",
+          },
+          {
+            type: "table",
+            table: {
+              label: "How the path from a customer's need to a business changes across search, AI search and agentic discovery",
+              head: ["Model", "Typical path", "Who evaluates the options"],
+              rows: [
+                ["Traditional search", "Person → search engine → websites", "The person, from a list of results"],
+                ["AI search", "Person → AI → synthesised answer and sources", "The AI summarises; the person decides"],
+                [
+                  "Agentic discovery",
+                  "Person → agent → research → evaluation → action",
+                  "The agent researches and shortlists; the person approves",
+                ],
+              ],
+            },
+          },
+          {
+            type: "p",
+            content: {
+              text: "None of this means Google Search is disappearing. People will keep searching, and search engines remain one of the main ways AI systems find information in the first place. We've written before about why a business can rank well on Google and still be weakly represented in AI answers. Agents add a further question on top of both: when software is asked to choose, does it have enough clear, trustworthy information to choose you?",
+              link: {
+                anchor: "why a business can rank well on Google and still be weakly represented in AI answers",
+                link: { kind: "post", slug: "google-ranking-vs-ai-visibility" },
+              },
+            },
+          },
+        ],
+      },
+      {
+        h2: "When the AI agent becomes the customer's researcher",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "Consider the kind of request agentic systems are being designed to handle. These are illustrative examples of the direction of travel, not a claim that Muse performs each of these exact workflows today, or that it is available in the GCC.",
+          },
+          {
+            type: "ul",
+            items: [
+              "*“Find a highly rated dermatologist near me who offers this treatment, has appointments this week, communicates in Arabic and fits my budget.”*",
+              "*“Find an accounting firm in Dubai that works with SMEs and understands UAE corporate tax.”*",
+              "*“Find a hotel in Muscat suitable for a three-day business trip and book it.”*",
+            ],
+          },
+          {
+            type: "p",
+            content: "To handle requests like these, an agent could potentially:",
+          },
+          {
+            type: "ol",
+            items: [
+              "identify candidate businesses from search results, maps and other sources",
+              "open and read their websites",
+              "compare services, locations, languages and, where published, prices",
+              "check reviews and other signals of reputation",
+              "look for evidence of specific expertise, such as experience with SMEs or a particular treatment",
+              "start or complete a booking or enquiry, with the user's approval",
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "Each step is a point where a business can drop out. If a clinic's website doesn't say which treatments it offers, an agent can't confirm the match. If an accounting firm's corporate tax expertise is only implied, the agent may favour a competitor that states it plainly. If a hotel's booking path is hard to complete, the agent may move on. A human might phone to check; an agent working through a shortlist is more likely to choose the option it can verify.",
+          },
+          {
+            type: "p",
+            content: {
+              text: "This is also why it matters who builds the agent. When the platform that hosts the agent also earns from transactions or advertising, there are open questions about how options are ranked, which we explored in our article on ChatGPT's sponsored agents and conversational advertising.",
+              link: {
+                anchor: "ChatGPT's sponsored agents and conversational advertising",
+                link: { kind: "post", slug: "chatgpt-sponsored-agents-conversational-advertising" },
+              },
+            },
+          },
+        ],
+      },
+      {
+        h2: "What does this mean for SEO?",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** SEO doesn't become irrelevant. Its audience widens. Visibility may increasingly mean being understood by people, search engines, answer engines and AI agents at the same time.",
+          },
+          {
+            type: "p",
+            content:
+              "Agents still need to find information, and much of that finding runs through the open web and search indexes. The foundations of SEO therefore remain the foundations of agent visibility, with more weight on clarity and verifiability:",
+          },
+          {
+            type: "ul",
+            items: [
+              "**Crawlability and indexability:** if search engines and AI crawlers can't access a page, it's unlikely to inform an answer or an agent's decision.",
+              "**Clear service pages:** one page per core service, saying exactly what is offered, for whom and where.",
+              "**Entities:** a business that is consistently identifiable as one specific organisation, with a clear name, location and area of expertise.",
+              "**Structured data:** schema markup that states business facts in a machine-readable format.",
+              "**Business facts:** opening hours, service areas, languages, contact routes and booking options that are complete and current.",
+              "**Pricing where appropriate:** even a starting price or a clear pricing model helps a system answer “fits my budget”.",
+              "**FAQs:** direct answers to the real questions customers ask before buying.",
+              "**Reviews and reputation signals:** independent evidence that the business does what it says.",
+              "**Authoritative references:** mentions in credible industry, local and media sources.",
+              "**Consistency across the web:** the same facts on the website, map listings, directories and social profiles.",
+            ],
+          },
+          {
+            type: "p",
+            content: {
+              text: "None of these are new. What changes is the cost of getting them wrong. A person can tolerate a vague page and phone for details; an automated system comparing several options may simply rank the vague option lower. That's why strong SEO foundations and technical SEO are the starting point for AI-era visibility, not a separate discipline to be replaced.",
+              links: [
+                { anchor: "strong SEO foundations", link: { kind: "service", slug: "seo" } },
+                { anchor: "technical SEO", link: { kind: "service", slug: "technical-seo" } },
+              ],
+            },
+          },
+        ],
+      },
+      {
+        h2: "AI agents need information they can understand and trust",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** An attractive website isn't enough on its own. For a machine to recommend or act on a business, it needs to answer basic questions about that business with confidence.",
+          },
+          {
+            type: "p",
+            content:
+              "Whether the system is a search engine, an AI answer engine or an agent, it is effectively trying to answer questions like these:",
+          },
+          {
+            type: "ul",
+            items: [
+              "Who is this business?",
+              "Where does it operate?",
+              "What exactly does it offer?",
+              "Who does it serve?",
+              "Is the information current?",
+              "What evidence supports its expertise?",
+              "Can its services be compared with alternatives?",
+              "Can an action, such as a booking, enquiry or purchase, actually be completed?",
+            ],
+          },
+          { type: "h3", text: "An analytical framework: agent-ready business information" },
+          {
+            type: "p",
+            content:
+              "We use the phrase **agent-ready business information** to describe information that a person and a machine can both read, verify and act on. It's an analytical framework, not an established ranking factor: neither Google nor Meta has published a formula for how agents choose businesses. But it's a useful lens, because each question above maps to something a business controls: its website content, its structured data, its listings, its reviews and its conversion paths.",
+          },
+          {
+            type: "p",
+            content: {
+              text: "This is the same territory our AI Search Visibility service focuses on: how a business is found, described and cited across AI-assisted discovery, and where its digital presence is hard for machines to interpret. If you want to know where you stand today, our practical guide to checking whether your business is visible in AI search is a good starting point.",
+              links: [
+                { anchor: "AI Search Visibility service", link: { kind: "service", slug: "ai-search-visibility" } },
+                {
+                  anchor: "checking whether your business is visible in AI search",
+                  link: { kind: "post", slug: "is-your-business-visible-in-ai-search-gcc" },
+                },
+              ],
+            },
+          },
+        ],
+      },
+      {
+        h2: "Why this matters especially for GCC businesses",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** Many of the gaps that make a business hard for machines to evaluate are common in the region. Muse itself is currently US-focused, but the underlying shift towards agent-mediated discovery is not limited to one platform or one market.",
+          },
+          {
+            type: "p",
+            content: "In our work with businesses in Oman, the UAE and the wider GCC, a few patterns come up repeatedly:",
+          },
+          {
+            type: "ul",
+            items: [
+              "**Arabic and English information that doesn't match.** Different names, transliterations or service descriptions in each language can make one business look like two, or make neither version complete.",
+              "**Inconsistent details across platforms.** Phone numbers, addresses and opening hours that differ between the website, map listings and directories.",
+              "**Strong local intent.** Many searches are tied to a specific city or district, yet service areas are often unstated.",
+              "**WhatsApp-heavy customer journeys.** Enquiries and bookings that happen entirely in chat can leave little on the website for a system to verify or act on.",
+              "**Location and service-area ambiguity.** Businesses serving several emirates or several GCC countries without saying clearly where they operate.",
+              "**Limited structured service information.** Services described in broad marketing language rather than as specific, comparable offerings.",
+              "**Reliance on Instagram instead of an owned website.** Social profiles are valuable, but they rarely provide the complete, structured information a machine needs.",
+            ],
+          },
+          {
+            type: "p",
+            content: {
+              text: "Businesses with a clear digital entity and machine-readable information may find it easier to be evaluated by future AI systems, whichever platform those systems run on. Our guides to bilingual SEO in Arabic and English and to local SEO for multi-location businesses cover two of the most common gaps in more depth.",
+              links: [
+                { anchor: "bilingual SEO in Arabic and English", link: { kind: "post", slug: "bilingual-seo-gcc-arabic-english" } },
+                { anchor: "local SEO for multi-location businesses", link: { kind: "post", slug: "local-seo-multi-location-gcc" } },
+              ],
+            },
+          },
+        ],
+      },
+      {
+        h2: "From SEO to AI discoverability",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "These are overlapping layers, not replacements. Most businesses will need to be visible across all three for the foreseeable future.",
+          },
+          {
+            type: "table",
+            table: {
+              label: "Comparison of traditional SEO, AI search visibility and agentic discoverability",
+              head: ["Aspect", "Traditional SEO", "AI Search Visibility", "Agentic Discoverability"],
+              rows: [
+                [
+                  "Primary interface",
+                  "Search results pages",
+                  "AI answers and summaries (AI search features, chat assistants)",
+                  "Personal AI agents acting on a user's behalf",
+                ],
+                [
+                  "Typical user behaviour",
+                  "Search, scan results, click, compare",
+                  "Ask a question, read a synthesised answer, sometimes click a source",
+                  "Delegate a goal, review a shortlist or recommendation, approve an action",
+                ],
+                [
+                  "What systems need to understand",
+                  "Relevance, quality and crawlability of pages",
+                  "Who the business is, what it offers and whether sources agree",
+                  "All of that, plus whether facts are verifiable and an action can be completed",
+                ],
+                [
+                  "Business objective",
+                  "Rank and earn the click",
+                  "Be accurately described and cited",
+                  "Be confidently shortlisted and chosen",
+                ],
+              ],
+            },
+          },
+          {
+            type: "p",
+            content: {
+              text: "The agentic column is the least mature and the most speculative. But the direction is consistent with what is already happening in search: Google Search Console now reports on multimodal search, where people search with images as well as text, and Meta says Muse on its AI glasses will be able to act on what the wearer is looking at.",
+              links: [
+                {
+                  anchor: "Google Search Console now reports on multimodal search",
+                  link: { kind: "post", slug: "google-search-console-multimodal-search-seo-ai-visibility" },
+                },
+                {
+                  anchor: "Meta says Muse on its AI glasses",
+                  link: { kind: "external", href: "https://about.fb.com/news/2026/09/the-biggest-news-from-connect-2026/" },
+                },
+              ],
+            },
+          },
+        ],
+      },
+      {
+        h2: "What businesses should do now",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** You don't need to optimise for Muse Charm. You need the kind of clear, consistent, verifiable digital presence that works across Google, AI search and whatever agents come next.",
+          },
+          {
+            type: "ol",
+            items: [
+              "**Make the business entity unmistakably clear.** One consistent name, a clear description of what you do, where you are and who you serve.",
+              "**Build dedicated service or product pages.** One page per core offering, with specifics rather than slogans.",
+              "**Keep location, contact and business information consistent** across your website, Google Business Profile, directories and social profiles.",
+              "**Add appropriate structured data,** such as Organization, LocalBusiness, Service and Product markup, where it accurately reflects visible content.",
+              "**Publish genuinely useful expert content** that shows how you work and what you know.",
+              "**Answer real customer questions,** including pricing models, eligibility, timelines and languages, where you can.",
+              "**Strengthen third-party authority signals:** reviews, credible directories, industry associations and media coverage.",
+              "**Make booking, contact and conversion paths easy to understand,** on the website, not only in direct messages.",
+              "**Maintain Arabic and English entity consistency** where you serve both audiences.",
+              "**Measure visibility beyond traditional rankings,** including how AI systems describe and recommend you.",
+            ],
+          },
+          {
+            type: "p",
+            content: {
+              text: "On the last point, our framework for measuring AI search visibility explains what can and can't be measured today, and our local SEO work covers the consistency of listings and location signals that agents are likely to rely on.",
+              links: [
+                {
+                  anchor: "measuring AI search visibility",
+                  link: { kind: "post", slug: "how-to-measure-ai-search-visibility-gcc" },
+                },
+                { anchor: "local SEO work", link: { kind: "service", slug: "local-seo" } },
+              ],
+            },
+          },
+        ],
+      },
+      {
+        h2: "The question businesses should start asking",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "For years, the question was simple: *do we rank?* It still matters. But it's no longer the whole picture.",
+          },
+          {
+            type: "p",
+            content:
+              "The better question is: **can search engines, AI systems and autonomous agents understand who we are, trust the information they find, and confidently surface us when someone needs what we provide?**",
+          },
+          {
+            type: "p",
+            content:
+              "Muse Charm may or may not become a mainstream device. Muse itself is new, US-only for now and still evolving. But the pattern it represents, software that researches and acts for people, is being pursued across the industry. The businesses best placed for that shift will be the ones whose information is already clear, consistent and verifiable, because that serves human customers and search engines today as well.",
+          },
+          {
+            type: "p",
+            content: {
+              text: "OMSA helps businesses understand how they appear across traditional search and emerging AI discovery environments, and where their digital presence is difficult for machines to interpret. If that's a question you're asking, our AI Search Visibility service is the place to start, or you can talk to us directly.",
+              links: [
+                { anchor: "AI Search Visibility service", link: { kind: "service", slug: "ai-search-visibility" } },
+                { anchor: "talk to us directly", link: { kind: "contact" } },
+              ],
+            },
+          },
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "What is Meta Muse?",
+        a: "Muse is Meta's personal AI agent, launched in September 2026. Unlike a chatbot that only answers questions, Meta says it can open a browser, fill out forms, book travel, send emails and work on longer tasks in the background, checking with the user before sensitive actions such as purchases. At launch it is rolling out in the United States.",
+      },
+      {
+        q: "What is Muse Charm?",
+        a: "Muse Charm is a small, keychain-sized device Meta announced at Connect 2026 for talking to and interacting with Muse. Meta has not yet published a price or full specifications. Mark Zuckerberg said it is expected to ship in December, with some details still to be finalised.",
+      },
+      {
+        q: "What is the difference between an AI assistant and an AI agent?",
+        a: "An AI assistant mainly answers questions and handles simple, contained tasks. An AI agent takes a goal and works through the steps to achieve it, such as researching options, navigating websites and completing actions, usually with the user's approval for sensitive steps.",
+      },
+      {
+        q: "Will AI agents replace Google Search?",
+        a: "There's no evidence that traditional search is disappearing. Search engines, AI answers and AI agents are more likely to coexist, and agents themselves often rely on search indexes and the open web to find information.",
+      },
+      {
+        q: "Do businesses need to optimise for Muse Charm?",
+        a: "No. There is no Muse-specific optimisation to do. The practices that help, such as clear service pages, consistent business information, structured data, credible reviews and easy booking paths, are the same ones that support visibility in Google and AI search.",
+      },
+      {
+        q: "What is agentic discoverability?",
+        a: "It's a way of describing how easily an AI agent can find, understand, compare and act on a business when working for a user. It's an analytical framework rather than an established ranking factor, and it builds on SEO and AI search visibility rather than replacing them.",
+      },
+      {
+        q: "Is Meta Muse available in Oman, the UAE or the GCC?",
+        a: "At launch, Meta says Muse is rolling out in the United States. It has not announced availability in the GCC. The broader shift towards AI agents is still relevant for GCC businesses, because similar capabilities are being developed across the industry.",
       },
     ],
   },
