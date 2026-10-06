@@ -106,7 +106,7 @@ function Objections() {
     {
       icon: TrendingUp,
       title: "How quickly do we see returns?",
-      desc: "Conversion and analytics improvements land within the first 60 days. SEO compounds from month three. AI assistants typically pay for themselves within a single quarter.",
+      desc: "Conversion and analytics fixes tend to be the earliest improvements you can measure. SEO gains build progressively as technical, content and authority work compounds. AI assistants can cut repetitive workload when built around the right workflows.",
     },
     {
       icon: HeartHandshake,

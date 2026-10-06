@@ -30,6 +30,9 @@ function createCubicBezierEasing(x1: number, y1: number, x2: number, y2: number)
 
 const easeOut = createCubicBezierEasing(0.22, 1, 0.36, 1);
 
+// Fixed locale so server and client format identically (no hydration mismatch).
+const format = (n: number) => Math.round(n).toLocaleString("en-US");
+
 export function Counter({
   to,
   suffix = "",
@@ -40,29 +43,36 @@ export function Counter({
   duration?: number;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
-  // Matches the previous implementation's initial state: always render 0
-  // (formatted) until the viewport trigger fires, both on the server and
-  // on the client's first paint, so there is no hydration mismatch.
-  const [display, setDisplay] = useState(() => Math.round(0).toLocaleString());
+  // `null` means "not animating": render the final value as plain text. This
+  // is the state on the server and on the client's first render, so the SSR
+  // HTML (what crawlers and no-JS visitors see) always contains the real
+  // number. The count-up is a client-only enhancement layered on afterwards.
+  const [display, setDisplay] = useState<string | null>(null);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    // Already on screen at hydration: keep the final value rather than
+    // visibly snapping it back to 0.
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) return;
+
+    // Off screen, so resetting to 0 here is invisible to the user.
+    setDisplay(format(0));
 
     let frameId = 0;
 
     const runCountUp = () => {
-      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (reduceMotion) {
-        setDisplay(Math.round(to).toLocaleString());
-        return;
-      }
       const start = performance.now();
       const tick = (now: number) => {
         const progress = Math.min(1, (now - start) / 1000 / duration);
-        setDisplay(Math.round(easeOut(progress) * to).toLocaleString());
         if (progress < 1) {
+          setDisplay(format(easeOut(progress) * to));
           frameId = requestAnimationFrame(tick);
+        } else {
+          setDisplay(null);
         }
       };
       frameId = requestAnimationFrame(tick);
@@ -82,12 +92,21 @@ export function Counter({
     return () => {
       observer.disconnect();
       if (frameId) cancelAnimationFrame(frameId);
+      setDisplay(null);
     };
   }, [to, duration]);
 
   return (
     <span ref={ref} className="inline-flex items-baseline">
-      <span>{display}</span>
+      {display === null ? (
+        <span>{format(to)}</span>
+      ) : (
+        <>
+          {/* Visual count-up only; assistive tech gets the final value once. */}
+          <span aria-hidden="true">{display}</span>
+          <span className="sr-only">{format(to)}</span>
+        </>
+      )}
       {suffix}
     </span>
   );

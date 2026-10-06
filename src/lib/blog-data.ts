@@ -1029,7 +1029,8 @@ export const BLOG_POSTS: BlogPost[] = [
       { h2: "SEO vs AEO vs GEO: what's the difference?",
         p: [
           "In simple terms: SEO is visibility across search engines generally. AEO is visibility as a direct answer, wherever it appears. GEO is visibility within generative, AI-driven discovery environments specifically. Each term points at a different destination for the same underlying goal — being found, understood and trusted.",
-          "In practice, the three overlap far more than the acronyms suggest. A page that clearly answers a real question tends to perform across all three at once, because clarity is the common ingredient. Treating them as three separate workstreams usually just duplicates effort.",
+          { text: "In practice, the three overlap far more than the acronyms suggest. A page that clearly answers a real question tends to perform across all three at once, because clarity is the common ingredient. Treating them as three separate workstreams usually just duplicates effort, which is why we approach AEO and GEO as extensions of search work rather than separate products.",
+            link: { anchor: "AEO and GEO", link: { kind: "service", slug: "ai-search-visibility" } } },
         ],
       },
       { h2: "How do AI systems understand a business?",
@@ -1576,7 +1577,8 @@ export const BLOG_POSTS: BlogPost[] = [
       { h2: "Final thoughts",
         p: [
           "Ranking on Google is still worth having. It just isn't the whole picture anymore. The more useful question for a business to ask today is whether AI systems can already describe what it does, where it operates, and why it's a credible option — accurately and consistently — before a customer ever asks.",
-          "Before investing further in content, advertising or a website redesign, it's worth understanding what AI systems can currently discover about your business, and where the gaps actually are. That's the kind of foundational review worth having with a team that already treats search, SEO and analytics as one connected system.",
+          { text: "Before investing further in content, advertising or a website redesign, it's worth understanding what AI systems can currently discover about your business, and where the gaps actually are. That's the kind of foundational review worth having with a team that already treats search, SEO and analytics as one connected system.",
+            link: { anchor: "foundational review", link: { kind: "service", slug: "ai-search-visibility" } } },
         ],
       },
     ],
@@ -3564,6 +3566,7 @@ export const BLOG_POSTS: BlogPost[] = [
             content: {
               text: "If you'd like help running this diagnostic across your markets and both languages, or turning the findings into a plan, our SEO team works with businesses across Oman, the UAE and the GCC. We can't promise a place in any AI answer, and nobody honestly can. What we can do is make sure your business is clear, accessible and well evidenced wherever buyers look. Talk to us.",
               links: [
+                { anchor: "help running this diagnostic", link: { kind: "service", slug: "ai-search-visibility" } },
                 { anchor: "SEO team", link: { kind: "service", slug: "seo" } },
                 { anchor: "Talk to us", link: { kind: "contact" } },
               ],
@@ -4519,6 +4522,10 @@ export const BLOG_POSTS: BlogPost[] = [
                 {
                   anchor: "strong SEO work",
                   link: { kind: "service", slug: "seo" },
+                },
+                {
+                  anchor: "AI visibility",
+                  link: { kind: "service", slug: "ai-search-visibility" },
                 },
                 {
                   anchor: "being represented well in AI answers",
