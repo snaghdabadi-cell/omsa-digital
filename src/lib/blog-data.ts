@@ -18,6 +18,7 @@ import googleCrawlingIndexingTimes2026 from "@/assets/google-crawling-indexing-t
 import googleAiContentHumanReview from "@/assets/google-ai-content-human-review-fact-checking.webp";
 import smeConversionTrackingGoogleSiteKit from "@/assets/sme-conversion-tracking-google-site-kit.webp";
 import metaMuseCharmAiAgentSearch from "@/assets/meta-muse-charm-ai-agent-search-business-visibility.webp";
+import chatgptAdsMeasurementAttribution from "@/assets/chatgpt-ads-measurement-attribution-2026.webp";
 
 // Blog-scoped link types, deliberately separate from services-data.ts's
 // ContentLink/AnchorLink (which has no "industry" kind and is used by the
@@ -6096,6 +6097,687 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         q: "Is Meta Muse available in Oman, the UAE or the GCC?",
         a: "At launch, Meta says Muse is rolling out in the United States. It has not announced availability in the GCC. The broader shift towards AI agents is still relevant for GCC businesses, because similar capabilities are being developed across the industry.",
+      },
+    ],
+  },
+  {
+    slug: "chatgpt-ads-visual-attribution-measurement-2026",
+    title: "ChatGPT Ads Are Becoming a Real Advertising Ecosystem: What Marketers Need to Know",
+    excerpt:
+      "OpenAI's new visual ad format is the headline. The bigger story is the infrastructure underneath it: conversion data, attribution, incrementality testing and brand suitability. Here's what's confirmed, what it means, and what we still don't know.",
+    metaTitle: "ChatGPT Ads 2026: Visual Ads, Attribution & Measurement Explained",
+    metaDescription:
+      "OpenAI is expanding ChatGPT Ads with visual formats, conversion integrations, attribution, incrementality testing and brand-suitability tools. Here's what marketers should know.",
+    category: "Digital Marketing",
+    date: "2026-10-06",
+    readMinutes: 14,
+    image: chatgptAdsMeasurementAttribution,
+    imageAlt: "ChatGPT Ads measurement, attribution and incrementality ecosystem",
+    imageWidth: 1672,
+    imageHeight: 941,
+    inLanguage: "en",
+    relatedServices: ["digital-marketing", "google-analytics", "ai-search-visibility"],
+    relatedPostSlugs: [
+      "chatgpt-sponsored-agents-conversational-advertising",
+      "sme-conversion-tracking-google-site-kit",
+      "how-to-measure-ai-search-visibility-gcc",
+    ],
+    intro: [
+      {
+        text: "On October 5, 2026, OpenAI announced a new visual ad format for ChatGPT. That's the part most people will notice. The more consequential part of the announcement sits underneath it: conversion-data integrations, a long list of attribution partners, early incrementality experiments and brand-suitability pilots.",
+        link: {
+          anchor: "OpenAI announced",
+          link: {
+            kind: "external",
+            href: "https://openai.com/index/new-chatgpt-ads-format-and-measurement/",
+          },
+        },
+      },
+      "Taken together, those pieces look less like a single new ad unit and more like the infrastructure of a real advertising ecosystem, one that connects three things: **discovery, conversation and measurement.**",
+      "**A note on sources:** throughout this article we separate what OpenAI has stated from OMSA's own analysis. Where something hasn't been publicly disclosed, we say so rather than fill the gap.",
+    ],
+    body: [
+      {
+        h2: "What are ChatGPT Ads?",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** ChatGPT Ads are sponsored placements shown inside ChatGPT and bought through OpenAI's advertising platform. OpenAI states that ads are clearly labelled, kept separate from ChatGPT's answers, and do not influence those answers.",
+          },
+          {
+            type: "p",
+            content: {
+              text: "The platform launched earlier in 2026. OpenAI opened a self-serve Ads Manager in May, and on August 31 reported that ChatGPT Ads had reached $1 billion in annualized revenue run rate, with tens of thousands of advertisers. We covered one of its earlier experiments, Sponsored Agents, in our look at how conversational advertising could change digital advertising.",
+              links: [
+                {
+                  anchor:
+                    "reported that ChatGPT Ads had reached $1 billion in annualized revenue run rate",
+                  link: {
+                    kind: "external",
+                    href: "https://openai.com/index/expanding-access-to-ai-with-chatgpt-ads/",
+                  },
+                },
+                {
+                  anchor: "how conversational advertising could change digital advertising",
+                  link: {
+                    kind: "post",
+                    slug: "chatgpt-sponsored-agents-conversational-advertising",
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+      {
+        h2: "What OpenAI announced on October 5, 2026",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "The announcement covered three areas: a visual ad format, expanded measurement and attribution, and brand suitability. OpenAI published the measurement details in a companion post on its Ads blog. Everything in the table below comes from those two OpenAI sources.",
+          },
+          {
+            type: "table",
+            table: {
+              label: "What OpenAI announced for ChatGPT Ads on October 5, 2026",
+              head: ["Area", "What OpenAI announced", "Stated status"],
+              rows: [
+                [
+                  "Visual ads",
+                  "An image-based ad format, tested first during image generation in ChatGPT",
+                  "Testing to begin later in October 2026, in the US, with an initial group of advertisers",
+                ],
+                [
+                  "Conversion data",
+                  "Pixel and Conversions API (CAPI); integrations with Hightouch, Tealium and LiveRamp to send conversion data from existing systems",
+                  "Announced",
+                ],
+                [
+                  "Attribution",
+                  "Support for AppsFlyer, Triple Whale, Adjust, DV Rockerbox, Northbeam, Branch, Singular, Kochava, Airbridge and Tenjin, enabling Conversions API, reporting and click attribution solutions",
+                  "Announced as supported",
+                ],
+                [
+                  "Full-funnel measurement",
+                  "Partnerships with Fospha, Measured and INCRMNTAL",
+                  "Announced",
+                ],
+                [
+                  "Incrementality",
+                  "Work with Haus, Measured and WorkMagic to explore geo-based experiments",
+                  "Described by OpenAI as early stage",
+                ],
+                [
+                  "Brand measurement",
+                  "Testing with Kantar and Cint on brand resonance metrics",
+                  "Described by OpenAI as early-stage testing",
+                ],
+                [
+                  "Brand suitability",
+                  "Evaluation pilots with DoubleVerify (DV) and Integral Ad Science (IAS); Negative Phrases for brand-specific placement exclusions",
+                  "Pilots in development; Negative Phrases available to qualifying advertisers",
+                ],
+              ],
+            },
+          },
+        ],
+      },
+      {
+        h2: "Visual Ads Are Only the Visible Part of the Update",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Does ChatGPT show visual ads?** OpenAI is about to start testing them. The new format uses images showing product inspiration, product usage or the experiences a product makes possible, and OpenAI says testing begins later this month with a limited group of US advertisers.",
+          },
+          { type: "h3", text: "Image-generation placement" },
+          {
+            type: "p",
+            content:
+              "OpenAI says the format will initially be tested during image generation in ChatGPT, when a person is already creating images. It hasn't said when or whether the format will appear elsewhere.",
+          },
+          { type: "h3", text: "Clear sponsored labeling" },
+          {
+            type: "p",
+            content:
+              "According to OpenAI, these ads will be clearly labelled and kept separate from the image the person is creating. A sponsored image is not part of the user's generated output.",
+          },
+          { type: "h3", text: "Initial U.S. testing" },
+          {
+            type: "p",
+            content:
+              "This is a test, not a rollout. OpenAI describes it as beginning in the US with an initial group of advertisers. The announcement doesn't mention testing in any other market, including the GCC.",
+          },
+          { type: "h3", text: "Separation from AI answers" },
+          {
+            type: "p",
+            content:
+              "OpenAI repeats its existing principle for this format: advertising does not influence the answers ChatGPT provides. That separation matters well beyond this format, and we come back to it below.",
+          },
+        ],
+      },
+      {
+        h2: "Discovery, Conversation, Measurement: A Framework for Reading the Update",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "*This section is OMSA analysis, not an OpenAI description of how its system works.*",
+          },
+          {
+            type: "p",
+            content:
+              "Each major advertising environment organises intent differently. Search advertising is built around a query and a results page. Social advertising is built around feeds, content and audiences. Conversational advertising adds a third environment, one where **the conversation itself becomes part of the context.**",
+          },
+          {
+            type: "table",
+            table: {
+              label:
+                "How intent and context differ across advertising environments (OMSA framework)",
+              head: ["Environment", "Where intent shows up", "Main context signal"],
+              rows: [
+                ["Search ads", "A typed query", "The query and the results page"],
+                ["Social ads", "Behaviour and interests over time", "Feeds, content and audiences"],
+                ["Conversational ads", "A developing exchange", "The conversation as it unfolds"],
+              ],
+            },
+          },
+          {
+            type: "p",
+            content: {
+              text: "One part of this is confirmed. In August, OpenAI said its ads system uses the context of the current conversation to show an ad relevant to what someone is exploring and, depending on the country and the user's settings, may also use context from their broader ChatGPT experience. OpenAI hasn't disclosed how that context is weighted or how ads are selected.",
+              link: {
+                anchor: "OpenAI said its ads system uses the context of the current conversation",
+                link: {
+                  kind: "external",
+                  href: "https://openai.com/index/expanding-access-to-ai-with-chatgpt-ads/",
+                },
+              },
+            },
+          },
+          {
+            type: "p",
+            content: "If conversation is the context, several familiar disciplines shift:",
+          },
+          {
+            type: "ul",
+            items: [
+              "**Relevance** depends on what someone is working through, not just a keyword.",
+              "**Creative** has to make sense in the middle of a task, not only in a feed.",
+              "**Measurement** has to account for journeys where the next step isn't an immediate click.",
+              "**Attribution** gets harder when a decision forms over a longer exchange.",
+              "**Brand suitability** has to be judged on a conversation, not a page.",
+              "**Landing pages** may receive visitors who arrive with more context already formed.",
+            ],
+          },
+        ],
+      },
+      {
+        h2: "The Bigger Change Is Measurement Infrastructure",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**How are ChatGPT Ads measured?** Through conversion signals sent by the advertiser, using OpenAI's pixel or Conversions API, plus a growing set of third-party attribution, full-funnel and incrementality partners. OpenAI says its approach supports both in-house and partner-led measurement.",
+          },
+          {
+            type: "p",
+            content:
+              "**Can ChatGPT Ads track conversions?** Yes. OpenAI says its pixel and CAPI can measure actions such as purchases, leads, installs and sign-ups, and use those signals to optimise campaigns. The Hightouch, Tealium and LiveRamp integrations are designed to make it easier to send that conversion data from systems advertisers already use.",
+          },
+          {
+            type: "p",
+            content:
+              "The announced pieces form a progression, with each layer answering a harder question:",
+          },
+          {
+            type: "ol",
+            items: [
+              "**Conversion data.** Did something valuable happen after someone encountered the ad?",
+              "**Attribution.** Which touchpoint gets credit for that conversion?",
+              "**Full-funnel measurement.** How does this channel contribute alongside everything else the business runs?",
+              "**Incrementality.** Would that conversion have happened without the ad?",
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "Measurement that stops at “did someone click the ad?” misses most of what a marketer needs to know. OpenAI makes a related point: people often come to ChatGPT to work through a task, and clicking an ad may not be their immediate next step. In an early analysis of global campaigns optimised for deeper-funnel outcomes, OpenAI reports that 52.7% of eligible one-day view-through conversions happened within an hour of the matched ad impression.",
+          },
+          {
+            type: "p",
+            content:
+              "For reporting, OpenAI says advertisers can choose a click-through attribution window to match their buying cycle and add a one-day view-through window. It notes these settings change how conversions are attributed in reports, not how campaigns optimise. It has also introduced an Event Quality Score to help advertisers assess the quality of the conversion signals they send.",
+          },
+          {
+            type: "p",
+            content: {
+              text: "None of this works without clean conversion data. If a business can't reliably record a lead or a sale today, a new ad channel won't fix that. It's the same foundation we described in our article on why SMEs need better conversion tracking.",
+              link: {
+                anchor: "why SMEs need better conversion tracking",
+                link: { kind: "post", slug: "sme-conversion-tracking-google-site-kit" },
+              },
+            },
+          },
+        ],
+      },
+      {
+        h2: "Why Incrementality Matters More Than Clicks",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**What is incrementality measurement in ChatGPT Ads?** It's the attempt to measure whether ChatGPT Ads caused additional sales or leads that wouldn't otherwise have happened. OpenAI is working with Haus, Measured and WorkMagic on geo-based experiments to estimate that causal impact, and describes this work as still in its early stages.",
+          },
+          {
+            type: "p",
+            content: "Three measures are often confused, and they answer different questions:",
+          },
+          {
+            type: "ul",
+            items: [
+              "**Clicks** show interaction. Someone was interested enough to act on the ad.",
+              "**Attribution** associates a conversion with a touchpoint. It assigns credit.",
+              "**Incrementality** asks whether advertising caused business that wouldn't have happened anyway.",
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "A simple, hypothetical example makes the difference clear. Suppose 100 customers bought after seeing an ad, so attribution credits the ad with 100 sales. But if 80 of those people were already going to buy, perhaps because they were loyal customers or had already decided, the ad only produced 20 additional sales. Those 20 are the incremental result, and they're the number that tells you whether the spend was worth it.",
+          },
+          {
+            type: "p",
+            content:
+              "Geo-based experiments are one way to estimate this. In simple terms, advertising runs in some regions and not in comparable others, and the difference in outcomes is measured. It's not perfect, but it gets closer to cause and effect than click-based reporting can.",
+          },
+          {
+            type: "p",
+            content:
+              "For an SME owner or marketing manager, the practical takeaway is this: attributed results tell you where conversions were credited. Incremental results tell you what the advertising actually added. On a new channel, both are worth knowing before budgets grow.",
+          },
+        ],
+      },
+      {
+        h2: "Conversation Context Creates a New Brand-Suitability Problem",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "On a conventional website, brand suitability can be judged with relatively stable signals: the publisher, the page, the topic and the content around the ad. Those signals exist before the ad is placed.",
+          },
+          {
+            type: "p",
+            content:
+              "In conversational AI, context can emerge dynamically as a conversation develops. There is no fixed page to review in advance. That's a different kind of suitability problem.",
+          },
+          {
+            type: "p",
+            content: {
+              text: "Here is what OpenAI has confirmed. Its placement guardrails assess whether a conversation is appropriate for advertising, aiming to keep ads out of emotionally vulnerable, sensitive or otherwise unsuitable contexts. Negative Phrases are available to qualifying advertisers for brand-specific exclusions. And OpenAI is developing evaluation pilots with DoubleVerify and Integral Ad Science that let these independent partners assess how its brand safety standards are applied in a controlled testing environment, without accessing private user conversations. Its advertising policies set out the wider rules.",
+              link: {
+                anchor: "advertising policies",
+                link: { kind: "external", href: "https://openai.com/policies/ad-policies/" },
+              },
+            },
+          },
+          {
+            type: "p",
+            content:
+              "DoubleVerify's CEO, Mark Zagorski, put the shift directly in OpenAI's announcement: ChatGPT is creating an environment “where context is defined by the conversation itself rather than a page or video.”",
+          },
+          {
+            type: "p",
+            content:
+              "**OMSA analysis:** if that's right, **conversation context may become a new media variable**, as important to planning and suitability as placement or audience. That's an implication, not a description of OpenAI's system. OpenAI hasn't publicly disclosed the full detail of its auction mechanics, targeting logic, ranking logic or ad-selection logic, and we won't speculate about them.",
+          },
+        ],
+      },
+      {
+        h2: "Organic AI Visibility and Paid AI Visibility Must Stay Separate",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Do ads influence ChatGPT's answers?** OpenAI says no. It states that advertising does not influence the answers ChatGPT provides, that ads are clearly labelled and separate from those answers, and that advertisers don't get access to people's private conversations.",
+          },
+          {
+            type: "p",
+            content:
+              "That means two different things can happen for a business inside ChatGPT, and they shouldn't be confused.",
+          },
+          { type: "h3", text: "Organic AI visibility" },
+          {
+            type: "p",
+            content:
+              "A brand may be understood, mentioned, recommended or cited by an AI system based on the information available about it and how that system behaves. Nobody buys this outcome, and nobody can guarantee it.",
+          },
+          { type: "h3", text: "Paid AI visibility" },
+          {
+            type: "p",
+            content:
+              "A sponsored placement purchased through an advertising system, such as ChatGPT Ads. It's labelled as an ad and sits outside the answer.",
+          },
+          {
+            type: "ul",
+            items: [
+              "**Organic mention ≠ advertisement.**",
+              "**AI citation ≠ sponsorship.**",
+              "**GEO ≠ ChatGPT Ads.**",
+              "**AI referral traffic ≠ paid advertising attribution.**",
+            ],
+          },
+          {
+            type: "p",
+            content: {
+              text: "**Is GEO the same as advertising in ChatGPT?** No. Generative engine optimisation (GEO) is about how clearly and credibly a business is represented in the information AI systems draw on. Buying ChatGPT Ads doesn't improve that, and GEO doesn't buy ad placements. At OMSA, AI Search Visibility work focuses on the organic side: how accurately AI systems can understand and describe a business. It can't guarantee mentions, citations or recommendations.",
+              link: {
+                anchor: "AI Search Visibility work",
+                link: { kind: "service", slug: "ai-search-visibility" },
+              },
+            },
+          },
+          {
+            type: "p",
+            content: {
+              text: "Measurement should stay separate too. Visits that arrive from organic ChatGPT answers are AI referral traffic. Conversions credited to a ChatGPT ad are paid attribution. Mixing them in one report hides what each channel is doing. Our framework for how to measure AI search visibility covers the organic side in detail.",
+              link: {
+                anchor: "how to measure AI search visibility",
+                link: { kind: "post", slug: "how-to-measure-ai-search-visibility-gcc" },
+              },
+            },
+          },
+        ],
+      },
+      {
+        h2: "What the Early Performance Numbers Do — and Don't — Tell Us",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "OpenAI published several early results, each reported by a measurement partner for a single advertiser:",
+          },
+          {
+            type: "table",
+            table: {
+              label: "Early partner-reported ChatGPT Ads results published by OpenAI, October 2026",
+              head: ["Advertiser", "Reported by", "Reported result", "Measurement type"],
+              rows: [
+                [
+                  "WeightWatchers",
+                  "DV Rockerbox",
+                  "Attributed cost per acquisition 15.3% lower than its blended paid-search benchmark",
+                  "Attribution",
+                ],
+                [
+                  "Dose",
+                  "WorkMagic",
+                  "Statistically significant lift, with 67% of incremental purchases from net-new customers; a geo-lift study estimated 2.3x more incremental orders than last-click attribution captured",
+                  "Incrementality",
+                ],
+                [
+                  "Portland Leather",
+                  "Triple Whale",
+                  "93% of visitors from ChatGPT Ads were new",
+                  "Attribution / analytics",
+                ],
+              ],
+            },
+          },
+          {
+            type: "p",
+            content: "The limitations matter as much as the numbers:",
+          },
+          {
+            type: "ul",
+            items: [
+              "These are advertiser and measurement-partner results selected and published by OpenAI, not independent benchmarks.",
+              "Each describes one advertiser, in one market and period, with its own products, budgets and creative.",
+              "They use different methods, so they can't be compared with each other or combined.",
+              "OpenAI hasn't published average performance across advertisers.",
+              "Other advertisers shouldn't expect similar results. They're evidence the channel can be measured, not a forecast.",
+            ],
+          },
+        ],
+      },
+      {
+        h2: "What This Means for Landing Pages",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "*This section is OMSA analysis and a hypothesis worth testing, not an observed pattern.*",
+          },
+          {
+            type: "p",
+            content:
+              "Someone arriving from a longer AI conversation may reach a website with more context and more developed intent than someone arriving from a generic click. They may already have compared options, set criteria and narrowed down what they want. Not every ChatGPT Ads visitor will behave this way, but where they do, the landing page has a different job.",
+          },
+          {
+            type: "p",
+            content:
+              "That suggests landing pages may increasingly need to preserve **conversation → website continuity**. In practice, that could mean:",
+          },
+          {
+            type: "ul",
+            items: [
+              "**Immediate relevance:** the page confirms, within seconds, that it matches what the visitor was exploring.",
+              "**A clear value proposition** that doesn't make them start their reasoning again.",
+              "**Continuation of intent:** picking up where the conversation left off, not restarting at awareness.",
+              "**Useful supporting evidence:** specifications, pricing structure, proof and policies.",
+              "**A low-friction next step:** a booking, enquiry or purchase that's easy to complete.",
+              "**Consistent messaging** between the ad, the page and what the business actually offers.",
+            ],
+          },
+          {
+            type: "p",
+            content: {
+              text: "The way to find out is to test it: compare engagement and conversion quality for ChatGPT Ads traffic against other channels, using a reliable Google Analytics setup and conversions tied to real business outcomes.",
+              link: {
+                anchor: "reliable Google Analytics setup",
+                link: { kind: "service", slug: "google-analytics" },
+              },
+            },
+          },
+        ],
+      },
+      {
+        h2: "What UAE and GCC Businesses Should Watch",
+        blocks: [
+          {
+            type: "p",
+            content: {
+              text: "**Are ChatGPT Ads available in the UAE?** Self-service Ads Manager is. As of October 6, 2026, OpenAI's Help Center lists self-service Ads Manager as available in the United Arab Emirates, Oman, Saudi Arabia, Qatar, Kuwait and Bahrain, provided the advertising and billing legal entity is based in a listed country. That followed OpenAI's August 31 expansion of self-service access across the Middle East and North Africa.",
+              link: {
+                anchor: "OpenAI's Help Center lists self-service Ads Manager as available",
+                link: {
+                  kind: "external",
+                  href: "https://help.openai.com/en/articles/20001245-ads-manager-availability",
+                },
+              },
+            },
+          },
+          {
+            type: "p",
+            content:
+              "That's not the same as the October 5 announcement reaching the region. The visual ad format will be tested in the US first. The announcement doesn't confirm when it will come to the GCC, or which of the new measurement integrations, incrementality experiments and brand-suitability pilots apply in specific GCC markets. The sources we reviewed also don't address Arabic-language ad support.",
+          },
+          {
+            type: "p",
+            content:
+              "For businesses in Muscat, Dubai, Riyadh and across the region, the things worth watching are:",
+          },
+          {
+            type: "ul",
+            items: [
+              "**Regional availability** of the visual format and future formats, not just of Ads Manager.",
+              "**Arabic advertising support**, including Arabic creative and Arabic-language conversations.",
+              "**Targeting options** available to advertisers in each market.",
+              "**Measurement integrations:** whether the partners a business already uses support its market.",
+              "**Commerce integrations** such as product feeds for regional retailers.",
+              "**Privacy:** how conversion data sharing fits local data-protection obligations.",
+              "**Brand suitability** in Arabic and mixed-language conversations.",
+              "**Reporting capabilities** at the level of detail regional businesses need.",
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "Check OpenAI's own documentation for current availability before planning a campaign. It is changing quickly.",
+          },
+        ],
+      },
+      {
+        h2: "What We Still Don't Know",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "OpenAI's announcement is useful, but several important questions remain publicly unanswered:",
+          },
+          {
+            type: "ul",
+            items: [
+              "How the ad auction works in full.",
+              "Pricing for the visual format and typical costs by market.",
+              "Which targeting controls are available in each market.",
+              "Whether and when Arabic-language advertising will be supported.",
+              "When, or whether, the visual format will roll out to the GCC.",
+              "Average advertiser performance, as opposed to selected case results.",
+              "How well incrementality measurement holds up at scale.",
+              "How conversational context influences which ad is selected.",
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "Until OpenAI discloses more, the responsible position is to treat these as unknowns, not to fill them with assumptions.",
+          },
+        ],
+      },
+      {
+        h2: "What marketers can do now",
+        blocks: [
+          {
+            type: "ol",
+            items: [
+              "**Fix conversion signals first.** Make sure leads and sales are recorded accurately before testing any new channel.",
+              "**Decide how you'll judge success** before you spend: attributed results, incremental results, or both.",
+              "**Plan an incrementality test** for any channel that grows into a meaningful share of budget.",
+              "**Keep organic AI visibility and paid AI advertising in separate reports.**",
+              "**Review landing pages** for visitors who arrive with more context than a generic click.",
+              "**Write down your brand-suitability rules** so they're ready if you advertise in conversational environments.",
+            ],
+          },
+        ],
+      },
+      {
+        h2: "Final thought",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "The visual ad format will get the attention. The measurement infrastructure is what will decide whether ChatGPT Ads become a durable part of the media plan: conversion data, attribution, incrementality and suitability controls that marketers can check for themselves.",
+          },
+          {
+            type: "p",
+            content:
+              "The most useful question isn't whether someone clicked the ad. It's whether the business would have won that customer without it.",
+          },
+          {
+            type: "p",
+            content: {
+              text: "If you want help connecting AI visibility, advertising and measurement to real business outcomes, talk to us.",
+              link: { anchor: "talk to us", link: { kind: "contact" } },
+            },
+          },
+        ],
+      },
+      {
+        h2: "Sources",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "Statements about ChatGPT Ads come from OpenAI's own announcements and documentation. Partner-reported results are attributed to the partner named by OpenAI. Interpretation and recommendations are OMSA's own and are not OpenAI statements.",
+          },
+          {
+            type: "ul",
+            items: [
+              {
+                text: "OpenAI: Building advertising for the way people use AI (October 5, 2026)",
+                link: {
+                  anchor: "Building advertising for the way people use AI",
+                  link: {
+                    kind: "external",
+                    href: "https://openai.com/index/new-chatgpt-ads-format-and-measurement/",
+                  },
+                },
+              },
+              {
+                text: "OpenAI Ads blog: More ways to measure ChatGPT Ads (October 5, 2026)",
+                link: {
+                  anchor: "More ways to measure ChatGPT Ads",
+                  link: {
+                    kind: "external",
+                    href: "https://ads.openai.com/blog/more-ways-to-measure",
+                  },
+                },
+              },
+              {
+                text: "OpenAI: A milestone in expanding access to AI (August 31, 2026)",
+                link: {
+                  anchor: "A milestone in expanding access to AI",
+                  link: {
+                    kind: "external",
+                    href: "https://openai.com/index/expanding-access-to-ai-with-chatgpt-ads/",
+                  },
+                },
+              },
+              {
+                text: "OpenAI Help Center: Ads Manager availability (checked October 6, 2026)",
+                link: {
+                  anchor: "Ads Manager availability",
+                  link: {
+                    kind: "external",
+                    href: "https://help.openai.com/en/articles/20001245-ads-manager-availability",
+                  },
+                },
+              },
+              {
+                text: "OpenAI: Advertising policies",
+                link: {
+                  anchor: "Advertising policies",
+                  link: { kind: "external", href: "https://openai.com/policies/ad-policies/" },
+                },
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "Do ChatGPT ads affect AI answers?",
+        a: "According to OpenAI, no. OpenAI states that advertising does not influence the answers ChatGPT provides, that ads are clearly labelled and separate from those answers, and that advertisers don't receive access to people's private conversations.",
+      },
+      {
+        q: "How does ChatGPT Ads conversion tracking work?",
+        a: "Advertisers send conversion signals, such as purchases, leads, installs and sign-ups, through OpenAI's pixel or Conversions API. Integrations with Hightouch, Tealium and LiveRamp help send conversion data from existing systems, and attribution partners including AppsFlyer, Triple Whale, Adjust, DV Rockerbox, Northbeam and Branch support reporting and click attribution.",
+      },
+      {
+        q: "Can advertisers measure ROAS from ChatGPT?",
+        a: "Advertisers can track purchase conversions through the pixel, Conversions API and attribution partners, which is the basis for calculating return on ad spend. OpenAI hasn't published average ROAS across advertisers, and attributed return isn't the same as incremental return, which requires experiments such as the geo-based tests OpenAI is exploring with Haus, Measured and WorkMagic.",
+      },
+      {
+        q: "Are ChatGPT Ads available outside the US?",
+        a: "Yes. As of October 6, 2026, OpenAI's Help Center lists self-service Ads Manager as available in many countries, including the UAE, Oman, Saudi Arabia, Qatar, Kuwait and Bahrain. The new visual ad format announced on October 5, 2026 is a separate matter: OpenAI says it will be tested in the US first with an initial group of advertisers.",
+      },
+      {
+        q: "Is appearing organically in ChatGPT the same as advertising?",
+        a: "No. An organic mention or citation happens when ChatGPT's answer draws on information about a business; it can't be bought or guaranteed. An ad is a labelled, paid placement kept separate from the answer. Improving organic AI visibility (often called GEO) and buying ChatGPT Ads are different disciplines, measured differently.",
       },
     ],
   },
