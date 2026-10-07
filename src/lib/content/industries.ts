@@ -3,6 +3,16 @@ import type { Industry, ServiceSlug } from "./taxonomy";
 export type IndustryUseCase = { title: string; body: string };
 export type IndustryFaq = { q: string; a: string };
 
+// One internal link over an exact substring of hub copy. Kept to service and
+// post destinations (both typed routes) rather than importing the larger
+// ContentLink union from services-data.ts into this lightweight catalog.
+export type IndustryLink = { anchor: string; kind: "service" | "post"; slug: string };
+export type IndustryText = { text: string; link?: IndustryLink };
+export type IndustryHubStage = { label: string; h3: string; body: IndustryText; points: string[] };
+// A short "how customers find and choose a business" hub, organised as
+// journey stages. Optional — only set where an industry page needs it.
+export type IndustryHub = { h2: string; intro: IndustryText[]; stages: IndustryHubStage[]; closing?: IndustryText };
+
 export type IndustryPage = {
   slug: string;
   name: Industry;
@@ -22,6 +32,9 @@ export type IndustryPage = {
   // Slug of a CASE_STUDIES entry to feature as a "Concept Project" example.
   caseStudySlug?: string;
   faqs?: IndustryFaq[];
+  hub?: IndustryHub; // rendered after the outcomes paragraph
+  metaTitle?: string; // overrides the default "<name> — AI & Digital Growth Solutions | OMSA"
+  metaDescription?: string; // overrides `description` in meta tags only
 };
 
 export const INDUSTRY_PAGES: IndustryPage[] = [
@@ -101,13 +114,81 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
     description: "Medical websites, local SEO, appointment automation, AI assistants, and patient-focused digital experiences for modern clinics.",
     outcomes:
       "Patients typically research before they book, and a clinic's website is often the first real impression of quality and trust. The focus is clear service information that helps patients understand what a clinic offers, local visibility for the searches that matter, and an appointment journey that's simple to complete on any device. Multilingual information supports patients who search or communicate in more than one language, and analytics built around the discovery-to-appointment journey shows where that process breaks down. AI-assisted enquiries can handle common questions and booking requests responsibly — always as support for the clinical and administrative team, never as a substitute for clinical judgment.",
-    services: ["website-design", "local-seo", "ai-chatbots", "google-analytics"],
+    metaTitle: "Healthcare & Clinic SEO in Oman and the UAE | OMSA",
+    metaDescription:
+      "How patients find, trust and book a clinic, and what clinics in Oman and the UAE can do about treatments, doctors, insurance, Arabic search and bookings.",
+    services: ["website-design", "seo", "local-seo", "ai-search-visibility", "ai-chatbots", "google-analytics"],
+    hub: {
+      h2: "How patients find, trust and book a clinic",
+      intro: [
+        { text: "Choosing a clinic is rarely one search. Patients pair a treatment or specialty with a location, check the doctor, look for reasons to trust the clinic, confirm practical details such as insurance, and then try to book. We think about it in four stages: Search, Trust, Decision and Booking. Patients drop out at each stage for reasons that usually have nothing to do with the quality of care: information that is missing, out of date or contradictory." },
+        {
+          text: "For the UAE in detail, including insurance-network searches, doctor profiles and healthcare advertising standards, see our guide to how patients find, evaluate and choose a clinic in the UAE.",
+          link: { anchor: "how patients find, evaluate and choose a clinic in the UAE", kind: "post", slug: "seo-for-clinics-uae" },
+        },
+      ],
+      stages: [
+        {
+          label: "01 · Search",
+          h3: "Being found for the right treatment, place and language",
+          body: {
+            text: "Most clinic searches pair a need with a place, often in Google Maps first, and in Arabic as well as English. This is where clinic SEO does most of its work.",
+            link: { anchor: "clinic SEO", kind: "service", slug: "seo" },
+          },
+          points: [
+            "Treatment and specialty pages that use the words patients search with",
+            "An accurate Google Business Profile for every branch",
+            "Arabic pages written for Arabic searches, not translated word for word",
+          ],
+        },
+        {
+          label: "02 · Trust",
+          h3: "Making doctors and facts verifiable",
+          body: { text: "Health is a high-stakes topic, so patients look for information they can check. Details that differ between the website, Google and directories undermine trust quickly." },
+          points: [
+            "Doctor profiles linked to the treatments and branches they actually provide",
+            "Titles and credentials that match what the health authority has licensed",
+            "Clinical content reviewed and dated by a named clinician",
+            "No guarantees, superlatives or patient stories used without consent",
+          ],
+        },
+        {
+          label: "03 · Decision",
+          h3: "Answering the practical questions",
+          body: { text: "Before booking, patients want to know whether the clinic works with their insurance, which branch suits them and when they can be seen." },
+          points: [
+            "Insurance details patients can confirm for the branch they plan to visit",
+            "Which doctors are available at which branch",
+            "Treatment FAQs built from the questions reception actually receives",
+          ],
+        },
+        {
+          label: "04 · Booking",
+          h3: "Turning a decision into a measurable appointment",
+          body: {
+            text: "A patient who has decided should be able to book in one step, and the clinic should be able to see which journeys produce appointments. Setting up that measurement is part of our analytics work.",
+            link: { anchor: "analytics work", kind: "service", slug: "google-analytics" },
+          },
+          points: [
+            "Call, WhatsApp and booking actions on every treatment, doctor and branch page",
+            "Booking routes that work on mobile and in Arabic",
+            "Calls, WhatsApp messages and form requests measured by branch, without recording anything about a patient's health",
+          ],
+        },
+      ],
+      closing: {
+        text: "AI assistants and Google's AI features increasingly summarise which clinics offer a treatment in an area. Nobody can guarantee that a clinic will be named or cited, but accurate, consistent information about its doctors, treatments, branches and insurance makes correct representation more likely. Our AI Search Visibility reviews check how a clinic is actually described, in English and Arabic.",
+        link: { anchor: "AI Search Visibility reviews", kind: "service", slug: "ai-search-visibility" },
+      },
+    },
     challenges: [
       "Patients researching a clinic online before deciding whether to trust it enough to book",
       "Appointment booking that's difficult to complete outside phone calls during clinic hours",
       "Service and specialism information that's unclear or scattered across the website",
       "Local visibility that lags for the searches patients actually use — condition, specialism and location together",
       "Patient communication that only works reliably in one language",
+      "Doctor, branch and contact details that differ between the website, Google profiles and directories",
+      "Accepted insurance that patients can't easily confirm for a specific branch",
     ],
     caseStudySlug: "abu-dhabi-clinic-patient-acquisition",
     faqs: [
@@ -115,6 +196,7 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
       { q: "Is local SEO worth it for a single clinic?", a: "Yes, particularly for \"near me\" and specialism-plus-location searches. A well-maintained Google Business Profile combined with clear service pages helps a clinic appear for the searches patients actually use before booking." },
       { q: "Do we need a new website to start improving patient bookings?", a: "Not always — if the existing site can support a clearer appointment journey and local SEO foundations, improvements can often start there rather than a full rebuild." },
       { q: "How is success measured for a healthcare digital project?", a: "Through analytics built around the discovery-to-appointment journey — enquiry volume and where the process breaks down — rather than traffic alone." },
+      { q: "Can you guarantee our clinic will rank on Google or appear in AI answers?", a: "No. Search engines and AI platforms decide what they show, and no one outside them can guarantee a ranking, a citation or a recommendation. What we can do is make accurate information about the clinic easier for patients and search systems to find and interpret, then measure whether patient enquiries improve." },
     ],
   },
   {
