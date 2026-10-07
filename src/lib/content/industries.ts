@@ -1,17 +1,8 @@
 import type { Industry, ServiceSlug } from "./taxonomy";
+import type { ContentHub } from "./hub";
 
 export type IndustryUseCase = { title: string; body: string };
 export type IndustryFaq = { q: string; a: string };
-
-// One internal link over an exact substring of hub copy. Kept to service and
-// post destinations (both typed routes) rather than importing the larger
-// ContentLink union from services-data.ts into this lightweight catalog.
-export type IndustryLink = { anchor: string; kind: "service" | "post"; slug: string };
-export type IndustryText = { text: string; link?: IndustryLink };
-export type IndustryHubStage = { label: string; h3: string; body: IndustryText; points: string[] };
-// A short "how customers find and choose a business" hub, organised as
-// journey stages. Optional — only set where an industry page needs it.
-export type IndustryHub = { h2: string; intro: IndustryText[]; stages: IndustryHubStage[]; closing?: IndustryText };
 
 export type IndustryPage = {
   slug: string;
@@ -32,7 +23,7 @@ export type IndustryPage = {
   // Slug of a CASE_STUDIES entry to feature as a "Concept Project" example.
   caseStudySlug?: string;
   faqs?: IndustryFaq[];
-  hub?: IndustryHub; // rendered after the outcomes paragraph
+  hub?: ContentHub; // rendered after the outcomes paragraph
   metaTitle?: string; // overrides the default "<name> — AI & Digital Growth Solutions | OMSA"
   metaDescription?: string; // overrides `description` in meta tags only
 };

@@ -3,7 +3,8 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Container, Eyebrow, Heading, Prose, Tag } from "@/components/site/Primitives";
 import { FaqItem } from "@/components/site/FaqItem";
 import { RelatedInsights } from "@/components/site/RelatedInsights";
-import { getIndustry, type IndustryPage, type IndustryText } from "@/lib/content/industries";
+import { ContentHubSection } from "@/components/site/ContentHubSection";
+import { getIndustry, type IndustryPage } from "@/lib/content/industries";
 import { getService } from "@/lib/services-data";
 import { getCaseStudy } from "@/lib/case-studies-data";
 import { getRelatedPostsForIndustry } from "@/lib/blog-data";
@@ -21,29 +22,6 @@ const INDUSTRY_HEAD_FALLBACK: IndustryPage = {
   outcomes: SITE_DESCRIPTION,
   services: [],
 };
-
-// Renders hub copy with its optional single internal link over an exact
-// substring, resolved through the router's typed routes.
-function HubText({ text, link }: IndustryText) {
-  const idx = link ? text.indexOf(link.anchor) : -1;
-  if (!link || idx === -1) return <>{text}</>;
-  const className = "link-underline font-medium text-[color:var(--gold-deep)]";
-  return (
-    <>
-      {text.slice(0, idx)}
-      {link.kind === "service" ? (
-        <Link to="/services/$slug" params={{ slug: link.slug }} className={className}>
-          {link.anchor}
-        </Link>
-      ) : (
-        <Link to="/blog/$slug" params={{ slug: link.slug }} className={className}>
-          {link.anchor}
-        </Link>
-      )}
-      {text.slice(idx + link.anchor.length)}
-    </>
-  );
-}
 
 export const Route = createFileRoute("/industries/$slug")({
   loader: ({ params }) => {
@@ -93,42 +71,7 @@ function IndustryPage() {
           <Prose className="mt-5">{ind.outcomes}</Prose>
         </div>
 
-        {ind.hub && (
-          <div className="mt-16">
-            <h2 className="font-display text-2xl font-bold max-w-3xl">{ind.hub.h2}</h2>
-            <div className="mt-5 max-w-3xl space-y-4">
-              {ind.hub.intro.map((p) => (
-                <p key={p.text} className="text-base leading-relaxed text-muted-foreground">
-                  <HubText {...p} />
-                </p>
-              ))}
-            </div>
-            <div className="mt-8 grid gap-4 sm:grid-cols-2">
-              {ind.hub.stages.map((s) => (
-                <div key={s.h3} className="rounded-2xl border border-border bg-card p-6">
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[color:var(--gold-deep)]">{s.label}</p>
-                  <h3 className="mt-3 font-display text-base font-semibold tracking-tight">{s.h3}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                    <HubText {...s.body} />
-                  </p>
-                  <ul className="mt-4 space-y-2">
-                    {s.points.map((pt) => (
-                      <li key={pt} className="flex items-start gap-2.5 text-sm text-foreground/85 leading-relaxed">
-                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[color:var(--gold)]" />
-                        {pt}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-            {ind.hub.closing && (
-              <p className="mt-6 max-w-3xl text-base leading-relaxed text-muted-foreground">
-                <HubText {...ind.hub.closing} />
-              </p>
-            )}
-          </div>
-        )}
+        {ind.hub && <ContentHubSection hub={ind.hub} />}
 
         {ind.challenges && ind.challenges.length > 0 && (
           <div className="mt-16 max-w-3xl">

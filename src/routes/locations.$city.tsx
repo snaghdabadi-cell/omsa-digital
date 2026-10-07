@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, MapPin } from "lucide-react";
 import { Container, Eyebrow, Heading, Prose, Tag } from "@/components/site/Primitives";
 import { FaqItem } from "@/components/site/FaqItem";
+import { ContentHubSection } from "@/components/site/ContentHubSection";
 import { getLocation, type Location } from "@/lib/content/locations";
 import { getIndustryByCaseStudySlug } from "@/lib/content/industries";
 import { getService } from "@/lib/services-data";
@@ -33,8 +34,8 @@ export const Route = createFileRoute("/locations/$city")({
     const loc = loaderData?.loc ?? LOCATION_HEAD_FALLBACK;
     return {
       ...pageMeta({
-        title: `AI & Digital Growth Agency in ${loc.city}, ${loc.country} | OMSA`,
-        description: loc.tagline,
+        title: loc.metaTitle ?? `AI & Digital Growth Agency in ${loc.city}, ${loc.country} | OMSA`,
+        description: loc.metaDescription ?? loc.tagline,
         path: `/locations/${params.city}`,
         // "soon" locations are not yet an active market — keep them out of
         // the index until there's substantive, city-specific content live.
@@ -61,12 +62,25 @@ function LocationPage() {
   const { loc } = Route.useLoaderData();
   const relatedCaseStudy = loc.relatedCaseStudySlug ? getCaseStudy(loc.relatedCaseStudySlug) : undefined;
   const relatedIndustry = relatedCaseStudy ? getIndustryByCaseStudySlug(relatedCaseStudy.slug) : undefined;
+  const h1CityAt = loc.h1 ? loc.h1.indexOf(loc.city) : -1;
   return (
     <section className="pt-40 pb-32">
       <Container>
         <Eyebrow>{loc.country}</Eyebrow>
         <Heading as="h1" size="xl" className="mt-6 max-w-4xl">
-          Digital Growth in <span className="text-gradient-gold">{loc.city}</span> by OMSA Digital & AI Studio.
+          {loc.h1 && h1CityAt !== -1 ? (
+            <>
+              {loc.h1.slice(0, h1CityAt)}
+              <span className="text-gradient-gold">{loc.city}</span>
+              {loc.h1.slice(h1CityAt + loc.city.length)}
+            </>
+          ) : loc.h1 ? (
+            loc.h1
+          ) : (
+            <>
+              Digital Growth in <span className="text-gradient-gold">{loc.city}</span> by OMSA Digital & AI Studio.
+            </>
+          )}
         </Heading>
         <Prose className="mt-8 max-w-2xl text-lg">{loc.intro}</Prose>
 
@@ -75,6 +89,8 @@ function LocationPage() {
           {loc.city}, {loc.country}
           {loc.status === "soon" && <Tag>Coming soon</Tag>}
         </div>
+
+        {loc.hub && <ContentHubSection hub={loc.hub} />}
 
         <div className="mt-16">
           <h2 className="font-display text-2xl font-bold">Services available in {loc.city}</h2>
