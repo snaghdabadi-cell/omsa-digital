@@ -351,6 +351,12 @@ const PILLARS = [
     title: "SEO & Digital Growth",
     headline: "Increase visibility, attract qualified leads, and drive sustainable growth.",
     desc: "We combine technical SEO, local SEO, content strategy, analytics, and conversion optimization to deliver long-term organic growth.",
+    // Optional contextual link rendered under `desc` (Grow pillar only).
+    aside: {
+      before: "As discovery extends into AI answers, we also review how Google's AI features and AI assistants describe your business through ",
+      anchor: "AI search visibility audits",
+      slug: "ai-search-visibility",
+    },
     items: [
       "Technical & On-Page SEO",
       "Local SEO for Oman, UAE and GCC",
@@ -411,6 +417,19 @@ function Pillars() {
                   {p.headline}
                 </p>
                 <p className="mt-4 text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
+                {p.aside && (
+                  <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
+                    {p.aside.before}
+                    <Link
+                      to="/services/$slug"
+                      params={{ slug: p.aside.slug }}
+                      className="link-underline font-medium text-[color:var(--gold-deep)]"
+                    >
+                      {p.aside.anchor}
+                    </Link>
+                    .
+                  </p>
+                )}
                 <ul className="mt-8 space-y-3 border-t border-border pt-6">
                   {p.items.map((it) => (
                     <li key={it} className="flex items-start gap-3 text-sm">

@@ -76,6 +76,7 @@ export type ServiceDetail = {
   heroBody?: string[]; // replaces the single `short` paragraph in the hero when present
   heroCta?: { primaryLabel: string; secondaryLabel?: string; secondaryLink?: ContentLink };
   sections?: EditorialSection[]; // rendered as a block, in order, after Problem/Solution
+  sectionsStartMuted?: boolean; // false starts `sections` on white, keeping the alternation intact around them (default true)
   benefitsEyebrow?: string;
   benefitsHeading?: string; // overrides "What you can expect"
   benefitsIntro?: string;
@@ -1010,6 +1011,7 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
       secondaryLabel: "See How AI Visibility Is Measured",
       secondaryLink: { kind: "post", slug: "how-to-measure-ai-search-visibility-gcc" },
     },
+    sectionsStartMuted: false,
     sections: [
       {
         id: "discovery-expanding",
@@ -1078,6 +1080,50 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
           { label: "Observed externally · where relevant", h3: "Oman vs UAE Visibility", body: "Differences in search and AI visibility between markets, for businesses that operate in, or are expanding into, more than one GCC country." },
           { label: "Requires analytics access", h3: "Analytics & Referral Evidence", body: "With access to GA4, Search Console and, where set up, Bing Webmaster Tools, we review AI assistant referrals, AI feature impressions and the landing pages they reach. Without that access, this area isn't assessed." },
           { label: "Requires CRM or lead data", h3: "Business Outcomes", body: "Where enquiry or CRM data exists, we connect visibility to contact forms, WhatsApp actions, calls, bookings and qualified leads. AI influence that leaves no click or referrer can't be fully measured, and we report that limit rather than hide it." },
+        ],
+      },
+      {
+        id: "methodology",
+        eyebrow: "Methodology",
+        h2: "How OMSA Measures AI Search Visibility",
+        paragraphs: [
+          { text: "AI answers change with wording, platform, language and timing, so a single screenshot proves very little. We treat visibility as evidence: every result is tied to the prompt, engine, language and date that produced it, and scored against the same definitions each time the test is re-run." },
+          { text: "Those definitions keep different outcomes from being counted as one. A brand that is mentioned hasn't necessarily been recommended, and a page that is cited isn't necessarily described accurately. This is measurement, not a promise: it shows where you stand and whether that changes, without guaranteeing a ranking, citation or recommendation on any platform." },
+        ],
+        subsections: [
+          {
+            label: "Recorded per answer",
+            h3: "How Each Answer Is Scored",
+            body: "Every tested answer is assessed on each of these separately:",
+            items: [
+              "Brand mentioned: the business is named anywhere in the answer",
+              "Brand recommended: the answer suggests the business as an option, not just names it",
+              "Brand cited: a page on your own website is linked as a source",
+              "Source cited: which domains and pages the answer relies on, including third parties and competitors",
+              "Entity accuracy: name, services, locations and key facts checked against your approved fact sheet",
+            ],
+          },
+          {
+            label: "Recorded per test",
+            h3: "How Each Test Is Documented",
+            body: "So that results can be compared and re-checked later, each test records:",
+            items: [
+              "The AI engine and mode tested, agreed during scoping",
+              "The exact prompt wording",
+              "The test date",
+              "The language, with Arabic and English prompts written separately and reported side by side",
+            ],
+          },
+          {
+            label: "Requires analytics or CRM access",
+            h3: "What First-Party Data Adds",
+            body: "Where access exists, external testing is connected to your own data. Where it doesn't, the gap is reported, not estimated:",
+            items: [
+              "Detectable AI referral traffic in GA4, such as visits from ChatGPT, Gemini or Copilot",
+              "Clicks from Google's AI Overviews and AI Mode, which GA4 counts as organic search, kept separate from AI referrals",
+              "Business outcomes, such as enquiries, calls or bookings, only where tracking makes them measurable",
+            ],
+          },
         ],
       },
       {

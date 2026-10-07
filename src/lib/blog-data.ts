@@ -1405,7 +1405,8 @@ export const BLOG_POSTS: BlogPost[] = [
         p: [
           { text: "On August 31, 2026, OpenAI announced that advertisers could begin purchasing ChatGPT Ads directly through Ads Manager across India, Europe, and the Middle East and North Africa. That's a meaningful signal for advertisers in the region — but it's a statement about the broader advertising platform's purchasing access, not confirmation that Sponsored Agents specifically are available to businesses in Oman, the UAE or elsewhere in the GCC. As of this writing, that test remains limited to select advertisers in the United States.",
             link: { anchor: "advertisers could begin purchasing ChatGPT Ads directly through Ads Manager across India, Europe, and the Middle East and North Africa", link: { kind: "external", href: "https://openai.com/index/expanding-access-to-ai-with-chatgpt-ads/" } } },
-          "The strategic opportunity for Muscat, Dubai and wider GCC businesses isn't to chase a format that isn't available to them yet. It's to start building the digital foundations — clear service information, consistent entity signals, dependable analytics — that will matter regardless of which AI-native ad formats eventually reach the region, and that already matter for how AI systems understand a business today.",
+          { text: "The strategic opportunity for Muscat, Dubai and wider GCC businesses isn't to chase a format that isn't available to them yet. It's to start building the digital foundations — clear service information, consistent entity signals, dependable analytics — that will matter regardless of which AI-native ad formats eventually reach the region, and that already matter for how AI systems understand a business today.",
+            link: { anchor: "how AI systems understand a business today", link: { kind: "service", slug: "ai-search-visibility" } } },
         ],
       },
       { h2: "How businesses can prepare for conversational advertising",
@@ -1742,7 +1743,8 @@ export const BLOG_POSTS: BlogPost[] = [
       },
       { h2: "What businesses should audit now",
         p: [
-          "The framework below is practical, not a promise. None of these steps guarantees visibility in Google Lens, AI Overviews, AI Mode or any other system. They improve the chances that your content can be found, understood and matched when someone searches with an image.",
+          { text: "The framework below is practical, not a promise. None of these steps guarantees visibility in Google Lens, AI Overviews, AI Mode or any other system. They improve the chances that your content can be found, understood and matched when someone searches with an image. Where you want the AI side assessed directly, that's the scope of an AI search visibility audit.",
+            link: { anchor: "AI search visibility audit", link: { kind: "service", slug: "ai-search-visibility" } } },
           { text: "Several of the checks overlap with standard technical SEO work, which is good news: the effort isn't duplicated. The same groundwork serves typed search, visual search and AI features alike.",
             link: { anchor: "technical SEO work", link: { kind: "service", slug: "technical-seo" } } },
           { text: "One caution on measurement: impressions and clicks from image-led searches only matter if they lead somewhere. As with any channel, more traffic isn't the same as more business, so connect what Search Console shows to enquiries, bookings or sales in your analytics.",
@@ -5335,11 +5337,14 @@ export const BLOG_POSTS: BlogPost[] = [
           {
             type: "p",
             content: {
-              text: "AI visibility becomes more commercially meaningful when a business can connect it with outcomes. Our framework for how to measure AI search visibility covers what can and can't be tracked today.",
-              link: {
-                anchor: "how to measure AI search visibility",
-                link: { kind: "post", slug: "how-to-measure-ai-search-visibility-gcc" },
-              },
+              text: "AI visibility becomes more commercially meaningful when a business can connect it with outcomes. Our framework for how to measure AI search visibility covers what can and can't be tracked today, and it's the method behind our AI Search Visibility audits.",
+              links: [
+                {
+                  anchor: "how to measure AI search visibility",
+                  link: { kind: "post", slug: "how-to-measure-ai-search-visibility-gcc" },
+                },
+                { anchor: "AI Search Visibility audits", link: { kind: "service", slug: "ai-search-visibility" } },
+              ],
             },
           },
         ],

@@ -328,7 +328,11 @@ function ServiceDetailPage() {
 
       {/* Editorial sections (optional, long-form pages only) */}
       {service.sections?.map((section: EditorialSection, i: number) => (
-        <EditorialSectionBlock key={section.id} section={section} muted={i % 2 === 0} />
+        <EditorialSectionBlock
+          key={section.id}
+          section={section}
+          muted={i % 2 === (service.sectionsStartMuted === false ? 1 : 0)}
+        />
       ))}
 
       {/* Benefits */}
