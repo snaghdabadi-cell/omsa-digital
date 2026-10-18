@@ -292,10 +292,141 @@ export const LOCATIONS: Location[] = [
     city: "Sharjah",
     country: "UAE",
     region: "GCC",
-    tagline: "Bilingual digital systems for Sharjah's heritage and modern businesses.",
-    intro: "Arabic-first content and search strategy for brands serving a culturally precise audience.",
-    services: ["website-design", "seo", "local-seo"],
-    status: "soon",
+    tagline: "Websites and search visibility for Sharjah's SMEs and professional firms.",
+    intro: "OMSA works with Sharjah businesses remotely from Oman, helping small and medium-sized companies and professional firms build a website and search presence that gives prospective customers clear reasons, and easy ways, to get in touch. Often the pieces already exist (a website, a Google Business Profile, word-of-mouth referrals), but they aren't working together. We focus on the fundamentals that are usually worth getting right first: a clear, credible website, accurate local listings, content in the language your customers search in, and tracking that shows which enquiries came from search.",
+    h1: "Website Design and SEO for Sharjah SMEs and Professional Firms",
+    metaTitle: "Website Design & SEO for Sharjah Businesses | OMSA",
+    metaDescription:
+      "Websites, SEO and Local SEO for Sharjah SMEs and professional firms, in Arabic and English and focused on real enquiries. Delivered remotely from Oman.",
+    services: ["website-design", "seo", "local-seo", "ai-search-visibility", "google-analytics", "business-automation"],
+    hub: {
+      h2: "What a Sharjah business needs to be found, trusted and contacted",
+      intro: [
+        {
+          text: "For a small or mid-sized business, every part of its online presence has to earn its place. The six areas below focus on practical problems: a website that doesn't explain the business clearly, listings that are incomplete or inconsistent, and enquiries that can't be traced to where they came from.",
+        },
+      ],
+      stages: [
+        {
+          label: "01 · Website design",
+          h3: "A website that does the job of a good first meeting",
+          body: {
+            text: "For many SMEs and professional firms, the website is checked after a referral or a search, before anyone picks up the phone. It needs to explain what you do, who it is for and how to get in touch, without making visitors work for it. OMSA's website design work starts from those questions rather than from a template.",
+            link: { anchor: "website design", kind: "service", slug: "website-design" },
+          },
+          points: [
+            "Service pages that answer the questions prospective clients usually ask before getting in touch",
+            "Accurate company details, plus licensing or accreditation information where your sector requires or expects it",
+            "A site that is easy to keep up to date, so it doesn't drift out of date after launch",
+            {
+              text: "Design that feels considered without slowing the page down; see what makes a corporate website feel premium",
+              link: { anchor: "what makes a corporate website feel premium", kind: "post", slug: "what-makes-corporate-website-premium" },
+            },
+          ],
+        },
+        {
+          label: "02 · SEO and Local SEO",
+          h3: "Local visibility built on accurate foundations",
+          body: {
+            text: "Local search results depend heavily on information a business controls: its Google Business Profile, its website and its details on other sites. The gaps we look for first are practical ones, such as incomplete profiles, inconsistent names or phone numbers, and service pages too thin to show what the business actually offers. Our Local SEO work fixes those foundations first.",
+            link: { anchor: "Local SEO", kind: "service", slug: "local-seo" },
+          },
+          points: [
+            "Where your business is eligible, a complete Google Business Profile, with categories and service areas that match how you really operate",
+            "Consistent business names, addresses and phone numbers across your website and listings",
+            {
+              text: "Service pages built for the searches your customers use, as part of a wider SEO plan",
+              link: { anchor: "SEO plan", kind: "service", slug: "seo" },
+            },
+            "If you also serve customers in neighbouring emirates, a service-area setup that reflects that honestly",
+          ],
+        },
+        {
+          label: "03 · AI search",
+          h3: "How AI assistants describe your business",
+          body: {
+            text: "Some customers now ask AI assistants such as ChatGPT, Gemini or Google's AI features to recommend or compare local providers. These tools work differently from one another, and their answers can change between questions and over time, so nobody can promise a particular result. OMSA's AI Search Visibility review starts by checking how your business is currently described.",
+            link: { anchor: "AI Search Visibility", kind: "service", slug: "ai-search-visibility" },
+          },
+          points: [
+            "Answers checked in English and Arabic for the questions your customers are likely to ask",
+            "Gaps and inaccuracies compared with what your website and listings actually say",
+            {
+              text: "A practical first step, explained in our guide to checking whether your business is visible in AI search",
+              link: { anchor: "checking whether your business is visible in AI search", kind: "post", slug: "is-your-business-visible-in-ai-search-gcc" },
+            },
+            {
+              text: "The difference between ranking on Google and being recommended by AI",
+              link: { anchor: "ranking on Google and being recommended by AI", kind: "post", slug: "google-ranking-vs-ai-visibility" },
+            },
+          ],
+        },
+        {
+          label: "04 · Arabic and English",
+          h3: "Arabic content written for Arabic searches",
+          body: {
+            text: "If you serve both Arabic- and English-speaking customers, the two groups don't always search for the same service in the same way. A page translated word for word can read correctly and still miss the terms people actually use. We treat each language as its own piece of work, following the approach in our guide to bilingual SEO.",
+            link: { anchor: "bilingual SEO", kind: "post", slug: "bilingual-seo-gcc-arabic-english" },
+          },
+          points: [
+            "Arabic copy written from Arabic search terms, not translated from English",
+            "Business names that match in both languages, so listings and the website clearly refer to the same company",
+            "Correct right-to-left layout and language settings on every Arabic page",
+            "A clear decision on which pages need both languages, rather than translating everything by default",
+          ],
+        },
+        {
+          label: "05 · Sectors",
+          h3: "Sectors where these problems tend to matter most",
+          body: {
+            text: "The issues above show up differently from one sector to another. These are the areas where we expect them to matter most for Sharjah businesses.",
+          },
+          points: [
+            {
+              text: "Professional Services: firms whose clients check credentials and expertise online before making contact, often after a referral",
+              link: { anchor: "Professional Services", kind: "industry", slug: "professional-services" },
+            },
+            {
+              text: "Education: schools, nurseries and training centres where parents and learners compare programmes and need clear answers in more than one language",
+              link: { anchor: "Education", kind: "industry", slug: "education" },
+            },
+            {
+              text: "Retail: shops and showrooms where accurate opening hours, location details and product information decide whether someone visits",
+              link: { anchor: "Retail", kind: "industry", slug: "retail" },
+            },
+            {
+              text: "Construction: contractors and suppliers whose websites need to support tenders and procurement checks, not just look presentable",
+              link: { anchor: "Construction", kind: "industry", slug: "construction" },
+            },
+          ],
+        },
+        {
+          label: "06 · Working together",
+          h3: "Working with OMSA from Oman",
+          body: {
+            text: "OMSA operates from Oman and works with Sharjah businesses remotely. Oman and the UAE share a time zone, so meetings, reviews and support happen during your normal working day.",
+          },
+          points: [
+            "A short discovery call, then a written scope setting out what will be done, in what order and why",
+            "Work prioritised around your budget, starting with the changes that matter most for your business",
+            "Progress shared over video calls, phone and WhatsApp, with plain-language reporting",
+            {
+              text: "Measurement that shows which enquiries came from search, using the approach in our guide to SME conversion tracking",
+              link: { anchor: "SME conversion tracking", kind: "post", slug: "sme-conversion-tracking-google-site-kit" },
+            },
+          ],
+        },
+      ],
+    },
+    status: "live",
+    faqs: [
+      { q: "Does OMSA work with businesses in Sharjah?", a: "Yes. OMSA operates from Oman and works with Sharjah businesses remotely, covering website design, SEO and Local SEO, AI search visibility, analytics and business automation." },
+      { q: "Is SEO worth it for a small business in Sharjah?", a: "It can be, if the work is focused. For most small businesses, the sensible starting point is the fundamentals: an accurate Google Business Profile where the business is eligible, clear service pages, and tracking that shows which enquiries came from search. We start there, and only recommend larger projects once those basics are in place and being measured." },
+      { q: "Do I need a physical address in Sharjah to appear in Google Maps?", a: "Not necessarily, but eligibility matters. Google Business Profile is intended for businesses that meet Google's guidelines, which generally means serving customers in person during stated hours, either at a location they can visit or at the customer's own location within a defined area. Having an address or naming a service area isn't enough on its own. If you operate from premises in Sharjah, the profile should reflect that location; if you serve customers at their premises, a service-area profile may be appropriate. We check eligibility against Google's current guidelines before making changes, and we never create listings for places you don't operate from." },
+      { q: "Can you write Arabic content, or only translate it?", a: "We plan Arabic content from Arabic search terms rather than translating English pages word for word, and we check that names, contact details and terminology match across both languages. Where specialist or regulated wording is involved, we confirm it with your team before publishing." },
+      { q: "How long does SEO take to show results?", a: "There is no fixed or guaranteed timeline. Some changes, such as correcting tracking, are useful as soon as they're in place because they improve what you can measure. How search visibility responds to profile, content or technical changes depends on your competition, your site's history and how search engines reassess it. We agree what to measure at the start, so progress is judged on enquiries, not on rankings alone." },
+      { q: "How do we get started?", a: "Book a strategy call. We'll look at your current website, listings and goals, then send a written plan with priorities and scope before any work begins." },
+    ],
   },
   {
     slug: "doha",
