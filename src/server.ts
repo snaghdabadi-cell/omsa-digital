@@ -17,6 +17,7 @@ type ContactPayload = {
   company?: string;
   budget?: string;
   message?: string;
+  source?: string;
 };
 
 async function handleContactForm(request: Request, env: unknown): Promise<Response> {
@@ -45,6 +46,9 @@ async function handleContactForm(request: Request, env: unknown): Promise<Respon
   const company = data.company || "Not provided";
   const budget = data.budget || "Not provided";
   const message = data.message || "Not provided";
+  // Lead source tag from the contact URL; only a safe slug is accepted.
+  const source =
+    typeof data.source === "string" && /^[a-z0-9-]{1,60}$/.test(data.source) ? data.source : null;
 
   const resendResponse = await fetch("https://api.resend.com/emails", {
     method: "POST",
@@ -55,13 +59,14 @@ async function handleContactForm(request: Request, env: unknown): Promise<Respon
     body: JSON.stringify({
       from: `OMSA Digital <${CONTACT.publicEmail}>`,
       to: ["snaghdabadi@gmail.com"],
-      subject: "New contact form submission - OMSA Digital",
+      subject: `New contact form submission - OMSA Digital${source ? ` [${source}]` : ""}`,
       html: `
         <h2>New contact form submission</h2>
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Company:</strong> ${company}</p>
         <p><strong>Budget:</strong> ${budget}</p>
+        ${source ? `<p><strong>Source:</strong> ${source}</p>` : ""}
         <p><strong>Message:</strong></p>
         <p>${message}</p>
       `,

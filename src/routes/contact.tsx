@@ -3,6 +3,7 @@ import { Calendar, CheckCircle2, Clock, Globe2, Mail, MessageCircle, Phone, Send
 import { useEffect, useState } from "react";
 import { z } from "zod";
 import { Reveal } from "@/components/site/Reveal";
+import { parseLeadSource } from "@/lib/lead-source";
 import { CONTACT, pageMeta } from "@/lib/seo";
 declare global {
   interface Window {
@@ -10,6 +11,10 @@ declare global {
   }
 }
 export const Route = createFileRoute("/contact")({
+  validateSearch: (search: Record<string, unknown>): { source?: string } => {
+    const source = parseLeadSource(search.source);
+    return source ? { source } : {};
+  },
   head: () => pageMeta({
     title: "Contact — Start a Conversation About Growth",
     description: "Tell us about your business. We'll send back a tailored digital growth strategy within five working days — whether we end up working together or not.",
@@ -27,6 +32,9 @@ const schema = z.object({
 });
 
 function ContactPage() {
+  // Re-validated here because the router merges the root route's raw search
+  // params into this route's, so an invalid ?source= survives validateSearch.
+  const source = parseLeadSource(Route.useSearch().source);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [sent, setSent] = useState(false);
   useEffect(() => {
@@ -53,7 +61,7 @@ try {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(result.data),
+    body: JSON.stringify(source ? { ...result.data, source } : result.data),
   });
 
   if (!response.ok) {
