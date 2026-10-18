@@ -976,7 +976,7 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
       { q: "How long does Local SEO take?", a: "Some improvements, such as Google Business Profile completeness, can show effects within weeks. Competitive local rankings and sustained visibility typically build over several months, depending on your market and competition." },
       { q: "Can you guarantee Google Maps rankings?", a: "No responsible provider can guarantee specific map-pack or ranking positions — Google controls its own results. We commit to a transparent, technically sound process focused on the signals that genuinely influence local visibility." },
       { q: "Do I need separate pages for every location?", a: "Only where each location offers genuine value and real geographic relevance. Dedicated location pages built purely to duplicate content across cities can do more harm than good — the right structure depends on how your business actually operates." },
-      { q: "Do you provide Local SEO services for UAE businesses?", a: "Yes. OMSA works with businesses across the UAE, including Dubai, building Local SEO strategies around each business's actual service area and presence." },
+      { q: "Do you provide Local SEO services for UAE businesses?", a: "Yes. OMSA works with businesses across the UAE, including Dubai and Sharjah, building Local SEO strategies around each business's actual service area and presence.", link: { anchor: "Sharjah", link: { kind: "location", city: "sharjah" } } },
     ],
     finalCta: {
       heading: "Be Findable When Local Customers Are Ready to Act",
