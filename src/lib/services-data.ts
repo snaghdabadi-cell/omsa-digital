@@ -882,7 +882,7 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
         eyebrow: "Oman & Muscat",
         h2: "Local SEO for Oman and Muscat",
         paragraphs: [
-          { text: "Muscat is OMSA's home market, which shapes how we approach Local SEO for Omani businesses.", link: { anchor: "Muscat", link: { kind: "location", city: "muscat" } } },
+          { text: "OMSA operates from Oman and works with businesses in Muscat and across the country, which shapes how we approach Local SEO for Omani businesses.", link: { anchor: "Muscat", link: { kind: "location", city: "muscat" } } },
           { text: "The right strategy depends on how your business actually operates — a single physical location in Muscat needs a different approach to a business serving customers across multiple areas of Oman, or one taking enquiries nationwide regardless of location." },
           { text: "We build the strategy around your real service coverage, rather than adding location pages for areas you don't genuinely serve." },
         ],
@@ -964,7 +964,7 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
       paragraphs: [
         { text: "OMSA works across websites, SEO and analytics as one connected discipline, which matters for Local SEO because the strongest local presence depends on signals from all three working together, not a Google Business Profile treated in isolation." },
         { text: "We build strategy around your actual footprint — the locations and service areas you genuinely operate in — rather than a generic template applied to every city in the GCC." },
-        { text: "We're based in Oman, which gives us direct, practical familiarity with the local market rather than a purely remote, generic approach." },
+        { text: "We operate from Oman, which gives us practical familiarity with the local market, its languages and how decisions get made." },
         { text: "And we don't promise specific map-pack positions or guaranteed rankings. What we commit to is a transparent process and a local presence built on accurate, consistent information." },
       ],
     },

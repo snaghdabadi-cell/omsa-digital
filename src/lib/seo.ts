@@ -18,8 +18,8 @@ export const CONTACT = {
   publicEmail: "hello@omsadigital.com",
   phone: "+968 90980683",
   whatsapp: "+968 90980683",
-  city: "Muscat",
-  region: "Muscat",
+  // OMSA operates from Oman but has no verified physical office, so no
+  // city/region is recorded here.
   country: "OM",
 };
 
@@ -113,11 +113,7 @@ export const organizationJsonLd = () => ({
     { "@type": "Country", name: "United Arab Emirates" },
     { "@type": "AdministrativeArea", name: "Gulf Cooperation Council" },
   ],
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Muscat",
-    addressCountry: "OM",
-  },
+  // No `address`: OMSA has no verified physical office, so none is claimed.
   // Only the verified LinkedIn Company Page is listed.
   sameAs: [SOCIAL.linkedin],
   knowsAbout: [

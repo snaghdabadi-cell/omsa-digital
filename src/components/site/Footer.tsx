@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 // Footer uses plain <a> for dynamic /services/$slug-style URLs to avoid
 // fighting TanStack Link's strict path typing. Static routes use <Link>.
-import { Sparkles, Linkedin, Mail, Phone, MapPin } from "lucide-react";
+import { Sparkles, Linkedin, Mail, Phone, Globe2 } from "lucide-react";
 import { CONTACT, SOCIAL } from "@/lib/seo";
 import { SERVICE_NAV_LINKS, INDUSTRY_NAV_LINKS, LOCATION_NAV_LINKS } from "@/lib/content/nav-links";
 import { RESOURCE_CATEGORIES } from "@/lib/content/resources";
@@ -93,7 +93,7 @@ export function Footer() {
                 type="email"
                 required
                 placeholder="Enter your email address"
-                className="flex-1 rounded-full bg-white/5 border border-white/10 px-4 py-3 text-sm placeholder:text-white/40 focus:outline-none focus:border-[color:var(--gold)]"
+                className="w-0 min-w-0 flex-1 rounded-full bg-white/5 border border-white/10 px-4 py-3 text-sm placeholder:text-white/40 focus:outline-none focus:border-[color:var(--gold)]"
               />
               <button className="btn-gold !py-2.5 !px-4 text-sm" type="submit">Subscribe</button>
             </form>
@@ -101,7 +101,7 @@ export function Footer() {
           <address className="not-italic space-y-3 text-sm text-white/60">
             <div className="flex items-center gap-2"><Mail className="h-4 w-4 text-[color:var(--gold)]" /> <a href={`mailto:${CONTACT.publicEmail}`} className="hover:text-white">{CONTACT.publicEmail}</a></div>
             <div className="flex items-center gap-2"><Phone className="h-4 w-4 text-[color:var(--gold)]" /> <a href={`tel:${CONTACT.phone.replace(/\s/g, "")}`} className="hover:text-white">{CONTACT.phone}</a></div>
-            <div className="flex items-center gap-2"><MapPin className="h-4 w-4 text-[color:var(--gold)]" /> Muscat · Dubai · Abu Dhabi</div>
+            <div className="flex items-center gap-2"><Globe2 className="h-4 w-4 text-[color:var(--gold)]" /> Serving businesses across Oman &amp; the UAE</div>
           </address>
         </div>
 

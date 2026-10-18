@@ -14,6 +14,7 @@ import appCss from "../styles.css?url";
 import interFontUrl from "../assets/fonts/inter-400-600.woff2?url";
 import poppinsBoldFontUrl from "../assets/fonts/poppins-700.woff2?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { parseLeadSource } from "../lib/lead-source";
 import { Navbar } from "../components/site/Navbar";
 import { Footer } from "../components/site/Footer";
 import { ScrollProgress } from "../components/site/ScrollProgress";
@@ -162,6 +163,7 @@ function RootComponent() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   // Private prospect review pages render their own minimal header/footer.
   const chromeless = isReviewPath(pathname);
+  const router = useRouter();
 
   useEffect(() => {
   
@@ -173,13 +175,21 @@ function RootComponent() {
     page_path: pathname,
   });
 
+  // The single authoritative contact_page_view per visit. It lives here (keyed
+  // on pathname only) rather than in the contact page, because PageTransition
+  // remounts page components during exit animations. The source is read at
+  // push time, so a query-only change on /contact is not counted as a visit.
   if (pathname === "/contact") {
+    const leadSource = parseLeadSource(
+      (router.state.location.search as Record<string, unknown>).source,
+    );
     window.dataLayer.push({
       event: "contact_page_view",
       page_path: pathname,
+      ...(leadSource ? { lead_source: leadSource } : {}),
     });
   }
-}, [pathname]);
+}, [pathname, router]);
 
   return (
     <LocaleProvider>

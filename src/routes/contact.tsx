@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Calendar, CheckCircle2, Clock, Mail, MapPin, MessageCircle, Phone, Send, ShieldCheck } from "lucide-react";
-import { useEffect, useState } from "react";
+import { Calendar, CheckCircle2, Clock, Globe2, Loader2, Mail, MessageCircle, Phone, Send, ShieldCheck } from "lucide-react";
+import { useRef, useState } from "react";
 import { z } from "zod";
 import { Reveal } from "@/components/site/Reveal";
+import { parseLeadSource } from "@/lib/lead-source";
 import { CONTACT, pageMeta } from "@/lib/seo";
 declare global {
   interface Window {
@@ -10,6 +11,10 @@ declare global {
   }
 }
 export const Route = createFileRoute("/contact")({
+  validateSearch: (search: Record<string, unknown>): { source?: string } => {
+    const source = parseLeadSource(search.source);
+    return source ? { source } : {};
+  },
   head: () => pageMeta({
     title: "Contact — Start a Conversation About Growth",
     description: "Tell us about your business. We'll send back a tailored digital growth strategy within five working days — whether we end up working together or not.",
@@ -27,17 +32,22 @@ const schema = z.object({
 });
 
 function ContactPage() {
+  // Re-validated here because the router merges the root route's raw search
+  // params into this route's, so an invalid ?source= survives validateSearch.
+  const source = parseLeadSource(Route.useSearch().source);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [sent, setSent] = useState(false);
-  useEffect(() => {
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({
-    event: "contact_page_view",
-  });
-}, []);
+  const [pending, setPending] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
+  // Synchronous guard: state updates are async, so a fast double-submit could
+  // otherwise slip through before `pending` re-renders the disabled button.
+  const submittingRef = useRef(false);
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const fd = new FormData(e.currentTarget);
+    if (submittingRef.current) return;
+    // Captured before any await: React clears e.currentTarget once the handler yields.
+    const form = e.currentTarget;
+    const fd = new FormData(form);
     const result = schema.safeParse(Object.fromEntries(fd));
     if (!result.success) {
       const eobj: Record<string, string> = {};
@@ -46,6 +56,10 @@ function ContactPage() {
       return;
     }
     setErrors({});
+    setSubmitError(false);
+    setSent(false);
+    submittingRef.current = true;
+    setPending(true);
 
 try {
   const response = await fetch("/api/contact", {
@@ -53,7 +67,7 @@ try {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(result.data),
+    body: JSON.stringify(source ? { ...result.data, source } : result.data),
   });
 
   if (!response.ok) {
@@ -65,11 +79,14 @@ try {
   });
 
   setSent(true);
-  e.currentTarget.reset();
+  form.reset();
 } catch (err) {
   console.error(err);
 
-  alert("Something went wrong. Please try again.");
+  setSubmitError(true);
+} finally {
+  submittingRef.current = false;
+  setPending(false);
 }
   };
 
@@ -125,8 +142,35 @@ try {
                 </div>
               )}
 
-              <button type="submit" className="btn-gold w-full sm:w-auto">
-                Request a Strategy Call <Send className="h-4 w-4" />
+              {submitError && (
+                <div role="alert" className="rounded-2xl border border-destructive/40 p-4 text-sm text-destructive">
+                  Your message couldn't be sent. Please try again, or{" "}
+                  <a
+                    href={`https://wa.me/${CONTACT.whatsapp.replace(/\D/g, "")}`}
+                    className="font-medium underline underline-offset-2"
+                  >
+                    message us on WhatsApp
+                  </a>
+                  .
+                </div>
+              )}
+
+              <button
+                type="submit"
+                className="btn-gold w-full sm:w-auto disabled:pointer-events-none disabled:opacity-60 disabled:saturate-50 disabled:shadow-none"
+                disabled={pending}
+                aria-busy={pending}
+              >
+                {/* Both labels share one grid cell so the button keeps its width while pending. */}
+                <span className="grid">
+                  <span className={`col-start-1 row-start-1 ${pending ? "invisible" : ""}`}>Request a Strategy Call</span>
+                  <span className={`col-start-1 row-start-1 text-center ${pending ? "" : "invisible"}`}>Sending…</span>
+                </span>
+                {pending ? (
+                  <Loader2 className="h-4 w-4 motion-safe:animate-spin" aria-hidden="true" />
+                ) : (
+                  <Send className="h-4 w-4" />
+                )}
               </button>
 
               <p className="flex items-center gap-2 text-xs text-muted-foreground">
@@ -168,19 +212,7 @@ try {
                 href={`https://wa.me/${CONTACT.whatsapp.replace(/\D/g, "")}`}
                 accent
               />
-              <ContactCard icon={MapPin} label="Based in" value="Muscat, Oman — serving the UAE & GCC" />
-
-              <div className="overflow-hidden rounded-[2rem] border border-border">
-                <iframe
-                  title="OMSA Digital & AI Studio – Muscat office location"
-                  src="https://www.google.com/maps?q=Muscat&output=embed"
-                  width="100%"
-                  height="320"
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  className="w-full"
-                />
-              </div>
+              <ContactCard icon={Globe2} label="Service area" value="Operating from Oman · Serving businesses across Oman and the UAE" />
             </div>
           </Reveal>
         </div>
@@ -233,14 +265,14 @@ function ContactCard({
         ? "border-[color:var(--gold)] bg-[color:var(--gold)]/8 hover:bg-[color:var(--gold)]/15"
         : "border-border bg-card hover:border-foreground/30"
     }`}>
-      <span className={`grid h-12 w-12 place-items-center rounded-xl ${
+      <span className={`grid h-12 w-12 shrink-0 place-items-center rounded-xl ${
         accent ? "bg-[color:var(--gold)] text-[color:var(--ink)]" : "bg-primary text-primary-foreground"
       }`}>
         <Icon className="h-5 w-5" />
       </span>
       <div className="min-w-0">
         <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">{label}</div>
-        <div className="mt-1 font-display font-semibold truncate">{value}</div>
+        <div className="mt-1 font-display font-semibold wrap-anywhere">{value}</div>
       </div>
     </div>
   );

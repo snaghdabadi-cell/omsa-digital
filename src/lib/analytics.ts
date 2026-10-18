@@ -2,7 +2,7 @@
 // touching call sites. Replace the `dispatch` body when wiring a provider.
 
 export type AnalyticsEvent =
-  | { name: "cta_click"; props: { location: string; label: string } }
+  | { name: "cta_click"; props: { location: string; label: string; destination?: string } }
   | { name: "form_submit"; props: { form: string; outcome: "success" | "error" } }
   | { name: "locale_change"; props: { from: string; to: string } }
   | { name: "search_query"; props: { query: string; results: number } }

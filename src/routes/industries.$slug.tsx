@@ -60,7 +60,7 @@ function IndustryPage() {
     <section className="pt-40 pb-32">
       <Container>
         <Eyebrow>Industry</Eyebrow>
-        <Heading as="h1" size="xl" className="mt-6 max-w-4xl">
+        <Heading as="h1" size="xl" className="mt-6 max-w-4xl max-[362px]:text-4xl">
           <span className="text-gradient-gold">{ind.name}</span>
         </Heading>
         <Prose className="mt-6 max-w-2xl text-lg">{ind.tagline}</Prose>
