@@ -20,6 +20,12 @@ dist-ssr
 .wrangler/
 .dev.vars
 
+# Environment files hold secrets (e.g. RESEND_API_KEY) and must never be
+# committed. Configure them as hosting secrets instead. Example files are safe.
+.env
+.env.*
+!.env.example
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
