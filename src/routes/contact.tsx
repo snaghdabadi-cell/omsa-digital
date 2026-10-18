@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Calendar, CheckCircle2, Clock, Mail, MapPin, MessageCircle, Phone, Send, ShieldCheck } from "lucide-react";
+import { Calendar, CheckCircle2, Clock, Globe2, Mail, MessageCircle, Phone, Send, ShieldCheck } from "lucide-react";
 import { useEffect, useState } from "react";
 import { z } from "zod";
 import { Reveal } from "@/components/site/Reveal";
@@ -168,19 +168,7 @@ try {
                 href={`https://wa.me/${CONTACT.whatsapp.replace(/\D/g, "")}`}
                 accent
               />
-              <ContactCard icon={MapPin} label="Based in" value="Muscat, Oman — serving the UAE & GCC" />
-
-              <div className="overflow-hidden rounded-[2rem] border border-border">
-                <iframe
-                  title="OMSA Digital & AI Studio – Muscat office location"
-                  src="https://www.google.com/maps?q=Muscat&output=embed"
-                  width="100%"
-                  height="320"
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  className="w-full"
-                />
-              </div>
+              <ContactCard icon={Globe2} label="Service area" value="Operating from Oman · Serving businesses across Oman and the UAE" />
             </div>
           </Reveal>
         </div>

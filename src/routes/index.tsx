@@ -536,8 +536,8 @@ function Services() {
 /* ────────────────────────── STATS ────────────────────────── */
 function Stats() {
   const stats = [
-    { value: 8, suffix: "", label: "Core service areas" },
-    { value: 3, suffix: "", label: "Target markets" },
+    { value: 9, suffix: "", label: "Service areas" },
+    { value: 2, suffix: "", label: "Countries served" },
     { value: 24, suffix: "/7", label: "AI chatbot availability" },
     { value: 1, suffix: "", label: "Connected growth system" },
   ];

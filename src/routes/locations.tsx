@@ -8,7 +8,7 @@ export const Route = createFileRoute("/locations")({
   head: ({ matches, match }) => {
     const meta = pageMeta({
       title: "Locations — OMSA Digital & AI Studio in Oman, UAE & the GCC",
-      description: "Discover OMSA Digital & AI Studio locations serving businesses across Muscat, Dubai, Abu Dhabi and the GCC with AI, SEO, web development and digital growth services.",
+      description: "OMSA Digital & AI Studio provides SEO, website, AI and digital growth services to businesses across Oman and the UAE, including Muscat, Dubai and Abu Dhabi.",
       path: "/locations",
     });
     return isLeafMatch(matches, match) ? meta : { ...meta, links: [] };
@@ -28,7 +28,7 @@ function LocationsPage() {
           Built for the <span className="text-gradient-gold">GCC</span>.
         </Heading>
         <Prose className="mt-6 max-w-2xl text-lg">
-          A growing network of city-specific practices, each with local services, case studies and contact information.
+          OMSA provides SEO, website, digital strategy and AI Search services to businesses across Oman and the UAE.
         </Prose>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

@@ -86,7 +86,7 @@ function LocationPage() {
 
         <div className="mt-8 inline-flex items-center gap-2 text-sm text-muted-foreground">
           <MapPin className="h-4 w-4 text-[color:var(--gold)]" />
-          {loc.city}, {loc.country}
+          Service area: {loc.city}, {loc.country}
           {loc.status === "soon" && <Tag>Coming soon</Tag>}
         </div>
 
@@ -117,7 +117,7 @@ function LocationPage() {
         {relatedCaseStudy && (
           <div className="mt-16">
             <div className="flex flex-wrap items-baseline justify-between gap-3">
-              <h2 className="font-display text-2xl font-bold">Related concept case study</h2>
+              <h2 className="font-display text-2xl font-bold">Illustrative concept project</h2>
               {relatedIndustry && (
                 <Link
                   to="/industries/$slug"
@@ -128,6 +128,9 @@ function LocationPage() {
                 </Link>
               )}
             </div>
+            <p className="mt-2 text-sm text-muted-foreground max-w-xl">
+              A concept showing how we'd approach this kind of project — not client work.
+            </p>
             <Link
               to="/case-studies/$slug"
               params={{ slug: relatedCaseStudy.slug }}
