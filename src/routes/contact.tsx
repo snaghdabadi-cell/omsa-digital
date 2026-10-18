@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Calendar, CheckCircle2, Clock, Globe2, Mail, MessageCircle, Phone, Send, ShieldCheck } from "lucide-react";
-import { useState } from "react";
+import { Calendar, CheckCircle2, Clock, Globe2, Loader2, Mail, MessageCircle, Phone, Send, ShieldCheck } from "lucide-react";
+import { useRef, useState } from "react";
 import { z } from "zod";
 import { Reveal } from "@/components/site/Reveal";
 import { parseLeadSource } from "@/lib/lead-source";
@@ -37,9 +37,17 @@ function ContactPage() {
   const source = parseLeadSource(Route.useSearch().source);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [sent, setSent] = useState(false);
+  const [pending, setPending] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
+  // Synchronous guard: state updates are async, so a fast double-submit could
+  // otherwise slip through before `pending` re-renders the disabled button.
+  const submittingRef = useRef(false);
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const fd = new FormData(e.currentTarget);
+    if (submittingRef.current) return;
+    // Captured before any await: React clears e.currentTarget once the handler yields.
+    const form = e.currentTarget;
+    const fd = new FormData(form);
     const result = schema.safeParse(Object.fromEntries(fd));
     if (!result.success) {
       const eobj: Record<string, string> = {};
@@ -48,6 +56,10 @@ function ContactPage() {
       return;
     }
     setErrors({});
+    setSubmitError(false);
+    setSent(false);
+    submittingRef.current = true;
+    setPending(true);
 
 try {
   const response = await fetch("/api/contact", {
@@ -67,11 +79,14 @@ try {
   });
 
   setSent(true);
-  e.currentTarget.reset();
+  form.reset();
 } catch (err) {
   console.error(err);
 
-  alert("Something went wrong. Please try again.");
+  setSubmitError(true);
+} finally {
+  submittingRef.current = false;
+  setPending(false);
 }
   };
 
@@ -127,8 +142,35 @@ try {
                 </div>
               )}
 
-              <button type="submit" className="btn-gold w-full sm:w-auto">
-                Request a Strategy Call <Send className="h-4 w-4" />
+              {submitError && (
+                <div role="alert" className="rounded-2xl border border-destructive/40 p-4 text-sm text-destructive">
+                  Your message couldn't be sent. Please try again, or{" "}
+                  <a
+                    href={`https://wa.me/${CONTACT.whatsapp.replace(/\D/g, "")}`}
+                    className="font-medium underline underline-offset-2"
+                  >
+                    message us on WhatsApp
+                  </a>
+                  .
+                </div>
+              )}
+
+              <button
+                type="submit"
+                className="btn-gold w-full sm:w-auto disabled:pointer-events-none disabled:opacity-60 disabled:saturate-50 disabled:shadow-none"
+                disabled={pending}
+                aria-busy={pending}
+              >
+                {/* Both labels share one grid cell so the button keeps its width while pending. */}
+                <span className="grid">
+                  <span className={`col-start-1 row-start-1 ${pending ? "invisible" : ""}`}>Request a Strategy Call</span>
+                  <span className={`col-start-1 row-start-1 text-center ${pending ? "" : "invisible"}`}>Sending…</span>
+                </span>
+                {pending ? (
+                  <Loader2 className="h-4 w-4 motion-safe:animate-spin" aria-hidden="true" />
+                ) : (
+                  <Send className="h-4 w-4" />
+                )}
               </button>
 
               <p className="flex items-center gap-2 text-xs text-muted-foreground">
