@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Calendar, CheckCircle2, Clock, Globe2, Mail, MessageCircle, Phone, Send, ShieldCheck } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { z } from "zod";
 import { Reveal } from "@/components/site/Reveal";
 import { parseLeadSource } from "@/lib/lead-source";
@@ -37,12 +37,6 @@ function ContactPage() {
   const source = parseLeadSource(Route.useSearch().source);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [sent, setSent] = useState(false);
-  useEffect(() => {
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({
-    event: "contact_page_view",
-  });
-}, []);
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);

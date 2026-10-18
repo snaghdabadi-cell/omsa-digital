@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { Menu, X, Sparkles, Search } from "lucide-react";
 import { LocaleSwitcher } from "./LocaleSwitcher";
 import { useScrollY } from "@/hooks/use-scroll-state";
+import { track } from "@/lib/analytics";
 
 declare global {
   interface Window {
@@ -11,15 +12,14 @@ declare global {
   }
 }
 
-const trackStrategyCallClick = () => {
-  
-
+// Phase 1 (additive): the legacy contact_page_view push is kept unchanged
+// because existing GTM triggers may depend on it; cta_click is added alongside.
+const trackStrategyCallClick = (location: "navbar-desktop" | "navbar-mobile") => {
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({
     event: "contact_page_view",
   });
-
-  
+  track("cta_click", { location, label: "book-strategy-call", destination: "/contact" });
 };
 
 const links = [
@@ -91,7 +91,7 @@ export function Navbar() {
               <Search className="h-4 w-4" />
             </Link>
             <LocaleSwitcher />
-            <Link to="/contact" className="btn-gold !py-2.5 !px-5 text-sm" onClick={trackStrategyCallClick}>
+            <Link to="/contact" className="btn-gold !py-2.5 !px-5 text-sm" onClick={() => trackStrategyCallClick("navbar-desktop")}>
               Book a Strategy Call
             </Link>
           </div>
@@ -144,7 +144,7 @@ export function Navbar() {
                     </Link>
                   </motion.div>
                 ))}
-                <Link to="/contact" className="btn-gold mt-2" onClick={trackStrategyCallClick}>
+                <Link to="/contact" className="btn-gold mt-2" onClick={() => trackStrategyCallClick("navbar-mobile")}>
                   Book a Strategy Call
                 </Link>
               </nav>
