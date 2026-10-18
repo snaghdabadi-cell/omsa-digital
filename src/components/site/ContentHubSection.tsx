@@ -14,6 +14,10 @@ function HubCopy({ text, link }: HubText) {
         <Link to="/services/$slug" params={{ slug: link.slug }} className={className}>
           {link.anchor}
         </Link>
+      ) : link.kind === "industry" ? (
+        <Link to="/industries/$slug" params={{ slug: link.slug }} className={className}>
+          {link.anchor}
+        </Link>
       ) : (
         <Link to="/blog/$slug" params={{ slug: link.slug }} className={className}>
           {link.anchor}
@@ -46,9 +50,10 @@ export function ContentHubSection({ hub }: { hub: ContentHub }) {
             </p>
             <ul className="mt-4 space-y-2">
               {s.points.map((pt) => (
-                <li key={pt} className="flex items-start gap-2.5 text-sm text-foreground/85 leading-relaxed">
+                <li key={typeof pt === "string" ? pt : pt.text} className="flex items-start gap-2.5 text-sm text-foreground/85 leading-relaxed">
                   <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[color:var(--gold)]" />
-                  {pt}
+                  {/* Linked points are wrapped so text and link stay one flex item. */}
+                  {typeof pt === "string" ? pt : <span><HubCopy {...pt} /></span>}
                 </li>
               ))}
             </ul>

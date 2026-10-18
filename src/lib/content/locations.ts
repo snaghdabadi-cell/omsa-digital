@@ -145,14 +145,129 @@ export const LOCATIONS: Location[] = [
     region: "GCC",
     tagline: "Premium digital systems for Dubai's developers, hospitality groups and clinics.",
     intro: "From Downtown to Palm Jumeirah, Dubai businesses compete for attention in one of the world's most crowded markets, and OMSA builds bilingual platforms designed to perform in it. Dubai's digital market is dense and highly competitive, so the businesses that stand out tend to be genuinely specific about who they serve — a developer, a clinic, a hospitality group — rather than speaking to everyone at once. Because the market spans Arabic and English speakers day to day, search visibility and content built to work naturally in both languages tend to reach a meaningfully wider audience.",
-    services: ["website-design", "seo", "local-seo", "ai-chatbots", "business-automation", "google-analytics"],
+    h1: "Website Design, SEO and AI Search Visibility for Dubai Businesses",
+    metaTitle: "Website Design, SEO & AI Search in Dubai | OMSA",
+    metaDescription:
+      "Bilingual website design, SEO, Local SEO and AI search visibility for Dubai businesses, delivered remotely from Oman and built around how your customers search.",
+    services: ["website-design", "seo", "local-seo", "ai-chatbots", "business-automation", "google-analytics", "ai-search-visibility"],
+    hub: {
+      h2: "How Dubai businesses are found, compared and chosen",
+      intro: [
+        {
+          text: "Being chosen online in Dubai rarely depends on a single channel. Your website, Google Search and Maps, AI assistants and the language a customer searches in all shape whether a business makes the shortlist. The six areas below set out how OMSA approaches each one.",
+        },
+      ],
+      stages: [
+        {
+          label: "01 · Website design",
+          h3: "Website design for a market that compares before it calls",
+          body: {
+            text: "Many Dubai customers compare several providers before making contact, often on a phone. Your website has a short window to show who you serve, why you are credible and what to do next. OMSA designs websites around that moment of decision.",
+            link: { anchor: "designs websites", kind: "service", slug: "website-design" },
+          },
+          points: [
+            "Clear service structure, so visitors quickly find what they came for",
+            "Fast mobile performance, since much of that comparison happens on a phone",
+            "A layout ready for both Arabic and English",
+            "Enquiry paths that suit how your customers prefer to get in touch: WhatsApp, phone or form",
+          ],
+        },
+        {
+          label: "02 · SEO and Local SEO",
+          h3: "SEO and Local SEO for competitive categories",
+          body: {
+            text: "Many Dubai service categories are competitive in search, and broad terms often favour directories, marketplaces and long-established brands. Steady progress in SEO usually comes from precision: pages built around specific services, specific customers and the areas you genuinely serve.",
+            link: { anchor: "SEO", kind: "service", slug: "seo" },
+          },
+          points: [
+            {
+              text: "With a physical location: a complete, accurate Google Business Profile, managed as part of Local SEO",
+              link: { anchor: "Local SEO", kind: "service", slug: "local-seo" },
+            },
+            "Business details that stay consistent across the web",
+            "For service-area businesses: your real coverage, described honestly",
+            "Technical foundations such as indexing, structured data and page speed, supporting both",
+          ],
+        },
+        {
+          label: "03 · AI search",
+          h3: "Being represented accurately in AI search",
+          body: {
+            text: "More customers now ask tools such as ChatGPT, Gemini and Google's AI features to suggest or compare providers. Each tool gathers and presents information in its own way, and answers can vary between tools, between questions and over time. OMSA's AI Search Visibility work starts by measuring how your business currently appears in those answers.",
+            link: { anchor: "AI Search Visibility", kind: "service", slug: "ai-search-visibility" },
+          },
+          points: [
+            "Measurement in English and Arabic before anything is changed",
+            "Clearer, more consistent information about your business, on your website and wherever it is listed",
+            {
+              text: "The approach is explained in our guide to measuring AI search visibility",
+              link: { anchor: "measuring AI search visibility", kind: "post", slug: "how-to-measure-ai-search-visibility-gcc" },
+            },
+            "No one can guarantee placement in an AI answer, but you can improve how clearly and accurately your business is described",
+          ],
+        },
+        {
+          label: "04 · Arabic and English",
+          h3: "Built for Arabic and English search",
+          body: {
+            text: "Dubai customers search in English, in Arabic and often in a mix of both. The same need is frequently phrased differently in each language, so a literal translation rarely matches how people actually search.",
+            link: { anchor: "how people actually search", kind: "post", slug: "bilingual-seo-gcc-arabic-english" },
+          },
+          points: [
+            "Each language planned as its own audience, not a translation of the other",
+            "Properly structured pages for each language",
+            "Correct right-to-left settings for Arabic",
+            "Keyword research carried out separately in each language",
+          ],
+        },
+        {
+          label: "05 · Sectors",
+          h3: "Sectors where this matters most",
+          body: {
+            text: "Our approach in Dubai is shaped by sectors where customers research carefully before getting in touch.",
+          },
+          points: [
+            {
+              text: "Real Estate: launch and project pages designed to qualify buyers, not just collect contact details",
+              link: { anchor: "Real Estate", kind: "industry", slug: "real-estate" },
+            },
+            {
+              text: "Healthcare: visibility for specialism-and-location searches, with the clarity patients look for before booking",
+              link: { anchor: "Healthcare", kind: "industry", slug: "healthcare" },
+            },
+            {
+              text: "Hospitality: search and booking journeys that support direct reservations alongside travel platforms",
+              link: { anchor: "Hospitality", kind: "industry", slug: "hospitality" },
+            },
+            {
+              text: "Professional Services: websites and search visibility that stand up to the careful research corporate buyers do before shortlisting",
+              link: { anchor: "Professional Services", kind: "industry", slug: "professional-services" },
+            },
+          ],
+        },
+        {
+          label: "06 · Working together",
+          h3: "How remote collaboration works",
+          body: {
+            text: "OMSA operates from Oman and works with Dubai businesses remotely. Oman and the UAE share a time zone, so we work within the same business day as your team.",
+          },
+          points: [
+            "A strategy call and a written plan before any work begins",
+            "Reviews and reporting over video calls, phone and WhatsApp",
+            "Shared documents and agreed milestones throughout",
+          ],
+        },
+      ],
+    },
     status: "live",
     relatedCaseStudySlug: "dubai-developer-landing-page",
     faqs: [
-      { q: "Does OMSA work with businesses in Dubai?", a: "Yes. OMSA works with businesses in Dubai on website design, SEO, AI chatbots, business automation and analytics." },
-      { q: "What digital services does OMSA provide for Dubai businesses?", a: "For Dubai, that typically includes website design, SEO and Local SEO, AI chatbots, business automation and Google Analytics — services chosen based on what the business actually needs, not a generic package." },
+      { q: "Can OMSA work with my Dubai business remotely?", a: "Yes. OMSA operates from Oman and works with Dubai businesses remotely. Oman and the UAE share a time zone, so calls, reviews and reporting happen within the same business day, over video, phone and WhatsApp." },
+      { q: "Can OMSA help my business appear in Google Maps results in Dubai?", a: "We can optimise your Google Business Profile, strengthen your local content and keep your business details consistent online. These are the foundations local visibility depends on. A Business Profile must reflect a real address or genuine service area, and no one can guarantee a specific map position." },
+      { q: "Do you build bilingual Arabic and English websites for Dubai businesses?", a: "Yes. We plan Arabic and English as separate audiences, with properly structured pages for each language, a correct right-to-left layout for Arabic, and keyword research carried out in each language." },
+      { q: "What is AI search visibility, and does it matter for a Dubai business?", a: "It describes how your business is represented when customers ask AI tools such as ChatGPT, Gemini or Google's AI features for recommendations. If your customers research before they get in touch, these tools can influence who makes their shortlist. We measure your current visibility first, then work on making the information about your business clearer and more consistent." },
       { q: "Can OMSA provide SEO, website design and AI automation together for a Dubai business?", a: "Yes. These services are usually more effective coordinated as one strategy rather than run separately, and that's how a Dubai engagement is typically scoped." },
-      { q: "Can businesses in Dubai work with OMSA remotely?", a: "Yes. We work with Dubai businesses remotely, through video calls, phone calls and WhatsApp." },
+      { q: "How does a Dubai project start?", a: "With a strategy call about your business, your current website and your goals. A written plan and scope follow before any work begins." },
     ],
   },
   {

@@ -527,7 +527,7 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
       { title: "SMEs and Growing Businesses", body: "Build organic visibility without relying solely on the ongoing cost of paid acquisition." },
       { title: "Established Businesses", body: "Strengthen or rebuild visibility for a site that no longer reflects the business's current position or market." },
       { title: "Professional Service Companies", body: "Turn expertise and credibility into search visibility for the terms your prospective clients actually search." },
-      { title: "Businesses Competing Locally", body: "Compete effectively in Muscat, Dubai and other cities where local visibility drives enquiries." },
+      { title: "Businesses Competing Locally", body: "Compete effectively in Muscat, Dubai and other cities where local visibility drives enquiries.", link: { anchor: "Dubai", link: { kind: "location", city: "dubai" } } },
       { title: "Businesses Expanding Across the GCC", body: "Build a search strategy that can extend into new markets without starting from zero each time." },
       { title: "Sites With Traffic but Few Enquiries", body: "Diagnose why visitors arrive but rarely convert, and rebuild the journey around genuine search intent." },
     ],
@@ -892,7 +892,7 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
         eyebrow: "UAE & Dubai",
         h2: "Local SEO for UAE and Dubai",
         paragraphs: [
-          { text: "Commercial districts in the UAE, particularly in Dubai, tend to be considerably more competitive than equivalent categories in Oman — which usually means visibility needs sharper differentiation and more precise local relevance, not just more content." },
+          { text: "Commercial districts in the UAE, particularly in Dubai, tend to be considerably more competitive than equivalent categories in Oman — which usually means visibility needs sharper differentiation and more precise local relevance, not just more content.", link: { anchor: "Dubai", link: { kind: "location", city: "dubai" } } },
           { text: "That can mean tighter service-area targeting, a more complete Google Business Profile, and location-specific content that genuinely reflects how and where you operate, rather than a broad claim to serve \"the UAE\" without local specificity." },
           { text: "OMSA is based in Oman; where a UAE engagement is scoped, the strategy is built around your actual service area and business presence rather than an assumed local address." },
         ],
