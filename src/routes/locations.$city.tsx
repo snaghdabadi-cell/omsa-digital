@@ -7,6 +7,7 @@ import { getLocation, type Location } from "@/lib/content/locations";
 import { getIndustryByCaseStudySlug } from "@/lib/content/industries";
 import { getService } from "@/lib/services-data";
 import { getCaseStudy } from "@/lib/case-studies-data";
+import { locationLeadSource } from "@/lib/lead-source";
 import { pageMeta, breadcrumbJsonLd, faqJsonLd, SITE_DESCRIPTION } from "@/lib/seo";
 
 // `head()`'s loaderData param can be undefined before the loader resolves,
@@ -43,6 +44,7 @@ export const Route = createFileRoute("/locations/$city")({
       }),
       scripts: [
         { type: "application/ld+json", children: JSON.stringify(breadcrumbJsonLd([
+          { name: "Home", path: "/" },
           { name: "Locations", path: "/locations" },
           { name: loc.city, path: `/locations/${params.city}` },
         ])) },
@@ -58,11 +60,22 @@ export const Route = createFileRoute("/locations/$city")({
   component: LocationPage,
 });
 
+// Lists longer than two full rows can leave one card alone on the last row;
+// that card then spans the row so the grid stays balanced. Lists of six or
+// fewer keep the original layout.
+function lastServiceCardSpan(count: number) {
+  if (count <= 6) return "";
+  const sm = count % 2 === 1 ? "sm:col-span-2" : "";
+  const lg = count % 3 === 1 ? "lg:col-span-3" : sm ? "lg:col-span-1" : "";
+  return [sm, lg].filter(Boolean).join(" ");
+}
+
 function LocationPage() {
   const { loc } = Route.useLoaderData();
   const relatedCaseStudy = loc.relatedCaseStudySlug ? getCaseStudy(loc.relatedCaseStudySlug) : undefined;
   const relatedIndustry = relatedCaseStudy ? getIndustryByCaseStudySlug(relatedCaseStudy.slug) : undefined;
   const h1CityAt = loc.h1 ? loc.h1.indexOf(loc.city) : -1;
+  const contactSource = locationLeadSource(loc.slug);
   return (
     <section className="pt-40 pb-32">
       <Container>
@@ -95,15 +108,16 @@ function LocationPage() {
         <div className="mt-16">
           <h2 className="font-display text-2xl font-bold">Services available in {loc.city}</h2>
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {loc.services.map((slug: string) => {
+            {loc.services.map((slug: string, i: number) => {
               const s = getService(slug);
               if (!s) return null;
+              const span = i === loc.services.length - 1 ? lastServiceCardSpan(loc.services.length) : "";
               return (
                 <Link
                   key={slug}
                   to="/services/$slug"
                   params={{ slug }}
-                  className="card-lift block rounded-2xl border border-border bg-card p-6"
+                  className={`card-lift block rounded-2xl border border-border bg-card p-6${span ? ` ${span}` : ""}`}
                 >
                   <s.icon className="h-5 w-5 text-[color:var(--gold-deep)]" />
                   <div className="mt-4 font-display text-lg font-semibold">{s.name}</div>
@@ -167,7 +181,11 @@ function LocationPage() {
           <p className="mt-3 text-sm text-muted-foreground max-w-xl">
             Book a strategy call and we'll prepare a tailored plan for your market.
           </p>
-          <Link to="/contact" className="btn-gold mt-6 text-sm inline-flex">
+          <Link
+            to="/contact"
+            search={contactSource ? { source: contactSource } : {}}
+            className="btn-gold mt-6 text-sm inline-flex"
+          >
             Book a strategy call <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
