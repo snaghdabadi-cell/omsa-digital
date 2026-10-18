@@ -402,7 +402,7 @@ function Pillars() {
         <div className="mt-16 grid gap-6 lg:grid-cols-3">
           {PILLARS.map((p, i) => (
             <Reveal key={p.title} delay={i * 0.08}>
-              <article className="group relative h-full overflow-hidden rounded-[2rem] border border-border bg-card p-10 transition-all duration-500 hover:-translate-y-1 hover:border-[color:var(--gold)] hover:shadow-luxe">
+              <article className="group relative h-full overflow-hidden rounded-[2rem] border border-border bg-card p-10 max-[362px]:p-8 transition-all duration-500 hover:-translate-y-1 hover:border-[color:var(--gold)] hover:shadow-luxe">
                 <div aria-hidden className="pointer-events-none absolute -top-24 -right-24 h-56 w-56 rounded-full bg-[color:var(--gold)]/0 blur-3xl transition-all duration-700 group-hover:bg-[color:var(--gold)]/15" />
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] uppercase tracking-[0.22em] text-[color:var(--gold-deep)]">
@@ -412,7 +412,7 @@ function Pillars() {
                     <p.icon className="h-5 w-5" />
                   </span>
                 </div>
-                <h3 className="mt-10 font-display text-4xl font-bold tracking-tight">{p.title}</h3>
+                <h3 className="mt-10 font-display text-4xl max-[362px]:text-3xl font-bold tracking-tight">{p.title}</h3>
                 <p className="mt-3 font-display text-lg text-foreground/80 leading-snug">
                   {p.headline}
                 </p>

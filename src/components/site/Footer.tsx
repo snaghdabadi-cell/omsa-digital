@@ -93,7 +93,7 @@ export function Footer() {
                 type="email"
                 required
                 placeholder="Enter your email address"
-                className="flex-1 rounded-full bg-white/5 border border-white/10 px-4 py-3 text-sm placeholder:text-white/40 focus:outline-none focus:border-[color:var(--gold)]"
+                className="w-0 min-w-0 flex-1 rounded-full bg-white/5 border border-white/10 px-4 py-3 text-sm placeholder:text-white/40 focus:outline-none focus:border-[color:var(--gold)]"
               />
               <button className="btn-gold !py-2.5 !px-4 text-sm" type="submit">Subscribe</button>
             </form>

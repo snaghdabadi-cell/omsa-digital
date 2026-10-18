@@ -265,14 +265,14 @@ function ContactCard({
         ? "border-[color:var(--gold)] bg-[color:var(--gold)]/8 hover:bg-[color:var(--gold)]/15"
         : "border-border bg-card hover:border-foreground/30"
     }`}>
-      <span className={`grid h-12 w-12 place-items-center rounded-xl ${
+      <span className={`grid h-12 w-12 shrink-0 place-items-center rounded-xl ${
         accent ? "bg-[color:var(--gold)] text-[color:var(--ink)]" : "bg-primary text-primary-foreground"
       }`}>
         <Icon className="h-5 w-5" />
       </span>
       <div className="min-w-0">
         <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">{label}</div>
-        <div className="mt-1 font-display font-semibold truncate">{value}</div>
+        <div className="mt-1 font-display font-semibold wrap-anywhere">{value}</div>
       </div>
     </div>
   );
