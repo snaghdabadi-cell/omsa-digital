@@ -31,7 +31,7 @@ export const INDUSTRY_NAV_LINKS = [
   { name: "Education", slug: "education" },
 ];
 
-// The 6 Oman/UAE LOCATIONS (both "live" and "soon" status — Salalah/Sohar
+// The 7 Oman/UAE LOCATIONS (both "live" and "soon" status — Salalah/Sohar
 // are "soon" but already followed this precedent before this file existed).
 // Deliberately NOT including Doha (Qatar) or Riyadh (Saudi Arabia): both
 // are also "soon"/noindexed, but promoting them into the site-wide footer
@@ -47,5 +47,6 @@ export const LOCATION_NAV_LINKS = [
   { name: "Sohar", slug: "sohar" },
   { name: "Dubai", slug: "dubai" },
   { name: "Abu Dhabi", slug: "abu-dhabi" },
+  { name: "Al Ain", slug: "al-ain" },
   { name: "Sharjah", slug: "sharjah" },
 ];

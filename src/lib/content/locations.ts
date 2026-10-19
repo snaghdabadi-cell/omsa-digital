@@ -414,6 +414,144 @@ export const LOCATIONS: Location[] = [
     ],
   },
   {
+    slug: "al-ain",
+    city: "Al Ain",
+    country: "UAE",
+    region: "GCC",
+    tagline: "Websites and local search visibility for Al Ain's growing businesses.",
+    intro: "OMSA works remotely from Oman with Al Ain businesses that want to be found by customers in Al Ain itself, not just across the wider emirate. This page is for newer firms building an online presence for the first time, and for established local businesses whose website hasn't kept pace with them. We help with the foundations: a clear website, an accurate local presence in Google, content in Arabic and English, and tracking that shows where enquiries come from.",
+    h1: "Website Design and Local SEO for Businesses in Al Ain",
+    metaTitle: "Website Design & SEO in Al Ain for Growing Businesses | OMSA",
+    metaDescription:
+      "Websites, Local SEO and bilingual search for Al Ain engineering firms, professional practices and training providers. Delivered remotely from Oman.",
+    services: ["website-design", "local-seo", "seo", "technical-seo", "ai-search-visibility", "google-analytics"],
+    hub: {
+      h2: "What it takes to be found in Al Ain specifically",
+      intro: [
+        {
+          text: "Al Ain is a city in its own right, with its own neighbourhoods, customers and local search results. The six areas below are built around being found, understood and contacted there, rather than somewhere in the wider Abu Dhabi emirate.",
+        },
+      ],
+      stages: [
+        {
+          label: "01 · Website design",
+          h3: "A first website, or one that has fallen behind",
+          body: {
+            text: "Some Al Ain businesses are building a website for the first time; others have one that no longer reflects what they do. In both cases, OMSA's website design work starts with what local customers need to see: what you offer, where you are, and how to contact you.",
+            link: { anchor: "website design", kind: "service", slug: "website-design" },
+          },
+          points: [
+            "A clear page for each main service, rather than one page trying to cover everything",
+            "Your location, service area and opening hours stated plainly",
+            "Fast loading on mobile, with call and WhatsApp buttons where they help",
+            {
+              text: "Success measured by enquiries, not just visits; see why more traffic doesn't always mean more business",
+              link: { anchor: "more traffic doesn't always mean more business", kind: "post", slug: "website-traffic-vs-business-growth" },
+            },
+          ],
+        },
+        {
+          label: "02 · Local SEO",
+          h3: "Showing up in Al Ain's local results",
+          body: {
+            text: "Google's local results take into account how relevant a business is, how far it is from the person searching, and how well known it is. For an Al Ain business, that makes an accurate Google Business Profile and consistent local details especially important. Our Local SEO work focuses on those foundations.",
+            link: { anchor: "Local SEO", kind: "service", slug: "local-seo" },
+          },
+          points: [
+            "Where your business is eligible, a Google Business Profile with the right categories, hours and location",
+            "The same business name, address and phone number on your website and every listing",
+            "Service-area settings that reflect where you really work, if you visit customers rather than receive them",
+            {
+              text: "Crawlable, indexable service pages, with deeper issues handled through Technical SEO",
+              link: { anchor: "Technical SEO", kind: "service", slug: "technical-seo" },
+            },
+          ],
+        },
+        {
+          label: "03 · Arabic and English",
+          h3: "Reaching customers in both languages",
+          body: {
+            text: "Your customers in Al Ain may search in Arabic, in English or in both, and the words they use won't always be direct translations of each other. We plan Arabic and English content separately, so each reads naturally and reflects how people actually search, following our guide to bilingual SEO.",
+            link: { anchor: "bilingual SEO", kind: "post", slug: "bilingual-seo-gcc-arabic-english" },
+          },
+          points: [
+            "Arabic service names based on local search terms, not literal translations",
+            "Business details that match exactly across Arabic and English listings",
+            "Separate, properly linked language versions of each key page",
+            "A decision on which content needs both languages first, based on who your customers are",
+          ],
+        },
+        {
+          label: "04 · AI search",
+          h3: "How AI assistants describe local businesses",
+          body: {
+            text: "Some people now ask AI assistants such as ChatGPT, Gemini or Google's AI features for local recommendations. These tools work differently and their answers can change, so nobody can promise a mention. OMSA's AI Search Visibility review checks how your business is described today, in English and Arabic.",
+            link: { anchor: "AI Search Visibility", kind: "service", slug: "ai-search-visibility" },
+          },
+          points: [
+            "Questions tested with Al Ain in them, the way a local customer might ask",
+            "Wrong or missing details, such as an old phone number or address, identified and corrected where you control them",
+            "Clear, consistent information about your services on your own website",
+            {
+              text: "A practical first step, explained in our guide to finding out whether AI search can see your business",
+              link: { anchor: "finding out whether AI search can see your business", kind: "post", slug: "is-your-business-visible-in-ai-search-gcc" },
+            },
+          ],
+        },
+        {
+          label: "05 · Sectors",
+          h3: "Al Ain businesses we're best placed to help",
+          body: {
+            text: "These are the kinds of Al Ain business where we expect a clear website and an accurate local presence to make the most practical difference.",
+          },
+          points: [
+            {
+              text: "Construction: architecture, engineering, interior design and contracting firms, where a website supports project credibility and prequalification checks",
+              link: { anchor: "Construction", kind: "industry", slug: "construction" },
+            },
+            {
+              text: "Professional Services: law firms and accounting and business advisory practices that rely on local reputation and referrals",
+              link: { anchor: "Professional Services", kind: "industry", slug: "professional-services" },
+            },
+            {
+              text: "Education: training centres, tutoring providers and other education businesses whose learners and parents compare options before enrolling",
+              link: { anchor: "Education", kind: "industry", slug: "education" },
+            },
+            {
+              text: "Healthcare: clinics, where patients look for specialty, location and clear practical information",
+              link: { anchor: "Healthcare", kind: "industry", slug: "healthcare" },
+            },
+          ],
+        },
+        {
+          label: "06 · Working together",
+          h3: "Remote delivery, with Oman next door",
+          body: {
+            text: "OMSA operates from Oman and works with Al Ain businesses remotely, by video call, phone and WhatsApp, in the same time zone. If your business also serves customers across the border in Al Buraimi or elsewhere in Oman, we can plan your website and search presence for both markets.",
+          },
+          points: [
+            "A written plan and scope before any work starts",
+            "Priorities set around your budget and what matters most for your business",
+            "Regular updates in plain language",
+            {
+              text: "Enquiry tracking set up from the start, using the approach in our guide to conversion tracking for SMEs",
+              link: { anchor: "conversion tracking for SMEs", kind: "post", slug: "sme-conversion-tracking-google-site-kit" },
+            },
+          ],
+        },
+      ],
+    },
+    status: "live",
+    faqs: [
+      { q: "Can OMSA work with my business in Al Ain?", a: "Yes. OMSA operates from Oman and works with Al Ain businesses remotely, by video call, phone and WhatsApp. Oman and the UAE share a time zone, so we work during your normal business hours." },
+      { q: "We operate in both Abu Dhabi city and Al Ain. Do we need separate listings and pages?", a: "If you have premises customers visit in both places, each eligible location can have its own Google Business Profile and its own location page on your website. If you only operate from one, describe the other as part of your service area rather than creating a listing for an address you don't operate from." },
+      { q: "Can my business appear in Google Maps in Al Ain?", a: "If it's eligible under Google's guidelines. Google Business Profile is for businesses that have in-person contact with customers during stated hours, either at a location customers visit or by travelling to them. Businesses that serve customers at their own locations can usually hide their address and show a service area instead. We review eligibility before setting up or changing a profile." },
+      { q: "We're a new business in Al Ain. Where should we start?", a: "Usually with the basics: a clear website, an eligible Google Business Profile, and a way to track calls and messages. Those foundations make later work, such as more content or SEO, easier to measure. We'll suggest a starting scope based on your budget." },
+      { q: "Do you work with businesses that also serve customers in Oman?", a: "Yes. OMSA operates from Oman, so if your Al Ain business also serves customers in Al Buraimi or elsewhere in Oman, we can plan content and listings for both countries. Each country's listings still need to reflect real locations and service areas." },
+      { q: "Can you guarantee more enquiries or a top ranking in Al Ain?", a: "No. Rankings, AI answers and enquiry volumes depend on factors no agency controls, including competition and how search engines assess your business. We agree what to measure at the start and report on it honestly." },
+    ],
+  },
+  {
     slug: "sharjah",
     city: "Sharjah",
     country: "UAE",
