@@ -275,16 +275,142 @@ export const LOCATIONS: Location[] = [
     city: "Abu Dhabi",
     country: "UAE",
     region: "GCC",
-    tagline: "Considered digital growth for Abu Dhabi's institutional and family businesses.",
-    intro: "OMSA approaches Abu Dhabi work as a long-term commitment, built for brands planning for the next decade, not the next quarter. Institutional and family-owned businesses here are often evaluated on credibility as much as capability, so a website and search presence need to read as considered and established rather than rushed. That same credibility should carry through to how the business is found — SEO, AI chatbots and analytics working together as one digital marketing approach, built for both traditional search and the AI-driven tools institutional buyers increasingly use to research and shortlist a company. Corporate and professional-services organisations in particular benefit from clear, bilingual information that holds up to scrutiny from local and international audiences alike.",
-    services: ["website-design", "seo", "ai-chatbots", "google-analytics"],
+    tagline: "Websites and search visibility for Abu Dhabi's professional firms and clinics.",
+    intro: "OMSA works remotely from Oman with Abu Dhabi law firms, accounting and advisory practices, clinics and other owner-led businesses whose clients check carefully before they get in touch. For these businesses, a website has to do more than look polished. It needs to state services, qualifications and contact details accurately, in Arabic and English, and stay consistent with what search engines, maps and AI assistants show about the business. We build and maintain that foundation, and set up tracking so you can see where enquiries come from.",
+    h1: "Website Design and SEO for Abu Dhabi Professional Firms and Clinics",
+    metaTitle: "Website Design & SEO for Abu Dhabi Firms and Clinics | OMSA",
+    metaDescription:
+      "Websites, SEO and AI search visibility for Abu Dhabi law firms, advisory practices and clinics, in Arabic and English. Delivered remotely from Oman.",
+    services: ["website-design", "seo", "technical-seo", "local-seo", "ai-search-visibility", "google-analytics", "ai-chatbots"],
+    hub: {
+      h2: "How Abu Dhabi clients check a firm or clinic before they get in touch",
+      intro: [
+        {
+          text: "Before contacting a lawyer, an accountant or a clinic, many people look for reassurance: who the practitioners are, what the firm actually handles, whether it is licensed for that work, and how easy it is to reach. The six areas below cover where that checking happens and what OMSA does about each one.",
+        },
+      ],
+      stages: [
+        {
+          label: "01 · Website design",
+          h3: "Websites that answer the questions clients check first",
+          body: {
+            text: "For a professional firm or clinic, the website is often where a referral is verified. OMSA's website design work for Abu Dhabi practices is built around the information people look for at that point, presented clearly in both languages.",
+            link: { anchor: "website design", kind: "service", slug: "website-design" },
+          },
+          points: [
+            "Practice-area or treatment pages that explain what you do and who it is for, without overstating outcomes",
+            "Profiles of partners, practitioners or doctors, with qualifications presented accurately",
+            "Licensing, registration or accreditation details where your profession or regulator requires them",
+            {
+              text: "A redesign plan that protects existing search visibility, as covered in our guide to SEO-safe migrations and redesigns",
+              link: { anchor: "SEO-safe migrations and redesigns", kind: "post", slug: "technical-seo-migrations-redesigns-gcc" },
+            },
+          ],
+        },
+        {
+          label: "02 · Technical SEO and Local SEO",
+          h3: "Search foundations for established practices",
+          body: {
+            text: "Websites that have grown over several years often carry old service pages, duplicated content, slow templates or an Arabic section search engines can't properly read. Technical SEO resolves those issues so the right pages can be found and indexed.",
+            link: { anchor: "Technical SEO", kind: "service", slug: "technical-seo" },
+          },
+          points: [
+            "Crawl and indexing checks, so important practice and service pages are actually in Google's index",
+            {
+              text: "A clear structure for practice areas, specialties or departments, as part of a wider SEO strategy",
+              link: { anchor: "SEO strategy", kind: "service", slug: "seo" },
+            },
+            {
+              text: "Where your practice is eligible, an accurate Google Business Profile for each location clients actually visit, managed as part of Local SEO",
+              link: { anchor: "Local SEO", kind: "service", slug: "local-seo" },
+            },
+            "Consistent names, addresses and phone numbers for every branch or office across your listings",
+          ],
+        },
+        {
+          label: "03 · AI search",
+          h3: "What AI assistants can verify about your firm",
+          body: {
+            text: "People may ask AI assistants such as ChatGPT, Gemini, Copilot or Google's AI features which firms or clinics to consider. These tools differ in how they gather and present information, and their answers vary, so no one can guarantee that a business will be mentioned. OMSA's AI Search Visibility work checks how your practice is currently described, and where that description is incomplete or wrong.",
+            link: { anchor: "AI Search Visibility", kind: "service", slug: "ai-search-visibility" },
+          },
+          points: [
+            "Questions tested in English and Arabic, including ones that combine a service with Abu Dhabi",
+            "Inaccurate or outdated details traced back to their likely sources, such as old listings or directory entries",
+            "Practitioner, service and location information made clear and consistent on your own site",
+            {
+              text: "Background on how discovery is changing, in our article on how customers are finding businesses in 2026",
+              link: { anchor: "how customers are finding businesses in 2026", kind: "post", slug: "ai-search-business-visibility" },
+            },
+          ],
+        },
+        {
+          label: "04 · Arabic and English",
+          h3: "Arabic and English for every audience you serve",
+          body: {
+            text: "A practice may serve Arabic-speaking clients, English-speaking residents and international companies, sometimes for the same service. Each group can describe its need differently, and specialist terms don't always translate directly. We plan both languages as separate content, following our guide to bilingual SEO.",
+            link: { anchor: "bilingual SEO", kind: "post", slug: "bilingual-seo-gcc-arabic-english" },
+          },
+          points: [
+            "Arabic practice-area and treatment names checked against the terms people actually search for",
+            "Legal, financial or medical terminology reviewed with your team before publishing",
+            "Matching names for the firm and its practitioners in both languages",
+            "Language versions properly linked, so search engines can show the right one",
+          ],
+        },
+        {
+          label: "05 · Sectors",
+          h3: "Where this approach fits best in Abu Dhabi",
+          body: {
+            text: "These are the types of business where we expect careful, accurate search visibility to matter most. For clinics, there's more depth in our guide to SEO for clinics in the UAE.",
+            link: { anchor: "SEO for clinics in the UAE", kind: "post", slug: "seo-for-clinics-uae" },
+          },
+          points: [
+            {
+              text: "Professional Services: law firms and legal consultancies, and accounting, tax and advisory practices, where clients verify expertise before making contact",
+              link: { anchor: "Professional Services", kind: "industry", slug: "professional-services" },
+            },
+            {
+              text: "Healthcare: medical, dental and aesthetic clinics, where patients compare specialty, location and insurance acceptance",
+              link: { anchor: "Healthcare", kind: "industry", slug: "healthcare" },
+            },
+            {
+              text: "Construction: engineering consultancies and architecture practices, where a website supports prequalification and tender checks as much as new enquiries",
+              link: { anchor: "Construction", kind: "industry", slug: "construction" },
+            },
+            {
+              text: "Real Estate: property management, brokerage and valuation services, where accurate listings and clearly stated service areas matter more than volume",
+              link: { anchor: "Real Estate", kind: "industry", slug: "real-estate" },
+            },
+          ],
+        },
+        {
+          label: "06 · Working together",
+          h3: "Remote delivery from Oman, on Abu Dhabi time",
+          body: {
+            text: "OMSA operates from Oman and works with Abu Dhabi businesses remotely. Because Oman and the UAE share a time zone, calls and reviews happen during the same working hours as your team.",
+          },
+          points: [
+            "A written scope agreed before work begins, with priorities and responsibilities set out clearly",
+            "Content that touches on regulated topics sent to you for review and sign-off before it goes live",
+            "Reporting over video calls, phone and WhatsApp, focused on enquiries rather than traffic alone",
+            {
+              text: "Tracking that distinguishes calls, forms and WhatsApp messages, using the approach in our guide to GA4 for professional services firms",
+              link: { anchor: "GA4 for professional services firms", kind: "post", slug: "ga4-professional-services-gcc" },
+            },
+          ],
+        },
+      ],
+    },
     status: "live",
     relatedCaseStudySlug: "abu-dhabi-clinic-patient-acquisition",
     faqs: [
-      { q: "Does OMSA work with businesses in Abu Dhabi?", a: "Yes. OMSA works with Abu Dhabi businesses on website design, SEO, AI chatbots and analytics." },
-      { q: "What digital services does OMSA provide for Abu Dhabi businesses?", a: "For Abu Dhabi, that typically includes website design, SEO, AI chatbots and Google Analytics, scoped around the business's actual goals rather than a fixed package." },
-      { q: "Does OMSA provide AI-supported SEO and digital marketing for Abu Dhabi businesses?", a: "Yes. For Abu Dhabi, we combine SEO, AI chatbots and analytics as the core of that work, with digital marketing support added where a business's goals call for it — scoped to help the company be found and evaluated well by both traditional search and the AI-driven tools increasingly used to research a business before making contact." },
-      { q: "Can businesses in Abu Dhabi work with OMSA remotely?", a: "Yes. We work with Abu Dhabi businesses remotely, through video calls, phone calls and WhatsApp." },
+      { q: "Does OMSA work with law firms and clinics in Abu Dhabi?", a: "Yes. OMSA operates from Oman and works with Abu Dhabi businesses remotely. The approach on this page is built for professional firms and clinics in particular: website design, technical and Local SEO, bilingual content and AI search visibility." },
+      { q: "Can a law firm or clinic in Abu Dhabi use Google Business Profile?", a: "Usually, if it meets Google's eligibility guidelines. Google Business Profile is intended for businesses that serve customers in person during stated hours, such as at an office or clinic clients can visit. A registered address alone, a mailing address or a virtual office that isn't staffed during business hours isn't enough. Each location should have its own profile only if it genuinely serves clients there. We check eligibility against Google's current guidelines before making changes." },
+      { q: "Are there rules about how clinics and law firms can market themselves?", a: "Often, yes. Healthcare advertising in the UAE is regulated, and many professions have conduct rules that affect what can be said publicly. We don't give legal or regulatory advice. We write cautiously, avoid promises about outcomes, and ask you to confirm any regulated wording before it's published." },
+      { q: "How do you handle legal and medical terms in Arabic?", a: "We start from the terms people actually search for in Arabic, then review specialist terminology with your team, because a technically correct translation isn't always the term clients use. Arabic and English pages are kept as separate, properly linked versions, so search engines can show the right one." },
+      { q: "Can you make AI assistants recommend our firm?", a: "No one can guarantee that. AI assistants vary in how they gather and present information, and their answers change. What we can do is check how your firm is currently described, correct inaccurate information where you control it, and make your services, practitioners and locations clearer and more consistent online." },
+      { q: "What does a first project usually look like?", a: "We usually start with a review of your current website, your Google Business Profile and how your firm appears in search and AI tools, followed by a written plan. From there we agree priorities, which often begin with fixing inaccurate information and technical issues before any new content is written." },
     ],
   },
   {
