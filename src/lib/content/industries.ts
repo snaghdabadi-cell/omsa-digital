@@ -26,6 +26,9 @@ export type IndustryPage = {
   hub?: ContentHub; // rendered after the outcomes paragraph
   metaTitle?: string; // overrides the default "<name> — AI & Digital Growth Solutions | OMSA"
   metaDescription?: string; // overrides `description` in meta tags only
+  // Optional closing CTA; defaults to "Discuss your project" -> plain /contact.
+  // `source` must satisfy parseLeadSource (lib/lead-source.ts).
+  cta?: { text?: string; label: string; source?: string };
 };
 
 export const INDUSTRY_PAGES: IndustryPage[] = [
@@ -215,24 +218,140 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
   {
     slug: "professional-services",
     name: "Professional Services",
-    tagline: "Professional digital platforms that strengthen your brand and generate opportunities.",
-    description: "Corporate websites, SEO, AI automation, and analytics solutions designed to improve visibility and business growth.",
+    tagline: "SEO, websites and enquiry tracking for accounting, tax, legal, audit and consulting firms in Oman and the UAE.",
+    description: "Clients of professional services firms usually search for a specific need, then check whether the firm behind the result is qualified to handle it. We build the service pages, local visibility and measurement that support that decision.",
+    metaTitle: "Professional Services SEO & Websites in Oman and the UAE | OMSA",
+    metaDescription:
+      "SEO, websites and enquiry tracking for accounting, tax, legal, audit and consulting firms in Oman and the UAE, built around how clients verify expertise.",
     outcomes:
-      "For legal, consulting and other professional-services firms, a website's job is to convert expertise into trust before the first conversation happens. The focus is clear service architecture that helps prospective clients understand exactly what a firm handles, local SEO for the searches that bring in genuinely relevant enquiries, and lead capture designed for how professional buyers actually evaluate a firm — carefully, and usually over more than one visit. Enquiry automation can qualify and route new contacts before they reach a partner's inbox, and analytics shows which pages and channels are actually contributing to real enquiries rather than just traffic.",
-    services: ["website-design", "seo", "technical-seo"],
+      "For accounting, tax, legal, audit and consulting firms, a website's job is to turn expertise into trust before the first conversation happens. Prospective clients usually arrive with a specific need, such as a Corporate Tax registration, a VAT return, a statutory audit, a commercial contract or a market-entry question, and they judge a firm on whether it clearly handles that need, who would handle it and whether its credentials can be checked. The focus is a service architecture that matches those needs, local visibility for the offices a firm actually operates, content written for both English and Arabic searches, and lead capture designed for how professional buyers evaluate a firm: carefully, and usually over more than one visit. Measurement then shows which pages and channels produce relevant enquiries rather than just traffic.",
+    services: ["website-design", "seo", "local-seo", "ai-search-visibility", "technical-seo", "google-analytics"],
+    hub: {
+      h2: "What different professional services firms need from search",
+      intro: [
+        { text: "Professional services buyers rarely search for a \"firm\". They search for a problem, a regulation or a deadline, often with a place attached, and then check whether the firm behind the result is qualified to help. How that plays out differs by type of firm, and so do the places where websites most often fall short." },
+        {
+          text: "For accounting and tax practices in particular, our guide to SEO for accounting firms in the UAE works through Corporate Tax, VAT, audit and e-invoicing service pages in detail.",
+          link: { anchor: "SEO for accounting firms in the UAE", kind: "post", slug: "seo-for-accounting-firms-uae" },
+        },
+      ],
+      stages: [
+        {
+          label: "01 · Accounting & Tax Firms",
+          h3: "Service pages that match the obligation the client is dealing with",
+          body: { text: "Clients of accounting and tax practices usually search for a specific obligation, such as Corporate Tax registration, VAT filing or e-invoicing readiness, rather than for \"accounting services\". A single services page can't answer those questions precisely enough." },
+          points: [
+            "Separate pages for Corporate Tax, VAT, bookkeeping and e-invoicing support, where the firm genuinely provides each",
+            "A clear statement of who each service is for, such as SMEs, free zone companies or groups",
+            "Regulatory references linked to the Ministry of Finance or Federal Tax Authority, with a last-reviewed date",
+            "Arabic pages that use the tax terms clients and official sources actually use, not word-for-word translations",
+          ],
+        },
+        {
+          label: "02 · Legal Services",
+          h3: "Practice areas explained in the client's terms",
+          body: { text: "People looking for a lawyer usually describe a situation, such as an employment dispute, a commercial contract or a company setup, rather than a practice-area name. They also need to know where a firm is able to act for them." },
+          points: [
+            "Practice-area pages that describe the kinds of matters handled, without promising outcomes",
+            "An accurate statement of the jurisdictions and courts the firm works in",
+            "Lawyer profiles with verifiable qualifications, admissions and languages",
+            "Content checked against the advertising and conduct rules of the firm's licensing authority",
+          ],
+        },
+        {
+          label: "03 · Audit & Advisory",
+          h3: "Credentials buyers can verify before they shortlist",
+          body: { text: "Audit and advisory work is often bought by finance teams, boards or investors who shortlist carefully. They look for the registrations an engagement depends on, relevant sector experience and the people who would lead the work." },
+          points: [
+            "Audit services presented alongside the registrations they rely on, stated exactly as registered",
+            "Partner and team profiles that show qualifications and sector focus",
+            "Sector pages only where the firm has real experience to describe",
+            "Key service information kept on indexable pages rather than only in PDFs or gated downloads",
+          ],
+        },
+        {
+          label: "04 · Business Consulting",
+          h3: "Showing a method, not a list of buzzwords",
+          body: { text: "Consulting firms compete on how they think. Generic pages about \"strategy\" and \"transformation\" give a buyer nothing to evaluate; a concrete description of the problems handled and how an engagement runs does." },
+          points: [
+            "Service pages organised around client problems, such as market entry, restructuring or process improvement",
+            "A described engagement process: discovery, deliverables, typical timeline and who is involved",
+            "Articles that answer questions clients actually ask, written or reviewed by the consultants themselves",
+            {
+              text: "Bilingual content for markets where decision-makers search in Arabic as well as English",
+              link: { anchor: "Bilingual content", kind: "post", slug: "bilingual-seo-gcc-arabic-english" },
+            },
+          ],
+        },
+        {
+          label: "05 · Search Visibility & Trust",
+          h3: "Being found, and being consistent wherever you're found",
+          body: {
+            text: "Before contacting a firm, most buyers check it in more than one place: Google Search, Google Maps, directories, LinkedIn and, increasingly, AI assistants. Details that differ between them weaken trust. This is where Local SEO and broader search work meet.",
+            link: { anchor: "Local SEO", kind: "service", slug: "local-seo" },
+          },
+          points: [
+            "An accurate Google Business Profile for each office the firm actually operates",
+            "Firm name, address, licence details and partner names consistent across the website, profiles and directories",
+            {
+              text: "A periodic check of how AI assistants describe the firm, in English and Arabic",
+              link: { anchor: "how AI assistants describe the firm", kind: "service", slug: "ai-search-visibility" },
+            },
+            "No rankings, outcomes or \"best firm\" claims the firm can't substantiate",
+          ],
+        },
+        {
+          label: "06 · Qualified Enquiry Tracking",
+          h3: "Measuring enquiries that fit the firm, not just traffic",
+          body: {
+            text: "A professional services firm needs relevant enquiries, not a high visit count. Measurement should show which pages and channels produce them, without recording confidential details. Our guide to GA4 for professional services firms explains the approach.",
+            link: { anchor: "GA4 for professional services firms", kind: "post", slug: "ga4-professional-services-gcc" },
+          },
+          points: [
+            "Form submissions, calls, WhatsApp clicks and email clicks tracked by landing page",
+            "Enquiry forms that ask about the service, type of entity and timing, so fit can be judged before the first call",
+            "Source information passed into the inbox or CRM, where the firm's systems allow it",
+            {
+              text: "Analytics configured so client names and matter details never reach GA4",
+              link: { anchor: "Analytics configured", kind: "service", slug: "google-analytics" },
+            },
+          ],
+        },
+      ],
+      closing: {
+        text: "OMSA operates from Oman and works with firms across Muscat and the UAE, including Dubai, Abu Dhabi, Sharjah and Al Ain, remotely. Each location page describes how search works in that market.",
+        links: [
+          { anchor: "Muscat", kind: "location", slug: "muscat" },
+          { anchor: "Dubai", kind: "location", slug: "dubai" },
+          { anchor: "Abu Dhabi", kind: "location", slug: "abu-dhabi" },
+          { anchor: "Sharjah", kind: "location", slug: "sharjah" },
+          { anchor: "Al Ain", kind: "location", slug: "al-ain" },
+        ],
+      },
+    },
     challenges: [
-      "A website that lists services but doesn't clearly explain what the firm actually handles",
-      "Enquiries that don't indicate whether a prospective client is a good fit before the first call",
-      "Search visibility that lags behind less-established competitors for relevant searches",
-      "Content that reads as generic rather than demonstrating real expertise",
-      "No clear way to see which pages or channels are producing genuine client enquiries",
+      "A single \"Our Services\" page that lists tax, audit and advisory work without explaining any of it",
+      "Enquiries that don't show whether a prospective client is a good fit before the first call",
+      "Regulatory content that goes out of date when a deadline passes or a rule changes",
+      "Partner credentials and registrations that clients can't easily verify",
+      "Arabic pages translated from English rather than written for Arabic searches",
+      "Office details that differ between the website, Google Business Profile and directories",
+      "No clear way to see which pages or channels produce genuine client enquiries",
     ],
     faqs: [
-      { q: "How long does it take to see results from SEO for a professional-services firm?", a: "Technical and on-page improvements can show movement within a few months; content-led authority and competitive rankings typically build over six to twelve months and continue compounding." },
+      { q: "How long does SEO take for a professional services firm?", a: "There's no fixed timeline. Fixes to technical issues or a Google Business Profile can be reflected relatively quickly once search engines process them, while visibility for competitive service searches usually builds over months. It depends on the firm's starting point, its competition and how much genuinely useful content it can publish. Tracking enquiries along the way shows whether the work is heading in the right direction." },
+      { q: "Should an accounting firm have separate pages for Corporate Tax, VAT and e-invoicing?", a: "Usually, where the firm genuinely provides each service and clients look for them separately. Each page can then explain who the service is for, what the engagement involves and which official requirements it relates to. Thin pages created for every keyword variation are harder to keep accurate and add little for clients." },
       { q: "Can enquiry forms be set up to qualify prospective clients before a call?", a: "Yes — the right qualifying questions can be built into a form or chatbot flow so a partner's time is spent on genuinely relevant enquiries." },
-      { q: "Do you write the service content yourselves or work from what we provide?", a: "Both are possible — it depends on how much existing material accurately reflects the firm's expertise and how much needs to be developed from scratch." },
+      { q: "Do you write the service content yourselves or work from what we provide?", a: "Both are possible, depending on how much existing material accurately reflects the firm's expertise. Either way, anything that states a tax, legal or regulatory position should be reviewed and approved by the firm's own qualified professionals before it's published." },
+      { q: "Do you provide tax, accounting or legal advice?", a: "No. OMSA works on websites, search visibility and measurement. Statements about tax, legal or regulatory requirements on a firm's website should come from, and be approved by, the firm itself." },
       { q: "Is local SEO relevant for a firm that serves clients regionally, not just locally?", a: "It can still matter for firms with a physical office or a specific service area, alongside broader SEO for clients searching beyond that area." },
+      { q: "Can you guarantee our firm will rank on Google or appear in AI answers?", a: "No. Search engines and AI platforms decide what they show, and no one outside them can guarantee a ranking, a citation or a recommendation. What we can do is make accurate information about the firm easier for clients and search systems to find and interpret, then measure whether relevant enquiries improve." },
     ],
+    cta: {
+      text: "A Search Visibility Review looks at how your firm appears in Google Search, Google Maps and AI assistants, in English and Arabic, and where the path from search to enquiry breaks down.",
+      label: "Request a Search Visibility Review",
+      source: "industry-professional-services",
+    },
   },
   {
     slug: "construction",
