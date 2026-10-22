@@ -5,12 +5,18 @@ import { pageMeta, isLeafMatch } from "@/lib/seo";
 
 export const Route = createFileRoute("/authors")({
   head: ({ matches, match }) => {
+    const leaf = isLeafMatch(matches, match);
     const meta = pageMeta({
       title: "Authors — OMSA Digital & AI Studio",
       description: "Meet the strategists, designers and AI specialists behind OMSA Digital & AI Studio.",
       path: "/authors",
+      // With a single editorial author this hub only repeats that author's
+      // profile (/authors/$slug, which stays indexable), so it's kept out of
+      // the index and the sitemap until there's more than one author. Only
+      // applied as the leaf route, so child profile pages aren't affected.
+      noindex: leaf && AUTHORS.length < 2,
     });
-    return isLeafMatch(matches, match) ? meta : { ...meta, links: [] };
+    return leaf ? meta : { ...meta, links: [] };
   },
   component: AuthorsPage,
 });

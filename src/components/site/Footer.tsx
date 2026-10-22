@@ -73,6 +73,7 @@ export function Footer() {
               { label: "Our Work", to: "/portfolio" },
               { label: "Industries", to: "/industries" },
               { label: "Locations", to: "/locations" },
+              { label: "Careers", to: "/careers" },
               { label: "Contact", to: "/contact" },
             ]}
           />

@@ -4,6 +4,7 @@ import { Container, Eyebrow, Heading, Prose, Tag } from "@/components/site/Primi
 import { FaqItem } from "@/components/site/FaqItem";
 import { ContentHubSection } from "@/components/site/ContentHubSection";
 import { getLocation, type Location } from "@/lib/content/locations";
+import type { ServiceSlug } from "@/lib/content/taxonomy";
 import { getIndustryByCaseStudySlug } from "@/lib/content/industries";
 import { getService } from "@/lib/services-data";
 import { getCaseStudy } from "@/lib/case-studies-data";
@@ -121,7 +122,7 @@ function LocationPage() {
                 >
                   <s.icon className="h-5 w-5 text-[color:var(--gold-deep)]" />
                   <div className="mt-4 font-display text-lg font-semibold">{s.name}</div>
-                  <p className="mt-2 text-sm text-muted-foreground">{s.short}</p>
+                  <p className="mt-2 text-sm text-muted-foreground">{loc.serviceCards?.[slug as ServiceSlug] ?? s.short}</p>
                 </Link>
               );
             })}

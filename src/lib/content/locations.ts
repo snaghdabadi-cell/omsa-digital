@@ -24,6 +24,10 @@ export type Location = {
   metaTitle?: string;
   metaDescription?: string; // overrides `tagline` in meta tags only
   hub?: ContentHub; // rendered after the intro
+  // Optional per-city copy for the "Services available in" cards, replacing a
+  // service's shared `short` line where that line would read as generic or
+  // name other cities. Services without an entry keep their shared copy.
+  serviceCards?: Partial<Record<ServiceSlug, string>>;
 };
 
 export const LOCATIONS: Location[] = [
@@ -39,6 +43,9 @@ export const LOCATIONS: Location[] = [
     metaDescription:
       "SEO, local search and AI search visibility for Muscat businesses, in Arabic and English, measured by the enquiries it produces. OMSA operates from Oman.",
     services: ["website-design", "seo", "local-seo", "ai-search-visibility", "ai-chatbots", "google-analytics"],
+    serviceCards: {
+      "local-seo": "Be found when people in Muscat search Google Search and Maps, with one accurate address and area spelling everywhere.",
+    },
     hub: {
       h2: "How Muscat customers find a business, and what turns that into an enquiry",
       intro: [
@@ -150,6 +157,9 @@ export const LOCATIONS: Location[] = [
     metaDescription:
       "Bilingual website design, SEO, Local SEO and AI search visibility for Dubai businesses, delivered remotely from Oman and built around how your customers search.",
     services: ["website-design", "seo", "local-seo", "ai-chatbots", "business-automation", "google-analytics", "ai-search-visibility"],
+    serviceCards: {
+      "local-seo": "Local visibility in Dubai's competitive categories, built on an accurate Business Profile and the areas you genuinely serve.",
+    },
     hub: {
       h2: "How Dubai businesses are found, compared and chosen",
       intro: [
@@ -282,6 +292,9 @@ export const LOCATIONS: Location[] = [
     metaDescription:
       "Websites, SEO and AI search visibility for Abu Dhabi law firms, advisory practices and clinics, in Arabic and English. Delivered remotely from Oman.",
     services: ["website-design", "seo", "technical-seo", "local-seo", "ai-search-visibility", "google-analytics", "ai-chatbots"],
+    serviceCards: {
+      "local-seo": "An accurate Google Business Profile for each eligible Abu Dhabi office or clinic, with matching details across listings.",
+    },
     hub: {
       h2: "How Abu Dhabi clients check a firm or clinic before they get in touch",
       intro: [
@@ -425,6 +438,9 @@ export const LOCATIONS: Location[] = [
     metaDescription:
       "Websites, Local SEO and bilingual search for Al Ain engineering firms, professional practices and training providers. Delivered remotely from Oman.",
     services: ["website-design", "local-seo", "seo", "technical-seo", "ai-search-visibility", "google-analytics"],
+    serviceCards: {
+      "local-seo": "Be found in Al Ain's own local results, not just across the wider Abu Dhabi emirate.",
+    },
     hub: {
       h2: "What it takes to be found in Al Ain specifically",
       intro: [
@@ -563,6 +579,9 @@ export const LOCATIONS: Location[] = [
     metaDescription:
       "Websites, SEO and Local SEO for Sharjah SMEs and professional firms, in Arabic and English and focused on real enquiries. Delivered remotely from Oman.",
     services: ["website-design", "seo", "local-seo", "ai-search-visibility", "google-analytics", "business-automation"],
+    serviceCards: {
+      "local-seo": "A complete, consistent local presence for Sharjah businesses, matched to how and where you really operate.",
+    },
     hub: {
       h2: "What a Sharjah business needs to be found, trusted and contacted",
       intro: [
