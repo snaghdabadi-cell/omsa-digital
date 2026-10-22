@@ -1,31 +1,38 @@
 import { Link } from "@tanstack/react-router";
-import type { ContentHub, HubText } from "@/lib/content/hub";
+import type { ReactNode } from "react";
+import type { ContentHub, HubLink, HubText } from "@/lib/content/hub";
 
-// Renders hub copy with its optional single internal link over an exact
-// substring, resolved through the router's typed routes.
-function HubCopy({ text, link }: HubText) {
-  const idx = link ? text.indexOf(link.anchor) : -1;
-  if (!link || idx === -1) return <>{text}</>;
+function HubAnchor({ link }: { link: HubLink }) {
   const className = "link-underline font-medium text-[color:var(--gold-deep)]";
-  return (
-    <>
-      {text.slice(0, idx)}
-      {link.kind === "service" ? (
-        <Link to="/services/$slug" params={{ slug: link.slug }} className={className}>
-          {link.anchor}
-        </Link>
-      ) : link.kind === "industry" ? (
-        <Link to="/industries/$slug" params={{ slug: link.slug }} className={className}>
-          {link.anchor}
-        </Link>
-      ) : (
-        <Link to="/blog/$slug" params={{ slug: link.slug }} className={className}>
-          {link.anchor}
-        </Link>
-      )}
-      {text.slice(idx + link.anchor.length)}
-    </>
-  );
+  switch (link.kind) {
+    case "service":
+      return <Link to="/services/$slug" params={{ slug: link.slug }} className={className}>{link.anchor}</Link>;
+    case "industry":
+      return <Link to="/industries/$slug" params={{ slug: link.slug }} className={className}>{link.anchor}</Link>;
+    case "location":
+      return <Link to="/locations/$city" params={{ city: link.slug }} className={className}>{link.anchor}</Link>;
+    case "post":
+      return <Link to="/blog/$slug" params={{ slug: link.slug }} className={className}>{link.anchor}</Link>;
+  }
+}
+
+// Renders hub copy with its internal links over exact substrings, resolved
+// through the router's typed routes. Anchors that aren't found are skipped.
+function HubCopy({ text, link, links }: HubText) {
+  const placed = (link ? [link] : (links ?? []))
+    .map((l) => ({ l, idx: text.indexOf(l.anchor) }))
+    .filter((p) => p.idx !== -1)
+    .sort((a, b) => a.idx - b.idx);
+  if (placed.length === 0) return <>{text}</>;
+  const out: ReactNode[] = [];
+  let cursor = 0;
+  for (const { l, idx } of placed) {
+    if (idx < cursor) continue; // overlapping anchor
+    out.push(text.slice(cursor, idx), <HubAnchor key={idx} link={l} />);
+    cursor = idx + l.anchor.length;
+  }
+  out.push(text.slice(cursor));
+  return <>{out}</>;
 }
 
 // Journey-stage hub shared by industry and location pages.

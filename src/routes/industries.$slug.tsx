@@ -175,8 +175,13 @@ function IndustryPage() {
         )}
 
         <div className="mt-16">
-          <Link to="/contact" className="btn-gold inline-flex text-sm">
-            Discuss your project <ArrowRight className="h-4 w-4" />
+          {ind.cta?.text && <Prose className="mb-6 max-w-2xl">{ind.cta.text}</Prose>}
+          <Link
+            to="/contact"
+            search={ind.cta?.source ? { source: ind.cta.source } : {}}
+            className="btn-gold inline-flex text-sm"
+          >
+            {ind.cta?.label ?? "Discuss your project"} <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </Container>

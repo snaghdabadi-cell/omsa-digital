@@ -38,7 +38,8 @@ export type BlogContentLink =
   // category" cards already do.
   | { kind: "post"; slug: string }
   // The /contact page, for a closing call to action inside body copy.
-  | { kind: "contact" };
+  // `source` is an optional lead-source tag (see lib/lead-source.ts).
+  | { kind: "contact"; source?: string };
 
 // Attaches a BlogContentLink to one exact substring ("anchor") of a
 // paragraph. Optional — most paragraphs are plain strings; only the ones
@@ -7578,6 +7579,708 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         q: "Can clinics use patient reviews and before-and-after photos online?",
         a: "Only within the rules set by the relevant health authority, and with the patient's written consent. In Dubai, the DHA's standards for medical advertising on social media set conditions for before-and-after images and ban exaggerated claims. Check the current requirements and have clinical marketing content approved by the clinic's medical director or compliance lead.",
+      },
+    ],
+  },
+  {
+    slug: "seo-for-accounting-firms-uae",
+    title: "SEO for Accounting Firms in the UAE: Building Better Tax, Audit & E-Invoicing Service Pages",
+    excerpt:
+      "UAE businesses rarely search for “an accounting firm”. They search for the obligation in front of them, such as Corporate Tax, VAT, an audit or e-invoicing, and then check whether the firm can be trusted with it. This guide shows how accounting firms can build service pages that match those searches.",
+    metaTitle: "SEO for Accounting Firms in the UAE: Tax, Audit & E-Invoicing",
+    metaDescription:
+      "How UAE clients search for Corporate Tax, VAT, audit and e-invoicing help, and how accounting firms can build service pages that are found and trusted.",
+    category: "SEO",
+    date: "2026-10-22",
+    readMinutes: 17,
+    image: workCorporate,
+    imageAlt: "Glass-fronted office towers against a pale sky in a commercial business district.",
+    imageWidth: 1200,
+    imageHeight: 900,
+    inLanguage: "en",
+    relatedServices: ["seo", "local-seo", "ai-search-visibility", "google-analytics"],
+    relatedIndustrySlugs: ["professional-services"],
+    relatedPostSlugs: [
+      "ga4-professional-services-gcc",
+      "bilingual-seo-gcc-arabic-english",
+      "is-your-business-visible-in-ai-search-gcc",
+    ],
+    intro: [
+      "The finance manager of a growing trading company in Dubai has three things on their list: the Corporate Tax return, a VAT question they can't resolve internally, and a note from the auditors about getting ready for e-invoicing. They don't search for “accounting firm Dubai”. They search for each problem, open a few results, and keep the firms whose pages clearly explain how they handle it.",
+      "That is the gap this guide addresses. Many accounting and tax firms in the UAE do excellent work but describe it on a single “Our Services” page that lists everything and explains nothing. Clients searching for a specific obligation, and search systems trying to understand what a firm does, find very little to work with.",
+      "This guide is written for accounting firm owners, tax advisers and the people who market professional services firms in the UAE. It covers how clients search, how to structure Corporate Tax, VAT, audit, bookkeeping and e-invoicing pages, and how to make those pages trustworthy, bilingual, ready for AI-assisted search and measurable.",
+      "**A note on sources and scope:** this article is about websites and search, not tax or legal advice. Where we refer to UAE tax rules or the e-invoicing programme, we link to the Ministry of Finance or the Federal Tax Authority. Requirements and dates change, so check the official source before relying on any of them. The search queries shown are illustrative examples, not measured search-volume data.",
+    ],
+    body: [
+      {
+        h2: "How businesses search for accounting services",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** Most searches start from an obligation or a problem, not from the word “accountant”. Clients then narrow by type of business, location and language, and check whether the firm is qualified before they get in touch.",
+          },
+          {
+            type: "p",
+            content: "Typical patterns look like this (illustrative examples, not search-volume data):",
+          },
+          {
+            type: "ul",
+            items: [
+              "“corporate tax registration Dubai”",
+              "“VAT return filing services Sharjah”",
+              "“e-invoicing readiness UAE”",
+              "“audit firm Abu Dhabi free zone company”",
+              "“bookkeeping for small business Dubai”",
+              "“tax agent UAE corporate tax”",
+            ],
+          },
+          { type: "p", content: "Behind most of those searches sit the same four questions:" },
+          {
+            type: "ol",
+            items: [
+              "**What do I need?** The obligation, deadline or problem.",
+              "**Does this firm handle it for a business like mine?** Mainland or free zone, SME or group, the sector.",
+              "**Can I trust them with it?** Qualifications, registrations, named people, how clearly they explain the subject.",
+              "**How do I start?** Who to contact, what to send and what happens next.",
+            ],
+          },
+          {
+            type: "p",
+            content: {
+              text: "Tax and finance also fall into what Google calls “Your Money or Your Life” topics: subjects that could significantly affect people's financial stability. Google's guidance on helpful content says its systems give even more weight to content showing strong experience, expertise, authoritativeness and trustworthiness on topics like these. For an accounting firm, that makes accuracy and verifiable credentials part of search visibility, not only part of client service.",
+              link: {
+                anchor: "Google's guidance on helpful content",
+                link: { kind: "external", href: "https://developers.google.com/search/docs/fundamentals/creating-helpful-content" },
+              },
+            },
+          },
+        ],
+      },
+      {
+        h2: "Why generic service pages underperform",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** One page that lists every service can't answer any single question well. It gives search engines no clear match for specific searches, gives clients no reason to trust the firm with their specific problem, and gives the firm no way to measure which service produces enquiries.",
+          },
+          { type: "p", content: "The typical “Our Services” page has a heading, a short introduction and a grid of service names with one or two sentences each. It falls short in predictable ways:" },
+          {
+            type: "ul",
+            items: [
+              "**No match for specific intent.** A search for VAT return filing lands on a page that mentions VAT in one sentence among many.",
+              "**No audience.** The page doesn't say whether a service suits a start-up, a free zone company or a group with several entities.",
+              "**No substance to evaluate.** There's nothing about what the engagement involves, what the client needs to provide or who would handle it.",
+              "**No room for official references.** Regulatory context has nowhere to live, so it either goes missing or gets crammed in and goes out of date.",
+              "**Nothing to link to.** A Google Business Profile, an article or a partner profile can't point to a page about the specific service.",
+              "**Nothing to measure.** Every enquiry comes from the same URL, so the firm can't see which service clients were interested in.",
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "None of this means a firm needs dozens of pages. It means each service that clients genuinely look for, and that the firm genuinely provides, deserves a page that answers the questions that service raises.",
+          },
+        ],
+      },
+      {
+        h2: "Example: turning an “Our Services” page into a service architecture",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** Keep a short overview page, give each main service its own page built around the client's question, and connect related services with links that follow the client's next decision.",
+          },
+          {
+            type: "p",
+            content:
+              "This is a hypothetical, educational example. It doesn't describe a specific firm, and the page names are illustrations rather than a template every firm should copy.",
+          },
+          { type: "h3", text: "Before: one page doing every job" },
+          {
+            type: "p",
+            content:
+              "A mid-sized firm in Dubai has a single `/services/` page. It lists Accounting, Bookkeeping, VAT, Corporate Tax, Audit, Advisory and E-Invoicing, each with a two-sentence description such as “We provide comprehensive VAT services tailored to your business needs.” Every service ends with the same “Contact us” button. Nothing explains who each service is for, what it involves or who would handle it.",
+          },
+          { type: "h3", text: "After: one page per client question" },
+          {
+            type: "table",
+            table: {
+              label: "Example service architecture for a UAE accounting firm",
+              head: ["Page", "Main client question", "What the page covers", "Natural next step"],
+              rows: [
+                ["`/services/`", "What does this firm do, and where do I start?", "Short summaries of each service, each linking to its own page; who the firm typically works with", "The relevant service page"],
+                ["`/services/corporate-tax/`", "Can this firm handle our Corporate Tax registration and return?", "Who the service suits (mainland, free zone, groups), what the engagement involves, links to Ministry of Finance and FTA sources, the people responsible", "Enquiry form with entity type and financial year-end"],
+                ["`/services/vat/`", "Do we need to register for VAT, and can they file our returns?", "Registration, return preparation and filing, related services the firm offers, thresholds linked to the FTA with a review date", "Enquiry form; link to bookkeeping"],
+                ["`/services/e-invoicing-readiness/`", "What do we need to do for e-invoicing, and by when?", "What e-invoicing means in the UAE, which businesses are affected, the firm's role compared with an Accredited Service Provider, a dated timeline linked to the Ministry of Finance", "Readiness consultation; link to VAT"],
+                ["`/services/audit/`", "Can this firm audit our accounts, and is it registered to do so?", "Types of audit offered, registrations stated exactly as held, sectors, the audit process and what the client provides", "Request a proposal"],
+                ["`/services/bookkeeping/`", "Can they keep our books every month?", "Scope, frequency, accounting software supported, how the work feeds VAT and Corporate Tax compliance", "Enquiry form; link to VAT and Corporate Tax"],
+                ["`/team/` profiles", "Who would actually handle our work?", "Partners and managers with verifiable qualifications, registrations, languages and services led", "The service pages each person leads"],
+                ["`/contact/dubai/` office page", "Where are they, and how do I reach them?", "Address, map, hours, phone and WhatsApp, matching the Google Business Profile", "Call, message or visit"],
+              ],
+            },
+          },
+          {
+            type: "p",
+            content:
+              "The value is in the connections. The VAT page links to e-invoicing because the two are closely related in practice. Bookkeeping links to VAT and Corporate Tax because clean books feed both. Each service page names the people responsible, and each profile links back to the services that person leads. The overview page stops trying to sell everything and becomes a clear route to the right page.",
+          },
+          {
+            type: "p",
+            content:
+              "The enquiry form changes too. Instead of a single generic form, each service page passes the service name with the enquiry and asks one or two qualifying questions, such as the type of entity or the financial year-end. That helps the firm respond properly, and it makes each page's enquiries measurable.",
+          },
+        ],
+      },
+      {
+        h2: "Corporate Tax advisory pages",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** A Corporate Tax page should explain who the firm helps, what the engagement covers and who handles it, and link to official sources for the rules rather than restating them in detail.",
+          },
+          {
+            type: "p",
+            content: {
+              text: "UAE Corporate Tax is set out in Federal Decree-Law No. 47 of 2022 on the Taxation of Corporations and Businesses, which the Ministry of Finance says applies to financial years beginning on or after 1 June 2023. Since then, clients' questions have shifted from “what is Corporate Tax?” to practical ones: registration, record-keeping, return preparation and how particular rules apply to their structure.",
+              link: {
+                anchor: "the Ministry of Finance says",
+                link: { kind: "external", href: "https://mof.gov.ae/en/public-finance/tax/corporate-tax/" },
+              },
+            },
+          },
+          { type: "p", content: "A useful Corporate Tax page typically covers:" },
+          {
+            type: "ul",
+            items: [
+              "the services the firm actually provides, such as registration, return preparation or advisory work",
+              "the businesses it suits, for example mainland companies, free zone entities or groups, stated only where the firm has that experience",
+              "what the client needs to provide and what the process looks like",
+              "who leads the work, linked to their profile",
+              "links to the Ministry of Finance and Federal Tax Authority for the rules themselves",
+              "a “last reviewed” date that reflects a real review",
+            ],
+          },
+          {
+            type: "p",
+            content: {
+              text: "If the firm's professionals are registered tax agents with the Federal Tax Authority, say so accurately and in a way a client can check. The FTA runs its own tax agent registration process, and a registration stated on the website should match what the FTA holds.",
+              link: {
+                anchor: "tax agent registration process",
+                link: { kind: "external", href: "https://tax.gov.ae/en/services/registration.of.tax.agents.aspx" },
+              },
+            },
+          },
+          {
+            type: "p",
+            content:
+              "Avoid promises about tax outcomes, such as savings or a lower bill. They can't be guaranteed, they undermine trust on a financial topic, and they may conflict with professional obligations.",
+          },
+        ],
+      },
+      {
+        h2: "VAT registration and filing pages",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** VAT searches are usually concrete: whether to register, how to file and what to do when something has gone wrong. Separate the services clearly, and treat any threshold or deadline on the page as a fact to source and review.",
+          },
+          {
+            type: "p",
+            content: {
+              text: "For example, the Federal Tax Authority states that the mandatory VAT registration threshold is AED 375,000 and the voluntary threshold is AED 187,500. A page that mentions those figures should link to the FTA's VAT registration page and be reviewed when the rules change, rather than leaving an unsourced number that may quietly go out of date.",
+              link: {
+                anchor: "the Federal Tax Authority states",
+                link: { kind: "external", href: "https://tax.gov.ae/en/taxes/vat/vat.topics/registration.for.vat.aspx" },
+              },
+            },
+          },
+          { type: "p", content: "A VAT page earns its place when it:" },
+          {
+            type: "ul",
+            items: [
+              "separates registration, return preparation and filing, and any other VAT services the firm offers, so each client recognises their situation",
+              "explains what the firm needs from the client and when",
+              "connects VAT to bookkeeping, because accurate records make returns easier to prepare",
+              "links to the e-invoicing page, because e-invoices are reported to the FTA and the two topics overlap in practice",
+              "uses the same terms as the FTA, in English and in Arabic",
+            ],
+          },
+        ],
+      },
+      {
+        h2: "Audit and bookkeeping pages",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** Audit pages are judged on registrations and people; bookkeeping pages are judged on scope and reliability. They serve different buyers and deserve different pages.",
+          },
+          { type: "h3", text: "Audit" },
+          {
+            type: "p",
+            content: {
+              text: "Audit is bought by finance teams, boards and investors who check credentials carefully. In the UAE, the Ministry of Economy and Tourism registers and licenses auditors and audit offices. Some free zone authorities also keep their own lists of approved auditors. An audit page should state the registrations the firm holds, exactly as registered, and avoid implying approvals it doesn't have.",
+              link: {
+                anchor: "registers and licenses auditors and audit offices",
+                link: { kind: "external", href: "https://www.moet.gov.ae/en/w/auditing-accounts-services-beta-version" },
+              },
+            },
+          },
+          {
+            type: "ul",
+            items: [
+              "the types of audit and assurance work the firm performs",
+              "the registrations and approvals the firm holds, stated precisely",
+              "sectors where the team has real experience",
+              "how the audit runs, what the client provides and typical timing",
+              "the partner or manager responsible, linked to their profile",
+            ],
+          },
+          { type: "h3", text: "Bookkeeping" },
+          {
+            type: "p",
+            content:
+              "Bookkeeping clients are often small businesses looking for an ongoing arrangement. They want to know what is included each month, which accounting software the firm works with, how they will send documents and how the work supports VAT and Corporate Tax compliance. Clear answers to those practical questions do more for this page than a description of the firm's values.",
+          },
+        ],
+      },
+      {
+        h2: "E-invoicing readiness pages",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** E-invoicing is a timely subject with fixed dates, but a page about it should be built to stay useful after those dates pass. Explain what e-invoicing is, who it affects and how the firm helps, and keep the timeline in one dated, sourced section that is easy to update.",
+          },
+          { type: "h3", text: "What the Ministry of Finance says" },
+          {
+            type: "p",
+            content: {
+              text: "The Ministry of Finance's eInvoicing portal states that, at this time, it is the only official source of information about the introduction of e-invoicing in the UAE. According to the Ministry's programme materials, an eInvoice is an invoice issued, transmitted and received in a structured data format that allows automatic processing. PDFs, Word documents, scanned paper and images of invoices are not eInvoices.",
+              link: {
+                anchor: "eInvoicing portal",
+                link: { kind: "external", href: "https://mof.gov.ae/einvoicing/" },
+              },
+            },
+          },
+          {
+            type: "p",
+            content:
+              "The UAE has chosen what the Ministry calls a Decentralized Continuous Transaction Control and Exchange (DCTCE) model, also described as a “5-corner” model. Businesses exchange eInvoices through Accredited Service Providers over the Peppol network, using the PINT AE specification, and invoice data is reported to the Federal Tax Authority. The Ministry's materials describe B2B and B2G e-invoicing as mandatory, introduced in phases.",
+          },
+          { type: "h3", text: "The published timeline, as at October 2026" },
+          {
+            type: "p",
+            content:
+              "This is the phased timeline shown in the Ministry of Finance's October 2026 programme materials. It is reproduced here for context only. Check the Ministry's portal for the current position before acting on any date.",
+          },
+          {
+            type: "table",
+            table: {
+              label: "UAE e-invoicing implementation timeline published by the Ministry of Finance, as at October 2026",
+              head: ["Group", "Appoint an Accredited Service Provider by", "Implement e-invoicing by"],
+              rows: [
+                ["Voluntary adopters and pilot participants", "Not applicable", "Voluntary exchange and reporting, and the pilot phase, opened in July 2026"],
+                ["Businesses with revenue of AED 50 million or more", "30 October 2026", "1 January 2027"],
+                ["Businesses with revenue below AED 50 million", "31 March 2027", "1 July 2027"],
+                ["Government entities", "31 March 2027", "1 October 2027"],
+              ],
+            },
+          },
+          {
+            type: "p",
+            content: {
+              text: "Two details are worth knowing. The deadline for larger businesses to appoint an Accredited Service Provider was moved from 31 July 2026 to 30 October 2026 by Ministerial Decision No. 66 of 2026, while the 1 January 2027 implementation date was unchanged. And the Ministry's materials say revenue is measured using the latest financial statements, with newly established companies using projected revenue for the current financial year.",
+              link: {
+                anchor: "Ministerial Decision No. 66 of 2026",
+                link: { kind: "external", href: "https://mof.gov.ae/wp-content/uploads/2026/05/Ministerial-Resolution-No.-66-of-2026-Amending-Certain-Provisions-of-Ministerial-Resolution-No.-244-of-2025-Regarding-the-Implementation-of-the-Electronic-Invoicing-System-En-20260514.pdf" },
+              },
+            },
+          },
+          { type: "h3", text: "Building a page that outlasts the deadlines" },
+          { type: "p", content: "Deadline-led pages lose their value the day after the deadline. A more durable structure keeps the evergreen explanation separate from the dates:" },
+          {
+            type: "ul",
+            items: [
+              "**What e-invoicing means in the UAE**, in plain language, linked to the Ministry of Finance.",
+              "**Who is affected**, framed by type of business rather than by a single date.",
+              "**What readiness involves**, such as invoice data quality, accounting or ERP system changes, choosing an Accredited Service Provider and internal processes.",
+              "**How the firm helps, and where its role ends.** An accounting firm is not an Accredited Service Provider unless it has been accredited, and the page shouldn't imply otherwise. The Ministry publishes information about accredited providers.",
+              "**A dated timeline section** with a “last reviewed” date, updated in place when the rules change.",
+            ],
+          },
+          {
+            type: "p",
+            content:
+              "Update the same URL as the programme moves on, rather than publishing a new page for every phase. Short news-style posts can cover specific announcements and link back to the main page, which keeps the main page's history and links in one place.",
+          },
+        ],
+      },
+      {
+        h2: "Local SEO and Google Business Profile",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** For searches with a place in them, a firm's Google Business Profile is often the first thing a client sees. Each real office needs an accurate profile, and the details should match the website exactly.",
+          },
+          {
+            type: "p",
+            content: {
+              text: "Google says local results are mainly based on relevance, distance and popularity. A firm can't change where a client is searching from, but it can make each profile clearly relevant to the services it provides and keep the information accurate:",
+              link: {
+                anchor: "local results are mainly based on relevance, distance and popularity",
+                link: { kind: "external", href: "https://support.google.com/business/answer/7091" },
+              },
+            },
+          },
+          {
+            type: "ul",
+            items: [
+              "the firm's real-world name, without added keywords",
+              "a primary category that describes the business accurately",
+              "the correct address, phone number, hours and map pin for each office",
+              "services that match the service pages on the website",
+              "a website link that goes to the relevant office or service page",
+              "review responses that never confirm someone is a client or discuss their affairs",
+            ],
+          },
+          {
+            type: "p",
+            content: {
+              text: "Google's guidelines for representing a business ask for the business name as it is used in the real world. Adding phrases such as “VAT & Corporate Tax Experts Dubai” to the profile name breaks those guidelines and can lead to the profile being suspended.",
+              link: {
+                anchor: "Google's guidelines for representing a business",
+                link: { kind: "external", href: "https://support.google.com/business/answer/3038177" },
+              },
+            },
+          },
+          {
+            type: "p",
+            content: {
+              text: "Create location pages only for places where the firm genuinely has an office or serves clients, and give each one information specific to that place. This is what our Local SEO work covers, and we've written about keeping several offices consistent in our guide to multi-location local SEO.",
+              links: [
+                { anchor: "Local SEO", link: { kind: "service", slug: "local-seo" } },
+                { anchor: "multi-location local SEO", link: { kind: "post", slug: "local-seo-multi-location-gcc" } },
+              ],
+            },
+          },
+          {
+            type: "p",
+            content: {
+              text: "Local search also differs from one emirate to the next. Our pages on Dubai, Abu Dhabi, Sharjah and Al Ain describe how businesses are found in each market.",
+              links: [
+                { anchor: "Dubai", link: { kind: "location", city: "dubai" } },
+                { anchor: "Abu Dhabi", link: { kind: "location", city: "abu-dhabi" } },
+                { anchor: "Sharjah", link: { kind: "location", city: "sharjah" } },
+                { anchor: "Al Ain", link: { kind: "location", city: "al-ain" } },
+              ],
+            },
+          },
+        ],
+      },
+      {
+        h2: "Professional credentials and trust",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** Clients trust what they can check. Name the people, state qualifications and registrations exactly, date regulatory content, and leave out claims the firm can't support.",
+          },
+          {
+            type: "ul",
+            items: [
+              "Named partners and managers, with qualifications and memberships they actually hold",
+              "Registrations, such as FTA tax agent or Ministry of Economy and Tourism auditor registration, stated exactly as held",
+              "Licence details and the legal name of the firm, consistent across the website and profiles",
+              "Regulatory content reviewed by a qualified professional, with a review date that reflects a real review",
+              "No “best firm”, guaranteed outcomes or unverifiable statistics",
+              "Client names, logos and testimonials used only with clear permission, and never in a way that discloses a client's affairs",
+            ],
+          },
+          {
+            type: "p",
+            content: {
+              text: "If AI tools help draft tax or accounting content, review becomes more important, not less. A wrong threshold, date or rule on a firm's website can mislead a client and be repeated far beyond the original page. We've covered why human review matters in our article on Google's guidance about AI-generated content.",
+              link: {
+                anchor: "why human review matters",
+                link: { kind: "post", slug: "google-ai-content-human-review-fact-checking" },
+              },
+            },
+          },
+        ],
+      },
+      {
+        h2: "Arabic and English search",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** Many UAE decision-makers search in Arabic, English or both. Arabic pages work best when they use the terms clients and official sources actually use, with the same facts as the English pages.",
+          },
+          {
+            type: "p",
+            content:
+              "Tax terminology helps here, because official Arabic terms are well established. The Federal Tax Authority and Ministry of Finance use terms such as {{ar:ضريبة الشركات}} (Corporate Tax), {{ar:ضريبة القيمة المضافة}} (VAT) and {{ar:الفوترة الإلكترونية}} (e-invoicing), and clients often search with them directly. Other common service terms include {{ar:تدقيق الحسابات}} (auditing), {{ar:مسك الدفاتر}} (bookkeeping) and {{ar:وكيل ضريبي}} (tax agent).",
+          },
+          {
+            type: "p",
+            content:
+              "Searches also combine those terms with a place, such as {{ar:مكتب محاسبة في دبي}} (an accounting office in Dubai). As with the English examples, these are illustrations of phrasing, not search-volume data.",
+          },
+          {
+            type: "p",
+            content: {
+              text: "Consistency matters as much as wording. Partner names, the firm's legal name, registrations and office details should clearly match between the Arabic and English versions. We cover the wider approach in our guide to bilingual SEO in the GCC.",
+              link: { anchor: "bilingual SEO in the GCC", link: { kind: "post", slug: "bilingual-seo-gcc-arabic-english" } },
+            },
+          },
+        ],
+      },
+      {
+        h2: "AI search readiness",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** There is no special trick for AI search. Google says no additional requirements or special optimisations are needed for its AI features. Clear, accurate, well-structured pages are what help both traditional and AI-assisted search represent a firm correctly.",
+          },
+          {
+            type: "p",
+            content: {
+              text: "Google's guidance on AI features states that there are no additional requirements to appear in AI Overviews or AI Mode, that no new machine-readable files or special markup are needed, and that structured data should match the visible text on the page.",
+              link: {
+                anchor: "Google's guidance on AI features",
+                link: { kind: "external", href: "https://developers.google.com/search/docs/appearance/ai-features" },
+              },
+            },
+          },
+          { type: "p", content: "In practice, the work that helps is the same work this guide has already described:" },
+          {
+            type: "ul",
+            items: [
+              "pages that answer one question clearly, with the direct answer near the top",
+              "consistent facts about the firm, its people, offices and services across the website and third-party profiles",
+              "accurate business terminology, in English and Arabic",
+              "sources linked for regulatory statements",
+              "structured data, such as Organization or schema.org's AccountingService type, used only to restate information that is already visible and accurate",
+            ],
+          },
+          {
+            type: "p",
+            content: {
+              text: "Nobody can guarantee that an AI assistant will name or recommend a particular firm. What a firm can do is reduce the risk of being missing or misdescribed, then check how it is actually represented. That's the focus of our AI Search Visibility work, and our guide to measuring AI search visibility explains how to check it without overstating what the data shows.",
+              links: [
+                { anchor: "AI Search Visibility", link: { kind: "service", slug: "ai-search-visibility" } },
+                { anchor: "measuring AI search visibility", link: { kind: "post", slug: "how-to-measure-ai-search-visibility-gcc" } },
+              ],
+            },
+          },
+        ],
+      },
+      {
+        h2: "GA4 and qualified enquiry tracking",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "**Short answer:** Measure enquiries by service page and source, not just traffic, and keep client information out of analytics.",
+          },
+          {
+            type: "ul",
+            items: [
+              "form submissions, calls, WhatsApp clicks and email clicks, recorded as events with the page they came from",
+              "the service an enquiry relates to, passed with the form rather than guessed afterwards",
+              "a qualifying question or two, such as entity type or timing, so the firm can judge fit",
+              "organic landing pages that produce enquiries, compared over time",
+              "Google Business Profile interactions, where the data is available",
+            ],
+          },
+          {
+            type: "p",
+            content: {
+              text: "Confidentiality matters here. Google's policies say no data should be passed to Google Analytics that Google could use or recognise as personally identifiable information. For an accounting firm, that also means keeping client names, company details and the content of enquiries out of event parameters and URLs.",
+              link: {
+                anchor: "Google's policies say",
+                link: { kind: "external", href: "https://support.google.com/analytics/answer/6366371" },
+              },
+            },
+          },
+          {
+            type: "p",
+            content: {
+              text: "Our guide to GA4 for professional services firms covers the setup in more detail, and our Google Analytics service puts it in place.",
+              links: [
+                { anchor: "GA4 for professional services firms", link: { kind: "post", slug: "ga4-professional-services-gcc" } },
+                { anchor: "Google Analytics service", link: { kind: "service", slug: "google-analytics" } },
+              ],
+            },
+          },
+        ],
+      },
+      {
+        h2: "A practical website audit checklist for accounting firms",
+        blocks: [
+          {
+            type: "ul",
+            items: [
+              "Each main service the firm provides, such as Corporate Tax, VAT, audit, bookkeeping and e-invoicing support, has its own page that answers the client's main question.",
+              "Each service page says who the service is for, what it involves, what the client provides and who leads the work.",
+              "Regulatory statements link to the Ministry of Finance or the Federal Tax Authority and carry a real review date.",
+              "Time-sensitive information, such as e-invoicing dates, sits in one clearly dated section that is updated in place.",
+              "Partner and team profiles show verifiable qualifications and registrations, and link to the services each person leads.",
+              "Registrations and approvals are stated exactly as held, with no implied accreditations.",
+              "There are no superlatives, guaranteed outcomes or unverifiable statistics.",
+              "Each office has an accurate Google Business Profile, and its details match the website.",
+              "Arabic pages use the terms clients and official sources use, with the same facts as the English pages.",
+              "Structured data restates accurate, visible information only.",
+              "Every service page has a clear enquiry route that works on mobile and records which service the enquiry relates to.",
+              "Enquiries are tracked by page and source, with no client information sent to analytics.",
+              "How the firm appears in search and AI answers is checked periodically, in English and Arabic.",
+            ],
+          },
+        ],
+      },
+      {
+        h2: "Request a Search Visibility Review for your accounting firm",
+        blocks: [
+          {
+            type: "p",
+            content: {
+              text: "If you run or market an accounting, tax or audit firm in the UAE and want to know how clients currently find and evaluate it, OMSA can review it, as part of our work with professional services firms. A Search Visibility Review looks at:",
+              link: { anchor: "our work with professional services firms", link: { kind: "industry", slug: "professional-services" } },
+            },
+          },
+          {
+            type: "ul",
+            items: [
+              "how the firm appears in Google Search, Google Maps and AI-assisted search, in English and Arabic",
+              "whether service pages match how clients search for Corporate Tax, VAT, audit and e-invoicing help",
+              "the accuracy and consistency of office, people and registration details",
+              "where the path from search to enquiry breaks down, and what is and isn't being measured",
+            ],
+          },
+          {
+            type: "p",
+            content: {
+              text: "You'll receive prioritised findings, with what we could observe publicly kept separate from what would need your analytics data to confirm. We don't guarantee rankings or AI citations, and we don't give tax advice. We do make it clear what to fix first. Request a Search Visibility Review.",
+              link: { anchor: "Request a Search Visibility Review", link: { kind: "contact", source: "blog-seo-for-accounting-firms-uae" } },
+            },
+          },
+        ],
+      },
+      {
+        h2: "Sources",
+        blocks: [
+          {
+            type: "p",
+            content:
+              "Statements about UAE tax rules, the e-invoicing programme, Google guidance and schema.org come from the sources below. The e-invoicing timeline reflects the Ministry of Finance's published materials as at October 2026. Search queries in this article are illustrative, and the interpretation and recommendations are OMSA's own.",
+          },
+          {
+            type: "ul",
+            items: [
+              {
+                text: "UAE Ministry of Finance: eInvoicing portal",
+                link: { anchor: "eInvoicing portal", link: { kind: "external", href: "https://mof.gov.ae/einvoicing/" } },
+              },
+              {
+                text: "UAE Ministry of Finance: UAE eInvoicing Programme (October 2026)",
+                link: {
+                  anchor: "UAE eInvoicing Programme",
+                  link: { kind: "external", href: "https://mof.gov.ae/wp-content/uploads/2026/10/UAE-eInvoicing-Programme-Oct2026.pdf" },
+                },
+              },
+              {
+                text: "UAE Ministry of Finance: Ministerial Decision No. 66 of 2026 amending Ministerial Decision No. 244 of 2025 on the Implementation of the Electronic Invoicing System",
+                link: {
+                  anchor: "Ministerial Decision No. 66 of 2026",
+                  link: { kind: "external", href: "https://mof.gov.ae/wp-content/uploads/2026/05/Ministerial-Resolution-No.-66-of-2026-Amending-Certain-Provisions-of-Ministerial-Resolution-No.-244-of-2025-Regarding-the-Implementation-of-the-Electronic-Invoicing-System-En-20260514.pdf" },
+                },
+              },
+              {
+                text: "UAE Ministry of Finance: Corporate Tax",
+                link: { anchor: "Corporate Tax", link: { kind: "external", href: "https://mof.gov.ae/en/public-finance/tax/corporate-tax/" } },
+              },
+              {
+                text: "Federal Tax Authority: Registration for VAT",
+                link: { anchor: "Registration for VAT", link: { kind: "external", href: "https://tax.gov.ae/en/taxes/vat/vat.topics/registration.for.vat.aspx" } },
+              },
+              {
+                text: "Federal Tax Authority: Tax Agent Registration",
+                link: { anchor: "Tax Agent Registration", link: { kind: "external", href: "https://tax.gov.ae/en/services/registration.of.tax.agents.aspx" } },
+              },
+              {
+                text: "Ministry of Economy and Tourism: Auditing accounts services",
+                link: { anchor: "Auditing accounts services", link: { kind: "external", href: "https://www.moet.gov.ae/en/w/auditing-accounts-services-beta-version" } },
+              },
+              {
+                text: "Google Search Central: Creating helpful, reliable, people-first content",
+                link: {
+                  anchor: "Creating helpful, reliable, people-first content",
+                  link: { kind: "external", href: "https://developers.google.com/search/docs/fundamentals/creating-helpful-content" },
+                },
+              },
+              {
+                text: "Google Search Central: AI features and your website",
+                link: { anchor: "AI features and your website", link: { kind: "external", href: "https://developers.google.com/search/docs/appearance/ai-features" } },
+              },
+              {
+                text: "Google Business Profile Help: Tips to improve your local ranking on Google",
+                link: { anchor: "Tips to improve your local ranking on Google", link: { kind: "external", href: "https://support.google.com/business/answer/7091" } },
+              },
+              {
+                text: "Google Business Profile Help: Guidelines for representing your business on Google",
+                link: { anchor: "Guidelines for representing your business on Google", link: { kind: "external", href: "https://support.google.com/business/answer/3038177" } },
+              },
+              {
+                text: "Google Analytics Help: Best practices to avoid sending Personally Identifiable Information (PII)",
+                link: {
+                  anchor: "Best practices to avoid sending Personally Identifiable Information (PII)",
+                  link: { kind: "external", href: "https://support.google.com/analytics/answer/6366371" },
+                },
+              },
+              {
+                text: "Schema.org: AccountingService",
+                link: { anchor: "AccountingService", link: { kind: "external", href: "https://schema.org/AccountingService" } },
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "Does an accounting firm need a separate page for every service?",
+        a: "Not for every variation. A separate page is worth creating when clients genuinely look for the service, the firm actually provides it, and there's enough specific, accurate information to make the page useful. For most UAE firms that means at least Corporate Tax, VAT and, where offered, audit, bookkeeping and e-invoicing support.",
+      },
+      {
+        q: "Should we publish the e-invoicing deadlines on our website?",
+        a: "You can, as long as they sit in one clearly dated section that links to the Ministry of Finance and is updated when the rules change. Build the rest of the page around what e-invoicing is, who it affects and how your firm helps, so the page stays useful after each deadline passes.",
+      },
+      {
+        q: "Can an accounting firm say it provides e-invoicing solutions?",
+        a: "Only in terms that are accurate. In the UAE, eInvoices are exchanged through Accredited Service Providers. An accounting firm that advises on readiness, data and processes should describe that role clearly and not imply it is an Accredited Service Provider unless it has been accredited.",
+      },
+      {
+        q: "Is Arabic SEO necessary for accounting firms in the UAE?",
+        a: "For many firms, yes, especially those serving Emirati-owned businesses or Arabic-speaking decision-makers. Arabic pages work best when they use the official and everyday terms clients search with, such as the FTA's terms for Corporate Tax, VAT and e-invoicing, and when the facts match the English pages exactly.",
+      },
+      {
+        q: "Do accounting firms need special markup or an llms.txt file to appear in AI answers?",
+        a: "No. Google says there are no additional requirements or special optimisations needed for its AI features, and no new machine-readable files or special markup. Clear, accurate pages and structured data that matches the visible content are what help.",
+      },
+      {
+        q: "Can SEO guarantee that our firm ranks first or appears in AI answers?",
+        a: "No. Search engines and AI platforms decide what they show, and nobody outside them can guarantee a position or a mention. Good SEO makes a firm's real, verifiable information easier to find and understand, then measures whether relevant enquiries improve.",
+      },
+      {
+        q: "Is this article tax advice?",
+        a: "No. It's about how accounting firms present their services online. For tax, accounting or legal requirements, rely on the Ministry of Finance, the Federal Tax Authority and qualified professionals.",
       },
     ],
   },

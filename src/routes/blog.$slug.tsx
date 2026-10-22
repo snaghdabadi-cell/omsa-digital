@@ -41,7 +41,7 @@ function BlogContentAnchor({ link, label, className }: { link: BlogContentLink; 
       return <Link to="/blog/$slug" params={{ slug: link.slug }} className={className}>{label}</Link>;
     case "contact":
       return (
-        <Link to="/contact" className={className}>
+        <Link to="/contact" search={link.source ? { source: link.source } : {}} className={className}>
           {label}
         </Link>
       );
