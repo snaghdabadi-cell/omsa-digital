@@ -793,7 +793,10 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
   {
     slug: "local-seo",
     name: "Local SEO",
-    short: "Be the obvious choice when someone in Muscat, Dubai or Abu Dhabi is searching for what you do.",
+    // Shown on the service page and on industry, article and location cards,
+    // so it names no individual city; location pages can override it with
+    // their own copy (see `serviceCards` in lib/content/locations.ts).
+    short: "Be the obvious choice when nearby customers in Oman and the UAE search for what you do.",
     icon: MapPin,
     category: "Visibility",
     metaTitle: "Local SEO Services in Oman & UAE | OMSA Digital & AI Studio",
