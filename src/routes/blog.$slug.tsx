@@ -16,7 +16,7 @@ import {
 import { SERVICE_DETAILS } from "@/lib/services-data";
 import { getCaseStudy } from "@/lib/case-studies-data";
 import { getAuthor } from "@/lib/content/authors";
-import { abs, articleJsonLd, authorRefFromContent, breadcrumbJsonLd, faqJsonLd, pageMeta } from "@/lib/seo";
+import { abs, articleJsonLd, authorRefFromContent, brandedTitle, breadcrumbJsonLd, faqJsonLd, pageMeta } from "@/lib/seo";
 
 // Resolves a BlogContentLink to a real typed route. Mirrors the
 // ContentAnchor pattern already used on service pages, scoped to this file
@@ -247,7 +247,7 @@ export const Route = createFileRoute("/blog/$slug")({
     if (!p) return { meta: [{ title: "Article — OMSA Digital & AI Studio" }] };
     const path = `/blog/${params.slug}`;
     const base = pageMeta({
-      title: p.metaTitle ?? `${p.title} — OMSA Digital & AI Studio`,
+      title: p.metaTitle ?? brandedTitle(p.title),
       description: p.metaDescription ?? p.excerpt,
       path,
       image: p.image,

@@ -33,6 +33,15 @@ export const SOCIAL = {
 export const abs = (path: string) =>
   path.startsWith("http") ? path : `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
 
+// Search results usually show about 60 characters of a <title>, so a long
+// page title plus the full brand suffix gets cut mid-word. Keeps the given
+// suffix when it fits, then a short "| OMSA" suffix, then the title alone.
+const TITLE_MAX = 65;
+export function brandedTitle(title: string, suffix = " — OMSA Digital & AI Studio") {
+  for (const t of [`${title}${suffix}`, `${title} | OMSA`]) if (t.length <= TITLE_MAX) return t;
+  return title;
+}
+
 /**
  * True when this route is the deepest matched route for the current URL.
  * Used by parent/list routes to suppress their own canonical link when a

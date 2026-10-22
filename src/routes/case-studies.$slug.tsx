@@ -4,7 +4,7 @@ import { Tag } from "@/components/site/Primitives";
 import { CASE_STUDIES, getCaseStudy } from "@/lib/case-studies-data";
 import { SERVICE_DETAILS } from "@/lib/services-data";
 import { getIndustryByCaseStudySlug } from "@/lib/content/industries";
-import { abs, breadcrumbJsonLd, caseStudyJsonLd, pageMeta } from "@/lib/seo";
+import { abs, brandedTitle, breadcrumbJsonLd, caseStudyJsonLd, pageMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/case-studies/$slug")({
   loader: ({ params }) => {
@@ -17,7 +17,7 @@ export const Route = createFileRoute("/case-studies/$slug")({
     if (!c) return { meta: [{ title: "Case study — OMSA Digital & AI Studio" }] };
     const path = `/case-studies/${params.slug}`;
     const base = pageMeta({
-      title: `${c.title} — Case Study | OMSA Digital & AI Studio`,
+      title: brandedTitle(c.title, " — Case Study | OMSA Digital & AI Studio"),
       description: c.excerpt,
       path,
       image: c.image,

@@ -39,6 +39,7 @@ export const Route = createFileRoute("/industries/$slug")({
       }),
       scripts: [
         { type: "application/ld+json", children: JSON.stringify(breadcrumbJsonLd([
+          { name: "Home", path: "/" },
           { name: "Industries", path: "/industries" },
           { name: ind.name, path: `/industries/${params.slug}` },
         ])) },
