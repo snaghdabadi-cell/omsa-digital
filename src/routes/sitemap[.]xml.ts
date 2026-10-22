@@ -32,7 +32,9 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/blog", changefreq: "weekly", priority: "0.7" },
           { path: "/resources", changefreq: "weekly", priority: "0.7" },
           { path: "/tools", changefreq: "monthly", priority: "0.7" },
-          { path: "/authors", changefreq: "monthly", priority: "0.5" },
+          // /authors is listed only once there's more than one author — with a
+          // single author it's noindexed (see authors.tsx).
+          ...(AUTHORS.length > 1 ? [{ path: "/authors", changefreq: "monthly" as const, priority: "0.5" }] : []),
           { path: "/careers", changefreq: "monthly", priority: "0.5" },
           { path: "/contact", changefreq: "monthly", priority: "0.7" },
           // /community is intentionally omitted — entirely a ComingSoon
@@ -52,8 +54,9 @@ export const Route = createFileRoute("/sitemap.xml")({
           ...SERVICE_DETAILS.map((s) => ({ path: `/services/${s.slug}`, changefreq: "monthly" as const, priority: "0.85" })),
           ...INDUSTRY_PAGES.map((i) => ({ path: `/industries/${i.slug}`, changefreq: "monthly" as const, priority: "0.75" })),
           ...LOCATIONS.filter((l) => l.status !== "soon").map((l) => ({ path: `/locations/${l.slug}`, changefreq: "monthly" as const, priority: "0.75" })),
-          ...BLOG_POSTS.map((p) => ({ path: `/blog/${p.slug}`, changefreq: "monthly" as const, priority: "0.6", lastmod: p.date })),
-          ...CASE_STUDIES.map((c) => ({ path: `/case-studies/${c.slug}`, changefreq: "monthly" as const, priority: "0.75", lastmod: c.datePublished })),
+          // lastmod follows a genuine revision date when a post has one.
+          ...BLOG_POSTS.map((p) => ({ path: `/blog/${p.slug}`, changefreq: "monthly" as const, priority: "0.6", lastmod: p.dateModified ?? p.date })),
+          ...CASE_STUDIES.map((c) => ({ path: `/case-studies/${c.slug}`, changefreq: "monthly" as const, priority: "0.75", lastmod: c.dateModified ?? c.datePublished })),
           ...TOOLS.filter((t) => t.slug === "seo-audit").map((t) => ({ path: `/tools/${t.slug}`, changefreq: "monthly" as const, priority: "0.6" })),
           ...AUTHORS.map((a) => ({ path: `/authors/${a.slug}`, changefreq: "monthly" as const, priority: "0.4" })),
           ...ROLES.filter((r) => r.status === "open").map((r) => ({ path: `/careers/${r.slug}`, changefreq: "monthly" as const, priority: "0.4" })),
