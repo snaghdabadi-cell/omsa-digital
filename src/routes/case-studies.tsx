@@ -3,19 +3,17 @@ import { ArrowRight, TrendingUp } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { Tag } from "@/components/site/Primitives";
 import { CASE_STUDIES } from "@/lib/case-studies-data";
-import { abs, isLeafMatch } from "@/lib/seo";
+import { isLeafMatch, pageMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/case-studies")({
-  head: ({ matches, match }) => ({
-    meta: [
-      { title: "Case Studies — Concept Work for GCC Businesses" },
-      { name: "description", content: "Concept case studies from OMSA Digital & AI Studio showing how we approach digital growth challenges for businesses across Oman and the GCC through web design, SEO and AI automation." },
-      { property: "og:title", content: "Case Studies — OMSA Digital & AI Studio" },
-      { property: "og:description", content: "Concept case studies: how OMSA approaches growth problems for GCC businesses." },
-      { property: "og:url", content: abs("/case-studies") },
-    ],
-    links: isLeafMatch(matches, match) ? [{ rel: "canonical", href: abs("/case-studies") }] : [],
-  }),
+  head: ({ matches, match }) => {
+    const meta = pageMeta({
+      title: "Case Studies — Concept Work for GCC Businesses | OMSA",
+      description: "Concept case studies showing how OMSA approaches hospitality, real estate and healthcare growth problems in Oman and the UAE with web design, SEO and AI.",
+      path: "/case-studies",
+    });
+    return isLeafMatch(matches, match) ? meta : { ...meta, links: [] };
+  },
   component: CaseStudiesPage,
 });
 

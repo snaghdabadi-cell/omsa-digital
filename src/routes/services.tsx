@@ -2,7 +2,7 @@ import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-r
 import { ArrowRight, MapPin, ScanSearch, Wrench } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { ServiceCard, SERVICES } from "@/components/site/ServiceCard";
-import { abs, isLeafMatch } from "@/lib/seo";
+import { isLeafMatch, pageMeta } from "@/lib/seo";
 
 // Technical SEO, Local SEO and AI Search Visibility are full, independently-differentiated
 // service pages (see services-data.ts) but aren't part of the shared
@@ -15,16 +15,14 @@ const HUB_ONLY_SERVICES = [
 ];
 
 export const Route = createFileRoute("/services")({
-  head: ({ matches, match }) => ({
-    meta: [
-      { title: "Services — AI, SEO, Web Development & Automation | OMSA Digital & AI Studio" },
-      { name: "description", content: "Comprehensive AI-powered digital growth services including web development, SEO, analytics, automation and digital marketing for businesses across Oman and the GCC." },
-      { property: "og:title", content: "Services — OMSA Digital & AI Studio" },
-      { property: "og:description", content: "AI-driven websites, SEO, analytics and automation designed to accelerate business growth across Oman and the GCC." },
-      { property: "og:url", content: abs("/services") },
-    ],
-    links: isLeafMatch(matches, match) ? [{ rel: "canonical", href: abs("/services") }] : [],
-  }),
+  head: ({ matches, match }) => {
+    const meta = pageMeta({
+      title: "Digital Services: Web Design, SEO, AI & Automation | OMSA",
+      description: "Website design, technical and local SEO, AI search visibility, chatbots, automation, GA4 and digital marketing for businesses in Oman and the UAE.",
+      path: "/services",
+    });
+    return isLeafMatch(matches, match) ? meta : { ...meta, links: [] };
+  },
   component: ServicesPage,
 });
 

@@ -13,7 +13,7 @@ export const Route = createFileRoute("/authors/$slug")({
     const a = loaderData?.author;
     const path = `/authors/${params.slug}`;
     const base = pageMeta({
-      title: a ? `${a.name} — OMSA Digital & AI Studio` : "Author — OMSA Digital & AI Studio",
+      title: a ? `${a.name} | Authors` : "Author — OMSA Digital & AI Studio",
       description: a?.bio ?? "OMSA Digital & AI Studio author profile.",
       path,
       type: "profile",

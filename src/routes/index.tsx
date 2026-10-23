@@ -42,8 +42,8 @@ import { pageMeta, faqJsonLd } from "@/lib/seo";
 export const Route = createFileRoute("/")({
   head: () => {
     const base = pageMeta({
-      title: "OMSA Digital & AI Studio — Digital Growth Systems for Businesses in Oman & the GCC",
-      description: "OMSA Digital & AI Studio builds AI-powered digital growth systems including websites, SEO, analytics, automation and business intelligence for companies across Oman and the GCC.",
+      title: "Web Design, SEO & AI Studio in Oman & the UAE | OMSA Digital",
+      description: "OMSA Digital & AI Studio designs websites and delivers SEO, AI search visibility, chatbots, automation and GA4 tracking for businesses in Oman and the UAE.",
       path: "/",
     });
     return {
@@ -96,7 +96,7 @@ function Objections() {
     {
       icon: Zap,
       title: "How disruptive is the project to our team?",
-      desc: "Minimal. A single point of contact, weekly 30-minute reviews, and we handle the heavy lifting. Most clients spend two to three hours a week with us during build, then much less.",
+      desc: "Minimal. A single point of contact, weekly 30-minute reviews, and we handle the heavy lifting. Expect to spend around two to three hours a week with us during the build, then much less.",
     },
     {
       icon: Smartphone,
@@ -674,14 +674,17 @@ function WhyUs() {
           <div>
             <p className="eyebrow">Why Choose OMSA Digital & AI Studio</p>
             <h2 className="mt-6 font-display text-4xl md:text-5xl font-bold tracking-tight">
-              Why businesses across Oman, the UAE, and the GCC choose OMSA. <span className="text-gradient-gold">one trusted partner.</span>
+              Strategy, websites, search and AI from <span className="text-gradient-gold">one accountable team.</span>
             </h2>
           </div>
           <p className="text-muted-foreground max-w-lg">
             Businesses choose OMSA because we combine strategy, premium web design,
             SEO, AI automation, and analytics under one expert team.
-            Instead of managing multiple agencies, you gain a single digital growth 
-            partner focused on measurable business results.
+            Instead of managing multiple agencies, you gain a single digital growth
+            partner focused on measurable business results, working with{" "}
+            <Link to="/industries" className="link-underline font-medium text-[color:var(--gold-deep)]">hospitality, healthcare, professional services and other industries</Link>{" "}
+            across{" "}
+            <Link to="/locations" className="link-underline font-medium text-[color:var(--gold-deep)]">Oman and the UAE</Link>.
           </p>
         </div>
         <div className="mt-14 grid gap-px overflow-hidden rounded-3xl bg-border sm:grid-cols-2 lg:grid-cols-4">

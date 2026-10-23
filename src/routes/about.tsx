@@ -6,8 +6,8 @@ import { pageMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/about")({
   head: () => pageMeta({
-    title: "About — OMSA Digital & AI Studio",
-    description: "Today's businesses need more than a website. OMSA Digital & AI Studio combines strategy, premium web design, SEO, AI automation, and analytics to help ambitious companies grow across Oman and the GCC.",
+    title: "About OMSA — Digital & AI Studio for Oman and the UAE",
+    description: "OMSA Digital & AI Studio is based in Oman and brings strategy, website design, SEO, AI and analytics together for businesses in Oman and the UAE.",
     path: "/about",
   }),
   component: AboutPage,
@@ -64,6 +64,19 @@ function AboutPage() {
               qualified leads, lower acquisition cost, faster operations, and a brand that
               compounds in value over time.
             </p>
+            <p>
+              In practice that means{" "}
+              <Link to="/services/$slug" params={{ slug: "website-design" }} className="link-underline font-medium text-[color:var(--gold-deep)]">website design</Link>,{" "}
+              <Link to="/services/$slug" params={{ slug: "seo" }} className="link-underline font-medium text-[color:var(--gold-deep)]">SEO</Link> and{" "}
+              <Link to="/services/$slug" params={{ slug: "ai-search-visibility" }} className="link-underline font-medium text-[color:var(--gold-deep)]">AI search visibility</Link>{" "}
+              work for{" "}
+              <Link to="/industries" className="link-underline font-medium text-[color:var(--gold-deep)]">industries</Link>{" "}
+              such as hospitality, healthcare and professional services. Our{" "}
+              <Link to="/case-studies" className="link-underline font-medium text-[color:var(--gold-deep)]">concept case studies</Link>{" "}
+              show how we approach those problems, and our{" "}
+              <Link to="/blog" className="link-underline font-medium text-[color:var(--gold-deep)]">insights</Link>{" "}
+              share the thinking behind the work.
+            </p>
           </div>
         </div>
       </section>
@@ -99,7 +112,7 @@ function AboutPage() {
             { text: "Digital systems designed around business goals — not a template package." },
             { v: 9, s: "yrs", l: "Combined senior experience" },
             { text: "Built for growing businesses across Oman, the UAE and the GCC." },
-            { v: 100, s: "%", l: "Bilingual: English and Arabic" },
+            { text: "Websites, SEO and content delivered in Arabic and English." },
           ].map((s, i) => (
             <div key={i}>
               {"text" in s ? (

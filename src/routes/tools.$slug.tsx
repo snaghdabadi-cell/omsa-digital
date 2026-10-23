@@ -62,7 +62,7 @@ export const Route = createFileRoute("/tools/$slug")({
       const base = pageMeta({
         title: "SEO Audit Tool | Website SEO & Technical SEO Checker | OMSA",
         description:
-          "Audit the SEO foundation of your website with OMSA. Understand technical SEO, crawlability, indexability, metadata, site performance and the issues that may be limiting organic growth.",
+          "Check your website's SEO foundation: crawlability, indexability, metadata, site performance and the technical issues that may be limiting organic growth.",
         path,
       });
       return {

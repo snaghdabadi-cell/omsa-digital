@@ -16,7 +16,7 @@ export const Route = createFileRoute("/contact")({
     return source ? { source } : {};
   },
   head: () => pageMeta({
-    title: "Contact — Start a Conversation About Growth",
+    title: "Contact OMSA — Web Design, SEO & AI Enquiries",
     description: "Tell us about your business. We'll send back a tailored digital growth strategy within five working days — whether we end up working together or not.",
     path: "/contact",
   }),

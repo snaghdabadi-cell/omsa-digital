@@ -5,7 +5,7 @@ import { pageMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/portfolio")({
   head: () => pageMeta({
-    title: "Portfolio — Concept Projects & Internal Products | OMSA Digital & AI Studio",
+    title: "Portfolio — Concept Projects & Internal Products | OMSA",
     description: "Concept case studies, internal products and demonstration projects from OMSA Digital & AI Studio — AI, SEO, automation and website design work for the GCC.",
     path: "/portfolio",
   }),

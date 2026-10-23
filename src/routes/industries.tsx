@@ -7,8 +7,8 @@ import { pageMeta, isLeafMatch } from "@/lib/seo";
 export const Route = createFileRoute("/industries")({
   head: ({ matches, match }) => {
     const meta = pageMeta({
-      title: "Industries we serve — Hospitality, Real Estate, Healthcare & more",
-      description: "Deep specialism across hospitality, real estate, healthcare, retail and professional services in Oman and the UAE.",
+      title: "Industries We Serve in Oman & the UAE | OMSA Digital",
+      description: "Websites, SEO, analytics and AI for hospitality, real estate, healthcare, retail, professional services, construction and education in Oman and the UAE.",
       path: "/industries",
     });
     return isLeafMatch(matches, match) ? meta : { ...meta, links: [] };
