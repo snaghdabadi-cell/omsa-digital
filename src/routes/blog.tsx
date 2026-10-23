@@ -7,8 +7,8 @@ import { isLeafMatch, pageMeta } from "@/lib/seo";
 export const Route = createFileRoute("/blog")({
   head: ({ matches, match }) => {
     const meta = pageMeta({
-      title: "Insights — OMSA Digital & AI Studio Blog",
-      description: "Expert insights on web design, SEO, AI automation, Google Analytics, and digital growth strategies for businesses in Oman and the GCC.",
+      title: "SEO, AI Search & Digital Growth Insights | OMSA Blog",
+      description: "Practical guides on SEO, AI search visibility, GA4, websites and automation for businesses in Oman, the UAE and the GCC, from OMSA Digital & AI Studio.",
       path: "/blog",
     });
     return isLeafMatch(matches, match) ? meta : { ...meta, links: [] };
@@ -17,6 +17,9 @@ export const Route = createFileRoute("/blog")({
 });
 
 const CATEGORIES = ["All", "SEO", "Technical SEO", "Local SEO", "AI", "Digital Marketing", "Google Analytics", "Website Design", "Automation", "Business Growth"];
+
+// Newest first, so the hub surfaces recent writing before older posts.
+const POSTS_NEWEST_FIRST = [...BLOG_POSTS].sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
 
 const formatPostDate = (iso: string) =>
   new Date(iso).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
@@ -98,7 +101,7 @@ function BlogPage() {
 
       <section className="pb-32">
         <div className="container-luxe grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {BLOG_POSTS.filter((p) => p.slug !== featured.slug).map((p, i) => (
+          {POSTS_NEWEST_FIRST.filter((p) => p.slug !== featured.slug).map((p, i) => (
             <Reveal key={p.slug} delay={i * 0.05}>
               <Link
                 to="/blog/$slug"

@@ -108,6 +108,8 @@ export type BlogPost = {
   // never backfilled for existing posts. Omitted, structured data falls back
   // to the publish date (see articleJsonLd in lib/seo.ts).
   dateModified?: string; // ISO
+  // Derived from the article's own word count (see estimateReadMinutes
+  // below) rather than typed by hand, so it can't drift from the copy.
   readMinutes: number;
   image: string;
   // Optional descriptive alt text for `image`, used wherever it's rendered
@@ -149,35 +151,111 @@ export type BlogPost = {
   faqs?: { q: string; a: string }[];
 };
 
-export const BLOG_POSTS: BlogPost[] = [
+type BlogPostSource = Omit<BlogPost, "readMinutes">;
+
+// ~220 words per minute, a common estimate for attentive reading of
+// non-fiction. Counts every piece of copy the article page renders.
+const WORDS_PER_MINUTE = 220;
+const paragraphText = (p: BlogParagraph) => (typeof p === "string" ? p : p.text);
+const countWords = (s: string) => s.split(/\s+/).filter(Boolean).length;
+
+export function estimateReadMinutes(post: BlogPostSource): number {
+  const parts: string[] = [post.title, post.excerpt, ...(post.intro ?? []).map(paragraphText)];
+  for (const s of post.body) {
+    parts.push(s.h2, ...(s.p ?? []).map(paragraphText), ...(s.bullets ?? []));
+    for (const b of s.blocks ?? []) {
+      if (b.type === "p") parts.push(paragraphText(b.content));
+      else if (b.type === "h3") parts.push(b.text);
+      else if (b.type === "ul" || b.type === "ol") parts.push(...b.items.map(paragraphText));
+      else parts.push(...b.table.head, ...b.table.rows.flat());
+    }
+  }
+  for (const f of post.faqs ?? []) parts.push(f.q, f.a);
+  const words = parts.reduce((n, s) => n + countWords(s), 0);
+  return Math.max(1, Math.round(words / WORDS_PER_MINUTE));
+}
+
+const POSTS: BlogPostSource[] = [
   {
     slug: "ai-assistants-luxury-hospitality",
     title: "The honest case for AI assistants in luxury hospitality",
     excerpt:
       "Where AI genuinely improves the guest experience — and where it quietly damages your brand.",
+    metaTitle: "AI Assistants in Luxury Hospitality: Where They Help | OMSA",
+    metaDescription:
+      "Where AI guest assistants genuinely help luxury hotels in Oman and the UAE, where they damage the brand, and how to scope, test and measure one properly.",
     category: "AI",
     date: "2026-06-24",
-    dateModified: "2026-09-07",
-    readMinutes: 8,
+    dateModified: "2026-10-22",
     image: workAi,
     relatedServices: ["ai-chatbots", "website-design"],
+    relatedIndustrySlugs: ["hospitality"],
     relatedCaseStudySlug: "muscat-hotel-direct-bookings",
+    relatedPostSlugs: ["ga4-events-for-hotels", "local-seo-playbook-gcc-hospitality", "whatsapp-business-automation-gcc"],
+    intro: [
+      "An AI assistant on a luxury property's website is either an extension of the concierge desk or a liability with the brand's name on it. Which one it becomes depends far less on the model behind it than on what it's allowed to answer, what it's built from, and how quickly it steps aside for a person.",
+    ],
     body: [
       { h2: "Why hospitality is the wrong place for a generic chatbot",
         p: [
-          "Luxury hospitality is one of the few categories where the guest expects a human standard of attention from the first touchpoint. A clumsy chatbot doesn't just answer poorly — it actively contradicts the brand promise the property has spent decades building.",
-          "Most AI assistants on hotel websites today are general-purpose tools dropped into a premium context. They produce stilted answers, no understanding of the property's services, and a tone that belongs on a discount aggregator.",
+          "Luxury hospitality is one of the few categories where the guest expects a human standard of attention from the first touchpoint. A clumsy chatbot doesn't just answer poorly — it actively contradicts the brand promise the property has spent years building.",
+          "Many assistants on hotel websites are general-purpose tools dropped into a premium context. They give stilted answers, show little understanding of the property's services, and use a tone that belongs on a discount aggregator. Guests notice, and the impression carries over to the stay itself.",
         ],
       },
-      { h2: "What actually works: assistants trained on the property's own content",
+      { h2: "What works: assistants grounded in the property's own content",
         p: [
-          "The assistants that earn their place are trained on the property's own content — the brand book, service catalogue, restaurant menus, spa treatments, suite descriptions, and FAQs. They speak in the property's voice, in Arabic or English, and they hand off to a human the moment a request becomes nuanced.",
-          "They also do work no human team can. They answer at 3:14 a.m. when a guest is comparing properties from Singapore. They qualify reservation enquiries and route them to the right team. They never forget a long-haul guest mentioned a dietary preference six weeks earlier.",
+          "The assistants that earn their place answer from the property's own approved content — the service catalogue, restaurant menus, spa treatments, suite descriptions, policies and FAQs. They speak in the property's voice, in Arabic or English, and they hand off to a human the moment a request becomes nuanced.",
+          "They also cover what a front-office team can't always cover. They answer at 3 a.m. when a guest in another time zone is comparing properties. They route reservation, restaurant and spa enquiries to the right team with the details already captured. And when they're connected to the reservation or CRM system, they can pass a guest's stated preferences to staff instead of asking the same questions twice.",
+        ],
+      },
+      { h2: "Conversations an assistant can own, and the ones it should hand over",
+        blocks: [
+          { type: "p", content: "The line between the two is the most important design decision in the whole project. A useful starting split:" },
+          { type: "h3", text: "Usually safe for the assistant to handle" },
+          { type: "ul", items: [
+            "Factual questions about rooms, suites, facilities, dining and spa menus.",
+            "Policies such as check-in and check-out times, children, pets and dress codes.",
+            "Directions, transfers and what's nearby, drawn from approved copy.",
+            "Sending guests to the booking engine for live availability and rates, rather than quoting them itself.",
+            "Capturing pre-arrival requests for staff to confirm.",
+          ] },
+          { type: "h3", text: "Should always reach a person" },
+          { type: "ul", items: [
+            "Complaints, refunds and anything a guest is unhappy about.",
+            "Special occasions, VIP arrivals and requests that need a promise from the property.",
+            "Allergies, medical needs and accessibility requirements that must be confirmed by staff.",
+            "Group, wedding and event enquiries, and any price negotiation.",
+            "Anything involving payment details.",
+          ] },
+        ],
+      },
+      { h2: "Arabic and English, built as equals",
+        p: [
+          "In Oman and the UAE, a property's guests may write in Gulf Arabic, Modern Standard Arabic, English or a mix of both in the same message. An assistant tested only in English will fail quietly in Arabic: wrong tone, awkward phrasing, or the property's own venue names rendered inconsistently.",
+          "Test both languages with real guest questions before launch, agree on how names of restaurants and suites are written in each language, and make sure the chat interface itself displays right-to-left text properly on mobile.",
+        ],
+      },
+      { h2: "Guardrails a luxury brand needs",
+        bullets: [
+          "Answers come only from approved sources, and the assistant says plainly when it doesn't know.",
+          "It never invents prices, availability or promises; live information comes from the booking engine or a person.",
+          "Guests are told they're talking to an AI assistant, with an obvious way to reach a human.",
+          "Conversation data is handled in line with the data protection laws that apply in Oman and the UAE, and kept only as long as it's needed.",
+          "Transcripts are reviewed regularly so wrong or off-brand answers are fixed at the source.",
         ],
       },
       { h2: "Where to start",
         p: [
-          "Start narrow. Pick the two or three conversations that genuinely move the business — direct bookings, restaurant reservations, spa enquiries — and build the assistant around those. Measure resolution and handoff rates weekly. Expand only when each conversation is clean.",
+          { text: "Start narrow. Pick the two or three conversations that genuinely move the business — direct bookings, restaurant reservations, spa enquiries — and build the assistant around those. Expand only when each conversation is clean. This is the approach we take when scoping AI chatbots for hospitality brands.",
+            link: { anchor: "AI chatbots", link: { kind: "service", slug: "ai-chatbots" } } },
+          { text: "If enquiries also arrive on WhatsApp, decide early whether the same assistant should cover that channel; the hand-off rules matter even more there, as our guide to WhatsApp business automation explains.",
+            link: { anchor: "WhatsApp business automation", link: { kind: "post", slug: "whatsapp-business-automation-gcc" } } },
+        ],
+      },
+      { h2: "How to judge whether it's working",
+        p: [
+          { text: "Measure resolution and hand-off rates weekly, how quickly staff pick up hand-offs, and how many conversations end with a click to the booking engine. Track those clicks as events in GA4 so the assistant's contribution sits alongside every other channel — the events worth tracking for hotels are covered in our GA4 guide for hotel marketers.",
+            link: { anchor: "GA4 guide for hotel marketers", link: { kind: "post", slug: "ga4-events-for-hotels" } } },
           "And measure honestly. If guests prefer to wait for a human, that's information worth acting on. The point is to improve the experience, not to deflect it.",
         ],
       },
@@ -188,9 +266,9 @@ export const BLOG_POSTS: BlogPost[] = [
     title: "WhatsApp business automation for GCC enquiries: what to automate and what to leave alone",
     excerpt:
       "What WhatsApp automation can genuinely handle for a GCC business — and the moments it should always hand to a person.",
+    metaTitle: "WhatsApp Business Automation for GCC Enquiries | OMSA",
     category: "Automation",
     date: "2026-09-08",
-    readMinutes: 7,
     image: workDashboard,
     relatedServices: ["business-automation", "ai-chatbots"],
     body: [
@@ -250,9 +328,9 @@ export const BLOG_POSTS: BlogPost[] = [
     title: "Bilingual SEO for GCC websites: where Arabic and English sites go wrong",
     excerpt:
       "The technical mistakes that quietly cost bilingual GCC sites search visibility — and how to fix them properly.",
+    metaTitle: "Bilingual SEO for GCC Websites: Arabic & English Mistakes | OMSA",
     category: "Technical SEO",
     date: "2026-09-08",
-    readMinutes: 9,
     image: workCorporate,
     relatedServices: ["technical-seo", "seo"],
     body: [
@@ -339,9 +417,9 @@ export const BLOG_POSTS: BlogPost[] = [
     title: "Ecommerce SEO for GCC retailers: the technical foundations that actually move rankings",
     excerpt:
       "The structural SEO work that actually moves rankings for online stores, from category architecture to faceted navigation.",
+    metaTitle: "Ecommerce SEO for GCC Retailers: Technical Foundations | OMSA",
     category: "SEO",
     date: "2026-09-08",
-    readMinutes: 9,
     image: workRestaurant,
     relatedServices: ["seo", "technical-seo"],
     relatedIndustrySlugs: ["retail"],
@@ -436,9 +514,9 @@ export const BLOG_POSTS: BlogPost[] = [
     title: "AI admissions assistants for GCC schools: what to automate, and what needs a human",
     excerpt:
       "What an AI admissions assistant can genuinely handle for a GCC school — and the decisions that must always stay with a person.",
+    metaTitle: "AI Admissions Assistants for GCC Schools: What to Automate | OMSA",
     category: "AI",
     date: "2026-09-08",
-    readMinutes: 7,
     image: workAi,
     relatedServices: ["ai-chatbots"],
     relatedIndustrySlugs: ["education"],
@@ -498,9 +576,9 @@ export const BLOG_POSTS: BlogPost[] = [
     title: "GA4 for professional services firms in the GCC: measuring enquiries, not just traffic",
     excerpt:
       "Why session counts don't tell a services firm anything useful — and how to configure GA4 around actual enquiries instead.",
+    metaTitle: "GA4 for Professional Services Firms: Track Enquiries | OMSA",
     category: "Google Analytics",
     date: "2026-09-08",
-    readMinutes: 7,
     image: workDashboard,
     relatedServices: ["google-analytics"],
     relatedIndustrySlugs: ["professional-services"],
@@ -559,9 +637,9 @@ export const BLOG_POSTS: BlogPost[] = [
     title: "Local SEO for multi-location GCC businesses: building city pages that actually rank",
     excerpt:
       "Why one shared locations page rarely works for more than one city — and the structural work that makes each one rank on its own.",
+    metaTitle: "Local SEO for Multi-Location GCC Businesses | OMSA",
     category: "Local SEO",
     date: "2026-09-08",
-    readMinutes: 8,
     image: workCorporate,
     relatedServices: ["local-seo", "seo"],
     relatedIndustrySlugs: ["retail"],
@@ -638,7 +716,6 @@ export const BLOG_POSTS: BlogPost[] = [
       "How construction companies get evaluated online before a call ever happens — and what actually helps them get shortlisted.",
     category: "Digital Marketing",
     date: "2026-09-08",
-    readMinutes: 8,
     image: workCorporate,
     relatedServices: ["digital-marketing", "website-design", "seo"],
     relatedIndustrySlugs: ["construction"],
@@ -702,9 +779,9 @@ export const BLOG_POSTS: BlogPost[] = [
     title: "Technical SEO migrations and redesigns: how GCC businesses avoid losing search visibility",
     excerpt:
       "Why redesigns and platform migrations are the highest-risk moment in SEO, and the checklist that actually prevents visibility loss.",
+    metaTitle: "SEO-Safe Website Migrations & Redesigns in the GCC | OMSA",
     category: "Technical SEO",
     date: "2026-09-08",
-    readMinutes: 9,
     image: workDashboard,
     relatedServices: ["technical-seo", "seo", "website-design"],
     body: [
@@ -772,7 +849,6 @@ export const BLOG_POSTS: BlogPost[] = [
       "The instinct is to automate the most visible thing. The highest-return automation is usually the boring one nobody's fixed yet.",
     category: "Automation",
     date: "2026-09-08",
-    readMinutes: 8,
     image: workDashboard,
     relatedServices: ["business-automation", "ai-chatbots", "google-analytics"],
     body: [
@@ -839,29 +915,85 @@ export const BLOG_POSTS: BlogPost[] = [
     slug: "ga4-events-for-hotels",
     title: "GA4 for hotel marketers: the events that actually matter",
     excerpt:
-      "A short, practical guide to the GA4 setup we use for hospitality clients.",
+      "A practical GA4 measurement plan for hotels: the booking events worth tracking, the parameters that make them useful, and how to connect them to revenue.",
+    metaTitle: "GA4 for Hotels: Booking Events and Tracking That Matter | OMSA",
+    metaDescription:
+      "A practical GA4 setup for hotels in Oman and the UAE: booking-funnel events, useful parameters, cross-domain tracking and connecting bookings to revenue.",
     category: "Google Analytics",
     date: "2026-06-17",
-    dateModified: "2026-09-07",
-    readMinutes: 6,
+    dateModified: "2026-10-22",
     image: workDashboard,
     relatedServices: ["google-analytics", "seo"],
+    relatedIndustrySlugs: ["hospitality"],
     relatedCaseStudySlug: "muscat-hotel-direct-bookings",
+    relatedPostSlugs: ["ga4-professional-services-gcc", "sme-conversion-tracking-google-site-kit", "ai-assistants-luxury-hospitality"],
     body: [
       { h2: "Out-of-the-box GA4 isn't enough",
         p: [
-          "A default GA4 install measures sessions and pageviews. For a hotel, that's most of the way to useless. The questions a marketing director actually asks are about booking intent, room types, length of stay and revenue per visitor — none of which appear in the default reports.",
+          "A default GA4 install with enhanced measurement records page views, scrolls, outbound clicks, site search and a few other interactions. For a hotel, that's most of the way to useless. The questions a marketing director actually asks are about booking intent, room types, length of stay and revenue per visitor — none of which appear in the default reports.",
+        ],
+      },
+      { h2: "Start with the questions, not the events",
+        blocks: [
+          { type: "p", content: "Before anyone opens Tag Manager, write down the decisions the data needs to support. For most properties the list looks like this:" },
+          { type: "ul", items: [
+            "Which channels and campaigns produce direct bookings, not just visits?",
+            "Where do guests drop out between checking dates and completing a booking?",
+            "Which room types and rate plans get viewed most, and which convert?",
+            "How much direct revenue does organic search, paid search or email actually drive?",
+          ] },
+          { type: "p", content: "Every event in the plan should help answer one of those questions. If it doesn't, leave it out." },
         ],
       },
       { h2: "The events worth modelling",
+        blocks: [
+          { type: "p", content: "A clean hospitality funnel needs only a handful of events. Where GA4 has a recommended event that fits, such as `view_item`, `begin_checkout` or `purchase`, using it unlocks GA4's built-in ecommerce reports; custom names fill the gaps." },
+          { type: "table", table: {
+            label: "Suggested GA4 events for a hotel booking funnel",
+            head: ["Event", "When it fires", "Useful parameters"],
+            rows: [
+              ["booking_widget_open", "A guest opens the date picker or booking widget", "page, widget location"],
+              ["date_select", "Arrival and departure dates are chosen", "length of stay, days until arrival"],
+              ["room_view (or view_item)", "A room or suite detail is viewed", "room type"],
+              ["rate_view", "Rates are displayed for the chosen dates", "rate plan, value"],
+              ["booking_continue (or begin_checkout)", "The guest moves to guest details or payment", "room type, rate plan, value"],
+              ["booking_complete (or purchase)", "The reservation is confirmed", "booking value, currency, room type, nights"],
+            ],
+          } },
+          { type: "p", content: "Parameters only appear in standard reports once they're registered as custom dimensions or metrics in GA4's admin settings, so plan those registrations alongside the events." },
+        ],
+      },
+      { h2: "The booking engine problem",
         p: [
-          "The six events worth modelling for a hospitality site are booking_widget_open, date_select, room_view, rate_view, booking_continue and booking_complete. Each carries parameters for room type, rate plan, length of stay and value.",
-          "That gives a clean funnel from intent to conversion, with the dimensions you need to compare campaigns, traffic sources and audiences in a way that matches how the commercial team thinks.",
+          "Most hotel websites hand guests to a third-party booking engine on a different domain. Without cross-domain measurement configured in GA4, the session breaks at that hand-off: bookings appear as referrals from the booking engine, and the original channel — organic search, a campaign, an email — loses the credit.",
+          "Check three things early: whether the booking engine lets you install your own GA4 tag or Tag Manager container, whether cross-domain linking is configured for both domains in the GA4 data stream settings, and whether the confirmation page can fire a purchase event with the booking value. Test each step in GA4's DebugView before trusting any report. If the engine allows none of this, you may only ever see the click into the engine, and you'll need its own reports to fill the gap.",
+        ],
+      },
+      { h2: "Mark the right key events",
+        p: [
+          "GA4 calls the actions you treat as conversions \"key events\". Mark the completed booking as one, and perhaps a high-intent step such as reaching the guest details page. Marking every widget interaction as a key event makes the reports look busy and tells you nothing.",
         ],
       },
       { h2: "Connecting GA4 to revenue",
         p: [
-          "The final step is wiring purchases — direct, OTA where possible, and post-stay revenue — back into GA4 via the Measurement Protocol (GA4's API for sending events directly from a server) or a server-side container (a tag manager instance running on your own server rather than the visitor's browser). Without that, even a perfect event model misses the only metric that matters.",
+          "The final step is getting booking revenue into GA4 accurately — ideally from the confirmation page, or from a server via the Measurement Protocol (GA4's API for sending events directly from a server) or a server-side tag manager container. Without that, even a perfect event model misses the metric that matters most.",
+          "Bookings made through OTAs won't appear in your GA4 property at all. Compare the direct channel against your property management system's channel reports, rather than expecting one tool to show everything.",
+        ],
+      },
+      { h2: "Privacy and data quality",
+        bullets: [
+          "Never send guest names, email addresses or phone numbers to GA4; Google's policies prohibit personally identifiable information in Analytics.",
+          "Respect consent choices, and make sure the cookie banner and tags are configured to match what your privacy policy says.",
+          "Raise event data retention from the default two months to the longest available setting, so year-on-year comparisons work in explorations.",
+          "Exclude internal and agency traffic, and the booking engine's own domain as a referral source.",
+        ],
+      },
+      { h2: "What to review each month",
+        p: [
+          { text: "Direct bookings and revenue by channel, funnel drop-off between date selection and confirmation, the room types and rate plans that convert, and the landing pages that start the most bookings. If you'd like a second pair of eyes on the setup, our Google Analytics and GA4 work starts with exactly this kind of measurement plan.",
+            link: { anchor: "Google Analytics and GA4 work", link: { kind: "service", slug: "google-analytics" } } },
+          { text: "The same thinking applies outside hospitality: our guide to GA4 for professional services firms shows the enquiry-based version of this plan.",
+            link: { anchor: "GA4 for professional services firms", link: { kind: "post", slug: "ga4-professional-services-gcc" } } },
         ],
       },
     ],
@@ -871,23 +1003,62 @@ export const BLOG_POSTS: BlogPost[] = [
     title: "A local SEO playbook for hospitality brands in the GCC",
     excerpt:
       "How to build long-term visibility in markets where reputation, language and locality all matter.",
+    metaTitle: "Local SEO for Hospitality Brands in Oman & the UAE | OMSA",
+    metaDescription:
+      "A practical local SEO playbook for hotels, resorts and restaurants in Oman and the UAE: Google Business Profile, reviews, bilingual pages and structured data.",
     category: "Local SEO",
     date: "2026-06-09",
-    dateModified: "2026-09-07",
-    readMinutes: 10,
+    dateModified: "2026-10-22",
     image: workHotel,
     relatedServices: ["local-seo", "seo"],
+    relatedIndustrySlugs: ["hospitality"],
     relatedCaseStudySlug: "muscat-hotel-direct-bookings",
+    relatedPostSlugs: ["local-seo-multi-location-gcc", "bilingual-seo-gcc-arabic-english", "ga4-events-for-hotels"],
     body: [
       { h2: "Local search behaves differently in the GCC",
         p: [
-          "Search behaviour across Oman and the UAE is mobile-first, bilingual and heavily reliant on reviews — often more than in Western markets. A local SEO programme that ignores any of those three pillars under-performs by default.",
+          "Search behaviour across Oman and the UAE is mobile-first, bilingual and heavily shaped by reviews. Guests search in Arabic and English, often on Google Maps rather than the main results page, and they judge a hotel or restaurant on its photos and recent reviews before they ever reach the website. A local SEO programme that ignores any of those three things under-performs by default.",
         ],
       },
-      { h2: "The five pillars worth investing in",
+      { h2: "Pillar 1: Google Business Profile, maintained in both languages",
+        bullets: [
+          "Choose the most accurate primary category (for example Hotel, Resort hotel or a specific restaurant type) and add secondary categories only where they're genuinely true.",
+          "Use the property's real-world name. Adding keywords or locations to the business name breaks Google's guidelines and risks suspension.",
+          "Keep amenities, attributes, photos and opening hours current, including special hours for Ramadan, Eid and public holidays.",
+          "Make sure the website link and phone number point to the right property and booking path.",
+        ],
+      },
+      { h2: "Pillar 2: Consistent listings everywhere guests look",
         p: [
-          "Google Business Profile, properly maintained in both languages. Citations and NAP consistency — the business's name, address and phone number matching exactly across every directory and listing. A steady review generation engine. Locally-relevant landing pages built around neighbourhoods, not just cities. Structured data describing the property, services and reviews.",
-          "Done together, these compound. Done in isolation, they barely move the local pack — the map-based three-listing result Google shows above organic results for local queries.",
+          "Citations and NAP consistency — the business's name, address and phone number matching exactly across every directory and listing — still matter. For hospitality brands that means Google, Apple Maps, Bing Places, travel review sites and the booking platforms the property uses.",
+          "Agree on one spelling of the property's name in English and one in Arabic, and use them everywhere. Transliteration drift (several Latin spellings of the same Arabic name, for example) makes it harder for search engines to connect mentions to one place.",
+        ],
+      },
+      { h2: "Pillar 3: A steady, honest review engine",
+        p: [
+          "Ask for reviews at the moment guests are most likely to leave one — at check-out, or shortly after a meal — and make it easy with a direct link. Reply to reviews in the language the guest wrote in, and answer criticism specifically rather than with a template.",
+          "Don't offer incentives for reviews or ask only happy guests to post them. Google's policies prohibit both, and a pattern of suspiciously uniform praise undermines the trust reviews are supposed to build.",
+        ],
+      },
+      { h2: "Pillar 4: Location-relevant pages with real substance",
+        p: [
+          { text: "Locally relevant landing pages built around neighbourhoods, landmarks and the reasons guests visit an area can rank where a single generic page can't — but only when each one carries genuinely useful information: distances, transfer options, what's nearby, and how the property fits that trip. Our guide to local SEO for multi-location businesses covers the structure in detail.",
+            link: { anchor: "local SEO for multi-location businesses", link: { kind: "post", slug: "local-seo-multi-location-gcc" } } },
+          { text: "If the site runs in Arabic and English, each language version needs its own crawlable URL and correct hreflang annotations; the common mistakes are covered in our bilingual SEO guide.",
+            link: { anchor: "bilingual SEO guide", link: { kind: "post", slug: "bilingual-seo-gcc-arabic-english" } } },
+        ],
+      },
+      { h2: "Pillar 5: Structured data that describes the property accurately",
+        p: [
+          "Hotel, LodgingBusiness or Restaurant markup helps search engines understand the property's name, address, location, amenities, check-in times and contact details. Keep it consistent with the Business Profile and the visible page content.",
+          "One caution: Google doesn't show review stars for reviews a business publishes about itself on its own site, so marking up your own testimonials won't produce star ratings in search results. Put the effort into genuine reviews on the platforms guests actually read.",
+        ],
+      },
+      { h2: "Measuring local visibility",
+        p: [
+          { text: "Business Profile performance shows calls, direction requests and website clicks. Adding UTM parameters to the profile's website link lets GA4 separate those visits from other organic traffic, and Search Console shows which local queries lead to the site. Together they show whether the work is producing enquiries and bookings, not just impressions — the focus of our Local SEO work.",
+            link: { anchor: "Local SEO work", link: { kind: "service", slug: "local-seo" } } },
+          "Done together, these pillars compound. Done in isolation, they barely move the local pack — the map-based three-listing result Google shows above organic results for local queries.",
         ],
       },
     ],
@@ -897,22 +1068,76 @@ export const BLOG_POSTS: BlogPost[] = [
     title: "What actually makes a corporate website feel premium",
     excerpt:
       "It isn't typography. It isn't motion. It's something quieter — and harder to fake.",
+    metaTitle: "What Makes a Corporate Website Feel Premium | OMSA",
+    metaDescription:
+      "Premium corporate websites share clarity, restraint, speed and verifiable credibility. A practical guide for firms in Oman and the UAE planning a redesign.",
     category: "Website Design",
     date: "2026-05-28",
-    dateModified: "2026-09-07",
-    readMinutes: 7,
+    dateModified: "2026-10-22",
     image: workCorporate,
     relatedServices: ["website-design", "seo"],
     relatedIndustrySlugs: ["professional-services"],
+    relatedPostSlugs: ["technical-seo-migrations-redesigns-gcc", "bilingual-seo-gcc-arabic-english", "ga4-professional-services-gcc"],
     body: [
       { h2: "The premium feeling is a sum, not a feature",
         p: [
           "Premium websites don't share a typeface or a colour. What they share is discipline — fewer ideas, executed with more care. Less copy, written with more precision. Less motion, used with more intent.",
+          "That matters most for firms whose clients are buying judgment: law and advisory firms, engineering and construction companies, consultancies and financial services. Their website is often the first evidence a prospective client sees of how carefully the firm works.",
         ],
       },
-      { h2: "Three things every premium site gets right",
+      { h2: "Clarity in the first five seconds",
         p: [
-          "First, clarity. Within five seconds, a visitor knows who the company is, who it helps, and what the next step is. Second, calm. Generous spacing, restrained motion, no aggressive promotion. Third, speed — a slow-loading page reads as careless, and carelessness is the one thing a premium brand can't afford to signal.",
+          "Within five seconds, a visitor should know who the company is, who it helps, and what the next step is. That usually means a headline that names what the firm does and where, navigation labels in plain language (\"Services\", not \"Solutions Universe\"), and one obvious primary action rather than five competing buttons.",
+        ],
+      },
+      { h2: "Calm, not decoration",
+        p: [
+          "Generous spacing, a clear typographic hierarchy and restrained motion read as confidence. Animation should explain something — a transition, a sequence — not perform for its own sake. Respect visitors who have asked their device to reduce motion, and never make content wait behind an intro animation.",
+          "Aggressive pop-ups, auto-playing video with sound and countdown banners do the opposite. They signal that the firm needs the visitor more than the visitor needs the firm.",
+        ],
+      },
+      { h2: "Speed is part of the brand",
+        p: [
+          "A slow page reads as careless, and carelessness is the one thing a premium brand can't afford to signal. Google's Core Web Vitals give useful targets: Largest Contentful Paint within 2.5 seconds, Interaction to Next Paint under 200 milliseconds, and Cumulative Layout Shift below 0.1.",
+          "The usual culprits are oversized hero images and videos, too many font files, and third-party scripts nobody remembers adding. Modern image formats such as WebP or AVIF, a small set of well-chosen fonts and a regular script audit solve most of it.",
+        ],
+      },
+      { h2: "Credibility visitors can verify",
+        bullets: [
+          "Real people: named partners or team members with genuine roles and credentials.",
+          "Real details: licences, registrations and office addresses that exist, shown consistently.",
+          "Honest work: case studies with permission from the client, and concept work clearly labelled as concept work.",
+          "No borrowed authority: client logos, awards and testimonials only where they're real and approved.",
+          "Visible maintenance: dated articles and current information, not a news page last updated years ago.",
+        ],
+      },
+      { h2: "Bilingual done properly",
+        p: [
+          { text: "In Oman and the UAE, a premium site in Arabic and English treats both languages as first-class. Arabic copy written for the audience rather than translated line by line, Arabic typography chosen as carefully as the Latin, and layouts that work right-to-left rather than simply mirrored. Search engines need the same care — our bilingual SEO guide covers where Arabic and English sites usually go wrong.",
+            link: { anchor: "bilingual SEO guide", link: { kind: "post", slug: "bilingual-seo-gcc-arabic-english" } } },
+        ],
+      },
+      { h2: "Accessibility signals care",
+        p: [
+          "Sufficient colour contrast (WCAG asks for at least 4.5:1 for normal body text), full keyboard navigation, visible focus states, descriptive alt text and real headings make a site usable for more people. They're also exactly the details a discerning visitor notices when they're missing.",
+        ],
+      },
+      { h2: "Premium sites are built to be found",
+        p: [
+          { text: "A beautiful site that search engines can't crawl or understand is a brochure in a drawer. Clean heading structure, fast templates, sensible URLs and structured data belong in the design brief, not the post-launch fix list. That's how we approach website design.",
+            link: { anchor: "website design", link: { kind: "service", slug: "website-design" } } },
+          { text: "If the premium site replaces an existing one, the redesign is also the riskiest moment for search visibility. Our checklist for SEO-safe migrations and redesigns covers how to protect what the old site had earned.",
+            link: { anchor: "SEO-safe migrations and redesigns", link: { kind: "post", slug: "technical-seo-migrations-redesigns-gcc" } } },
+        ],
+      },
+      { h2: "A short checklist before you brief a redesign",
+        bullets: [
+          "Can a new visitor say what you do, for whom and where within five seconds?",
+          "Is there one clear primary action on every key page?",
+          "Do the main templates meet the Core Web Vitals thresholds on a mid-range phone?",
+          "Is every claim on the site — clients, results, credentials — something you could prove?",
+          "Are Arabic and English versions equally complete and equally polished?",
+          "Will the new site keep or redirect every URL that currently earns traffic?",
         ],
       },
     ],
@@ -922,22 +1147,66 @@ export const BLOG_POSTS: BlogPost[] = [
     title: "How specialist clinics grow without buying every lead",
     excerpt:
       "The compounding economics of organic search, reputation, and a well-designed booking experience.",
+    metaTitle: "How Specialist Clinics Grow Without Relying on Paid Leads | OMSA",
+    metaDescription:
+      "Why specialist clinics in the UAE and Oman grow through discoverable expertise, reputation and an easy booking experience, and where to invest first.",
     category: "Business Growth",
     date: "2026-05-19",
-    readMinutes: 9,
+    dateModified: "2026-10-22",
     image: workClinic,
     relatedServices: ["seo", "local-seo", "ai-chatbots"],
+    relatedIndustrySlugs: ["healthcare"],
     relatedCaseStudySlug: "abu-dhabi-clinic-patient-acquisition",
+    relatedPostSlugs: ["seo-for-clinics-uae", "whatsapp-business-automation-gcc", "website-traffic-vs-business-growth"],
     body: [
       { h2: "The three engines that compound",
         p: [
           "Specialist clinics grow on three things compounding over years: discoverable expertise, trusted reputation, and a frictionless booking experience. Paid acquisition can supplement each, but none can be replaced by it.",
+          "Each engine makes the others work harder. Good treatment pages bring patients who already understand the clinic; good reviews convert more of them; an easy booking flow turns that intent into appointments instead of abandoned forms.",
+        ],
+      },
+      { h2: "Why buying every lead is fragile",
+        p: [
+          "Paid search and lead platforms are useful, particularly for launching a new service or a new branch. But a clinic that depends on them entirely is renting its patient flow. Costs rise as more competitors bid on the same treatments, enquiries stop the day the budget stops, and the quality of bought leads varies widely.",
+          "Organic visibility, reputation and a strong booking experience behave differently. They take longer to build, but what's built keeps working, and it lowers the cost of every paid campaign that runs alongside it.",
+        ],
+      },
+      { h2: "Engine 1: expertise patients can find",
+        p: [
+          { text: "Patients search by treatment, condition, doctor, location and insurance network. A clinic that has a clear, accurate page for each treatment it offers, a profile for each doctor with their qualifications and licensing, and plain information about which insurers it accepts gives both patients and search engines something to match. Our guide to clinic SEO in the UAE covers the search side in detail.",
+            link: { anchor: "clinic SEO in the UAE", link: { kind: "post", slug: "seo-for-clinics-uae" } } },
+          "The content should answer the questions patients actually ask before booking — what a procedure involves, how long recovery takes, what a first appointment looks like — written or reviewed by the clinicians themselves.",
+        ],
+      },
+      { h2: "Engine 2: reputation that holds up",
+        p: [
+          "Reviews on the clinic's Google Business Profile are often the first thing a patient reads. Ask for them consistently after appointments, reply professionally without disclosing any patient information, and treat recurring complaints as operational feedback rather than a marketing problem.",
+          "Healthcare marketing is regulated. Health authorities in the UAE and Oman set rules for medical advertising, testimonials and before-and-after images, so check the current requirements with the relevant authority and have patient-facing marketing approved by the clinic's medical director or compliance lead.",
+        ],
+      },
+      { h2: "Engine 3: a booking experience without friction",
+        p: [
+          { text: "If the booking flow is broken, fix that first — no amount of traffic survives a clunky form. Make booking work on a phone in a few taps, offer the channels patients prefer (phone, WhatsApp, online booking), and confirm insurance questions early. An AI assistant can handle routine questions about opening hours, locations and preparation, provided it never gives clinical advice and hands over to staff quickly.",
+            link: { anchor: "AI assistant", link: { kind: "service", slug: "ai-chatbots" } } },
         ],
       },
       { h2: "Where to invest first",
+        blocks: [
+          { type: "ol", items: [
+            "Fix the booking flow and make sure every booking, call and WhatsApp enquiry is tracked.",
+            { text: "Get the Google Business Profile, categories, hours and review process right for each branch — the core of local SEO for clinics.",
+              link: { anchor: "local SEO", link: { kind: "service", slug: "local-seo" } } },
+            "Build accurate treatment and doctor pages for the services that matter most to the clinic.",
+            "Publish content that answers real patient questions, reviewed by clinicians.",
+            "Use paid search to fill specific gaps — a new treatment, a new branch — rather than as the only source of patients.",
+          ] },
+        ],
+      },
+      { h2: "How to tell whether it's working",
         p: [
-          { text: "If the booking flow is broken, fix that first — no amount of traffic survives a clunky form. Next, invest in long-form expertise content and local SEO. Reviews come naturally when the experience is good and the prompt is timely.",
-            link: { anchor: "local SEO", link: { kind: "post", slug: "seo-for-clinics-uae" } } },
+          { text: "Count booked appointments by source, not website visits. A clinic can double its traffic and see no change in bookings if the new visitors aren't looking for what it offers — the gap our article on traffic versus business growth explores.",
+            link: { anchor: "traffic versus business growth", link: { kind: "post", slug: "website-traffic-vs-business-growth" } } },
+          "Over time, the healthiest sign is a rising share of appointments that arrive without a paid click behind them.",
         ],
       },
     ],
@@ -947,22 +1216,73 @@ export const BLOG_POSTS: BlogPost[] = [
     title: "Real estate landing pages in the UAE: what high-converting pages get right",
     excerpt:
       "The five things every high-converting bilingual landing page in the UAE gets right.",
+    metaTitle: "Real Estate Landing Pages in the UAE That Convert | OMSA",
+    metaDescription:
+      "What high-converting real estate landing pages in the UAE get right: a specific headline, one CTA, a bilingual layout, fast media and quick WhatsApp follow-up.",
     category: "Digital Marketing",
     date: "2026-05-06",
-    dateModified: "2026-09-07",
-    readMinutes: 12,
+    dateModified: "2026-10-22",
     image: workRealestate,
-    relatedServices: ["website-design", "google-analytics"],
+    relatedServices: ["website-design", "google-analytics", "ai-chatbots"],
+    relatedIndustrySlugs: ["real-estate"],
     relatedCaseStudySlug: "dubai-developer-landing-page",
+    relatedPostSlugs: ["whatsapp-business-automation-gcc", "bilingual-seo-gcc-arabic-english", "website-traffic-vs-business-growth"],
     body: [
       { h2: "Conversion is mostly about clarity",
         p: [
           "Above-average landing pages aren't more persuasive — they're more specific. They speak to one buyer, one unit type, and one objection at a time.",
+          "Generic launch pages try to serve investors, end users, brokers and the press at once, and end up serving none of them. A buyer who arrives from an ad about two-bedroom apartments should land on a page about two-bedroom apartments.",
         ],
       },
-      { h2: "The five things they share",
+      { h2: "1. A specific headline",
         p: [
-          "A specific headline, a single primary CTA, a bilingual layout that doesn't feel translated, fast-loading rich media, and a qualifying assistant — usually WhatsApp — that routes serious enquiries to the right agent immediately. Together, they remove every extra decision between a buyer landing on the page and reaching a human who can answer their specific question.",
+          "Name the project, the location and the unit type in the headline, and support it with the facts buyers check first: starting price, handover timing and payment plan — but only details the developer has confirmed and is permitted to advertise. Vague superlatives (\"iconic\", \"unparalleled\") cost attention without adding information.",
+        ],
+      },
+      { h2: "2. One primary call to action",
+        p: [
+          "Decide what the page is for — registering interest, booking a viewing or downloading a brochure — and make that the only prominent action. Every additional button splits attention. Keep the form short: name, phone, preferred language and perhaps unit type is usually enough to start a conversation.",
+        ],
+      },
+      { h2: "3. A bilingual layout that doesn't feel translated",
+        p: [
+          { text: "Arabic and English buyers should each get a page written for them, with right-to-left layout handled properly and no half-translated elements. If the pages are meant to be found in search, each language needs its own URL and correct hreflang annotations, as our bilingual SEO guide explains.",
+            link: { anchor: "bilingual SEO guide", link: { kind: "post", slug: "bilingual-seo-gcc-arabic-english" } } },
+        ],
+      },
+      { h2: "4. Fast-loading rich media",
+        p: [
+          "Renders, video and floor plans sell property, but they're also what makes landing pages slow. Compress images and serve modern formats, use a lightweight poster image instead of auto-loading video, lazy-load everything below the first screen, and provide floor-plan details as text as well as images. Many visitors arrive from social ads on mobile data; a page that takes too long to show the first image loses them before the pitch begins.",
+        ],
+      },
+      { h2: "5. Fast, qualified follow-up",
+        p: [
+          { text: "A qualifying step — usually WhatsApp — that asks a few useful questions (budget range, unit type, timeline, cash or mortgage) and routes serious enquiries to the right agent quickly. The speed of that first human response often matters as much as the page itself. Our guide to WhatsApp business automation covers what to automate and what to leave to people.",
+            link: { anchor: "WhatsApp business automation", link: { kind: "post", slug: "whatsapp-business-automation-gcc" } } },
+          "Together, these remove every extra decision between a buyer landing on the page and reaching a human who can answer their specific question.",
+        ],
+      },
+      { h2: "Compliance and trust",
+        p: [
+          "Property advertising in the UAE is regulated. In Dubai, property advertisements generally require a permit issued through the Dubai Land Department's Trakheesi system, and other emirates have their own rules. Requirements change, so confirm the current rules with the developer's or brokerage's compliance team before launch, and show the details the regulator expects.",
+          "Trust signals on the page should be just as accurate: the developer's real name and track record, genuine project imagery labelled as renders where they are renders, and no invented scarcity.",
+        ],
+      },
+      { h2: "Measure enquiries, not clicks",
+        p: [
+          { text: "Track form submissions, WhatsApp clicks and calls as key events in GA4, carry the campaign source into the CRM, and judge each campaign by qualified leads and viewings rather than click-through rate. This is the measurement layer we build in our Google Analytics work for real estate teams.",
+            link: { anchor: "Google Analytics work", link: { kind: "service", slug: "google-analytics" } } },
+        ],
+      },
+      { h2: "A pre-launch checklist",
+        bullets: [
+          "Does the headline name the project, location and unit type?",
+          "Is there exactly one primary action, with a short form?",
+          "Are the Arabic and English versions both complete and native-sounding?",
+          "Does the first screen load quickly on a mid-range phone over mobile data?",
+          "Is every enquiry routed to a named person with a response-time target?",
+          "Are advertising permits and required details in place?",
+          "Are form, WhatsApp and call events tracked through to the CRM?",
         ],
       },
     ],
@@ -977,7 +1297,6 @@ export const BLOG_POSTS: BlogPost[] = [
       "AI is changing how customers discover businesses. Learn what AI search optimization, GEO and AEO mean, and how to stay visible across search and AI answers.",
     category: "AI",
     date: "2026-09-14",
-    readMinutes: 13,
     image: aiSearchBusinessVisibility,
     imageAlt: "AI search and business discovery replacing the traditional search journey",
     imageWidth: 1600,
@@ -1132,7 +1451,6 @@ export const BLOG_POSTS: BlogPost[] = [
       "More website traffic doesn't always mean more growth. Learn which marketing metrics reveal traffic quality, conversions and real business impact.",
     category: "Business Growth",
     date: "2026-09-14",
-    readMinutes: 10,
     image: websiteTrafficVsBusinessGrowth,
     imageAlt: "Website traffic increasing while business revenue remains flat",
     imageWidth: 1600,
@@ -1298,7 +1616,6 @@ export const BLOG_POSTS: BlogPost[] = [
       "OpenAI is testing Sponsored Agents in ChatGPT Ads. Learn how conversational advertising could change customer journeys, digital marketing and AI advertising.",
     category: "Digital Marketing",
     date: "2026-09-17",
-    readMinutes: 11,
     image: chatgptSponsoredAgents,
     imageAlt: "Conversational advertising concept showing a traditional ad journey compared with an AI-powered customer conversation",
     imageWidth: 1600,
@@ -1466,7 +1783,6 @@ export const BLOG_POSTS: BlogPost[] = [
       "A #1 Google ranking doesn't guarantee AI recommends your business. Learn the difference between search visibility and AI visibility, and how to check yours.",
     category: "AI",
     date: "2026-09-19",
-    readMinutes: 13,
     image: googleRankingVsAiVisibility,
     imageAlt: "Business comparing Google search visibility with AI recommendations across ChatGPT, Gemini and Perplexity",
     imageWidth: 1600,
@@ -1609,7 +1925,6 @@ export const BLOG_POSTS: BlogPost[] = [
       "Search Console now reports searches made with Google Lens, Circle to Search and image uploads. What the new data shows, what it doesn't, and what to audit next.",
     category: "SEO",
     date: "2026-09-26",
-    readMinutes: 15,
     image: googleSearchConsoleMultimodalSearch,
     imageAlt: "Smartphone camera framing a ceramic vase for a visual search, with matching image results",
     imageWidth: 1600,
@@ -1798,7 +2113,6 @@ export const BLOG_POSTS: BlogPost[] = [
       "Why there is no permanent ChatGPT ranking, and what to measure instead: buyer questions, recommendations, citations, entity accuracy, AI referrals and business outcomes.",
     category: "AI",
     date: "2026-10-03",
-    readMinutes: 22,
     image: aiSearchVisibilityMeasurementGcc,
     imageAlt:
       "Laptop showing an AI search visibility framework, from buyer questions and AI answers to citations, entity accuracy and business outcomes, for Oman, UAE and GCC markets in English and Arabic.",
@@ -2768,7 +3082,6 @@ export const BLOG_POSTS: BlogPost[] = [
       "There's no single \"ChatGPT ranking\" to check. Here's how to find out whether AI search knows, understands and surfaces your business, across Oman, the UAE, English and Arabic.",
     category: "AI",
     date: "2026-10-03",
-    readMinutes: 22,
     image: aiSearchBusinessDiscoverabilityGcc,
     imageAlt:
       "An Omani businessman at a laptop showing an AI search visibility dashboard, with ChatGPT, Google, Bing and Gemini answering questions about digital marketing agencies in Oman, the UAE and the GCC.",
@@ -3609,13 +3922,12 @@ export const BLOG_POSTS: BlogPost[] = [
     title: "How Long Does Google Really Take to Crawl and Index Changes?",
     excerpt:
       "Reported timelines from Google's Search Central Live Deep Dive Europe 2026 show how long discovery, indexing, canonical changes, structured data, site migrations and core update recovery typically take, and why the same fundamentals underpin AI Search.",
-    metaTitle: "Google Crawling & Indexing Times: New 2026 Data Explained",
+    metaTitle: "Google Crawling & Indexing Times: 2026 Timelines Explained",
     metaDescription:
-      "New Google data reveals typical timelines for crawling, indexing, canonical changes, structured data, site migrations and ranking recovery — and what they mean for SEO and AI Search.",
+      "Reported Google timelines for crawling, indexing, canonical changes, structured data, migrations and core update recovery, and what they mean for SEO.",
     ogTitle: "How Long Does Google Really Take to Crawl and Index Changes?",
     category: "Technical SEO",
     date: "2026-10-04",
-    readMinutes: 15,
     image: googleCrawlingIndexingTimes2026,
     imageAlt:
       "SEO crawling and indexing timeline illustrating typical Google processing times from URL discovery to site migration and core update recovery.",
@@ -4192,10 +4504,9 @@ export const BLOG_POSTS: BlogPost[] = [
       "Google has clarified its guidance on generative AI content. The question that matters was never whether AI helped write a page. It's whether anyone checked that the page is true before it went live.",
     metaTitle: "Google AI Content Guidance: Why Human Fact-Checking Matters",
     metaDescription:
-      "Google has clarified its guidance on generative AI content. The key issue isn't whether AI helped create the content — it's accuracy, quality, usefulness and human verification before publishing.",
+      "Google's guidance on generative AI content is clearer: what matters is accuracy, usefulness and human verification before publishing, not whether AI helped.",
     category: "SEO",
     date: "2026-10-04",
-    readMinutes: 11,
     image: googleAiContentHumanReview,
     imageAlt:
       "AI-generated content moving through human fact-checking and quality review before publication.",
@@ -4866,12 +5177,11 @@ export const BLOG_POSTS: BlogPost[] = [
     title: "More Traffic Isn't the Answer: Why SMEs Need Better Conversion Tracking",
     excerpt:
       "Many small businesses don't have a traffic problem. They have a measurement problem. Google Site Kit is making conversion tracking easier for WordPress sites, but the real advantage is turning that data into better business decisions.",
-    metaTitle: "Conversion Tracking for SMEs: From Website Traffic to Business Results",
+    metaTitle: "SME Conversion Tracking with Google Site Kit | OMSA",
     metaDescription:
-      "Google Site Kit is making conversion tracking easier for WordPress businesses. But the bigger opportunity for SMEs is understanding which traffic, pages and campaigns actually generate leads and sales.",
+      "Google Site Kit makes conversion tracking easier on WordPress. The bigger opportunity for SMEs is knowing which traffic, pages and campaigns produce leads.",
     category: "Google Analytics",
     date: "2026-10-04",
-    readMinutes: 12,
     image: smeConversionTrackingGoogleSiteKit,
     imageAlt:
       "Digital marketing measurement journey connecting search visibility, customer actions and business growth.",
@@ -5614,7 +5924,6 @@ export const BLOG_POSTS: BlogPost[] = [
       "What happens to search when the person looking for a business is no longer the one doing the searching? What Meta's Muse agent signals for SEO, AI search and business visibility.",
     category: "AI",
     date: "2026-10-05",
-    readMinutes: 13,
     image: metaMuseCharmAiAgentSearch,
     imageAlt: "Meta Muse Charm illustrating the rise of personal AI agents and agentic search",
     imageWidth: 1536,
@@ -6114,10 +6423,9 @@ export const BLOG_POSTS: BlogPost[] = [
       "OpenAI's new visual ad format is the headline. The bigger story is the infrastructure underneath it: conversion data, attribution, incrementality testing and brand suitability. Here's what's confirmed, what it means, and what we still don't know.",
     metaTitle: "ChatGPT Ads 2026: Visual Ads, Attribution & Measurement Explained",
     metaDescription:
-      "OpenAI is expanding ChatGPT Ads with visual formats, conversion integrations, attribution, incrementality testing and brand-suitability tools. Here's what marketers should know.",
+      "ChatGPT Ads are adding visual formats, conversion data, attribution, incrementality testing and brand-suitability controls. What marketers need to know.",
     category: "Digital Marketing",
     date: "2026-10-06",
-    readMinutes: 14,
     image: chatgptAdsMeasurementAttribution,
     imageAlt: "ChatGPT Ads measurement, attribution and incrementality ecosystem",
     imageWidth: 1672,
@@ -6798,7 +7106,6 @@ export const BLOG_POSTS: BlogPost[] = [
       "How UAE patients search by specialty, location, doctor and insurance network, and how clinics in Dubai and Abu Dhabi can be found, understood and trusted.",
     category: "Local SEO",
     date: "2026-10-07",
-    readMinutes: 19,
     image: workClinic,
     imageAlt: "Bright, modern clinic reception and consultation area with white furniture and timber accents.",
     imageWidth: 1200,
@@ -7592,7 +7899,6 @@ export const BLOG_POSTS: BlogPost[] = [
       "How UAE clients search for Corporate Tax, VAT, audit and e-invoicing help, and how accounting firms can build service pages that are found and trusted.",
     category: "SEO",
     date: "2026-10-22",
-    readMinutes: 17,
     image: workCorporate,
     imageAlt: "Glass-fronted office towers against a pale sky in a commercial business district.",
     imageWidth: 1200,
@@ -8285,6 +8591,8 @@ export const BLOG_POSTS: BlogPost[] = [
     ],
   },
 ];
+
+export const BLOG_POSTS: BlogPost[] = POSTS.map((p) => ({ ...p, readMinutes: estimateReadMinutes(p) }));
 
 export const getPost = (slug: string) => BLOG_POSTS.find((p) => p.slug === slug);
 

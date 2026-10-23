@@ -16,6 +16,7 @@ import {
 import { SERVICE_DETAILS } from "@/lib/services-data";
 import { getCaseStudy } from "@/lib/case-studies-data";
 import { getAuthor } from "@/lib/content/authors";
+import { INDUSTRY_NAV_LINKS } from "@/lib/content/nav-links";
 import { abs, articleJsonLd, authorRefFromContent, brandedTitle, breadcrumbJsonLd, faqJsonLd, pageMeta } from "@/lib/seo";
 
 // Resolves a BlogContentLink to a real typed route. Mirrors the
@@ -263,6 +264,7 @@ export const Route = createFileRoute("/blog/$slug")({
       meta: [
         ...base.meta,
         { property: "article:published_time", content: p.date },
+        ...(p.dateModified ? [{ property: "article:modified_time", content: p.dateModified }] : []),
         { property: "article:section", content: p.category },
       ],
       scripts: [
@@ -313,6 +315,9 @@ function BlogPostPage() {
     .map((s: string) => SERVICE_DETAILS.find((d) => d.slug === s))
     .filter(Boolean) as typeof SERVICE_DETAILS;
   const relatedCaseStudy = post.relatedCaseStudySlug ? getCaseStudy(post.relatedCaseStudySlug) : undefined;
+  const relatedIndustries = INDUSTRY_NAV_LINKS.filter((i) => post.relatedIndustrySlugs?.includes(i.slug));
+  const formatDate = (iso: string) =>
+    new Date(iso).toLocaleDateString("en-GB", { year: "numeric", month: "long", day: "numeric" });
   const { heading: moreHeading, posts: moreFromCategory } = continueReading(post);
 
   return (
@@ -336,7 +341,7 @@ function BlogPostPage() {
             {post.title}
           </h1>
           <p className="mt-6 text-lg text-muted-foreground">{post.excerpt}</p>
-          <div className="mt-6 flex items-center gap-5 text-xs text-muted-foreground">
+          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-muted-foreground">
             <span className="flex items-center gap-1.5">
               <User className="h-3.5 w-3.5" />
               By{" "}
@@ -346,8 +351,13 @@ function BlogPostPage() {
             </span>
             <span className="flex items-center gap-1.5">
               <Calendar className="h-3.5 w-3.5" />
-              <time dateTime={post.date}>{new Date(post.date).toLocaleDateString("en-GB", { year: "numeric", month: "long", day: "numeric" })}</time>
+              <time dateTime={post.date}>{formatDate(post.date)}</time>
             </span>
+            {post.dateModified && post.dateModified !== post.date && (
+              <span>
+                Updated <time dateTime={post.dateModified}>{formatDate(post.dateModified)}</time>
+              </span>
+            )}
             <span className="flex items-center gap-1.5">
               <Clock className="h-3.5 w-3.5" />
               {post.readMinutes} min read
@@ -451,6 +461,23 @@ function BlogPostPage() {
                 </Link>
               ))}
             </div>
+            {relatedIndustries.length > 0 && (
+              <p className="mt-8 text-sm text-muted-foreground">
+                Industry focus:{" "}
+                {relatedIndustries.map((i, idx) => (
+                  <Fragment key={i.slug}>
+                    {idx > 0 && ", "}
+                    <Link
+                      to="/industries/$slug"
+                      params={{ slug: i.slug }}
+                      className="link-underline font-medium text-[color:var(--gold-deep)]"
+                    >
+                      {i.name}
+                    </Link>
+                  </Fragment>
+                ))}
+              </p>
+            )}
           </div>
         </aside>
       )}
