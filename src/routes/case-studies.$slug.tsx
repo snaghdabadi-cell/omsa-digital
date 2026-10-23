@@ -1,6 +1,8 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, TrendingUp } from "lucide-react";
 import { Tag } from "@/components/site/Primitives";
+import { RelatedInsights } from "@/components/site/RelatedInsights";
+import { BLOG_POSTS } from "@/lib/blog-data";
 import { CASE_STUDIES, getCaseStudy } from "@/lib/case-studies-data";
 import { SERVICE_DETAILS } from "@/lib/services-data";
 import { getIndustryByCaseStudySlug } from "@/lib/content/industries";
@@ -10,7 +12,14 @@ export const Route = createFileRoute("/case-studies/$slug")({
   loader: ({ params }) => {
     const study = getCaseStudy(params.slug);
     if (!study) throw notFound();
-    return { study };
+    // Articles that already name this concept as their related case study.
+    // Resolved here (the loader is its own lazy chunk) and trimmed to what
+    // the page renders, so the blog catalog isn't bundled into the component.
+    const relatedPosts = BLOG_POSTS.filter((p) => p.relatedCaseStudySlug === study.slug)
+      .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0))
+      .slice(0, 3)
+      .map(({ slug, title, category }) => ({ slug, title, category }));
+    return { study, relatedPosts };
   },
   head: ({ params, loaderData }) => {
     const c = loaderData?.study;
@@ -64,11 +73,12 @@ export const Route = createFileRoute("/case-studies/$slug")({
 });
 
 function CaseStudyPage() {
-  const { study } = Route.useLoaderData();
+  const { study, relatedPosts } = Route.useLoaderData();
   const related = study.relatedServices
     .map((s: string) => SERVICE_DETAILS.find((d) => d.slug === s))
     .filter(Boolean) as typeof SERVICE_DETAILS;
   const moreCases = CASE_STUDIES.filter((c) => c.slug !== study.slug).slice(0, 2);
+  const industryPage = getIndustryByCaseStudySlug(study.slug);
 
   return (
     <>
@@ -88,7 +98,18 @@ function CaseStudyPage() {
         <header className="container-luxe max-w-4xl">
           <div className="flex flex-wrap items-center gap-3">
             <p className="eyebrow">
-              {study.industry} ·{" "}
+              {industryPage ? (
+                <Link
+                  to="/industries/$slug"
+                  params={{ slug: industryPage.slug }}
+                  className="link-underline hover:text-foreground"
+                >
+                  {study.industry}
+                </Link>
+              ) : (
+                study.industry
+              )}{" "}
+              ·{" "}
               {study.relatedLocationSlug ? (
                 <Link
                   to="/locations/$city"
@@ -138,7 +159,7 @@ function CaseStudyPage() {
             { h: "The challenge", b: study.challenge },
             { h: "The strategy", b: study.strategy },
             { h: "The execution", b: study.execution },
-            { h: "The results", b: study.results },
+            { h: "What the concept demonstrates", b: study.results },
             { h: "Business value & lessons", b: study.lessons },
           ].map((s) => (
             <section key={s.h}>
@@ -173,6 +194,14 @@ function CaseStudyPage() {
             </div>
           </div>
         </aside>
+      )}
+
+      {relatedPosts.length > 0 && (
+        <section className="section-pad">
+          <div className="container-luxe">
+            <RelatedInsights posts={relatedPosts} />
+          </div>
+        </section>
       )}
 
       {moreCases.length > 0 && (

@@ -26,6 +26,13 @@ export type IndustryPage = {
   hub?: ContentHub; // rendered after the outcomes paragraph
   metaTitle?: string; // overrides the default "<name> — AI & Digital Growth Solutions | OMSA"
   metaDescription?: string; // overrides `description` in meta tags only
+  // Optional descriptive H1 replacing the bare industry name (the name is
+  // still highlighted within it when it appears).
+  h1?: string;
+  // Live LOCATIONS city slugs whose own pages already feature this industry,
+  // mirrored here so the industry page can link back to them. Never a "soon"
+  // city (checked by scripts/industry-links.test.ts).
+  locationSlugs?: string[];
   // Optional closing CTA; defaults to "Discuss your project" -> plain /contact.
   // `source` must satisfy parseLeadSource (lib/lead-source.ts).
   cta?: { text?: string; label: string; source?: string };
@@ -39,6 +46,10 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
     description: "We build premium hotel websites, improve Google visibility, implement AI guest assistants, and create digital strategies that increase direct bookings across Oman and the UAE.",
     outcomes:
       "Hospitality businesses win or lose the booking decision long before a guest calls the front desk. A digital partner focuses on stronger direct discovery — a booking journey that's clear on mobile, local and destination search visibility that puts a property in front of travellers actually planning a stay, and multilingual guest communication that removes friction for international visitors. Where appropriate, that also means reducing dependency on third-party booking platforms by giving guests a reason to book direct. Analytics built around the actual booking and enquiry journey, paired with AI-assisted guest enquiries for common questions, gives a property a clearer picture of where interest comes from and where it's lost.",
+    h1: "Hospitality websites, search and direct-booking growth",
+    metaTitle: "Hotel Websites & Hospitality SEO in Oman & the UAE | OMSA",
+    metaDescription: "Hotel and hospitality websites, local SEO, GA4 booking tracking and AI guest assistants that help properties in Oman and the UAE grow direct bookings.",
+    locationSlugs: ["muscat", "dubai"],
     services: ["website-design", "seo", "local-seo", "ai-chatbots", "business-automation", "google-analytics"],
     challenges: [
       "Heavy dependence on third-party booking platforms for discovery",
@@ -73,6 +84,10 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
     description: "Landing pages, AI lead qualification, CRM integrations, and SEO strategies that help developers and agencies generate more property enquiries.",
     outcomes:
       "For developers and agencies, the goal isn't more enquiries — it's more qualified ones. The priority is project and landing-page clarity that speaks to a specific buyer and unit type, structured lead capture that doesn't lose interest at the form, and local and search visibility that puts a development in front of people actually searching in that market. Automated enquiry qualification — asking the right questions before a lead reaches a sales agent — helps separate genuine interest from casual browsing, and campaign measurement shows which channels and pages are actually contributing. Where scoped, this can connect into existing CRM and workflow tools rather than replacing them.",
+    h1: "Real Estate websites, landing pages and lead qualification",
+    metaTitle: "Real Estate Websites & Lead Generation in UAE & Oman | OMSA",
+    metaDescription: "Bilingual property landing pages, SEO, AI lead qualification and CRM-connected tracking for developers and real estate agencies in the UAE and Oman.",
+    locationSlugs: ["dubai", "abu-dhabi"],
     services: ["website-design", "seo", "local-seo", "digital-marketing", "ai-chatbots", "google-analytics"],
     challenges: [
       "High competition for the same searches across developers and agencies",
@@ -111,6 +126,8 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
     metaTitle: "Healthcare & Clinic SEO in Oman and the UAE | OMSA",
     metaDescription:
       "How patients find, trust and book a clinic, and what clinics in Oman and the UAE can do about treatments, doctors, insurance, Arabic search and bookings.",
+    h1: "Healthcare and clinic SEO in Oman and the UAE",
+    locationSlugs: ["dubai", "abu-dhabi", "al-ain"],
     services: ["website-design", "seo", "local-seo", "ai-search-visibility", "ai-chatbots", "google-analytics"],
     hub: {
       h2: "How patients find, trust and book a clinic",
@@ -200,7 +217,11 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
     description: "High-performance online stores, SEO, AI customer support, and analytics that help retail businesses grow faster across the GCC.",
     outcomes:
       "Retail and e-commerce growth depends on how easily a customer can find the right product and complete a purchase without friction. The focus is category and site architecture that makes product discovery intuitive, technical SEO that keeps product and category pages properly indexed and competitive in search, and conversion journeys designed around how people actually browse and buy. Analytics tracks the full path from discovery to checkout, not just traffic volume, and automation — from abandoned-cart follow-ups to customer support — helps a retailer respond consistently without adding headcount for every interaction.",
-    services: ["website-design", "seo", "google-analytics"],
+    h1: "Retail ecommerce websites, SEO and sales tracking",
+    metaTitle: "Ecommerce Websites & Retail SEO in Oman & the UAE | OMSA",
+    metaDescription: "Online store design, ecommerce SEO, automation and GA4 tracking for retailers in Oman and the UAE, built for product discovery and measurable sales.",
+    locationSlugs: ["sharjah"],
+    services: ["website-design", "seo", "business-automation", "google-analytics"],
     challenges: [
       "Customers unable to find the right product quickly, especially on mobile",
       "Category and product pages that aren't properly indexed or competitive in search",
@@ -225,6 +246,8 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
       "SEO, websites and enquiry tracking for accounting, tax, legal, audit and consulting firms in Oman and the UAE, built around how clients verify expertise.",
     outcomes:
       "For accounting, tax, legal, audit and consulting firms, a website's job is to turn expertise into trust before the first conversation happens. Prospective clients usually arrive with a specific need, such as a Corporate Tax registration, a VAT return, a statutory audit, a commercial contract or a market-entry question, and they judge a firm on whether it clearly handles that need, who would handle it and whether its credentials can be checked. The focus is a service architecture that matches those needs, local visibility for the offices a firm actually operates, content written for both English and Arabic searches, and lead capture designed for how professional buyers evaluate a firm: carefully, and usually over more than one visit. Measurement then shows which pages and channels produce relevant enquiries rather than just traffic.",
+    h1: "Professional Services SEO and websites in Oman and the UAE",
+    locationSlugs: ["dubai", "abu-dhabi", "al-ain", "sharjah"],
     services: ["website-design", "seo", "local-seo", "ai-search-visibility", "technical-seo", "google-analytics"],
     hub: {
       h2: "What different professional services firms need from search",
@@ -360,7 +383,11 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
     description: "Professional construction websites, SEO, AI automation and lead generation systems designed for contractors, engineering firms and developers across Oman and the UAE.",
     outcomes:
       "Contractors, engineering firms and developers are often evaluated on trust and track record before a single conversation happens. The focus is a website that presents capability, project types and credentials clearly, technical SEO and local visibility for the tenders and enquiries that matter in a specific region, and structured lead-generation systems that route enquiries to the right team quickly. AI-assisted automation can help qualify project enquiries — scope, budget range, timeline — before they reach an estimator, and analytics shows which pages and channels are actually driving genuine project enquiries rather than general traffic.",
-    services: ["website-design", "seo", "technical-seo", "google-analytics"],
+    h1: "Construction company websites, SEO and enquiry tracking",
+    metaTitle: "Construction Company Websites & SEO in Oman & the UAE | OMSA",
+    metaDescription: "Websites, SEO and enquiry tracking for contractors, engineering firms and developers in Oman and the UAE, built around how clients shortlist and verify.",
+    locationSlugs: ["abu-dhabi", "al-ain", "sharjah"],
+    services: ["website-design", "seo", "technical-seo", "business-automation", "google-analytics"],
     challenges: [
       "A website that doesn't clearly present capability, project types or credentials",
       "Tenders and enquiries missed because of weak local and technical search visibility",
@@ -382,7 +409,11 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
     description: "Educational websites, SEO, AI chat assistants, and marketing systems that help schools, academies, and training centers grow online.",
     outcomes:
       "For schools, academies and training centres, a website often has to do two jobs at once: reassure parents or adult learners that a programme is credible, and make the enrolment process genuinely easy to start. The focus is clear, structured programme and course information, local and search visibility for the terms prospective students and parents actually search, and an enquiry-to-enrolment journey that doesn't lose interest in a long form. AI chat assistants can answer common admissions questions instantly, and analytics built around the enquiry journey shows which programmes, pages and channels are genuinely driving interest — not just general site traffic.",
-    services: ["website-design", "seo", "ai-chatbots"],
+    h1: "Education websites, SEO and admissions assistants",
+    metaTitle: "School & Education Websites, SEO and AI in Oman & UAE | OMSA",
+    metaDescription: "Websites, SEO and AI admissions assistants for schools, academies and training centres in Oman and the UAE, built around how families and learners compare.",
+    locationSlugs: ["al-ain", "sharjah"],
+    services: ["website-design", "seo", "ai-chatbots", "google-analytics"],
     challenges: [
       "Programme and course information that's unclear or hard to compare",
       "An enrolment journey that loses interest partway through a long form",

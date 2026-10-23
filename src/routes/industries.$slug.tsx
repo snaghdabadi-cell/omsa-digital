@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Container, Eyebrow, Heading, Prose, Tag } from "@/components/site/Primitives";
@@ -8,6 +9,7 @@ import { getIndustry, type IndustryPage } from "@/lib/content/industries";
 import { getService } from "@/lib/services-data";
 import { getCaseStudy } from "@/lib/case-studies-data";
 import { getRelatedPostsForIndustry } from "@/lib/blog-data";
+import { LOCATION_NAV_LINKS } from "@/lib/content/nav-links";
 import { pageMeta, breadcrumbJsonLd, faqJsonLd, SITE_DESCRIPTION } from "@/lib/seo";
 
 // `head()`'s loaderData param can be undefined before the loader resolves,
@@ -56,13 +58,23 @@ function IndustryPage() {
   const { ind } = Route.useLoaderData();
   const caseStudy = ind.caseStudySlug ? getCaseStudy(ind.caseStudySlug) : undefined;
   const relatedPosts = getRelatedPostsForIndustry(ind.slug);
+  const locations = LOCATION_NAV_LINKS.filter((l) => ind.locationSlugs?.includes(l.slug));
+  const h1NameAt = ind.h1 ? ind.h1.indexOf(ind.name) : -1;
 
   return (
     <section className="pt-40 pb-32">
       <Container>
         <Eyebrow>Industry</Eyebrow>
         <Heading as="h1" size="xl" className="mt-6 max-w-4xl max-[362px]:text-4xl">
-          <span className="text-gradient-gold">{ind.name}</span>
+          {ind.h1 && h1NameAt !== -1 ? (
+            <>
+              {ind.h1.slice(0, h1NameAt)}
+              <span className="text-gradient-gold">{ind.name}</span>
+              {ind.h1.slice(h1NameAt + ind.name.length)}
+            </>
+          ) : (
+            ind.h1 ?? <span className="text-gradient-gold">{ind.name}</span>
+          )}
         </Heading>
         <Prose className="mt-6 max-w-2xl text-lg">{ind.tagline}</Prose>
         <Prose className="mt-4 max-w-2xl">{ind.description}</Prose>
@@ -108,6 +120,23 @@ function IndustryPage() {
               );
             })}
           </div>
+          {locations.length > 0 && (
+            <p className="mt-6 text-sm text-muted-foreground">
+              Where we work with {ind.name.toLowerCase()} businesses:{" "}
+              {locations.map((l, idx) => (
+                <Fragment key={l.slug}>
+                  {idx > 0 && ", "}
+                  <Link
+                    to="/locations/$city"
+                    params={{ city: l.slug }}
+                    className="link-underline font-medium text-[color:var(--gold-deep)]"
+                  >
+                    {l.name}
+                  </Link>
+                </Fragment>
+              ))}
+            </p>
+          )}
         </div>
 
         {ind.useCases && ind.useCases.length > 0 && (

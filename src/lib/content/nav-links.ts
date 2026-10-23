@@ -31,20 +31,12 @@ export const INDUSTRY_NAV_LINKS = [
   { name: "Education", slug: "education" },
 ];
 
-// The 7 Oman/UAE LOCATIONS (both "live" and "soon" status — Salalah/Sohar
-// are "soon" but already followed this precedent before this file existed).
-// Deliberately NOT including Doha (Qatar) or Riyadh (Saudi Arabia): both
-// are also "soon"/noindexed, but promoting them into the site-wide footer
-// would be the first place Qatar/Saudi Arabia appear in primary
-// navigation, ahead of the Organization schema's own areaServed
-// (Oman, UAE, GCC-as-a-region only — see organizationJsonLd in lib/seo.ts)
-// and the site description. That's a bigger claim about where OMSA
-// currently operates than the rest of the site makes. They remain reachable
-// (and correctly noindexed) via the /locations hub.
+// Only the "live" (indexable) LOCATIONS. "Soon" cities (Salalah, Sohar, Doha,
+// Riyadh) are noindexed placeholders, so they're kept out of the site-wide
+// footer rather than linked from every page; the /locations hub lists them
+// without linking until they have real, city-specific content.
 export const LOCATION_NAV_LINKS = [
   { name: "Muscat", slug: "muscat" },
-  { name: "Salalah", slug: "salalah" },
-  { name: "Sohar", slug: "sohar" },
   { name: "Dubai", slug: "dubai" },
   { name: "Abu Dhabi", slug: "abu-dhabi" },
   { name: "Al Ain", slug: "al-ain" },

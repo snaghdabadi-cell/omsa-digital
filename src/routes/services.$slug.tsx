@@ -1,10 +1,11 @@
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, CheckCircle2 } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { FaqItem } from "@/components/site/FaqItem";
 import { RelatedInsights } from "@/components/site/RelatedInsights";
 import { getRelatedPostsForService } from "@/lib/blog-data";
+import { INDUSTRY_PAGES } from "@/lib/content/industries";
 import {
   SERVICE_DETAILS,
   getService,
@@ -241,6 +242,9 @@ function ServiceDetailPage() {
     .map((slug: string) => SERVICE_DETAILS.find((s) => s.slug === slug))
     .filter(Boolean) as typeof SERVICE_DETAILS;
   const relatedPosts = getRelatedPostsForService(service.slug);
+  // Industries whose own pages recommend this service — the reverse of each
+  // industry page's "Recommended services", so the two can't drift apart.
+  const industries = INDUSTRY_PAGES.filter((i) => i.services.some((s) => s === service.slug));
 
   return (
     <>
@@ -469,6 +473,23 @@ function ServiceDetailPage() {
                 );
               })}
             </div>
+            {industries.length > 0 && (
+              <p className="mt-10 max-w-3xl text-sm text-muted-foreground leading-relaxed">
+                Industries where we apply {service.name}:{" "}
+                {industries.map((i, idx) => (
+                  <Fragment key={i.slug}>
+                    {idx > 0 && ", "}
+                    <Link
+                      to="/industries/$slug"
+                      params={{ slug: i.slug }}
+                      className="link-underline font-medium text-[color:var(--gold-deep)]"
+                    >
+                      {i.name}
+                    </Link>
+                  </Fragment>
+                ))}
+              </p>
+            )}
           </div>
         </section>
       )}
