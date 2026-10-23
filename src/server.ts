@@ -110,6 +110,16 @@ function legacyWordPressRedirect(url: URL): Response | undefined {
   return Response.redirect(new URL(destination, url.origin).toString(), 301);
 }
 
+// The router answers "/services/" with a temporary 307 to "/services". A
+// permanent redirect tells search engines the slash-less URL (the one every
+// canonical tag and the sitemap use) is the real address.
+function trailingSlashRedirect(url: URL): Response | undefined {
+  if (url.pathname.length <= 1 || !url.pathname.endsWith("/")) return undefined;
+  const destination = new URL(url);
+  destination.pathname = url.pathname.replace(/\/+$/, "") || "/";
+  return Response.redirect(destination.toString(), 301);
+}
+
 async function getServerEntry(): Promise<ServerEntry> {
   if (!serverEntryPromise) {
     serverEntryPromise = import("@tanstack/react-start/server-entry").then(
@@ -144,8 +154,8 @@ export default {
       const url = new URL(request.url);
 
       if (request.method === "GET" || request.method === "HEAD") {
-        const legacyRedirect = legacyWordPressRedirect(url);
-        if (legacyRedirect) return legacyRedirect;
+        const redirect = legacyWordPressRedirect(url) ?? trailingSlashRedirect(url);
+        if (redirect) return redirect;
       }
 
       if (url.pathname === "/api/contact") {

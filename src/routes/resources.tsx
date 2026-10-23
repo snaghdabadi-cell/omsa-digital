@@ -10,6 +10,10 @@ export const Route = createFileRoute("/resources")({
       title: "Resources — Guides, templates and tools for digital growth",
       description: "A growing library of guides, templates, whitepapers and downloads on SEO, AI and digital growth in the GCC.",
       path: "/resources",
+      // Every category and item below this hub is still a noindexed
+      // ComingSoon placeholder, so the hub itself is a thin list of links to
+      // unfinished pages. Keep it out of the index until real resources ship.
+      noindex: true,
     });
     return isLeafMatch(matches, match) ? meta : { ...meta, links: [] };
   },

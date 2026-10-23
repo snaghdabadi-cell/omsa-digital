@@ -30,7 +30,6 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/portfolio", changefreq: "monthly", priority: "0.8" },
           { path: "/case-studies", changefreq: "monthly", priority: "0.8" },
           { path: "/blog", changefreq: "weekly", priority: "0.7" },
-          { path: "/resources", changefreq: "weekly", priority: "0.7" },
           { path: "/tools", changefreq: "monthly", priority: "0.7" },
           // /authors is listed only once there's more than one author — with a
           // single author it's noindexed (see authors.tsx).
@@ -44,11 +43,10 @@ export const Route = createFileRoute("/sitemap.xml")({
           // press.tsx) and shouldn't also be submitted via the sitemap.
         ];
 
-        // Resource categories/items are omitted entirely — the whole
-        // resource ecosystem is currently "soon"/ComingSoon (see
-        // resources.$category.tsx and resources.$category.$slug.tsx, both
-        // noindexed). The /resources hub itself stays in staticEntries
-        // above since its own content is real, not placeholder.
+        // The /resources hub and its categories/items are omitted entirely —
+        // the whole resource ecosystem is currently "soon"/ComingSoon, so
+        // all of it is noindexed (see resources.tsx, resources.$category.tsx
+        // and resources.$category.$slug.tsx).
         const entries: SitemapEntry[] = [
           ...staticEntries,
           ...SERVICE_DETAILS.map((s) => ({ path: `/services/${s.slug}`, changefreq: "monthly" as const, priority: "0.85" })),
